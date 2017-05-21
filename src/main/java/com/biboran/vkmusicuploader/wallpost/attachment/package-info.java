@@ -21,22 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-package com.biboran.vkmusicuploader.Post;
-
-import java.io.IOException;
-
-/**
- * Class or Interface description.
- * <p>
- * Additional info
- *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
- * @since 0.1
- */
-public interface Postable {
-
-    void post() throws IOException;
-
-}
+package com.biboran.vkmusicuploader.wallpost.attachment;

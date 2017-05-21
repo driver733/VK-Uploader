@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-package com.biboran.vkmusicuploader.WallPost;
+package com.biboran.vkmusicuploader.wallpost;
 
-import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.httpclient.HttpTransportClient;
+import com.biboran.vkmusicuploader.wallpost.attachment.AttachmentArrays;
+import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
 
 /**
@@ -38,34 +38,42 @@ import com.vk.api.sdk.queries.wall.WallPostQuery;
  * @version $Id$
  * @since 0.1
  */
-public final class WallPostBase implements WallPost {
+public final class WallPostWithAttachments implements WallPost {
 
     /**
-     * VKAPIClient that is used for all VK API requests.
+     * Origin.
      */
-    private final VkApiClient client = new VkApiClient(
-        new HttpTransportClient()
-    );
+    private final WallPost wallPost;
 
     /**
-     * UserActor on behalf of which all requests will be sent.
+     * Attachments.
      */
-    private final UserActor actor;
+    private final AttachmentArrays attachments;
 
     /**
      * Ctor.
-     * @param actor UserActor on behalf of which all requests will be sent.
+     * @param wallPost Origin.
+     * @param attachmentArrays Attachment arrays.
      */
-    public WallPostBase(final UserActor actor) {
-        this.actor = actor;
+    public WallPostWithAttachments(
+        final WallPost wallPost,
+        final AttachmentArrays attachmentArrays
+    ) {
+        this.attachments = attachmentArrays;
+        this.wallPost = wallPost;
     }
 
     /**
-     * Constructs a base for all other WallPosts.
+     * Constructs a WallPost with the provided attachmentsFields.
      * @return Constructed WallPost.
      */
     public WallPostQuery construct() {
-        return this.client.wall().post(this.actor);
+        try {
+            return this.wallPost.construct()
+                .attachments(this.attachments.attachmentsFields());
+        } catch (final ClientException | ApiException exception) {
+            throw new IllegalStateException(exception);
+        }
     }
 
 }

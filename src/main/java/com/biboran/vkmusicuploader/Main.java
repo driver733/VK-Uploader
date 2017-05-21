@@ -23,7 +23,7 @@
  */
 package com.biboran.vkmusicuploader;
 
-import com.biboran.vkmusicuploader.Auth.Auth;
+//import com.biboran.vkmusicuploader.Auth.Auth;
 
 
 import java.io.File;
@@ -31,13 +31,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import com.biboran.vkmusicuploader.Post.AlbumPosts;
-import com.biboran.vkmusicuploader.Post.Post;
-import com.biboran.vkmusicuploader.Post.UploadServers;
+import com.biboran.vkmusicuploader.post.UploadServers;
 
-import com.google.gson.JsonElement;
-import com.jcabi.aspects.Loggable;
-import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
@@ -46,11 +41,6 @@ import com.vk.api.sdk.httpclient.HttpTransportClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.objects.audio.Audio;
-import com.vk.api.sdk.objects.audio.responses.AudioUploadResponse;
-import com.vk.api.sdk.queries.execute.ExecuteBatchQuery;
-import com.vk.api.sdk.queries.wall.WallPostQuery;
-
 
 /**
  * Main class.
@@ -97,11 +87,11 @@ final class Main {
 //
 
 
-        final VkApiClient client = new VkApiClient(new HttpTransportClient());
-        final UserActor actor = new Auth(client).userActor();
-
-
-        final UploadServers uploadServers = new UploadServers(client, actor);
+//        final VkApiClient client = new VkApiClient(new HttpTransportClient());
+//        final UserActor actor = new Auth(client).userActor();
+//
+//
+//        final UploadServers uploadServers = new UploadServers(client, actor);
 
 
 //        final AlbumPosts posts = new AlbumPosts(actor,  "/Volumes/Data/Downloads/Music/Miami Nights 1984 - Turbulence", uploadServers);

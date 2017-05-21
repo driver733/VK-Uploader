@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.biboran.vkmusicuploader.WallPost;
+package com.biboran.vkmusicuploader.wallpost;
 
 import com.vk.api.sdk.queries.wall.WallPostQuery;
 
@@ -35,12 +35,27 @@ import com.vk.api.sdk.queries.wall.WallPostQuery;
  * @version $Id$
  * @since 0.1
  */
-public interface WallPost {
+public final class WallPostFromGroup implements WallPost {
 
     /**
-     * Constucts a WallPostQuery from a decorated WallPost.
-     * @return WallPostQuery.
+     * Origin.
      */
-    WallPostQuery construct();
+    private final WallPost wallPost;
+
+    /**
+     * Ctor.
+     * @param wallPost Origin.
+     */
+    public WallPostFromGroup(final WallPost wallPost) {
+        this.wallPost = wallPost;
+    }
+
+    /**
+     * Constructs a WallPost that will posted on the behalf of the group.
+     * @return Constructed WallPost.
+     */
+    public WallPostQuery construct() {
+        return this.wallPost.construct().fromGroup(true);
+    }
 
 }

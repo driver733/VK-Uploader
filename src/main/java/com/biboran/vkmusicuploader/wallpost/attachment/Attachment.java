@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-package com.biboran.vkmusicuploader.WallPost;
+package com.biboran.vkmusicuploader.wallpost.attachment;
 
-import com.biboran.vkmusicuploader.WallPost.Attachment.AttachmentArrays;
+import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.queries.wall.WallPostQuery;
+import java.util.List;
 
 /**
  * Class or Interface description.
@@ -38,42 +38,15 @@ import com.vk.api.sdk.queries.wall.WallPostQuery;
  * @version $Id$
  * @since 0.1
  */
-public final class WallPostWithAttachments implements WallPost {
+public interface Attachment {
 
     /**
-     * Origin.
+     * Uploads the Attachment(s).
+     * @return The result(s) of uploaded Attachment(s).
+     * @throws ApiException VK API error.
+     * @throws ClientException VK Client error.
      */
-    private final WallPost wallPost;
-
-    /**
-     * Attachments.
-     */
-    private final AttachmentArrays attachments;
-
-    /**
-     * Ctor.
-     * @param wallPost Origin.
-     * @param attachmentArrays Attachment arrays.
-     */
-    public WallPostWithAttachments(
-        final WallPost wallPost,
-        final AttachmentArrays attachmentArrays
-    ) {
-        this.attachments = attachmentArrays;
-        this.wallPost = wallPost;
-    }
-
-    /**
-     * Construct a WallPost with the provided attachments.
-     * @return Constructed WallPost.
-     */
-    public WallPostQuery construct() {
-        try {
-            return this.wallPost.construct()
-                .attachments(this.attachments.attachments());
-        } catch (final ClientException | ApiException exception) {
-            throw new IllegalStateException(exception);
-        }
-    }
+    List<? extends AbstractQueryBuilder> upload()
+        throws ApiException, ClientException;
 
 }

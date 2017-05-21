@@ -3,30 +3,26 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <groupId>groupId</groupId>
+    <artifactId>VKMusicUploader</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <repositories>
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
     </repositories>
-
-    <groupId>groupId</groupId>
-    <artifactId>VKMusicUploader</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
     <dependencies>
         <dependency>
             <groupId>com.vk.api</groupId>
             <artifactId>sdk</artifactId>
             <version>0.5.2</version>
-            <!--<version>0.4.3</version>-->
         </dependency>
-        <dependency>
-            <groupId>com.jcabi</groupId>
-            <artifactId>jcabi-log</artifactId>
-            <version>0.17.2</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.jcabi</groupId>-->
+            <!--<artifactId>jcabi-log</artifactId>-->
+            <!--<version>0.17.2</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.jcabi</groupId>
             <artifactId>jcabi-aspects</artifactId>
@@ -44,24 +40,23 @@
             <version>0.9.0</version>
         </dependency>
         <!-- Binding for Log4J -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.7</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.logging.log4j</groupId>-->
+            <!--<artifactId>log4j-slf4j-impl</artifactId>-->
+            <!--<version>2.7</version>-->
+        <!--</dependency>-->
         <!-- Log4j API and Core implementation required for binding -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.7</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.logging.log4j</groupId>-->
+            <!--<artifactId>log4j-api</artifactId>-->
+            <!--<version>2.7</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.logging.log4j</groupId>-->
+            <!--<artifactId>log4j-core</artifactId>-->
+            <!--<version>2.7</version>-->
+        <!--</dependency>-->
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -79,7 +74,19 @@
                         <exclude>checkstyle:/src/main/java/com.biboran.vkmusicuploader/Auth/AuthRequest.java</exclude>
                         <exclude>checkstyle:/src/main/java/com.biboran.vkmusicuploader/Auth/GroupAuth.java</exclude>
                         <exclude>checkstyle:/src/main/java/com.biboran.vkmusicuploader/Auth/Server.java</exclude>
+
                         <exclude>pmd:/src/main/java/com.biboran.vkmusicuploader/Main.java</exclude>
+                        <exclude>pmd:/src/main/java/com.biboran.vkmusicuploader/Auth/Auth.java</exclude>
+                        <exclude>pmd:/src/main/java/com.biboran.vkmusicuploader/Auth/AuthCallback.java</exclude>
+                        <exclude>pmd:/src/main/java/com.biboran.vkmusicuploader/Auth/AuthCode.java</exclude>
+                        <exclude>pmd:/src/main/java/com.biboran.vkmusicuploader/Auth/AuthGroupRequest.java</exclude>
+                        <exclude>pmd:/src/main/java/com.biboran.vkmusicuploader/Auth/AuthRequest.java</exclude>
+                        <exclude>pmd:/src/main/java/com.biboran.vkmusicuploader/Auth/GroupAuth.java</exclude>
+                        <exclude>pmd:/src/main/java/com.biboran.vkmusicuploader/Auth/Server.java</exclude>
+
+                        <exclude>xml:/src/main/resources/.*</exclude>
+
+                        <exclude>duplicatefinder:.*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -112,5 +119,4 @@
             </plugin>
         </plugins>
     </build>
-    
 </project>

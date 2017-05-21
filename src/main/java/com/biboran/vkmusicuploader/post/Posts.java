@@ -22,40 +22,26 @@
  * SOFTWARE.
  */
 
-package com.biboran.vkmusicuploader.WallPost;
+package com.biboran.vkmusicuploader.post;
 
-import com.vk.api.sdk.queries.wall.WallPostQuery;
+import com.vk.api.sdk.queries.execute.ExecuteBatchQuery;
+import java.util.List;
 
 /**
  * Class or Interface description.
  * <p>
- * Additional info
+ * <p> Additional info
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
  */
-public final class WallPostFromGroup implements WallPost {
+public interface Posts {
 
     /**
-     * Origin.
+     * Constructs queries for batch posting the wall posts.
+     * @return ExecuteBatchQueries that will send the wall posts.
      */
-    private final WallPost wallPost;
-
-    /**
-     * Ctor.
-     * @param wallPost Origin.
-     */
-    public WallPostFromGroup(final WallPost wallPost) {
-        this.wallPost = wallPost;
-    }
-
-    /**
-     * Constructs a WallPost that will posted on the behalf of the group.
-     * @return Constructed WallPost.
-     */
-    public WallPostQuery construct() {
-        return this.wallPost.construct().fromGroup(true);
-    }
+    List<ExecuteBatchQuery> posts();
 
 }

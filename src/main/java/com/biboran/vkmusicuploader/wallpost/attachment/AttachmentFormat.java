@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.biboran.vkmusicuploader.WallPost.Attachment;
+package com.biboran.vkmusicuploader.wallpost.attachment;
 
 /**
  * Class or Interface description.
@@ -38,7 +38,7 @@ public final class AttachmentFormat {
     /**
      * Group ID.
      */
-    private static final int GROUP_ID = -92444715;
+    private static final int GROUP_ID = 92444715;
 
     /**
      * Attachment Type Enum.
@@ -86,13 +86,13 @@ public final class AttachmentFormat {
         ALBUM("album");
 
         /**
-         * String for the corresponding attachment type.
+         * String for the corresponding Attachment type.
          */
         private final String type;
 
         /**
          * Ctor.
-         * @param type String for the corresponding attachment type.
+         * @param type String for the corresponding Attachment type.
          */
         AttachmentType(final String type) {
             this.type = type;
@@ -142,7 +142,7 @@ public final class AttachmentFormat {
      * @param mediaId Media ID.
      */
     public AttachmentFormat(final AttachmentType type, final int mediaId) {
-        this(type, GROUP_ID, mediaId);
+        this(type, -AttachmentFormat.GROUP_ID, mediaId);
     }
 
     @Override

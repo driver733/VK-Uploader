@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.biboran.vkmusicuploader.WallPost.Attachment;
+package com.biboran.vkmusicuploader.wallpost.attachment;
 
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -51,14 +51,12 @@ public final class AttachmentAudio implements Attachment {
     /**
      * Group ID.
      */
-    private final int GROUP_ID = 92444715;
+    private static final int GROUP_ID = 92444715;
 
     /**
      * VKAPIClient that is used for all VK API requests.
      */
-    private final VkApiClient client = new VkApiClient(
-        new HttpTransportClient()
-    );
+    private final VkApiClient client;
 
     /**
      * UserActor on behalf of which all requests will be sent.
@@ -89,6 +87,9 @@ public final class AttachmentAudio implements Attachment {
         this.audioFiles = audioFiles;
         this.actor = actor;
         this.uploadUrl = uploadUrl;
+        this.client = new VkApiClient(
+            new HttpTransportClient()
+        );
     }
 
     /**
@@ -132,10 +133,11 @@ public final class AttachmentAudio implements Attachment {
         return Collections.singletonList(
             this.client.audio()
                 .add(
-                    this.actor, saveResult.getId(),
+                    this.actor,
+                    saveResult.getId(),
                     saveResult.getOwnerId()
                 )
-                .groupId(this.GROUP_ID)
+                .groupId(AttachmentAudio.GROUP_ID)
         );
     }
 

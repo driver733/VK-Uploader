@@ -21,4 +21,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.biboran.vkmusicuploader.Audio;
+
+package com.biboran.vkmusicuploader.wallpost;
+
+import com.vk.api.sdk.client.VkApiClient;
+import com.vk.api.sdk.client.actors.UserActor;
+import com.vk.api.sdk.httpclient.HttpTransportClient;
+import com.vk.api.sdk.queries.wall.WallPostQuery;
+
+/**
+ * Class or Interface description.
+ * <p>
+ * Additional info
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ */
+public final class WallPostBase implements WallPost {
+
+    /**
+     * VKAPIClient that is used for all VK API requests.
+     */
+    private final VkApiClient client;
+
+    /**
+     * UserActor on behalf of which all requests will be sent.
+     */
+    private final UserActor actor;
+
+    /**
+     * Ctor.
+     * @param actor UserActor on behalf of which all requests will be sent.
+     */
+    public WallPostBase(final UserActor actor) {
+        this.actor = actor;
+        this.client = new VkApiClient(new HttpTransportClient());
+    }
+
+    /**
+     * Constructs a base for all other WallPosts.
+     * @return Constructed WallPost.
+     */
+    public WallPostQuery construct() {
+        return this.client.wall().post(this.actor);
+    }
+
+}

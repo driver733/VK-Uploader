@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.biboran.vkmusicuploader.WallPost.Attachment;
+package com.biboran.vkmusicuploader.wallpost.attachment;
 
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -35,6 +35,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -52,14 +53,12 @@ public final class AttachmentWallPhoto implements Attachment {
     /**
      * Group ID.
      */
-    private final int GROUP_ID = 92444715;
+    private static final int GROUP_ID = 92444715;
 
     /**
      * VKAPIClient that is used for all VK API requests.
      */
-    private final VkApiClient client = new VkApiClient(
-        new HttpTransportClient()
-    );
+    private final VkApiClient client;
 
     /**
      * UserActor on behalf of which all requests will be sent.
@@ -87,14 +86,17 @@ public final class AttachmentWallPhoto implements Attachment {
         final byte[] photoFile,
         final String uploadUrl
     ) {
-        this.photoFile = photoFile;
+        this.photoFile = Arrays.copyOf(photoFile, photoFile.length);
         this.actor = userActor;
         this.uploadUrl = uploadUrl;
+        this.client = new VkApiClient(
+            new HttpTransportClient()
+        );
     }
 
     /**
      * Uploads the photo to the wall.
-     * @return PhotosSaveWallPhotoQuery that will save the wall post photo.
+     * @return PhotosSaveWallPhotoQuery that will save the wall Post photo.
      * @throws ClientException VK API Client error.
      * @throws ApiException VK API error.
      */
@@ -118,7 +120,7 @@ public final class AttachmentWallPhoto implements Attachment {
                 .saveWallPhoto(this.actor, wallRes.getPhoto())
                 .server(wallRes.getServer())
                 .hash(wallRes.getHash())
-                .groupId(this.GROUP_ID)
+                .groupId(AttachmentWallPhoto.GROUP_ID)
         );
     }
 

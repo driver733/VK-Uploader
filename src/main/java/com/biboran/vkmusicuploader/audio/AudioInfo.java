@@ -22,9 +22,13 @@
  * SOFTWARE.
  */
 
-package com.biboran.vkmusicuploader.WallPost;
+package com.biboran.vkmusicuploader.audio;
 
-import com.vk.api.sdk.queries.wall.WallPostQuery;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Class or Interface description.
@@ -35,35 +39,38 @@ import com.vk.api.sdk.queries.wall.WallPostQuery;
  * @version $Id$
  * @since 0.1
  */
-public final class WallPostWithOwnerId implements WallPost {
+public final class AudioInfo {
 
     /**
-     * Origin.
+     * Audio file to get info from.
      */
-    private final WallPost wallPost;
-
-    /**
-     * Owner id.
-     */
-    private final int ownerId;
+    private final File audioFile;
 
     /**
      * Ctor.
-     * @param wallPost Origin.
-     * @param ownerId Owner ID.
+     * @param audioFile Audio File.
      */
-    public WallPostWithOwnerId(final WallPost wallPost, final int ownerId) {
-        this.wallPost = wallPost;
-        this.ownerId = ownerId;
+    public AudioInfo(final File audioFile) {
+        this.audioFile = audioFile;
     }
 
-    /**
-     * Constructs a WallPost with the provided owner ID.
-     * @return WallPost.
-     */
-    public WallPostQuery construct() {
-        return this.wallPost.construct()
-            .ownerId(this.ownerId);
+    // id3v2Tag vs id3v1Tag - check which one is present
+    @Override
+    public String toString() {
+        try {
+            final Mp3File info = new Mp3File(this.audioFile);
+            return String.format(
+                "Artist: %s%nAlbum: %s",
+                info.getId3v2Tag().getArtist(),
+                info.getId3v2Tag().getGenre()
+            );
+        } catch (
+            final IOException
+                | InvalidDataException
+                | UnsupportedTagException exception
+        ) {
+            throw new IllegalStateException(exception);
+        }
     }
 
 }

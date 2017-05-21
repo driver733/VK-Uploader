@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.biboran.vkmusicuploader.WallPost.Attachment;
+package com.biboran.vkmusicuploader.wallpost.attachment;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -49,16 +49,14 @@ import java.util.List;
 public final class AttachmentArrays {
 
     /**
-     * Array of attachments.
+     * Array of attachmentsFields.
      */
     private final Attachment[] attachments;
 
     /**
      * VKAPIClient that is used for all VK API requests.
      */
-    private final VkApiClient client = new VkApiClient(
-        new HttpTransportClient()
-    );
+    private final VkApiClient client;
 
     /**
      * UserActor on behalf of which all requests will be sent.
@@ -76,15 +74,19 @@ public final class AttachmentArrays {
     ) {
         this.attachments = attachmentArrays;
         this.actor = actor;
+        this.client = new VkApiClient(
+            new HttpTransportClient()
+        );
     }
 
     /**
-     * Constructs attachment strings for the wall post.
+     * Constructs Attachment strings for the wall Post.
      * @return Attachment strings.
      * @throws ClientException VK API Client error.
      * @throws ApiException VK API error.
      */
-    public List<String> attachments() throws ClientException, ApiException {
+    public List<String> attachmentsFields()
+        throws ClientException, ApiException {
         final List<AbstractQueryBuilder> queries =
             new ArrayList<>(this.attachments.length);
         for (final Attachment attachment : this.attachments) {
@@ -105,7 +107,7 @@ public final class AttachmentArrays {
     }
 
     /**
-     * Maps queries results to attachment strings.
+     * Maps queries results to Attachment strings.
      * @param jsonElement JsonArray that contains the results of the queries.
      * @return Attachment strings.
      * @throws IOException If unknown Attachment format is found.
@@ -141,11 +143,12 @@ public final class AttachmentArrays {
     }
 
     /**
-     * Constructs an attachment string based on the JsonObject.
+     * Constructs an Attachment string based on the JsonObject.
      * @param jsonObject JsonObject that contains the response of the query.
      * @return Attachment string.
      * @throws IOException if unknown Attachment format is found.
      */
+    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     private static String jsonObjectToAttachmentFormat(
         final JsonObject jsonObject
     ) throws IOException {
@@ -169,7 +172,7 @@ public final class AttachmentArrays {
     }
 
     /**
-     * Constructs an attachment string for the wall post.
+     * Constructs an Attachment string for the wall Post.
      * @param jsonElement Json Element that contains media ID
      *  of the audio that was added to the group page.
      * @return Attachment string.

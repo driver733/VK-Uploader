@@ -22,12 +22,9 @@
  * SOFTWARE.
  */
 
-package com.biboran.vkmusicuploader.WallPost.Attachment;
+package com.biboran.vkmusicuploader.post;
 
-import com.vk.api.sdk.client.AbstractQueryBuilder;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
-import java.util.List;
+import java.io.IOException;
 
 /**
  * Class or Interface description.
@@ -38,15 +35,12 @@ import java.util.List;
  * @version $Id$
  * @since 0.1
  */
-public interface Attachment {
+public interface Postable {
 
     /**
-     * Uploads the attachment(s).
-     * @return The result(s) of uploaded attachment(s).
-     * @throws ApiException VK API error.
-     * @throws ClientException VK Client error.
+     * Constructs album posts and executes them.
+     * @throws IOException If no subdirectories with albums are found.
      */
-    List<? extends AbstractQueryBuilder> upload()
-        throws ApiException, ClientException;
+    void post() throws IOException;
 
 }

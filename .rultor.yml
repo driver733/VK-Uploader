@@ -1,0 +1,22 @@
+architect:
+- driver733
+
+merge:
+  fast-forward: only
+  rebase: true
+  script: |-
+    mvn clean install -Pqulice
+  commanders:
+  - driver733
+
+env:
+  MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
+
+release:
+  pre: false
+  script: |-
+    mvn versions:set "-DnewVersion=${tag}"
+    git commit -am "${tag}"
+    mvn clean package -Pqulice
+  commanders:
+  - driver733

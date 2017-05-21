@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.biboran.vkmusicuploader.Post;
+package com.biboran.vkmusicuploader.post;
 
 import com.jcabi.aspects.Cacheable;
 import com.vk.api.sdk.client.VkApiClient;
@@ -43,6 +43,11 @@ import java.io.IOException;
 public final class UploadServers {
 
     /**
+     * Group ID.
+     */
+    private static final int GROUP_ID = 92444715;
+
+    /**
      * VKAPIClient that is used for all VK API requests.
      */
     private final VkApiClient client;
@@ -51,11 +56,6 @@ public final class UploadServers {
      * UserActor on behalf of which all requests will be sent.
      */
     private final UserActor actor;
-
-    /**
-     * Group ID.
-     */
-    private final int GROUP_ID = 92444715;
 
     /**
      * Ctor.
@@ -68,7 +68,7 @@ public final class UploadServers {
     }
 
     /**
-     * Type of upload server. Usually corresponds to the attachment type.
+     * Type of upload server. Usually corresponds to the Attachment type.
      */
     enum UploadServerType {
         /**
@@ -136,7 +136,7 @@ public final class UploadServers {
     private String wallPhotoUploadUrl() throws ClientException, ApiException {
         return this.client.photos()
             .getWallUploadServer(this.actor)
-            .groupId(this.GROUP_ID)
+            .groupId(UploadServers.GROUP_ID)
             .execute()
             .getUploadUrl();
     }

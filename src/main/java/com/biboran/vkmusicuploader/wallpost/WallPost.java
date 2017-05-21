@@ -22,13 +22,9 @@
  * SOFTWARE.
  */
 
-package com.biboran.vkmusicuploader.Audio;
+package com.biboran.vkmusicuploader.wallpost;
 
-import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.Mp3File;
-import com.mpatric.mp3agic.UnsupportedTagException;
-import java.io.File;
-import java.io.IOException;
+import com.vk.api.sdk.queries.wall.WallPostQuery;
 
 /**
  * Class or Interface description.
@@ -39,38 +35,12 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.1
  */
-public final class AudioInfo {
+public interface WallPost {
 
     /**
-     * Audio file to get info from.
+     * Constucts a WallPostQuery from a decorated WallPost.
+     * @return WallPostQuery.
      */
-    private final File audioFile;
-
-    /**
-     * Ctor.
-     * @param audioFile Audio File.
-     */
-    public AudioInfo(final File audioFile) {
-        this.audioFile = audioFile;
-    }
-
-    // id3v2Tag vs id3v1Tag - check which one is present
-    @Override
-    public String toString() {
-        try {
-            final Mp3File info = new Mp3File(this.audioFile);
-            return String.format(
-                "Artist: %s%nAlbum: %s",
-                info.getId3v2Tag().getArtist(),
-                info.getId3v2Tag().getGenre()
-            );
-        } catch (
-            final IOException
-                | InvalidDataException
-                | UnsupportedTagException exception
-        ) {
-            throw new IllegalStateException(exception);
-        }
-    }
+    WallPostQuery construct();
 
 }

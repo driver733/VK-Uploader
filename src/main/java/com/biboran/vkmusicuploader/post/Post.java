@@ -22,18 +22,18 @@
  * SOFTWARE.
  */
 
-package com.biboran.vkmusicuploader.Post;
+package com.biboran.vkmusicuploader.post;
 
-import com.biboran.vkmusicuploader.Audio.AudioInfo;
-import com.biboran.vkmusicuploader.WallPost.Attachment.AttachmentArrays;
-import com.biboran.vkmusicuploader.WallPost.Attachment.AttachmentAudio;
-import com.biboran.vkmusicuploader.WallPost.Attachment.AttachmentWallPhoto;
-import com.biboran.vkmusicuploader.WallPost.WallPost;
-import com.biboran.vkmusicuploader.WallPost.WallPostBase;
-import com.biboran.vkmusicuploader.WallPost.WallPostFromGroup;
-import com.biboran.vkmusicuploader.WallPost.WallPostWithAttachments;
-import com.biboran.vkmusicuploader.WallPost.WallPostWithMessage;
-import com.biboran.vkmusicuploader.WallPost.WallPostWithOwnerId;
+import com.biboran.vkmusicuploader.audio.AudioInfo;
+import com.biboran.vkmusicuploader.wallpost.WallPost;
+import com.biboran.vkmusicuploader.wallpost.WallPostBase;
+import com.biboran.vkmusicuploader.wallpost.WallPostFromGroup;
+import com.biboran.vkmusicuploader.wallpost.WallPostWithAttachments;
+import com.biboran.vkmusicuploader.wallpost.WallPostWithMessage;
+import com.biboran.vkmusicuploader.wallpost.WallPostWithOwnerId;
+import com.biboran.vkmusicuploader.wallpost.attachment.AttachmentArrays;
+import com.biboran.vkmusicuploader.wallpost.attachment.AttachmentAudio;
+import com.biboran.vkmusicuploader.wallpost.attachment.AttachmentWallPhoto;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
@@ -41,6 +41,7 @@ import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Class or Interface description.
@@ -58,7 +59,7 @@ public final class Post implements WallPost {
     /**
      * Group ID.
      */
-    private final int GROUP_ID = 92444715;
+    private static final int GROUP_ID = 92444715;
 
     /**
      * Audio files.
@@ -71,7 +72,7 @@ public final class Post implements WallPost {
     private final UserActor actor;
 
     /**
-     * Upload servers that provide upload URLs for attachments.
+     * Upload servers that provide upload URLs for attachmentsFields.
      */
     private final UploadServers servers;
 
@@ -80,20 +81,20 @@ public final class Post implements WallPost {
      * @param userActor UserActor on behalf of which all requests will be sent.
      * @param audios Audio files.
      * @param uploadServers Upload servers
-     *  that provide upload URLs for attachments.
+     *  that provide upload URLs for attachmentsFields.
      */
     public Post(
         final UserActor userActor,
         final File[] audios,
         final UploadServers uploadServers
     ) {
-        this.audios = audios;
+        this.audios = Arrays.copyOf(audios, audios.length);
         this.actor = userActor;
         this.servers = uploadServers;
     }
 
     /**
-     * Constructs a WallPostQuery for a wall post.
+     * Constructs a WallPostQuery for a wall Post.
      * @return WallPostQuery.
      */
     public WallPostQuery construct() {
@@ -128,7 +129,7 @@ public final class Post implements WallPost {
                         message
                     )
                 ),
-                -this.GROUP_ID
+                -Post.GROUP_ID
             )
             .construct();
         } catch (final IOException exception) {
@@ -137,7 +138,7 @@ public final class Post implements WallPost {
     }
 
     /**
-     * Acquires album image from the provied mp3 file.
+     * Acquires album image from the provided mp3 file.
      * @param audioFile Audio file.
      * @return Album image.
      */

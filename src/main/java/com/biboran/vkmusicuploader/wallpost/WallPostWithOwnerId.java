@@ -21,4 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.biboran.vkmusicuploader.WallPost.Attachment;
+
+package com.biboran.vkmusicuploader.wallpost;
+
+import com.vk.api.sdk.queries.wall.WallPostQuery;
+
+/**
+ * Class or Interface description.
+ * <p>
+ * Additional info
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ */
+public final class WallPostWithOwnerId implements WallPost {
+
+    /**
+     * Origin.
+     */
+    private final WallPost wallPost;
+
+    /**
+     * Owner id.
+     */
+    private final int ownerId;
+
+    /**
+     * Ctor.
+     * @param wallPost Origin.
+     * @param ownerId Owner ID.
+     */
+    public WallPostWithOwnerId(final WallPost wallPost, final int ownerId) {
+        this.wallPost = wallPost;
+        this.ownerId = ownerId;
+    }
+
+    /**
+     * Constructs a WallPost with the provided owner ID.
+     * @return WallPost.
+     */
+    public WallPostQuery construct() {
+        return this.wallPost.construct()
+            .ownerId(this.ownerId);
+    }
+
+}

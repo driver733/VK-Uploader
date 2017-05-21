@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.biboran.vkmusicuploader.Post;
+package com.biboran.vkmusicuploader.post;
 
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -57,7 +57,7 @@ public final class AlbumPosts implements Posts {
     private final File directory;
 
     /**
-     * Upload servers that provide upload URLs for attachments.
+     * Upload servers that provide upload URLs for attachmentsFields.
      */
     private final UploadServers servers;
 
@@ -66,7 +66,7 @@ public final class AlbumPosts implements Posts {
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param directory Album directory.
      * @param uploadServers Upload servers that provide upload URLs
-     *  for attachments.
+     *  for attachmentsFields.
      */
     public AlbumPosts(
         final UserActor actor,
@@ -117,7 +117,8 @@ public final class AlbumPosts implements Posts {
      * @param audios Audio files to include with the wall posts.
      * @return ExecuteBatchQuery.
      */
-    private ExecuteBatchQuery postsBatch(final File[] audios) {
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    private ExecuteBatchQuery postsBatch(final File... audios) {
         final List<WallPostQuery> posts = new ArrayList<>(audios.length);
         int iter = 0;
         while (iter < audios.length) {
@@ -145,7 +146,7 @@ public final class AlbumPosts implements Posts {
         return new ExecuteBatchQuery(
             new VkApiClient(new HttpTransportClient()),
             this.actor,
-            posts.toArray(new WallPostQuery[0])
+            posts.toArray(new WallPostQuery[posts.size()])
         );
     }
 

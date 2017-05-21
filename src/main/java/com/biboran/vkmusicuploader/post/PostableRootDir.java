@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.biboran.vkmusicuploader.Post;
+package com.biboran.vkmusicuploader.post;
 
 import com.jcabi.aspects.Async;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -42,41 +42,72 @@ import java.util.List;
  * @version $Id$
  * @since 0.1
  */
-public class RootDirPosts implements Postable {
+public final class PostableRootDir implements Postable {
 
-    private final File rootDir;
+    /**
+     * Root directory that contains directories with albums.
+     */
+    private final File directory;
 
+    /**
+     * UserActor on behalf of which all requests will be sent.
+     */
     private final UserActor actor;
 
+    /**
+     * Upload servers that provide upload URLs for attachmentsFields.
+     */
     private final UploadServers servers;
 
-    public RootDirPosts(final UserActor actor, final File rootDir, final UploadServers uploadServers) {
-        this.rootDir = rootDir;
+    /**
+     * Ctor.
+     * @param actor UserActor on behalf of which all requests will be sent.
+     * @param rootDir Root directory that contains directories with albums.
+     * @param uploadServers Upload servers
+     *  that provide upload URLs for attachmentsFields.
+     */
+    public PostableRootDir(
+        final UserActor actor,
+        final File rootDir,
+        final UploadServers uploadServers
+    ) {
+        this.directory = rootDir;
         this.actor = actor;
         this.servers = uploadServers;
     }
 
+    /**
+     * Constructs album posts and asynchronously executes them.
+     * @throws IOException If no subdirectories with albums are found.
+     */
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public void post() throws IOException {
-        final File[] directories = rootDir.listFiles(File::isDirectory);
-
+        final File[] directories = this.directory.listFiles(File::isDirectory);
         if (directories == null) {
-            throw new IOException("No directories found");
+            throw new IOException("No subdirectories found");
         }
-
-        for (final File directory : directories) {
-            final List<ExecuteBatchQuery> queries = new AlbumPosts(actor, directory, servers).posts();
+        for (final File subDirectory : directories) {
+            final List<ExecuteBatchQuery> queries = new AlbumPosts(
+                this.actor,
+                subDirectory,
+                this.servers
+            ).posts();
             for (final ExecuteBatchQuery query : queries) {
                 execute(query);
             }
         }
     }
 
+    /**
+     * Asynchronously executes the provided query.
+     * @param query ExecuteBatchQuery.
+     */
     @Async
-    private void execute(final ExecuteBatchQuery query) {
+    private static void execute(final ExecuteBatchQuery query) {
         try {
             query.execute();
-        } catch (final ApiException | ClientException e) {
-            throw new IllegalStateException(e);
+        } catch (final ApiException | ClientException exception) {
+            throw new IllegalStateException(exception);
         }
     }
 

@@ -5,7 +5,7 @@ merge:
   fast-forward: only
   rebase: true
   script: |-
-    mvn clean install -Pqulice
+    mvn clean install
   commanders:
   - driver733
 
@@ -17,6 +17,6 @@ release:
   script: |-
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
-    mvn clean package -Pqulice
+    mvn clean package
   commanders:
   - driver733

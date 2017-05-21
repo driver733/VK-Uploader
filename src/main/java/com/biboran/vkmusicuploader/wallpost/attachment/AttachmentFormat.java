@@ -25,9 +25,8 @@
 package com.biboran.vkmusicuploader.wallpost.attachment;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Constructing attachment field (for wall.post) based on attachment type,
+ * owner ID and media ID.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

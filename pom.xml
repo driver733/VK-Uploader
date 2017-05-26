@@ -9,11 +9,11 @@
             <url>https://jitpack.io</url>
         </repository>
     </repositories>
-    <parent>
-        <groupId>com.github.driver733</groupId>
-        <artifactId>jcabi-parent</artifactId>
-        <version>8864b83e8e</version>
-    </parent>
+    <!--<parent>-->
+        <!--<groupId>com.github.driver733</groupId>-->
+        <!--<artifactId>jcabi-parent</artifactId>-->
+        <!--<version>8864b83e8e</version>-->
+    <!--</parent>-->
     <groupId>groupId</groupId>
     <artifactId>VKMusicUploader</artifactId>
     <version>1.0-SNAPSHOT</version>

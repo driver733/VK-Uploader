@@ -10,7 +10,8 @@ merge:
   fast-forward: only
   rebase: true
   script: |
-    mvn clean install -Pqulice
+    mvn clean install
+#    -Pqulice
 env:
   MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
 release:
@@ -18,6 +19,7 @@ release:
   script: |-
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
-    mvn clean package -Pqulice
+    mvn clean package
+#     -Pqulice
   commanders:
   - driver733

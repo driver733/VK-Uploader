@@ -1,20 +1,17 @@
 architect:
-- driver733
+- driver73
 
-install: |-
+install: |
   wget jitpack.io/com/github/driver733/vk-java-sdk/547a05fa42/vk-java-sdk-547a05fa42.jar
-
 merge:
   commanders:
   - driver733
   fast-forward: only
   rebase: true
-  script: |-
+  script: |
     mvn clean install -Pqulice
-
 env:
   MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
-
 release:
   pre: false
   script: |-

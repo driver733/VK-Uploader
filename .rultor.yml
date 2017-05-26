@@ -1,8 +1,8 @@
 architect:
 - driver73
 
-install: |
-  wget jitpack.io/com/github/driver733/vk-java-sdk/547a05fa42/vk-java-sdk-547a05fa42.jar
+install: |-
+  wget "http://jitpack.io/com/github/driver733/vk-java-sdk/547a05fa42/vk-java-sdk-547a05fa42.jar"
 merge:
   commanders:
   - driver733

@@ -3,6 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.driver733</groupId>
+        <artifactId>jcabi-parent</artifactId>
+        <version>8864b83e8e</version>
+    </parent>
     <groupId>groupId</groupId>
     <artifactId>VKMusicUploader</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -13,10 +18,15 @@
         </repository>
     </repositories>
     <dependencies>
+        <!--<dependency>-->
+            <!--<groupId>com.vk.api</groupId>-->
+            <!--<artifactId>sdk</artifactId>-->
+            <!--<version>0.5.2</version>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>com.vk.api</groupId>
-            <artifactId>sdk</artifactId>
-            <version>0.5.2</version>
+            <groupId>com.github.driver733</groupId>
+            <artifactId>vk-java-sdk</artifactId>
+            <version>547a05fa42</version>
         </dependency>
         <!--<dependency>-->
             <!--<groupId>com.jcabi</groupId>-->

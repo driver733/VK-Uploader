@@ -44,21 +44,21 @@ public final class AudioInfo {
     /**
      * Audio file to get info from.
      */
-    private final File audioFile;
+    private final File audio;
 
     /**
      * Ctor.
-     * @param audioFile Audio File.
+     * @param audio Audio File.
      */
-    public AudioInfo(final File audioFile) {
-        this.audioFile = audioFile;
+    public AudioInfo(final File audio) {
+        this.audio = audio;
     }
 
     // id3v2Tag vs id3v1Tag - check which one is present
     @Override
     public String toString() {
         try {
-            final Mp3File info = new Mp3File(this.audioFile);
+            final Mp3File info = new Mp3File(this.audio);
             return String.format(
                 "Artist: %s%nAlbum: %s",
                 info.getId3v2Tag().getArtist(),

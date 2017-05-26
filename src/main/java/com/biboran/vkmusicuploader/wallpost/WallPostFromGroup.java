@@ -40,14 +40,14 @@ public final class WallPostFromGroup implements WallPost {
     /**
      * Origin.
      */
-    private final WallPost wallPost;
+    private final WallPost post;
 
     /**
      * Ctor.
-     * @param wallPost Origin.
+     * @param post Origin.
      */
-    public WallPostFromGroup(final WallPost wallPost) {
-        this.wallPost = wallPost;
+    public WallPostFromGroup(final WallPost post) {
+        this.post = post;
     }
 
     /**
@@ -55,7 +55,7 @@ public final class WallPostFromGroup implements WallPost {
      * @return Constructed WallPost.
      */
     public WallPostQuery construct() {
-        return this.wallPost.construct().fromGroup(true);
+        return this.post.construct().fromGroup(true);
     }
 
 }

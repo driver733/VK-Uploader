@@ -40,21 +40,21 @@ public final class WallPostWithOwnerId implements WallPost {
     /**
      * Origin.
      */
-    private final WallPost wallPost;
+    private final WallPost post;
 
     /**
-     * Owner id.
+     * Owner ID.
      */
-    private final int ownerId;
+    private final int owner;
 
     /**
      * Ctor.
-     * @param wallPost Origin.
-     * @param ownerId Owner ID.
+     * @param post Origin.
+     * @param owner Owner ID.
      */
-    public WallPostWithOwnerId(final WallPost wallPost, final int ownerId) {
-        this.wallPost = wallPost;
-        this.ownerId = ownerId;
+    public WallPostWithOwnerId(final WallPost post, final int owner) {
+        this.post = post;
+        this.owner = owner;
     }
 
     /**
@@ -62,8 +62,8 @@ public final class WallPostWithOwnerId implements WallPost {
      * @return WallPost.
      */
     public WallPostQuery construct() {
-        return this.wallPost.construct()
-            .ownerId(this.ownerId);
+        return this.post.construct()
+            .ownerId(this.owner);
     }
 
 }

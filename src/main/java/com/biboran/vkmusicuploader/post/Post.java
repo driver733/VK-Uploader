@@ -78,19 +78,19 @@ public final class Post implements WallPost {
 
     /**
      * Ctor.
-     * @param userActor UserActor on behalf of which all requests will be sent.
+     * @param actor UserActor on behalf of which all requests will be sent.
      * @param audios Audio files.
-     * @param uploadServers Upload servers
+     * @param servers Upload servers
      *  that provide upload URLs for attachmentsFields.
      */
     public Post(
-        final UserActor userActor,
+        final UserActor actor,
         final File[] audios,
-        final UploadServers uploadServers
+        final UploadServers servers
     ) {
         this.audios = Arrays.copyOf(audios, audios.length);
-        this.actor = userActor;
-        this.servers = uploadServers;
+        this.actor = actor;
+        this.servers = servers;
     }
 
     /**
@@ -98,7 +98,7 @@ public final class Post implements WallPost {
      * @return WallPostQuery.
      */
     public WallPostQuery construct() {
-        final byte[] albumImage = albumImage(this.audios[0]);
+        final byte[] image = albumImage(this.audios[0]);
         final String message = new AudioInfo(this.audios[0]).toString();
         try {
             return new WallPostWithOwnerId(
@@ -110,7 +110,7 @@ public final class Post implements WallPost {
                                 this.actor,
                                 new AttachmentWallPhoto(
                                     this.actor,
-                                    albumImage,
+                                    image,
                                     this.servers.uploadUrl(
                                         UploadServers.UploadServerType
                                             .WALL_PHOTO
@@ -139,12 +139,12 @@ public final class Post implements WallPost {
 
     /**
      * Acquires album image from the provided mp3 file.
-     * @param audioFile Audio file.
+     * @param audio Audio file.
      * @return Album image.
      */
-    private static byte[] albumImage(final File audioFile) {
+    private static byte[] albumImage(final File audio) {
         try {
-            return new Mp3File(audioFile).getId3v2Tag().getAlbumImage();
+            return new Mp3File(audio).getId3v2Tag().getAlbumImage();
         } catch (
         final IOException
             | UnsupportedTagException

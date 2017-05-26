@@ -62,18 +62,18 @@ public final class PostableRootDir implements Postable {
     /**
      * Ctor.
      * @param actor UserActor on behalf of which all requests will be sent.
-     * @param rootDir Root directory that contains directories with albums.
-     * @param uploadServers Upload servers
+     * @param dir Root directory that contains directories with albums.
+     * @param servers Upload servers
      *  that provide upload URLs for attachmentsFields.
      */
     public PostableRootDir(
         final UserActor actor,
-        final File rootDir,
-        final UploadServers uploadServers
+        final File dir,
+        final UploadServers servers
     ) {
-        this.directory = rootDir;
+        this.directory = dir;
         this.actor = actor;
-        this.servers = uploadServers;
+        this.servers = servers;
     }
 
     /**
@@ -86,10 +86,10 @@ public final class PostableRootDir implements Postable {
         if (directories == null) {
             throw new IOException("No subdirectories found");
         }
-        for (final File subDirectory : directories) {
+        for (final File dir : directories) {
             final List<ExecuteBatchQuery> queries = new AlbumPosts(
                 this.actor,
-                subDirectory,
+                dir,
                 this.servers
             ).posts();
             for (final ExecuteBatchQuery query : queries) {

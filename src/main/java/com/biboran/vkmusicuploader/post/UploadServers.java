@@ -85,16 +85,16 @@ public final class UploadServers {
     /**
      * Acquires an upload URL
      * (or used a cached one if it is available).
-     * @param uploadServerType Type of upload server.
+     * @param type Type of upload server.
      * @return Upload URL.
      * @throws IOException If unknown upload server requested.
      */
     public String uploadUrl(
-        final UploadServerType uploadServerType
+        final UploadServerType type
     ) throws IOException {
         final String result;
         try {
-            switch (uploadServerType) {
+            switch (type) {
                 case AUDIO:
                     result = this.audioUploadUrl();
                     break;

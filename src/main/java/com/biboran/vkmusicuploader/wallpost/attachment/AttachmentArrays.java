@@ -66,13 +66,13 @@ public final class AttachmentArrays {
     /**
      * Ctor.
      * @param actor UserActor on behalf of which all requests will be sent.
-     * @param attachmentArrays Attachments.
+     * @param attachments Attachments.
      */
     public AttachmentArrays(
         final UserActor actor,
-        final Attachment... attachmentArrays
+        final Attachment... attachments
     ) {
-        this.attachments = attachmentArrays;
+        this.attachments = attachments;
         this.actor = actor;
         this.client = new VkApiClient(
             new HttpTransportClient()
@@ -96,11 +96,11 @@ public final class AttachmentArrays {
                 throw new IllegalStateException(exception);
             }
         }
-        final JsonElement jsonElement = this.client.execute()
+        final JsonElement element = this.client.execute()
             .batch(this.actor, queries)
             .execute();
         try {
-            return mapResultsToAttachments(jsonElement);
+            return mapResultsToAttachments(element);
         } catch (final IOException exception) {
             throw new IllegalStateException(exception);
         }
@@ -108,62 +108,77 @@ public final class AttachmentArrays {
 
     /**
      * Maps queries results to Attachment strings.
-     * @param jsonElement JsonArray that contains the results of the queries.
+     * @param root JsonArray that contains the results of the queries.
      * @return Attachment strings.
      * @throws IOException If unknown Attachment format is found.
      */
     private static List<String> mapResultsToAttachments(
-        final JsonElement jsonElement
+        final JsonElement root
     ) throws IOException {
-        final JsonArray jsonArray = jsonElement.getAsJsonArray();
-        final List<String> list = new ArrayList<>(jsonArray.size());
-        for (final JsonElement jsonElementt : jsonArray) {
-            if (jsonElementt.isJsonArray()) {
-                final JsonArray array = jsonElementt.getAsJsonArray();
-                for (final JsonElement innerElement : array) {
-                    list.add(
-                        jsonObjectToAttachmentFormat(
-                            innerElement.getAsJsonObject()
-                        )
-                    );
-                }
-            } else if (jsonElementt.isJsonPrimitive()) {
-                list.add(
-                    audioId(jsonElementt)
-                );
-            } else {
-                list.add(
-                    jsonObjectToAttachmentFormat(
-                        jsonElementt.getAsJsonObject()
-                    )
-                );
-            }
+        final JsonArray array = root.getAsJsonArray();
+        final List<String> list = new ArrayList<>(array.size());
+        for (final JsonElement element : array) {
+            addAttachmentStringsFromElements(list, element);
         }
         return list;
     }
 
     /**
+     * Extracts attachment string from the provided Json Elements.
+     * @param list List in which attachment strings will be saved.
+     * @param root Json Element.
+     * @throws IOException If attachment string cannot be extracted.
+     */
+    private static void addAttachmentStringsFromElements(
+        final List<String> list,
+        final JsonElement root
+    ) throws IOException {
+        try {
+            if (root.isJsonArray()) {
+                final JsonArray array = root.getAsJsonArray();
+                for (final JsonElement element : array) {
+                    list.add(
+                        jsonObjectToAttachmentFormat(
+                        element.getAsJsonObject()
+                        )
+                    );
+                }
+            } else if (root.isJsonPrimitive()) {
+                list.add(audioId(root));
+            } else {
+                list.add(
+                    jsonObjectToAttachmentFormat(
+                        root.getAsJsonObject()
+                    )
+                );
+            }
+        } catch (final IOException ex) {
+            throw new IOException("Could not extract attachment string.", ex);
+        }
+    }
+
+    /**
      * Constructs an Attachment string based on the JsonObject.
-     * @param jsonObject JsonObject that contains the response of the query.
+     * @param object JsonObject that contains the response of the query.
      * @return Attachment string.
      * @throws IOException if unknown Attachment format is found.
      */
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     private static String jsonObjectToAttachmentFormat(
-        final JsonObject jsonObject
+        final JsonObject object
     ) throws IOException {
         final AttachmentFormat format;
-        if (jsonObject.has("artist")) {
+        if (object.has("artist")) {
             format = new AttachmentFormat(
                 AttachmentFormat.AttachmentType.AUDIO,
-                jsonObject.get("owner_id").getAsInt(),
-                jsonObject.get("id").getAsInt()
+                object.get("owner_id").getAsInt(),
+                object.get("id").getAsInt()
             );
-        } else if (jsonObject.has("photo_75")) {
+        } else if (object.has("photo_75")) {
             format = new AttachmentFormat(
                 AttachmentFormat.AttachmentType.PHOTO,
-                jsonObject.get("owner_id").getAsInt(),
-                jsonObject.get("id").getAsInt()
+                object.get("owner_id").getAsInt(),
+                object.get("id").getAsInt()
             );
         } else {
             throw new IOException("Unknown AttachmentFormat");
@@ -173,14 +188,14 @@ public final class AttachmentArrays {
 
     /**
      * Constructs an Attachment string for the wall Post.
-     * @param jsonElement Json Element that contains media ID
+     * @param element Json Element that contains media ID
      *  of the audio that was added to the group page.
      * @return Attachment string.
      */
-    private static String audioId(final JsonElement jsonElement) {
+    private static String audioId(final JsonElement element) {
         return new AttachmentFormat(
             AttachmentFormat.AttachmentType.AUDIO,
-            jsonElement.getAsInt()
+            element.getAsInt()
         ).toString();
     }
 

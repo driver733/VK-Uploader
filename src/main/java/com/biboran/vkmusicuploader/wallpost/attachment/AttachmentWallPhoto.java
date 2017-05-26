@@ -68,27 +68,27 @@ public final class AttachmentWallPhoto implements Attachment {
     /**
      * File that contains a photo. Typically an album image.
      */
-    private final byte[] photoFile;
+    private final byte[] photo;
 
     /**
      * WallPhoto upload URL for the photo file.
      */
-    private final String uploadUrl;
+    private final String url;
 
     /**
      * Ctor.
-     * @param userActor UserActor on behalf of which all requests will be sent.
-     * @param photoFile File that contains a photo. Typically an album image.
-     * @param uploadUrl WallPhoto upload URL for the photo file.
+     * @param actor UserActor on behalf of which all requests will be sent.
+     * @param photo File that contains a photo. Typically an album image.
+     * @param url WallPhoto upload URL for the photo file.
      */
     public AttachmentWallPhoto(
-        final UserActor userActor,
-        final byte[] photoFile,
-        final String uploadUrl
+        final UserActor actor,
+        final byte[] photo,
+        final String url
     ) {
-        this.photoFile = Arrays.copyOf(photoFile, photoFile.length);
-        this.actor = userActor;
-        this.uploadUrl = uploadUrl;
+        this.photo = Arrays.copyOf(photo, photo.length);
+        this.actor = actor;
+        this.url = url;
         this.client = new VkApiClient(
             new HttpTransportClient()
         );
@@ -106,20 +106,20 @@ public final class AttachmentWallPhoto implements Attachment {
         try {
             path = Files.write(
                 File.createTempFile("albumCover", ".jpg").toPath(),
-                this.photoFile
+                this.photo
             );
         } catch (final IOException exception) {
             throw new IllegalStateException(exception);
         }
         path.toFile().deleteOnExit();
-        final WallUploadResponse wallRes = this.client.upload()
-            .photoWall(this.uploadUrl, path.toFile())
+        final WallUploadResponse response = this.client.upload()
+            .photoWall(this.url, path.toFile())
             .execute();
         return Collections.singletonList(
             this.client.photos()
-                .saveWallPhoto(this.actor, wallRes.getPhoto())
-                .server(wallRes.getServer())
-                .hash(wallRes.getHash())
+                .saveWallPhoto(this.actor, response.getPhoto())
+                .server(response.getServer())
+                .hash(response.getHash())
                 .groupId(AttachmentWallPhoto.GROUP_ID)
         );
     }

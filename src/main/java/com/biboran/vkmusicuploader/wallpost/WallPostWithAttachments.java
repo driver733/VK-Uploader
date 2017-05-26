@@ -43,7 +43,7 @@ public final class WallPostWithAttachments implements WallPost {
     /**
      * Origin.
      */
-    private final WallPost wallPost;
+    private final WallPost post;
 
     /**
      * Attachments.
@@ -52,15 +52,15 @@ public final class WallPostWithAttachments implements WallPost {
 
     /**
      * Ctor.
-     * @param wallPost Origin.
-     * @param attachmentArrays Attachment arrays.
+     * @param post Origin.
+     * @param attachments Attachment arrays.
      */
     public WallPostWithAttachments(
-        final WallPost wallPost,
-        final AttachmentArrays attachmentArrays
+        final WallPost post,
+        final AttachmentArrays attachments
     ) {
-        this.attachments = attachmentArrays;
-        this.wallPost = wallPost;
+        this.attachments = attachments;
+        this.post = post;
     }
 
     /**
@@ -69,8 +69,10 @@ public final class WallPostWithAttachments implements WallPost {
      */
     public WallPostQuery construct() {
         try {
-            return this.wallPost.construct()
-                .attachments(this.attachments.attachmentsFields());
+            return this.post.construct()
+                .attachments(
+                    this.attachments.attachmentsFields()
+                );
         } catch (final ClientException | ApiException exception) {
             throw new IllegalStateException(exception);
         }

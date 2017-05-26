@@ -5,6 +5,7 @@ merge:
   fast-forward: only
   rebase: true
   script: |-
+    wget jitpack.io/com/github/driver733/vk-java-sdk/547a05fa42/vk-java-sdk-547a05fa42.jar
     mvn clean install -Pqulice
   commanders:
   - driver733

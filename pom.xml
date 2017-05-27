@@ -23,11 +23,11 @@
             <!--<artifactId>sdk</artifactId>-->
             <!--<version>0.5.2</version>-->
         <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.github.driver733</groupId>-->
-            <!--<artifactId>vk-java-sdk</artifactId>-->
-            <!--<version>547a05fa42</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.github.driver733</groupId>
+            <artifactId>vk-java-sdk</artifactId>
+            <version>547a05fa42</version>
+        </dependency>
         <!--<dependency>-->
             <!--<groupId>com.jcabi</groupId>-->
             <!--<artifactId>jcabi-log</artifactId>-->

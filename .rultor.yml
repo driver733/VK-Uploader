@@ -9,9 +9,8 @@ install: |-
 merge:
   commanders:
   - driver733
-#  fast-forward: only
+  fast-forward: default
   rebase: true
   script: |-
     mvn clean install
-#env:
-#  MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
+    

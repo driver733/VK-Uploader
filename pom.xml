@@ -18,11 +18,6 @@
     <artifactId>VKMusicUploader</artifactId>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
-        <!--<dependency>-->
-            <!--<groupId>com.vk.api</groupId>-->
-            <!--<artifactId>sdk</artifactId>-->
-            <!--<version>0.5.2</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>com.github.driver733</groupId>
             <artifactId>vk-java-sdk</artifactId>

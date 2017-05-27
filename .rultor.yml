@@ -1,5 +1,5 @@
 architect:
-- driver73
+- driver733
 
 install: |-
   wget "http://jitpack.io/com/github/driver733/vk-java-sdk/547a05fa42/vk-java-sdk-547a05fa42.jar"

@@ -1,22 +1,16 @@
 architect:
 - driver733
-
+docker:
+  image: dockerfile/java:oracle-java8
+install: |-
+  wget "http://jitpack.io/com/github/driver733/vk-java-sdk/547a05fa42/vk-java-sdk-547a05fa42.jar"
+  wget "http://jitpack.io/com/github/driver733/jcabi-parent/8864b83e8e/jcabi-parent-8864b83e8e.pom"
 merge:
+  commanders:
+  - driver733
   fast-forward: only
   rebase: true
   script: |-
-    mvn clean install -Pqulice
-  commanders:
-  - driver733
-
+    mvn clean install
 env:
   MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
-
-release:
-  pre: false
-  script: |-
-    mvn versions:set "-DnewVersion=${tag}"
-    git commit -am "${tag}"
-    mvn clean package -Pqulice
-  commanders:
-  - driver733

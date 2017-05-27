@@ -1,7 +1,7 @@
 architect:
 - driver733
 docker:
-  image: dockerfile/java:oracle-java8
+  image: "openjdk:8-jdk"
 install: |-
   wget "http://jitpack.io/com/github/driver733/vk-java-sdk/547a05fa42/vk-java-sdk-547a05fa42.jar"
   wget "http://jitpack.io/com/github/driver733/jcabi-parent/8864b83e8e/jcabi-parent-8864b83e8e.pom"

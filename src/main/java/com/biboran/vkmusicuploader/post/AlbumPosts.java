@@ -47,6 +47,16 @@ import java.util.List;
 public final class AlbumPosts implements Posts {
 
     /**
+     * Audios in each batch request.
+     */
+    private static final int AUDIOS_IN_REQUEST = 1;
+
+    /**
+     * Audios in each wall post.
+     */
+    private static final int AUDIOS_IN_POST = 1;
+
+    /**
      * UserActor on behalf of which all requests will be sent.
      */
     private final UserActor actor;
@@ -65,17 +75,17 @@ public final class AlbumPosts implements Posts {
      * Ctor.
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param directory Album directory.
-     * @param uploadServers Upload servers that provide upload URLs
+     * @param servers Upload servers that provide upload URLs
      *  for attachmentsFields.
      */
     public AlbumPosts(
         final UserActor actor,
         final File directory,
-        final UploadServers uploadServers
+        final UploadServers servers
     ) {
         this.actor = actor;
         this.directory = directory;
-        this.servers = uploadServers;
+        this.servers = servers;
     }
 
     /**
@@ -85,27 +95,34 @@ public final class AlbumPosts implements Posts {
      */
     public List<ExecuteBatchQuery> posts() {
         final File[] audios = this.directory.listFiles(
-            (fileDir, fileName) -> fileName.endsWith(".mp3")
+            (dir, name) -> name.endsWith(".mp3")
         );
         int iter = 0;
         assert audios != null;
         final List<ExecuteBatchQuery> queries = new ArrayList<>(audios.length);
         while (iter < audios.length) {
-            final int batchAudios = 1;
-            if (audios.length < iter + batchAudios) {
+            if (audios.length < iter + AlbumPosts.AUDIOS_IN_REQUEST) {
                 queries.add(
                     this.postsBatch(
-                        Arrays.copyOfRange(audios, iter, audios.length - iter)
+                        Arrays.copyOfRange(
+                            audios,
+                            iter,
+                            audios.length - iter
+                        )
                     )
                 );
             } else {
                 queries.add(
                     this.postsBatch(
-                        Arrays.copyOfRange(audios, iter, iter + batchAudios)
+                        Arrays.copyOfRange(
+                            audios,
+                            iter,
+                            iter + AlbumPosts.AUDIOS_IN_REQUEST
+                        )
                     )
                 );
             }
-            iter += batchAudios;
+            iter += AlbumPosts.AUDIOS_IN_REQUEST;
         }
         Collections.reverse(queries);
         return queries;
@@ -122,8 +139,7 @@ public final class AlbumPosts implements Posts {
         final List<WallPostQuery> posts = new ArrayList<>(audios.length);
         int iter = 0;
         while (iter < audios.length) {
-            final int postAudios = 1;
-            if (audios.length < iter + postAudios) {
+            if (audios.length < iter + AlbumPosts.AUDIOS_IN_POST) {
                 posts.add(
                     new Post(
                         this.actor,
@@ -135,12 +151,16 @@ public final class AlbumPosts implements Posts {
                 posts.add(
                     new Post(
                         this.actor,
-                        Arrays.copyOfRange(audios, iter, iter + postAudios),
+                        Arrays.copyOfRange(
+                            audios,
+                            iter,
+                            iter + AlbumPosts.AUDIOS_IN_POST
+                        ),
                         this.servers
                     ).construct()
                 );
             }
-            iter += postAudios;
+            iter += AlbumPosts.AUDIOS_IN_POST;
         }
         Collections.reverse(posts);
         return new ExecuteBatchQuery(

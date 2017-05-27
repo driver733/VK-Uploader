@@ -40,7 +40,7 @@ public final class WallPostWithMessage implements WallPost {
     /**
      * Origin.
      */
-    private final WallPost wallPost;
+    private final WallPost post;
 
     /**
      * Wall Post text.
@@ -49,11 +49,11 @@ public final class WallPostWithMessage implements WallPost {
 
     /**
      * Ctor.
-     * @param wallPost Origin.
+     * @param post Origin.
      * @param message Wall Post text.
      */
-    public WallPostWithMessage(final WallPost wallPost, final String message) {
-        this.wallPost = wallPost;
+    public WallPostWithMessage(final WallPost post, final String message) {
+        this.post = post;
         this.message = message;
     }
 
@@ -62,7 +62,7 @@ public final class WallPostWithMessage implements WallPost {
      * @return Constructed WallPost.
      */
     public WallPostQuery construct() {
-        return this.wallPost.construct()
+        return this.post.construct()
             .message(this.message);
     }
 

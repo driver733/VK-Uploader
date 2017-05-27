@@ -3,31 +3,31 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.github.driver733</groupId>
-        <artifactId>jcabi-parent</artifactId>
-        <version>8864b83e8e</version>
-    </parent>
-    <groupId>groupId</groupId>
-    <artifactId>VKMusicUploader</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <repositories>
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
     </repositories>
+    <!--<parent>-->
+        <!--<groupId>com.github.driver733</groupId>-->
+        <!--<artifactId>jcabi-parent</artifactId>-->
+        <!--<version>8864b83e8e</version>-->
+    <!--</parent>-->
+    <groupId>groupId</groupId>
+    <artifactId>VKMusicUploader</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <dependencies>
         <!--<dependency>-->
             <!--<groupId>com.vk.api</groupId>-->
             <!--<artifactId>sdk</artifactId>-->
             <!--<version>0.5.2</version>-->
         <!--</dependency>-->
-        <dependency>
-            <groupId>com.github.driver733</groupId>
-            <artifactId>vk-java-sdk</artifactId>
-            <version>547a05fa42</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.github.driver733</groupId>-->
+            <!--<artifactId>vk-java-sdk</artifactId>-->
+            <!--<version>547a05fa42</version>-->
+        <!--</dependency>-->
         <!--<dependency>-->
             <!--<groupId>com.jcabi</groupId>-->
             <!--<artifactId>jcabi-log</artifactId>-->
@@ -49,6 +49,13 @@
             <artifactId>mp3agic</artifactId>
             <version>0.9.0</version>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>com.github.driver733.qulice</groupId>-->
+            <!--<artifactId>qulice-maven-plugin</artifactId>-->
+            <!--<version>0.17.1</version>-->
+        <!--</dependency>-->
+
         <!-- Binding for Log4J -->
         <!--<dependency>-->
             <!--<groupId>org.apache.logging.log4j</groupId>-->
@@ -70,9 +77,12 @@
     <build>
         <plugins>
             <plugin>
+                <!--<groupId>com.github.driver733.qulice</groupId>-->
+                <!--<artifactId>qulice-maven-plugin</artifactId>-->
+                <!--<version>0.17.1</version>-->
                 <groupId>com.qulice</groupId>
                 <artifactId>qulice-maven-plugin</artifactId>
-                <version>0.17</version>
+                <version>0.17.1</version>
                 <configuration>
                     <license>file:${basedir}/LICENSE_qulice.txt</license>
                     <excludes>
@@ -97,6 +107,10 @@
                         <exclude>xml:/src/main/resources/.*</exclude>
 
                         <exclude>duplicatefinder:.*</exclude>
+
+                        <exclude>cobertura:.*</exclude>
+
+                        <exclude>dependencies:.*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

@@ -66,27 +66,27 @@ public final class AttachmentAudio implements Attachment {
     /**
      * Audios files.
      */
-    private final File[] audioFiles;
+    private final File[] audios;
 
     /**
      * Audio upload URL for the audio files.
      */
-    private final String uploadUrl;
+    private final String url;
 
     /**
      * Ctor.
      * @param actor UserActor on behalf of which all requests will be sent.
-     * @param uploadUrl Audio upload URL for the audio files.
-     * @param audioFiles Audios files.
+     * @param url Audio upload URL for the audio files.
+     * @param audios Audios files.
      */
     public AttachmentAudio(
         final UserActor actor,
-        final String uploadUrl,
-        final File... audioFiles
+        final String url,
+        final File... audios
     ) {
-        this.audioFiles = audioFiles;
+        this.audios = audios;
         this.actor = actor;
-        this.uploadUrl = uploadUrl;
+        this.url = url;
         this.client = new VkApiClient(
             new HttpTransportClient()
         );
@@ -101,11 +101,11 @@ public final class AttachmentAudio implements Attachment {
     public List<AudioAddQuery> upload()
         throws ClientException, ApiException {
         final List<AudioAddQuery> list = new ArrayList<>(
-            this.audioFiles.length
+            this.audios.length
         );
-        for (final File audioFile : this.audioFiles) {
+        for (final File audio : this.audios) {
             list.addAll(
-                this.upload(audioFile)
+                this.upload(audio)
             );
         }
         return list;
@@ -113,29 +113,29 @@ public final class AttachmentAudio implements Attachment {
 
     /**
      * Uploads the audio files.
-     * @param audioFile Audio file to upload.
+     * @param audio Audio file to upload.
      * @return AudioAddQuery that will add the uploaded audio to the group page.
      * @throws ApiException VK API error.
      * @throws ClientException VK API Client error.
      */
-    private List<AudioAddQuery> upload(final File audioFile)
+    private List<AudioAddQuery> upload(final File audio)
         throws ApiException, ClientException {
-        final AudioUploadResponse uploadResult = this.client.upload().audio(
-            this.uploadUrl,
-            audioFile
+        final AudioUploadResponse response = this.client.upload().audio(
+            this.url,
+            audio
         ).execute();
-        final Audio saveResult = this.client.audio().save(
+        final Audio result = this.client.audio().save(
             this.actor,
-            uploadResult.getServer(),
-            uploadResult.getAudio(),
-            uploadResult.getHash()
+            response.getServer(),
+            response.getAudio(),
+            response.getHash()
         ).execute();
         return Collections.singletonList(
             this.client.audio()
                 .add(
                     this.actor,
-                    saveResult.getId(),
-                    saveResult.getOwnerId()
+                    result.getId(),
+                    result.getOwnerId()
                 )
                 .groupId(AttachmentAudio.GROUP_ID)
         );

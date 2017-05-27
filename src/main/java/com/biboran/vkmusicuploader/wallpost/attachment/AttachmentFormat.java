@@ -112,42 +112,42 @@ public final class AttachmentFormat {
     /**
      * Owner ID.
      */
-    private final int ownerId;
+    private final int owner;
 
     /**
      * Media ID.
      */
-    private final int mediaId;
+    private final int media;
 
     /**
      * Ctor.
      * @param type Attachment Type.
-     * @param ownerId Owner ID.
-     * @param mediaId Media ID.
+     * @param owner Owner ID.
+     * @param media Media ID.
      */
     public AttachmentFormat(
         final AttachmentType type,
-        final int ownerId,
-        final int mediaId
+        final int owner,
+        final int media
     ) {
         this.type = type;
-        this.ownerId = ownerId;
-        this.mediaId = mediaId;
+        this.owner = owner;
+        this.media = media;
     }
 
     /**
      * Ctor for audio that was added to the group page
      * and thus does not have an owner ID in the response.
      * @param type Attachment type.
-     * @param mediaId Media ID.
+     * @param media Media ID.
      */
-    public AttachmentFormat(final AttachmentType type, final int mediaId) {
-        this(type, -AttachmentFormat.GROUP_ID, mediaId);
+    public AttachmentFormat(final AttachmentType type, final int media) {
+        this(type, -AttachmentFormat.GROUP_ID, media);
     }
 
     @Override
     public String toString() {
-        return String.format("%s%d_%d", this.type, this.ownerId, this.mediaId);
+        return String.format("%s%d_%d", this.type, this.owner, this.media);
     }
 
 }

@@ -8,7 +8,7 @@ install: |-
 merge:
   commanders:
   - driver733
-  fast-forward: only
+#  fast-forward: only
   rebase: true
   script: |-
     mvn clean install

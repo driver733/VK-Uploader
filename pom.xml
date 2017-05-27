@@ -9,11 +9,6 @@
             <url>https://jitpack.io</url>
         </repository>
     </repositories>
-    <!--<parent>-->
-        <!--<groupId>com.github.driver733</groupId>-->
-        <!--<artifactId>jcabi-parent</artifactId>-->
-        <!--<version>8864b83e8e</version>-->
-    <!--</parent>-->
     <groupId>groupId</groupId>
     <artifactId>VKMusicUploader</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -77,9 +72,6 @@
     <build>
         <plugins>
             <plugin>
-                <!--<groupId>com.github.driver733.qulice</groupId>-->
-                <!--<artifactId>qulice-maven-plugin</artifactId>-->
-                <!--<version>0.17.1</version>-->
                 <groupId>com.qulice</groupId>
                 <artifactId>qulice-maven-plugin</artifactId>
                 <version>0.17.1</version>
@@ -87,29 +79,10 @@
                     <license>file:${basedir}/LICENSE_qulice.txt</license>
                     <excludes>
                         <exclude>checkstyle:/src/main/java/com.biboran.vkmusicuploader/Main.java</exclude>
-                        <exclude>checkstyle:/src/main/java/com.biboran.vkmusicuploader/Auth/Auth.java</exclude>
-                        <exclude>checkstyle:/src/main/java/com.biboran.vkmusicuploader/Auth/AuthCallback.java</exclude>
-                        <exclude>checkstyle:/src/main/java/com.biboran.vkmusicuploader/Auth/AuthCode.java</exclude>
-                        <exclude>checkstyle:/src/main/java/com.biboran.vkmusicuploader/Auth/AuthGroupRequest.java</exclude>
-                        <exclude>checkstyle:/src/main/java/com.biboran.vkmusicuploader/Auth/AuthRequest.java</exclude>
-                        <exclude>checkstyle:/src/main/java/com.biboran.vkmusicuploader/Auth/GroupAuth.java</exclude>
-                        <exclude>checkstyle:/src/main/java/com.biboran.vkmusicuploader/Auth/Server.java</exclude>
-
                         <exclude>pmd:/src/main/java/com.biboran.vkmusicuploader/Main.java</exclude>
-                        <exclude>pmd:/src/main/java/com.biboran.vkmusicuploader/Auth/Auth.java</exclude>
-                        <exclude>pmd:/src/main/java/com.biboran.vkmusicuploader/Auth/AuthCallback.java</exclude>
-                        <exclude>pmd:/src/main/java/com.biboran.vkmusicuploader/Auth/AuthCode.java</exclude>
-                        <exclude>pmd:/src/main/java/com.biboran.vkmusicuploader/Auth/AuthGroupRequest.java</exclude>
-                        <exclude>pmd:/src/main/java/com.biboran.vkmusicuploader/Auth/AuthRequest.java</exclude>
-                        <exclude>pmd:/src/main/java/com.biboran.vkmusicuploader/Auth/GroupAuth.java</exclude>
-                        <exclude>pmd:/src/main/java/com.biboran.vkmusicuploader/Auth/Server.java</exclude>
-
                         <exclude>xml:/src/main/resources/.*</exclude>
-
                         <exclude>duplicatefinder:.*</exclude>
-
                         <exclude>cobertura:.*</exclude>
-
                         <exclude>dependencies:.*</exclude>
                     </excludes>
                 </configuration>

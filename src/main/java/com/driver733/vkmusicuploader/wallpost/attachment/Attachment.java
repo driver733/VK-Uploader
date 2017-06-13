@@ -21,3 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.driver733.vkmusicuploader.wallpost.attachment;
+
+import com.vk.api.sdk.client.AbstractQueryBuilder;
+import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ClientException;
+import java.io.IOException;
+import java.util.List;
+
+/**
+ * Class or Interface description.
+ * <p>
+ * Additional info
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ */
+public interface Attachment {
+
+    /**
+     * Uploads the Attachment(s).
+     * @return The result(s) of uploaded Attachment(s).
+     * @throws ApiException VK API error.
+     * @throws ClientException VK Client error.
+     * @throws IOException If query fails to be constructed.
+     */
+    List<AbstractQueryBuilder> upload()
+        throws ApiException, ClientException, IOException;
+
+}

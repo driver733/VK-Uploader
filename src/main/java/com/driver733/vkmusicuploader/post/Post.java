@@ -21,3 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+package com.driver733.vkmusicuploader.post;
+
+import java.io.IOException;
+
+/**
+ * Class or Interface description.
+ * <p>
+ * Additional info
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ */
+public interface Post {
+
+    /**
+     * Constructs album postsQueries and executes them.
+     * @throws IOException If no subdirectories with albums are found.
+     */
+    void post() throws IOException;
+
+}

@@ -21,3 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.driver733.vkmusicuploader.post;
+
+import com.vk.api.sdk.queries.execute.ExecuteBatchQuery;
+import java.io.IOException;
+import java.util.List;
+
+/**
+ * Class or Interface description.
+ * <p>
+ * <p> Additional info
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ */
+interface WallPosts {
+
+    /**
+     * Constructs queries for batch posting the wall postsQueries.
+     * @return ExecuteBatchQueries that will send the wall postsQueries.
+     * @throws IOException If an error occurs while forming the queries.
+     */
+    List<ExecuteBatchQuery> postsQueries() throws IOException;
+
+    /**
+     * Updates the properties.
+     * @throws IOException If the properties cannot be saved.
+     */
+    void updateProperties() throws IOException;
+
+}

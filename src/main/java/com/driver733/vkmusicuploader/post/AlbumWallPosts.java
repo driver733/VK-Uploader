@@ -1,0 +1,230 @@
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2017 Mikhail Yakushin
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+package com.driver733.vkmusicuploader.post;
+
+import com.driver733.vkmusicuploader.audio.AudiosBasic;
+import com.driver733.vkmusicuploader.audio.AudiosNonProcessed;
+import com.driver733.vkmusicuploader.support.ImmutableProperties;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
+import com.jcabi.aspects.Cacheable;
+import com.vk.api.sdk.client.VkApiClient;
+import com.vk.api.sdk.client.actors.UserActor;
+import com.vk.api.sdk.httpclient.HttpTransportClient;
+import com.vk.api.sdk.queries.execute.ExecuteBatchQuery;
+import com.vk.api.sdk.queries.wall.WallPostQuery;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * Class or Interface description.
+ * <p>
+ * Additional info
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ *
+ * @checkstyle ClassDataAbstractionCouplingCheck (2 lines)
+ */
+public final class AlbumWallPosts implements WallPosts {
+
+    /**
+     * Audios in each batch request.
+     */
+    private static final int AUDIOS_IN_REQUEST = 2;
+
+    /**
+     * Audios in each wall postFromDir.
+     */
+    private static final int AUDIOS_IN_POST = 2;
+
+    /**
+     * UserActor on behalf of which all requests will be sent.
+     */
+    private final UserActor actor;
+
+    /**
+     * Album dir.
+     */
+    private final File dir;
+
+    /**
+     * Upload servers that provide upload URLs for attachmentsFields.
+     */
+    private final UploadServers servers;
+
+    /**
+     * Properties that contain the {@link AudioStatus}es of audio files.
+     */
+    private final ImmutableProperties properties;
+
+    /**
+     * Ctor.
+     * @param actor UserActor on behalf of which all requests will be sent.
+     * @param dir Album dir.
+     * @param servers Upload servers that provide upload URLs
+     *  for attachmentsFields.
+     * @param properties Properties that contain the
+     *  {@link AudioStatus}es of audio files.
+     * @checkstyle ParameterNumberCheck (10 lines)
+     */
+    public AlbumWallPosts(
+        final UserActor actor,
+        final File dir,
+        final UploadServers servers,
+        final ImmutableProperties properties
+    ) {
+        this.actor = actor;
+        this.dir = dir;
+        this.servers = servers;
+        this.properties = properties;
+    }
+
+    /**
+     * Constructs queries for batch posting wall postsQueries
+     * associated with the album.
+     * @return ExecuteBatchQuery.
+     * @throws IOException If no audios are found.
+     */
+    public List<ExecuteBatchQuery> postsQueries() throws IOException {
+        final File[] audios = this.audios();
+        final List<ExecuteBatchQuery> queries = new ArrayList<>(audios.length);
+        int iter = 0;
+        while (iter < audios.length) {
+            if (audios.length < iter + AlbumWallPosts.AUDIOS_IN_REQUEST) {
+                queries.add(
+                    this.postsBatch(
+                        Arrays.copyOfRange(
+                            audios,
+                            iter,
+                            audios.length - iter
+                        )
+                    )
+                );
+            } else {
+                queries.add(
+                    this.postsBatch(
+                        Arrays.copyOfRange(
+                            audios,
+                            iter,
+                            iter + AlbumWallPosts.AUDIOS_IN_REQUEST
+                        )
+                    )
+                );
+            }
+            iter += AlbumWallPosts.AUDIOS_IN_REQUEST;
+        }
+        Collections.reverse(queries);
+        return queries;
+    }
+
+    @Override
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    public void updateProperties() throws IOException {
+        final File[] audios = this.audios();
+        for (final File audio : audios) {
+            this.properties.put(
+                audio.getName(),
+                new StringBuilder(
+                    this.properties.getProperty(
+                        audio.getName()
+                    )
+                ).replace(
+                    0,
+                    1,
+                    AudioStatus.POSTED.toString()
+                ).toString()
+            );
+        }
+        try {
+            this.properties.store();
+        } catch (final IOException ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
+
+    /**
+     * Constructs a query for batch posting wall postsQueries
+     * associated with the album.
+     * @param audios Audio files to include with the wall postsQueries.
+     * @return ExecuteBatchQuery.
+     * @throws IOException If the WallPost query cannot be obtained.
+     * @checkstyle LocalFinalVariableNameCheck (10 lines)
+     */
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    private ExecuteBatchQuery postsBatch(final File... audios) throws
+        IOException {
+        final List<WallPostQuery> posts = new ArrayList<>(audios.length);
+        int from = 0;
+        while (from < audios.length) {
+            final int to;
+            if (audios.length < from + AlbumWallPosts.AUDIOS_IN_POST) {
+                to = audios.length;
+            } else {
+                to = from + AlbumWallPosts.AUDIOS_IN_POST;
+            }
+            final WallPostQuery query;
+            try {
+                query = new WallPostAlbum(
+                    this.actor,
+                    Arrays.copyOfRange(
+                        audios,
+                        from,
+                        to
+                    ),
+                    this.servers,
+                    this.properties
+                ).construct();
+            } catch (final IOException ex) {
+                throw new IOException("Failed to obtain a WallPost query", ex);
+            }
+            posts.add(query);
+            from += AlbumWallPosts.AUDIOS_IN_POST;
+        }
+        Collections.reverse(posts);
+        return new ExecuteBatchQuery(
+            new VkApiClient(new HttpTransportClient()),
+            this.actor,
+            posts.toArray(new WallPostQuery[posts.size()])
+        );
+    }
+
+    /**
+     * Finds audio files that have not been posted.
+     * @return An array of audio {@link File}s.
+     * @throws IOException If a certain criteria of
+     *  {@link com.driver733.vkmusicuploader.audio.Audios}
+     *  is not fulfilled.
+     */
+    @Cacheable(forever = true)
+    private File[] audios() throws IOException {
+        return new AudiosNonProcessed(
+            new AudiosBasic(this.dir)
+        ).audios();
+    }
+}

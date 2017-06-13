@@ -21,3 +21,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.driver733.vkmusicuploader.post;
+
+import com.vk.api.sdk.client.actors.UserActor;
+import java.io.File;
+
+/**
+ * Class or Interface description.
+ * <p>
+ * Additional info
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ */
+public final class PostsBasic implements Posts {
+
+    /**
+     * UserActor on behalf of which all requests will be sent.
+     */
+    private final UserActor actor;
+
+    /**
+     * Upload servers that provide upload URLs for attachmentsFields.
+     */
+    private final UploadServers servers;
+
+    /**
+     * Ctor.
+     * @param actor UserActor on behalf of which all requests will be sent.
+     * @param servers Upload servers that
+     *  provide upload URLs for attachmentsFields.
+     */
+    public PostsBasic(final UserActor actor, final UploadServers servers) {
+        this.actor = actor;
+        this.servers = servers;
+    }
+
+    @Override
+    public Post postFromDir(final File dir) {
+        return new PostRootDir(
+            this.actor,
+            dir,
+            this.servers
+        );
+    }
+
+}

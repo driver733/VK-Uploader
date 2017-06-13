@@ -21,3 +21,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.driver733.vkmusicuploader.wallpost.attachment.support;
+
+/**
+ * Class or Interface description.
+ *
+ * <p> Additional info
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since
+ */
+public enum AudioStatus {
+
+    /**
+     * Audio has been uploaded (and saved using audio.save() VK API method).
+     */
+    UPLOADED(0),
+
+    /**
+     * Audio has been added to the group page using (audio.add() VK API method).
+     */
+    ADDED(1),
+
+    /**
+     * Audio has been posted to the group page wall
+     * using (wall.postFromDir() VK API method).
+     */
+    POSTED(2);
+
+    /**
+     * Int value.
+     */
+    private final int value;
+
+    /**
+     * Ctor.
+     * @param value Int value.
+     */
+    AudioStatus(final Integer value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.value);
+    }
+}

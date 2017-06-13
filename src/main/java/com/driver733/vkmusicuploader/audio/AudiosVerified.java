@@ -21,3 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.driver733.vkmusicuploader.audio;
+
+import java.io.File;
+import java.io.IOException;
+
+/**
+ * Class or Interface description.
+ * <p>
+ * Additional info
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ */
+@SuppressWarnings("unused")
+public final class AudiosVerified implements Audios {
+
+    /**
+     * Origin.
+     */
+    private final Audios origin;
+
+    /**
+     * Ctor.
+     * @param origin Origin.
+     */
+    public AudiosVerified(final Audios origin) {
+        this.origin = origin;
+    }
+
+    @Override
+    public File[] audios() throws IOException {
+        final File[] audios = this.origin.audios();
+        if (audios.length == 0) {
+            throw new IOException("No audios found");
+        }
+        return audios;
+    }
+}

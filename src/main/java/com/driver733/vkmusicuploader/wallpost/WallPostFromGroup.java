@@ -21,3 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+package com.driver733.vkmusicuploader.wallpost;
+
+import com.vk.api.sdk.queries.wall.WallPostQuery;
+import java.io.IOException;
+
+/**
+ * Class or Interface description.
+ * <p>
+ * Additional info
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ */
+public final class WallPostFromGroup implements WallPost {
+
+    /**
+     * Origin.
+     */
+    private final WallPost post;
+
+    /**
+     * Ctor.
+     * @param post Origin.
+     */
+    public WallPostFromGroup(final WallPost post) {
+        this.post = post;
+    }
+
+    @Override
+    public WallPostQuery construct() throws IOException {
+        return this.post.construct().fromGroup(true);
+    }
+
+}

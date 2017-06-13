@@ -21,3 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.driver733.vkmusicuploader.wallpost;
+
+import com.vk.api.sdk.queries.wall.WallPostQuery;
+import java.io.IOException;
+
+/**
+ * Class or Interface description.
+ * <p>
+ * Additional info
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ */
+public interface WallPost {
+
+    /**
+     * Constructs a WallPostQuery from a decorated WallPost.
+     * @return WallPostQuery.
+     * @throws IOException If a {@link WallPostQuery} cannot be constructed.
+     */
+    WallPostQuery construct() throws IOException;
+
+}

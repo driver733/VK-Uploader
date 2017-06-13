@@ -21,3 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.driver733.vkmusicuploader.post;
+
+import java.io.File;
+
+/**
+ * Class or Interface description.
+ * <p>
+ * <p> Additional info
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ */
+interface Posts {
+
+    /**
+     * Constructs a {@link Post} with {@link File}s in the provided directory.
+     * @param dir With {@link File}s to be attached to the {@link Post}.
+     * @return Constructed {@link Post}.
+     */
+    Post postFromDir(File dir);
+
+}

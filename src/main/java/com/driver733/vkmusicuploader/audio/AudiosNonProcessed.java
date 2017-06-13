@@ -1,0 +1,83 @@
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2017 Mikhail Yakushin
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+package com.driver733.vkmusicuploader.audio;
+
+import com.driver733.vkmusicuploader.support.ImmutableProperties;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Class or Interface description.
+ * <p>
+ * Additional info
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ */
+public final class AudiosNonProcessed implements Audios {
+
+    /**
+     * Origin.
+     */
+    private final Audios origin;
+
+    /**
+     * Ctor.
+     * @param origin Origin.
+     * @checkstyle LocalFinalVariableNameCheck (20 lines)
+     */
+    public AudiosNonProcessed(final Audios origin) {
+        this.origin = origin;
+    }
+
+    @Override
+    public File[] audios() throws IOException {
+        final File[] audios = this.origin.audios();
+        final ImmutableProperties props = new ImmutableProperties(
+            new File(
+                String.format(
+                    "%s/vkmu.properties",
+                    audios[0].getParentFile()
+                        .getAbsoluteFile()
+                )
+            )
+        );
+        final List<File> nonProcessed = new ArrayList<>(audios.length);
+        for (final File file : audios) {
+            if (
+                props.containsKey(file.getName())
+                && !props.get(file.getName()).toString().substring(0, 1)
+                .equals(AudioStatus.POSTED.toString())
+                ) {
+                nonProcessed.add(file);
+            }
+        }
+        return nonProcessed.toArray(new File[nonProcessed.size()]);
+    }
+
+}

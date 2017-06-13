@@ -21,3 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.driver733.vkmusicuploader.audio;
+
+import java.io.File;
+
+/**
+ * Class or Interface description.
+ * <p>
+ * Additional info
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ */
+public final class AudiosBasic implements Audios {
+
+    /**
+     * Directory that contains audio files.
+     */
+    private final File dir;
+
+    /**
+     * Ctor.
+     * @param dir Directory that contains audio files.
+     */
+    public AudiosBasic(final File dir) {
+        this.dir = dir;
+    }
+
+    //@checkstyle ParameterNameCheck (5 lines)
+    @Override
+    public File[] audios() {
+        return this.dir.listFiles(
+            (dirName, fileName) -> fileName.endsWith(".mp3")
+        );
+    }
+
+}

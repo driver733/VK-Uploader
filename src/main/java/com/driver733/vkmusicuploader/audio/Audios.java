@@ -21,3 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.driver733.vkmusicuploader.audio;
+
+import java.io.File;
+import java.io.IOException;
+
+/**
+ * Class or Interface description.
+ * <p>
+ * Additional info
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ */
+public interface Audios {
+
+    /**
+     * Locates the audio {@link File} that match a certain criteria.
+     *  (See decorator classes)
+     * @return Arrays of audio {@link File}s.
+     * @throws IOException If a certain criteria is not fulfilled.
+     */
+    File[] audios() throws IOException;
+}

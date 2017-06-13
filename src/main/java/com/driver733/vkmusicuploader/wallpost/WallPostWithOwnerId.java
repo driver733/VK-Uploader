@@ -21,3 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.driver733.vkmusicuploader.wallpost;
+
+import com.vk.api.sdk.queries.wall.WallPostQuery;
+import java.io.IOException;
+
+/**
+ * Class or Interface description.
+ * <p>
+ * Additional info
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ */
+public final class WallPostWithOwnerId implements WallPost {
+
+    /**
+     * Origin.
+     */
+    private final WallPost post;
+
+    /**
+     * Owner ID.
+     */
+    private final int owner;
+
+    /**
+     * Ctor.
+     * @param post Origin.
+     * @param owner Owner ID.
+     */
+    public WallPostWithOwnerId(final WallPost post, final int owner) {
+        this.post = post;
+        this.owner = owner;
+    }
+
+    @Override
+    public WallPostQuery construct() throws IOException {
+        return this.post
+            .construct()
+            .ownerId(this.owner);
+    }
+
+}

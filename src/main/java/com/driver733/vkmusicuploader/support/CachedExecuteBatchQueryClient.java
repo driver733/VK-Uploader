@@ -1,5 +1,12 @@
 package com.driver733.vkmusicuploader.support;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
+import com.vk.api.sdk.client.ClientResponse;
+import com.vk.api.sdk.client.TransportClient;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,7 +15,6 @@ import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -26,13 +32,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
-import com.vk.api.sdk.client.ClientResponse;
-import com.vk.api.sdk.client.TransportClient;
 
 /**
  * Class or Interface description.

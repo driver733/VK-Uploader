@@ -82,11 +82,6 @@
             <artifactId>validation-api</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>com.github.driver733.qulice</groupId>
-            <artifactId>jaxen</artifactId>
-            <version>0.17.1</version>
-        </dependency>
     </dependencies>
     <build>
         <pluginManagement>

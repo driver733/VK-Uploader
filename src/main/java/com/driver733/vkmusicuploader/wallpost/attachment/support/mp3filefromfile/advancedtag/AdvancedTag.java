@@ -21,11 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.post;
+package com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile.advancedtag;
 
-import com.vk.api.sdk.queries.execute.ExecuteBatchQuery;
+import com.mpatric.mp3agic.ID3v2;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Class or Interface description.
@@ -36,19 +35,13 @@ import java.util.List;
  * @version $Id$
  * @since 0.1
  */
-interface WallPosts {
+public interface AdvancedTag {
 
     /**
-     * Constructs queries for batch posting the wall postsQueries.
-     * @return ExecuteBatchQueries that will send the wall postsQueries.
-     * @throws IOException If an error occurs while forming the queries.
+     * Checks the tag for missing items, such as album image.
+     * @return The {@link ID3v2} tag.
+     * @throws IOException If the tag has any of the requested items missing.
      */
-    List<ExecuteBatchQuery> postsQueries() throws IOException;
-
-    /**
-     * Updates the properties.
-     * @throws IOException If the properties cannot be saved.
-     */
-    void updateProperties() throws IOException;
+    ID3v2 construct() throws IOException;
 
 }

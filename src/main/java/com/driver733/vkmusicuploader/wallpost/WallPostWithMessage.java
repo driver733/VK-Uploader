@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost;
 
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
 import java.io.IOException;
 
@@ -35,6 +36,7 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class WallPostWithMessage implements WallPost {
 
     /**

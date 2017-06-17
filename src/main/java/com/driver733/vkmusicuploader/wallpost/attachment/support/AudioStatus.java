@@ -23,6 +23,8 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
+import com.jcabi.aspects.Immutable;
+
 /**
  * Class or Interface description.
  *
@@ -32,6 +34,7 @@ package com.driver733.vkmusicuploader.wallpost.attachment.support;
  * @version $Id$
  * @since
  */
+@Immutable
 public enum AudioStatus {
 
     /**

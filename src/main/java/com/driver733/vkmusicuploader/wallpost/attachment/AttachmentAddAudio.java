@@ -23,6 +23,8 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
+import com.jcabi.aspects.Immutable;
+import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -44,6 +46,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class AttachmentAddAudio implements Attachment {
 
     /**
@@ -64,7 +67,7 @@ public final class AttachmentAddAudio implements Attachment {
     /**
      * Audios files.
      */
-    private final ImmutablePair<Integer, Integer>[] audios;
+    private final Array<ImmutablePair<Integer, Integer>> audios;
 
     /**
      * Ctor.
@@ -76,7 +79,7 @@ public final class AttachmentAddAudio implements Attachment {
         final UserActor actor,
         final ImmutablePair<Integer, Integer>... audios
     ) {
-        this.audios = audios;
+        this.audios = new Array<>(audios);
         this.actor = actor;
         this.client = new VkApiClient(
             new HttpTransportClient()
@@ -87,7 +90,7 @@ public final class AttachmentAddAudio implements Attachment {
     public List<AbstractQueryBuilder> upload()
         throws ClientException, ApiException {
         final List<AbstractQueryBuilder> list = new ArrayList<>(
-            this.audios.length
+            this.audios.size()
         );
         for (final ImmutablePair<Integer, Integer> pair : this.audios) {
             list.addAll(

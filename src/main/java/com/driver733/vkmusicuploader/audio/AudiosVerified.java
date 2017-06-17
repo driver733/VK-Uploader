@@ -23,6 +23,8 @@
  */
 package com.driver733.vkmusicuploader.audio;
 
+import com.jcabi.aspects.Immutable;
+import com.jcabi.immutable.Array;
 import java.io.File;
 import java.io.IOException;
 
@@ -36,6 +38,7 @@ import java.io.IOException;
  * @since 0.1
  */
 @SuppressWarnings("unused")
+@Immutable
 public final class AudiosVerified implements Audios {
 
     /**
@@ -52,9 +55,9 @@ public final class AudiosVerified implements Audios {
     }
 
     @Override
-    public File[] audios() throws IOException {
-        final File[] audios = this.origin.audios();
-        if (audios.length == 0) {
+    public Array<File> audios() throws IOException {
+        final Array<File> audios = this.origin.audios();
+        if (audios.size() == 0) {
             throw new IOException("No audios found");
         }
         return audios;

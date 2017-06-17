@@ -23,6 +23,8 @@
  */
 package com.driver733.vkmusicuploader.post;
 
+import com.driver733.vkmusicuploader.wallpost.WallPosts;
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.queries.execute.ExecuteBatchQuery;
@@ -38,6 +40,7 @@ import java.util.List;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 final class UploadVerification {
 
     /**

@@ -26,6 +26,8 @@ package com.driver733.vkmusicuploader.wallpost.attachment;
 
 import com.driver733.vkmusicuploader.support.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
+import com.jcabi.aspects.Immutable;
+import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -49,6 +51,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class AttachmentAudio implements Attachment {
 
     /**
@@ -64,7 +67,7 @@ public final class AttachmentAudio implements Attachment {
     /**
      * Audios files.
      */
-    private final File[] audios;
+    private final Array<File> audios;
 
     /**
      * Audio upload URL for the audio files.
@@ -91,7 +94,7 @@ public final class AttachmentAudio implements Attachment {
         final ImmutableProperties properties,
         final File... audios
     ) {
-        this.audios = audios;
+        this.audios = new Array<>(audios);
         this.actor = actor;
         this.url = url;
         this.properties = properties;
@@ -102,9 +105,9 @@ public final class AttachmentAudio implements Attachment {
 
     @Override
     public List<AbstractQueryBuilder> upload()
-        throws ClientException, ApiException {
+        throws ClientException, ApiException, IOException {
         final List<AbstractQueryBuilder> list = new ArrayList<>(
-            this.audios.length
+            this.audios.size()
         );
         for (final File audio : this.audios) {
             list.addAll(
@@ -116,41 +119,34 @@ public final class AttachmentAudio implements Attachment {
 
     /**
      * Uploads the audio files.
-     * @param audio Audio file to upload.
+     * @param audio Audio construct to upload.
      * @return AudioAddQuery that will add the uploaded audio to the group page.
      * @throws ApiException VK API error.
      * @throws ClientException VK API Client error.
+     * @throws IOException If an exception occurs
+     *  while loading/saving the properties.
      */
     private List<AbstractQueryBuilder> upload(final File audio)
-        throws ApiException, ClientException {
-        try {
-            this.properties.load();
-        } catch (final IOException ex) {
-            throw new IllegalStateException(ex);
-        }
-        final AudioUploadResponse response = this.client.upload().audio(
-            this.url,
-            audio
-        ).execute();
+        throws ApiException, ClientException, IOException {
+        this.properties.load();
+        final AudioUploadResponse response = this.client
+            .upload()
+            .audio(this.url, audio)
+            .execute();
         final Audio result = this.client.audio().save(
             this.actor,
             response.getServer(),
             response.getAudio(),
             response.getHash()
         ).execute();
-        this.properties.put(
+        this.properties.setPropertyAndStore(
             audio.getName(),
             String.format("%s_%d", AudioStatus.UPLOADED, result.getId())
         );
-        try {
-            this.properties.store();
-        } catch (final IOException ex) {
-            throw new IllegalStateException(ex);
-        }
         return new AttachmentAddAudio(
             this.actor,
             new ImmutablePair<>(result.getId(), result.getOwnerId())
-            ).upload();
+        ).upload();
     }
 
 }

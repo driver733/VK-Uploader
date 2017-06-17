@@ -26,6 +26,7 @@ package com.driver733.vkmusicuploader.support;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.exceptions.ClientException;
 import java.io.IOException;
@@ -63,7 +64,7 @@ public final class QueryResults {
      * @throws IOException If query fails to execute.
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public JsonElement[] results() throws IOException {
+    public Array<JsonElement> results() throws IOException {
         final List<JsonElement> results =
             new ArrayList<>(this.queries.size());
         for (final AbstractQueryBuilder query : this.queries) {
@@ -83,9 +84,7 @@ public final class QueryResults {
                 );
             }
         }
-        return results.toArray(
-            new JsonElement[results.size()]
-        );
+        return new Array<>(results);
     }
 
 }

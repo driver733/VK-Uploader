@@ -24,6 +24,7 @@
 package com.driver733.vkmusicuploader.support;
 
 import com.google.gson.JsonElement;
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.ClientResponse;
 import com.vk.api.sdk.client.TransportClient;
 import java.io.File;
@@ -41,6 +42,7 @@ import org.apache.http.HttpStatus;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 final class CachedClient implements TransportClient {
 
     /**

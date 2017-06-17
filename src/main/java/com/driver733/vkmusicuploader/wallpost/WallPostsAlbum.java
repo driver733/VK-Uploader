@@ -21,13 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.post;
+package com.driver733.vkmusicuploader.wallpost;
 
 import com.driver733.vkmusicuploader.audio.AudiosBasic;
 import com.driver733.vkmusicuploader.audio.AudiosNonProcessed;
+import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.support.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.jcabi.aspects.Cacheable;
+import com.jcabi.aspects.Immutable;
+import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
@@ -36,7 +39,6 @@ import com.vk.api.sdk.queries.wall.WallPostQuery;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -51,17 +53,44 @@ import java.util.List;
  *
  * @checkstyle ClassDataAbstractionCouplingCheck (2 lines)
  */
-public final class AlbumWallPosts implements WallPosts {
+@Immutable
+public final class WallPostsAlbum implements WallPosts {
+
+    /**
+     * Maximum number of requests in each batch request.
+     * @see
+     */
+    private static final int MAX_REQUESTS = 25;
+
+    /**
+     * Number of photos in each wall post.
+     * 1 (Album image)
+     */
+    private static final int PHOTOS_IN_POST = 1;
+
+    /**
+     * The "cost" of a wall.post request.
+     */
+    private static final int WALL_POST_REQUEST = 1;
+
+    /**
+     * Maximum number of attachments in a wall post.
+     */
+    private static final int MAX_ATTACHMENTS = 10;
 
     /**
      * Audios in each batch request.
      */
-    private static final int AUDIOS_IN_REQUEST = 2;
+    private static final int AUDIOS_IN_REQUEST =
+        WallPostsAlbum.MAX_REQUESTS
+            - 3 * (WallPostsAlbum.PHOTOS_IN_POST
+            + WallPostsAlbum.WALL_POST_REQUEST);
 
     /**
-     * Audios in each wall postFromDir.
+     * Audios in each Wall Post.
      */
-    private static final int AUDIOS_IN_POST = 2;
+    private static final int AUDIOS_IN_POST =
+        WallPostsAlbum.MAX_ATTACHMENTS - WallPostsAlbum.PHOTOS_IN_POST;
 
     /**
      * UserActor on behalf of which all requests will be sent.
@@ -78,6 +107,7 @@ public final class AlbumWallPosts implements WallPosts {
      */
     private final UploadServers servers;
 
+    // @checkstyle LocalFinalVariableNameCheck (20 lines)
     /**
      * Properties that contain the {@link AudioStatus}es of audio files.
      */
@@ -93,7 +123,7 @@ public final class AlbumWallPosts implements WallPosts {
      *  {@link AudioStatus}es of audio files.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
-    public AlbumWallPosts(
+    public WallPostsAlbum(
         final UserActor actor,
         final File dir,
         final UploadServers servers,
@@ -105,6 +135,7 @@ public final class AlbumWallPosts implements WallPosts {
         this.properties = properties;
     }
 
+    // @checkstyle LocalFinalVariableNameCheck (20 lines)
     /**
      * Constructs queries for batch posting wall postsQueries
      * associated with the album.
@@ -112,32 +143,22 @@ public final class AlbumWallPosts implements WallPosts {
      * @throws IOException If no audios are found.
      */
     public List<ExecuteBatchQuery> postsQueries() throws IOException {
-        final File[] audios = this.audios();
-        final List<ExecuteBatchQuery> queries = new ArrayList<>(audios.length);
+        final Array<File> audios = this.audios();
+        final Array<ExecuteBatchQuery> queries = new Array<>();
         int iter = 0;
-        while (iter < audios.length) {
-            if (audios.length < iter + AlbumWallPosts.AUDIOS_IN_REQUEST) {
-                queries.add(
-                    this.postsBatch(
-                        Arrays.copyOfRange(
-                            audios,
-                            iter,
-                            audios.length - iter
-                        )
-                    )
-                );
+        while (iter < audios.size()) {
+            final int to;
+            if (audios.size() < iter + WallPostsAlbum.AUDIOS_IN_REQUEST) {
+                to = audios.size() - iter;
             } else {
-                queries.add(
-                    this.postsBatch(
-                        Arrays.copyOfRange(
-                            audios,
-                            iter,
-                            iter + AlbumWallPosts.AUDIOS_IN_REQUEST
-                        )
-                    )
-                );
+                to = iter + WallPostsAlbum.AUDIOS_IN_REQUEST;
             }
-            iter += AlbumWallPosts.AUDIOS_IN_REQUEST;
+            queries.add(
+                this.postsBatch(
+                    audios.subList(iter, to)
+                )
+            );
+            iter += WallPostsAlbum.AUDIOS_IN_REQUEST;
         }
         Collections.reverse(queries);
         return queries;
@@ -146,9 +167,9 @@ public final class AlbumWallPosts implements WallPosts {
     @Override
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public void updateProperties() throws IOException {
-        final File[] audios = this.audios();
+        final Array<File> audios = this.audios();
         for (final File audio : audios) {
-            this.properties.put(
+            this.properties.setProperty(
                 audio.getName(),
                 new StringBuilder(
                     this.properties.getProperty(
@@ -161,11 +182,7 @@ public final class AlbumWallPosts implements WallPosts {
                 ).toString()
             );
         }
-        try {
-            this.properties.store();
-        } catch (final IOException ex) {
-            throw new IllegalStateException(ex);
-        }
+        this.properties.store();
     }
 
     /**
@@ -177,25 +194,23 @@ public final class AlbumWallPosts implements WallPosts {
      * @checkstyle LocalFinalVariableNameCheck (10 lines)
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    private ExecuteBatchQuery postsBatch(final File... audios) throws
+    private ExecuteBatchQuery postsBatch(final List<File> audios) throws
         IOException {
-        final List<WallPostQuery> posts = new ArrayList<>(audios.length);
+        final List<WallPostQuery> posts = new ArrayList<>(audios.size());
         int from = 0;
-        while (from < audios.length) {
+        while (from < audios.size()) {
             final int to;
-            if (audios.length < from + AlbumWallPosts.AUDIOS_IN_POST) {
-                to = audios.length;
+            if (audios.size() < from + WallPostsAlbum.AUDIOS_IN_POST) {
+                to = audios.size();
             } else {
-                to = from + AlbumWallPosts.AUDIOS_IN_POST;
+                to = from + WallPostsAlbum.AUDIOS_IN_POST;
             }
             final WallPostQuery query;
             try {
                 query = new WallPostAlbum(
                     this.actor,
-                    Arrays.copyOfRange(
-                        audios,
-                        from,
-                        to
+                    new Array<>(
+                        audios.subList(from, to)
                     ),
                     this.servers,
                     this.properties
@@ -204,7 +219,7 @@ public final class AlbumWallPosts implements WallPosts {
                 throw new IOException("Failed to obtain a WallPost query", ex);
             }
             posts.add(query);
-            from += AlbumWallPosts.AUDIOS_IN_POST;
+            from += WallPostsAlbum.AUDIOS_IN_POST;
         }
         Collections.reverse(posts);
         return new ExecuteBatchQuery(
@@ -222,9 +237,10 @@ public final class AlbumWallPosts implements WallPosts {
      *  is not fulfilled.
      */
     @Cacheable(forever = true)
-    private File[] audios() throws IOException {
+    private Array<File> audios() throws IOException {
         return new AudiosNonProcessed(
-            new AudiosBasic(this.dir)
+            new AudiosBasic(this.dir),
+            this.properties
         ).audios();
     }
 }

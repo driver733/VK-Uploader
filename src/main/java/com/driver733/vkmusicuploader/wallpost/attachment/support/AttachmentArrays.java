@@ -28,6 +28,8 @@ import com.driver733.vkmusicuploader.support.ImmutableProperties;
 import com.driver733.vkmusicuploader.support.QueryResults;
 import com.driver733.vkmusicuploader.wallpost.attachment.Attachment;
 import com.google.gson.JsonElement;
+import com.jcabi.aspects.Immutable;
+import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
@@ -43,13 +45,15 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (10 lines)
  */
+@Immutable
 public final class AttachmentArrays {
 
     /**
      * Array of attachmentsFields.
      */
-    private final Attachment[] attachments;
+    private final Array<Attachment> attachments;
 
     /**
      * UserActor on behalf of which all requests will be sent.
@@ -73,7 +77,7 @@ public final class AttachmentArrays {
         final ImmutableProperties properties,
         final Attachment... attachments
     ) {
-        this.attachments = attachments;
+        this.attachments = new Array<>(attachments);
         this.actor = actor;
         this.properties = properties;
     }
@@ -87,32 +91,26 @@ public final class AttachmentArrays {
      */
     public List<String> attachmentsFields()
         throws ApiException, ClientException, IOException {
-        try {
-            this.properties.load();
-        } catch (final IOException ex) {
-            throw new IOException("Could not load properties", ex);
-        }
+        this.properties.load();
         final QueriesFromAttachments queries =
             new QueriesFromAttachments(this.attachments);
         final JsonElement root =
             new VkApiClient(
                 new CachedExecuteBatchQueryClient(
-                    new QueryResults(queries.queriesResults())
-                        .results()
+                    new QueryResults(
+                        queries.queries(true)
+                    ).results().toArray(new JsonElement[0])
                 )
             ).execute()
-                .batch(this.actor, queries.nonCachedQueries())
-                .execute();
+                .batch(
+                    this.actor,
+                    queries.queries(false)
+                ).execute();
         new PropertiesUpdate(
             this.properties,
             queries.idsMap(),
             root.getAsJsonArray()
         ).save();
-        try {
-            this.properties.store();
-        } catch (final IOException ex) {
-            throw new IOException("Could not store properties", ex);
-        }
         try {
             return new AttachmentsFromResults(
                 root.getAsJsonArray()

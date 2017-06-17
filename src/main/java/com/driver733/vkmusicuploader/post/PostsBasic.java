@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.post;
 
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.actors.UserActor;
 import java.io.File;
 
@@ -35,6 +36,7 @@ import java.io.File;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class PostsBasic implements Posts {
 
     /**

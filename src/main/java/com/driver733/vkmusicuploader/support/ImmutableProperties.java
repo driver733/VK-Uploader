@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.support;
 
+import com.jcabi.aspects.Immutable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -40,16 +41,17 @@ import java.util.Properties;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class ImmutableProperties extends Properties {
 
     /**
-     * Properties file.
+     * Properties construct.
      */
     private final File file;
 
     /**
      * Ctor.
-     * @param file Properties file.
+     * @param file Properties construct.
      */
     public ImmutableProperties(final File file) {
         super();
@@ -68,16 +70,36 @@ public final class ImmutableProperties extends Properties {
 
     /**
      * Loads the properties from the provided {@link File}.
-     * @throws IOException If the properties file cannot be loaded.
+     * @throws IOException If the properties construct cannot be loaded.
      */
     @SuppressWarnings("PMD.AvoidSynchronizedAtMethodLevel")
     public synchronized void load() throws IOException {
         if (!this.file.exists() && !this.file.createNewFile()) {
-            throw new IOException("Failed to create the Properties file.");
+            throw new IOException("Failed to create the Properties construct.");
         }
         final FileInputStream fis = new FileInputStream(this.file);
-        super.load(fis);
+        try {
+            super.load(fis);
+        } catch (final IOException ex) {
+            throw new IOException("Failed to load properties", ex);
+        }
         fis.close();
+    }
+
+    /**
+     * Sets the property and stores the properties object.
+     * @param key The key to be placed into this property list.
+     * @param value The value corresponding to <tt>key</tt>.
+     *  list, or {@code null} if it did not have one.
+     * @throws IOException If the properties cannot be stored.
+     */
+    @SuppressWarnings("PMD.AvoidSynchronizedAtMethodLevel")
+    public synchronized void setPropertyAndStore(
+        final String key,
+        final String value
+    ) throws IOException {
+        this.put(key, value);
+        this.store();
     }
 
     @Override
@@ -91,7 +113,7 @@ public final class ImmutableProperties extends Properties {
 
     /**
      * Saves the properties using the provided {@link File}.
-     * @throws IOException If the properties file cannot be saved.
+     * @throws IOException If the properties construct cannot be saved.
      */
     public void store() throws IOException {
         this.store("");
@@ -104,7 +126,12 @@ public final class ImmutableProperties extends Properties {
      */
     private void store(final String comment) throws IOException {
         final FileOutputStream fos = new FileOutputStream(this.file);
-        super.store(fos, comment);
+        try {
+            super.store(fos, comment);
+        } catch (final IOException ex) {
+            throw new IOException("Failed to store properties", ex);
+        }
         fos.close();
     }
+
 }

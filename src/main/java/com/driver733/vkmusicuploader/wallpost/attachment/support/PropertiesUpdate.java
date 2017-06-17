@@ -26,6 +26,7 @@ package com.driver733.vkmusicuploader.wallpost.attachment.support;
 import com.driver733.vkmusicuploader.support.ImmutableProperties;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.jcabi.aspects.Immutable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,6 +43,7 @@ import java.util.Objects;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 final class PropertiesUpdate {
 
     /**
@@ -87,18 +89,14 @@ final class PropertiesUpdate {
     public void save() throws IOException {
         final Map<Integer, String> results = this.resStrings();
         for (final int index : this.ids.keySet()) {
-            try {
-                this.properties.put(
-                    this.key(index),
-                    String.format(
-                        "%s_%s",
-                        AudioStatus.ADDED.toString(),
-                        results.get(index)
-                    )
-                );
-            } catch (final IOException ex) {
-                throw new IOException("Failed to save properties", ex);
-            }
+            this.properties.setPropertyAndStore(
+                this.key(index).toString(),
+                String.format(
+                    "%s_%s",
+                    AudioStatus.ADDED.toString(),
+                    results.get(index)
+                )
+            );
         }
     }
 

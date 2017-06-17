@@ -25,6 +25,7 @@
 package com.driver733.vkmusicuploader.wallpost;
 
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AttachmentArrays;
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
@@ -39,6 +40,7 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class WallPostWithAttachments implements WallPost {
 
     /**

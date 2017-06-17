@@ -25,6 +25,8 @@
 package com.driver733.vkmusicuploader.post;
 
 import com.driver733.vkmusicuploader.support.ImmutableProperties;
+import com.driver733.vkmusicuploader.wallpost.WallPostsAlbum;
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.actors.UserActor;
 import java.io.File;
 import java.io.IOException;
@@ -38,6 +40,7 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class PostRootDir implements Post {
 
     /**
@@ -75,13 +78,13 @@ public final class PostRootDir implements Post {
     @Override
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public void post() throws IOException {
-        final File[] directories = this.directory.listFiles(File::isDirectory);
-        if (directories == null) {
+        final File[] dirs = this.directory.listFiles(File::isDirectory);
+        if (dirs == null) {
             throw new IOException("No subdirectories found");
         }
-        for (final File dir : directories) {
+        for (final File dir : dirs) {
             new UploadVerification(
-                new AlbumWallPosts(
+                new WallPostsAlbum(
                     this.actor,
                     dir,
                     this.servers,

@@ -26,6 +26,8 @@ package com.driver733.vkmusicuploader.wallpost.attachment;
 import com.driver733.vkmusicuploader.support.CachedAudioAddQuery;
 import com.driver733.vkmusicuploader.support.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
+import com.jcabi.aspects.Immutable;
+import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
@@ -46,7 +48,8 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  * @version $Id$
  * @since 0.1
  */
-public final class CachedAttachmentAudio implements Attachment {
+@Immutable
+public final class AttachmentCachedAudio implements Attachment {
 
     /**
      * Group ID.
@@ -61,7 +64,7 @@ public final class CachedAttachmentAudio implements Attachment {
     /**
      * Audios files.
      */
-    private final File[] audios;
+    private final Array<File> audios;
 
     /**
      * Audio upload URL for the audio files.
@@ -82,11 +85,11 @@ public final class CachedAttachmentAudio implements Attachment {
      * @param audios Audios files.*
      * @checkstyle ParameterNumberCheck (2 lines)
      */
-    public CachedAttachmentAudio(
+    public AttachmentCachedAudio(
         final UserActor actor,
         final String url,
         final ImmutableProperties properties,
-        final File... audios
+        final Array<File> audios
     ) {
         this.audios = audios;
         this.actor = actor;
@@ -98,7 +101,7 @@ public final class CachedAttachmentAudio implements Attachment {
     public List<AbstractQueryBuilder> upload()
         throws ClientException, ApiException, IOException {
         final List<AbstractQueryBuilder> list = new ArrayList<>(
-            this.audios.length
+            this.audios.size()
         );
         for (final File audio : this.audios) {
             final List<AbstractQueryBuilder> queries;
@@ -106,7 +109,7 @@ public final class CachedAttachmentAudio implements Attachment {
                 queries = this.upload(audio);
             } catch (final IOException ex) {
                 throw new IOException(
-                    "Failed to construct upload query for audio upload",
+                    "Failed to get upload query for audio upload",
                     ex
                 );
             }
@@ -145,7 +148,7 @@ public final class CachedAttachmentAudio implements Attachment {
             if (status == 0) {
                 result = new AttachmentAddAudio(
                     this.actor,
-                    new ImmutablePair<>(mediaId, CachedAttachmentAudio.GROUP_ID)
+                    new ImmutablePair<>(mediaId, AttachmentCachedAudio.GROUP_ID)
                 ).upload();
             } else if (status == 1) {
                 final AbstractQueryBuilder query =

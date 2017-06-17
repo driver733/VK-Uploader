@@ -23,10 +23,10 @@
  */
 package com.driver733.vkmusicuploader.post;
 
-/**
- * A @checkstyle AvoidStaticImportCheck (20 lines)
- */
+// @checkstyle AvoidStaticImportCheck (30 lines)
 
+import com.jcabi.aspects.Immutable;
+import com.jcabi.immutable.Array;
 import com.jcabi.log.Logger;
 import java.io.Closeable;
 import java.io.File;
@@ -55,12 +55,13 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class WatchDirs implements Closeable {
 
     /**
      * Directories to watch to changes.
      */
-    private final File[] dirs;
+    private final Array<File> dirs;
 
     /**
      * The {@link Posts} that handle the
@@ -90,7 +91,7 @@ public final class WatchDirs implements Closeable {
         final File... dirs
     ) throws IOException {
         this.posts = posts;
-        this.dirs = dirs;
+        this.dirs = new Array<>(dirs);
         this.keys = new HashMap<>();
         this.watcher = FileSystems.getDefault().newWatchService();
     }

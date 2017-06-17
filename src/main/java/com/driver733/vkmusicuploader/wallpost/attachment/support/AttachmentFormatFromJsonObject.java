@@ -25,6 +25,7 @@ package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.jcabi.aspects.Immutable;
 import java.io.IOException;
 
 /**
@@ -36,6 +37,7 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class AttachmentFormatFromJsonObject {
 
     /**

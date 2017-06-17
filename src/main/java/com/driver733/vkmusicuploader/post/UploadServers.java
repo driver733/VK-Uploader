@@ -24,6 +24,7 @@
 package com.driver733.vkmusicuploader.post;
 
 import com.jcabi.aspects.Cacheable;
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
@@ -39,6 +40,7 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class UploadServers {
 
     /**

@@ -24,6 +24,8 @@
 
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
+import com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile.bytearray.fallback.Fallback;
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -35,8 +37,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,6 +49,7 @@ import java.util.List;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class AttachmentWallPhoto implements Attachment {
 
     /**
@@ -66,27 +68,27 @@ public final class AttachmentWallPhoto implements Attachment {
     private final UserActor actor;
 
     /**
-     * File that contains a photo. Typically an album image.
+     * Multiple sources of the photos. The first valid one will be chosen.
      */
-    private final byte[] photo;
+    private final Fallback<byte[]> photo;
 
     /**
-     * WallPhoto upload URL for the photo file.
+     * WallPhoto upload URL for the photo construct.
      */
     private final String url;
 
     /**
      * Ctor.
      * @param actor UserActor on behalf of which all requests will be sent.
-     * @param photo File that contains a photo. Typically an album image.
-     * @param url WallPhoto upload URL for the photo file.
+     * @param photo File that contains a photo. Typically an album toByteArray.
+     * @param url WallPhoto upload URL for the photo construct.
      */
     public AttachmentWallPhoto(
         final UserActor actor,
-        final byte[] photo,
+        final Fallback<byte[]> photo,
         final String url
     ) {
-        this.photo = Arrays.copyOf(photo, photo.length);
+        this.photo = photo;
         this.actor = actor;
         this.url = url;
         this.client = new VkApiClient(
@@ -97,26 +99,33 @@ public final class AttachmentWallPhoto implements Attachment {
     @Override
     public List<AbstractQueryBuilder> upload()
         throws ClientException, ApiException, IOException {
-        final Path path;
-        try {
-            path = Files.write(
-                File.createTempFile("albumCover", ".jpg").toPath(),
-                this.photo
+        final List<AbstractQueryBuilder> result = new ArrayList<>(1);
+        for (final byte[] element : this.photo.firstValid()) {
+            final Path path;
+            try {
+                path = Files.write(
+                    File.createTempFile("albumCover", ".jpg").toPath(),
+                    element
+                );
+            } catch (final IOException ex) {
+                throw new IOException(
+                    "Failed to save album cover to byte array",
+                    ex
+                );
+            }
+            path.toFile().deleteOnExit();
+            final WallUploadResponse response = this.client.upload()
+                .photoWall(this.url, path.toFile())
+                .execute();
+            result.add(
+                this.client.photos()
+                    .saveWallPhoto(this.actor, response.getPhoto())
+                    .server(response.getServer())
+                    .hash(response.getHash())
+                    .groupId(AttachmentWallPhoto.GROUP_ID)
             );
-        } catch (final IOException ex) {
-            throw new IOException("Failed to save album cover image file", ex);
         }
-        path.toFile().deleteOnExit();
-        final WallUploadResponse response = this.client.upload()
-            .photoWall(this.url, path.toFile())
-            .execute();
-        return Collections.singletonList(
-            this.client.photos()
-                .saveWallPhoto(this.actor, response.getPhoto())
-                .server(response.getServer())
-                .hash(response.getHash())
-                .groupId(AttachmentWallPhoto.GROUP_ID)
-        );
+        return result;
     }
 
 }

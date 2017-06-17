@@ -26,6 +26,7 @@ package com.driver733.vkmusicuploader.support;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import java.io.StringReader;
@@ -41,6 +42,7 @@ import java.util.List;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public class CachedAudioAddQuery extends AbstractQueryBuilder {
 
     /**

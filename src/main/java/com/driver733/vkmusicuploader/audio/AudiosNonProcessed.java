@@ -25,6 +25,8 @@ package com.driver733.vkmusicuploader.audio;
 
 import com.driver733.vkmusicuploader.support.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
+import com.jcabi.aspects.Immutable;
+import com.jcabi.immutable.Array;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ import java.util.List;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class AudiosNonProcessed implements Audios {
 
     /**
@@ -47,37 +50,43 @@ public final class AudiosNonProcessed implements Audios {
     private final Audios origin;
 
     /**
+     * Properties that contain the {@link AudioStatus}es of audio files.
+     */
+    private final ImmutableProperties props;
+
+    /**
      * Ctor.
      * @param origin Origin.
-     * @checkstyle LocalFinalVariableNameCheck (20 lines)
+     * @param properties Properties that contain
+     *  the {@link AudioStatus}es of audio files.
      */
-    public AudiosNonProcessed(final Audios origin) {
+    public AudiosNonProcessed(
+        final Audios origin,
+        final ImmutableProperties properties
+    ) {
         this.origin = origin;
+        this.props = properties;
     }
 
     @Override
-    public File[] audios() throws IOException {
-        final File[] audios = this.origin.audios();
-        final ImmutableProperties props = new ImmutableProperties(
-            new File(
-                String.format(
-                    "%s/vkmu.properties",
-                    audios[0].getParentFile()
-                        .getAbsoluteFile()
-                )
-            )
-        );
-        final List<File> nonProcessed = new ArrayList<>(audios.length);
+    public Array<File> audios() throws IOException {
+        this.props.load();
+        final Array<File> audios = this.origin.audios();
+        final List<File> result = new ArrayList<>(audios.size());
         for (final File file : audios) {
             if (
-                props.containsKey(file.getName())
-                && !props.get(file.getName()).toString().substring(0, 1)
-                .equals(AudioStatus.POSTED.toString())
+                !(this.props.containsKey(file.getName())
+                    || this.props.containsKey(file.getName())
+                    && !this.props.get(file.getName())
+                        .toString()
+                        .substring(0, 1)
+                        .equals(AudioStatus.POSTED.toString())
+                    )
                 ) {
-                nonProcessed.add(file);
+                result.add(file);
             }
         }
-        return nonProcessed.toArray(new File[nonProcessed.size()]);
+        return new Array<>(result);
     }
 
 }

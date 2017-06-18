@@ -27,8 +27,8 @@ import com.driver733.vkmusicuploader.audio.AudiosBasic;
 import com.driver733.vkmusicuploader.audio.AudiosNonProcessed;
 import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.support.ImmutableProperties;
-import com.driver733.vkmusicuploader.wallpost.wallpost.WallPostAlbum;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
+import com.driver733.vkmusicuploader.wallpost.wallpost.WallPostAlbum;
 import com.jcabi.aspects.Cacheable;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
@@ -109,7 +109,6 @@ public final class WallPostsAlbum implements WallPosts {
      */
     private final UploadServers servers;
 
-    // @checkstyle LocalFinalVariableNameCheck (20 lines)
     /**
      * Properties that contain the {@link AudioStatus}es of audio files.
      */
@@ -195,12 +194,27 @@ public final class WallPostsAlbum implements WallPosts {
     }
 
     /**
+     * Finds audio files that have not been posted yet.
+     * @return An array of audio {@link File}s.
+     * @throws IOException If a certain criteria of
+     *  {@link com.driver733.vkmusicuploader.audio.Audios}
+     *  is not fulfilled.
+     */
+    @Cacheable(forever = true)
+    private Array<File> audios() throws IOException {
+        return new AudiosNonProcessed(
+            new AudiosBasic(this.dir),
+            this.properties
+        ).audios();
+    }
+
+    // @checkstyle LocalFinalVariableNameCheck (30 lines)
+    /**
      * Constructs a query for batch posting wall postsQueries
      * associated with the album.
      * @param audios Audio files to include with the wall postsQueries.
      * @return ExecuteBatchQuery.
      * @throws IOException If the WallPost query cannot be obtained.
-     * @checkstyle LocalFinalVariableNameCheck (10 lines)
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private ExecuteBatchQuery postsBatch(final List<File> audios) throws
@@ -242,18 +256,4 @@ public final class WallPostsAlbum implements WallPosts {
         );
     }
 
-    /**
-     * Finds audio files that have not been posted yet.
-     * @return An array of audio {@link File}s.
-     * @throws IOException If a certain criteria of
-     *  {@link com.driver733.vkmusicuploader.audio.Audios}
-     *  is not fulfilled.
-     */
-    @Cacheable(forever = true)
-    private Array<File> audios() throws IOException {
-        return new AudiosNonProcessed(
-            new AudiosBasic(this.dir),
-            this.properties
-        ).audios();
-    }
 }

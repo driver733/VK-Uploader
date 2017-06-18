@@ -21,28 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support.message;
-
-import com.driver733.vkmusicuploader.wallpost.wallpost.WallPost;
-import java.io.IOException;
-
-/**
- * Class or Interface description.
- * <p>
- * <p> Additional info
- *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
- * @since 0.1
- */
-interface Message {
-
-    /**
-     * Constructs a message for the
-     *  {@link WallPost}.
-     * @return Constructed message.
-     * @throws IOException If the message cannot be constructed.
-     */
-    String construct() throws IOException;
-
-}
+package com.driver733.vkmusicuploader.wallpost.wallpost;

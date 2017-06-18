@@ -5,7 +5,6 @@ docker:
 install: |-
   wget "http://jitpack.io/com/github/driver733/vk-java-sdk/547a05fa42/vk-java-sdk-547a05fa42.jar"
   mvn install:install-file -Dfile=vk-java-sdk-547a05fa42.jar -DgroupId=com.github.driver733 -DartifactId=vk-java-sdk -Dversion=547a05fa42 -Dpackaging=jar
-#  wget "http://jitpack.io/com/github/driver733/jcabi-parent/8864b83e8e/jcabi-parent-8864b83e8e.pom"
 merge:
   commanders:
   - driver733

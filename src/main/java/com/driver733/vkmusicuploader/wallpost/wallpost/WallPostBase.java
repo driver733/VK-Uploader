@@ -21,11 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost;
+
+package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.jcabi.aspects.Immutable;
+import com.vk.api.sdk.client.VkApiClient;
+import com.vk.api.sdk.client.actors.UserActor;
+import com.vk.api.sdk.httpclient.HttpTransportClient;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
-import java.io.IOException;
 
 /**
  * Class or Interface description.
@@ -37,33 +40,30 @@ import java.io.IOException;
  * @since 0.1
  */
 @Immutable
-public final class WallPostWithOwnerId implements WallPost {
+public final class WallPostBase implements WallPost {
 
     /**
-     * Origin.
+     * VKAPIClient that is used for all VK API requests.
      */
-    private final WallPost post;
+    private final VkApiClient client;
 
     /**
-     * Owner ID.
+     * UserActor on behalf of which all requests will be sent.
      */
-    private final int owner;
+    private final UserActor actor;
 
     /**
      * Ctor.
-     * @param post Origin.
-     * @param owner Owner ID.
+     * @param actor UserActor on behalf of which all requests will be sent.
      */
-    public WallPostWithOwnerId(final WallPost post, final int owner) {
-        this.post = post;
-        this.owner = owner;
+    public WallPostBase(final UserActor actor) {
+        this.actor = actor;
+        this.client = new VkApiClient(new HttpTransportClient());
     }
 
     @Override
-    public WallPostQuery construct() throws IOException {
-        return this.post
-            .construct()
-            .ownerId(this.owner);
+    public WallPostQuery construct() {
+        return this.client.wall().post(this.actor);
     }
 
 }

@@ -21,16 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost;
+package com.driver733.vkmusicuploader.wallpost.wallpost.wallposts;
 
 import com.driver733.vkmusicuploader.audio.AudiosBasic;
 import com.driver733.vkmusicuploader.audio.AudiosNonProcessed;
 import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.support.ImmutableProperties;
+import com.driver733.vkmusicuploader.wallpost.wallpost.WallPostAlbum;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.jcabi.aspects.Cacheable;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
+import com.jcabi.log.Logger;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
@@ -146,6 +148,10 @@ public final class WallPostsAlbum implements WallPosts {
         final Array<File> audios = this.audios();
         final Array<ExecuteBatchQuery> queries = new Array<>();
         int iter = 0;
+        Logger.debug(
+            this,
+            "Analyzing directory '%s'...", this.dir.getPath()
+        );
         while (iter < audios.size()) {
             final int to;
             if (audios.size() < iter + WallPostsAlbum.AUDIOS_IN_REQUEST) {
@@ -161,6 +167,9 @@ public final class WallPostsAlbum implements WallPosts {
             iter += WallPostsAlbum.AUDIOS_IN_REQUEST;
         }
         Collections.reverse(queries);
+        if (queries.isEmpty()) {
+            Logger.debug(this, "No audio files to upload. Skipping...");
+        }
         return queries;
     }
 
@@ -196,6 +205,10 @@ public final class WallPostsAlbum implements WallPosts {
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private ExecuteBatchQuery postsBatch(final List<File> audios) throws
         IOException {
+        Logger.info(
+            this,
+            "Processing directory: '%s'...", this.dir.getPath()
+        );
         final List<WallPostQuery> posts = new ArrayList<>(audios.size());
         int from = 0;
         while (from < audios.size()) {
@@ -230,7 +243,7 @@ public final class WallPostsAlbum implements WallPosts {
     }
 
     /**
-     * Finds audio files that have not been posted.
+     * Finds audio files that have not been posted yet.
      * @return An array of audio {@link File}s.
      * @throws IOException If a certain criteria of
      *  {@link com.driver733.vkmusicuploader.audio.Audios}

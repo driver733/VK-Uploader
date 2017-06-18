@@ -22,5 +22,6 @@ env:
 jdk:
   - oraclejdk8
 #  - oraclejdk7
-#after_success:
+after_success:
+  - mvn clean test jacoco:report coveralls:report
 #  - "bash <(curl -s https://codecov.io/bash)"

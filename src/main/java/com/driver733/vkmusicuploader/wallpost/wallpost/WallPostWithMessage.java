@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-package com.driver733.vkmusicuploader.wallpost;
+package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
@@ -38,7 +37,7 @@ import java.io.IOException;
  * @since 0.1
  */
 @Immutable
-public final class WallPostFromGroup implements WallPost {
+public final class WallPostWithMessage implements WallPost {
 
     /**
      * Origin.
@@ -46,16 +45,25 @@ public final class WallPostFromGroup implements WallPost {
     private final WallPost post;
 
     /**
+     * Wall WallPostAlbum text.
+     */
+    private final String message;
+
+    /**
      * Ctor.
      * @param post Origin.
+     * @param message Wall WallPostAlbum text.
      */
-    public WallPostFromGroup(final WallPost post) {
+    public WallPostWithMessage(final WallPost post, final String message) {
         this.post = post;
+        this.message = message;
     }
 
     @Override
     public WallPostQuery construct() throws IOException {
-        return this.post.construct().fromGroup(true);
+        return this.post
+            .construct()
+            .message(this.message);
     }
 
 }

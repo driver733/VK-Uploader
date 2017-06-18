@@ -21,34 +21,62 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost;
 
-import com.vk.api.sdk.queries.execute.ExecuteBatchQuery;
+package com.driver733.vkmusicuploader.wallpost.wallpost;
+
+import com.driver733.vkmusicuploader.wallpost.attachment.support.AttachmentArrays;
+import com.jcabi.aspects.Immutable;
+import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ClientException;
+import com.vk.api.sdk.queries.wall.WallPostQuery;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Class or Interface description.
  * <p>
- * <p> Additional info
+ * Additional info
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
  */
-public interface WallPosts {
+@Immutable
+public final class WallPostWithAttachments implements WallPost {
 
     /**
-     * Constructs queries for batch posting the wall postsQueries.
-     * @return ExecuteBatchQueries that will send the wall postsQueries.
-     * @throws IOException If an error occurs while forming the queries.
+     * Origin.
      */
-    List<ExecuteBatchQuery> postsQueries() throws IOException;
+    private final WallPost post;
 
     /**
-     * Updates the properties.
-     * @throws IOException If the properties cannot be saved.
+     * Attachments.
      */
-    void updateProperties() throws IOException;
+    private final AttachmentArrays attachments;
+
+    /**
+     * Ctor.
+     * @param post Origin.
+     * @param attachments Attachment arrays.
+     */
+    public WallPostWithAttachments(
+        final WallPost post,
+        final AttachmentArrays attachments
+    ) {
+        this.attachments = attachments;
+        this.post = post;
+    }
+
+    @Override
+    public WallPostQuery construct() throws IOException {
+        try {
+            return this.post
+                .construct()
+                .attachments(
+                    this.attachments.attachmentsFields()
+                );
+        } catch (final ApiException | ClientException | IOException ex) {
+            throw new IOException("Failed to obtain attachment fields", ex);
+        }
+    }
 
 }

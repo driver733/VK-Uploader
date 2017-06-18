@@ -22,13 +22,11 @@
  * SOFTWARE.
  */
 
-package com.driver733.vkmusicuploader.wallpost;
+package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.jcabi.aspects.Immutable;
-import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.httpclient.HttpTransportClient;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
+import java.io.IOException;
 
 /**
  * Class or Interface description.
@@ -40,30 +38,24 @@ import com.vk.api.sdk.queries.wall.WallPostQuery;
  * @since 0.1
  */
 @Immutable
-public final class WallPostBase implements WallPost {
+public final class WallPostFromGroup implements WallPost {
 
     /**
-     * VKAPIClient that is used for all VK API requests.
+     * Origin.
      */
-    private final VkApiClient client;
-
-    /**
-     * UserActor on behalf of which all requests will be sent.
-     */
-    private final UserActor actor;
+    private final WallPost post;
 
     /**
      * Ctor.
-     * @param actor UserActor on behalf of which all requests will be sent.
+     * @param post Origin.
      */
-    public WallPostBase(final UserActor actor) {
-        this.actor = actor;
-        this.client = new VkApiClient(new HttpTransportClient());
+    public WallPostFromGroup(final WallPost post) {
+        this.post = post;
     }
 
     @Override
-    public WallPostQuery construct() {
-        return this.client.wall().post(this.actor);
+    public WallPostQuery construct() throws IOException {
+        return this.post.construct().fromGroup(true);
     }
 
 }

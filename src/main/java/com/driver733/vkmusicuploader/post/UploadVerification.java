@@ -23,7 +23,7 @@
  */
 package com.driver733.vkmusicuploader.post;
 
-import com.driver733.vkmusicuploader.wallpost.WallPosts;
+import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPosts;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;

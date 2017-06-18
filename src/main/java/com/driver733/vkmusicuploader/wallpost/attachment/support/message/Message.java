@@ -25,6 +25,8 @@ package com.driver733.vkmusicuploader.wallpost.attachment.support.message;
 
 import java.io.IOException;
 
+import com.driver733.vkmusicuploader.wallpost.wallpost.WallPost;
+
 /**
  * Class or Interface description.
  * <p>
@@ -38,7 +40,7 @@ interface Message {
 
     /**
      * Constructs a message for the
-     *  {@link com.driver733.vkmusicuploader.wallpost.WallPost}.
+     *  {@link WallPost}.
      * @return Constructed message.
      * @throws IOException If the message cannot be constructed.
      */

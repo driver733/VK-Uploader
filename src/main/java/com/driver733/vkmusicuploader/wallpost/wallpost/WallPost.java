@@ -21,9 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost;
+package com.driver733.vkmusicuploader.wallpost.wallpost;
 
-import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
 import java.io.IOException;
 
@@ -36,34 +35,13 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.1
  */
-@Immutable
-public final class WallPostWithMessage implements WallPost {
+public interface WallPost {
 
     /**
-     * Origin.
+     * Constructs a WallPostQuery from a decorated WallPost.
+     * @return WallPostQuery.
+     * @throws IOException If a {@link WallPostQuery} cannot be constructed.
      */
-    private final WallPost post;
-
-    /**
-     * Wall WallPostAlbum text.
-     */
-    private final String message;
-
-    /**
-     * Ctor.
-     * @param post Origin.
-     * @param message Wall WallPostAlbum text.
-     */
-    public WallPostWithMessage(final WallPost post, final String message) {
-        this.post = post;
-        this.message = message;
-    }
-
-    @Override
-    public WallPostQuery construct() throws IOException {
-        return this.post
-            .construct()
-            .message(this.message);
-    }
+    WallPostQuery construct() throws IOException;
 
 }

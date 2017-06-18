@@ -1,3 +1,5 @@
+package com.driver733.vkmusicuploader;
+
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 

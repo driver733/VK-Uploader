@@ -102,6 +102,11 @@
                             <exclude>pmd:/src/main/java/com.driver733.vkmusicuploader/Main.java</exclude>
                             <exclude>findbugs:com.driver733.vkmusicuploader.Main</exclude>
 
+
+                            <exclude>checkstyle:/src/test/java/com.driver733.vkmusicuploader/SampleTest.java</exclude>
+                            <exclude>pmd:/src/test/java/com.driver733.vkmusicuploader/SampleTest.java</exclude>
+                            <exclude>findbugs:com.driver733.vkmusicuploader.SampleTest.java</exclude>
+
                             <exclude>findbugs:com.driver733.vkmusicuploader.support.CachedExecuteBatchQueryClient</exclude>
                             <exclude>findbugs:com.driver733.vkmusicuploader.support.ImmutableProperties</exclude>
 

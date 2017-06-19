@@ -30,9 +30,8 @@ import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhoto;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AttachmentArrays;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.message.MessageBasic;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart.MessagePartAlbum;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart.MessagePartArtist;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart.MessagePartSafe;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart.MessagePartAlbumSafe;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart.MessagePartArtistSafe;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile.advancedtag.AdvancedTagFromMp3File;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile.advancedtag.AdvancedTagVerifiedAlbumImage;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile.basictag.BasicTagFromMp3File;
@@ -169,15 +168,11 @@ public final class WallPostAlbum implements WallPost {
                         )
                     ),
                     new MessageBasic(
-                        new MessagePartSafe(
-                            new MessagePartAlbum(
-                                new BasicTagFromMp3File(file)
-                            )
+                        new MessagePartAlbumSafe(
+                            new BasicTagFromMp3File(file)
                         ),
-                        new MessagePartSafe(
-                            new MessagePartArtist(
-                                new BasicTagFromMp3File(file)
-                            )
+                        new MessagePartArtistSafe(
+                            new BasicTagFromMp3File(file)
                         )
                     ).construct()
                 )

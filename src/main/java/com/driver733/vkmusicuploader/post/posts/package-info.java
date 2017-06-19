@@ -21,45 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart;
-
-import com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile.basictag.BasicTag;
-import com.jcabi.aspects.Immutable;
-import com.mpatric.mp3agic.ID3v1;
-import java.io.IOException;
-
-/**
- * Class or Interface description.
- * <p>
- * Additional info
- *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
- * @since 0.1
- */
-@Immutable
-public final class MessagePartAlbum implements MessagePart {
-
-    /**
-     * The {@link BasicTag} with {@link ID3v1} tags.
-     */
-    private final BasicTag tag;
-
-    /**
-     * Ctor.
-     * @param tag The {@link BasicTag} with {@link ID3v1} tags.
-     */
-    public MessagePartAlbum(final BasicTag tag) {
-        this.tag = tag;
-    }
-
-    @Override
-    public String construct() throws IOException {
-        return String.format(
-            "Album: %s",
-            this.tag.construct()
-                .getAlbum()
-        );
-    }
-
-}
+package com.driver733.vkmusicuploader.post.posts;

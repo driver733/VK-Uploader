@@ -21,11 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.support;
+package com.driver733.vkmusicuploader.post.posts;
 
-import com.google.gson.JsonElement;
-import com.jcabi.immutable.Array;
-import java.io.IOException;
+import com.driver733.vkmusicuploader.post.Post;
+import java.io.File;
 
 /**
  * Class or Interface description.
@@ -36,13 +35,13 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.1
  */
-public interface QueryResults {
+public interface Posts {
 
     /**
-     * Created queries`s responses with cached responses.
-     * @return Array with queries` cached responses.
-     * @throws IOException If query fails to execute.
+     * Constructs a {@link Post} with {@link File}s in the provided directory.
+     * @param dir With {@link File}s to be attached to the {@link Post}.
+     * @return Constructed {@link Post}.
      */
-    Array<JsonElement> results() throws IOException;
+    Post postFromDir(File dir);
 
 }

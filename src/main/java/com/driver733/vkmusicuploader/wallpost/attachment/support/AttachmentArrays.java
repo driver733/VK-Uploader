@@ -25,7 +25,7 @@ package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
 import com.driver733.vkmusicuploader.support.CachedExecuteBatchQueryClient;
 import com.driver733.vkmusicuploader.support.ImmutableProperties;
-import com.driver733.vkmusicuploader.support.QueryResults;
+import com.driver733.vkmusicuploader.support.QueryResultsBasic;
 import com.driver733.vkmusicuploader.wallpost.attachment.Attachment;
 import com.google.gson.JsonElement;
 import com.jcabi.aspects.Immutable;
@@ -35,7 +35,6 @@ import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Class or Interface description.
@@ -48,7 +47,7 @@ import java.util.List;
  * @checkstyle ClassDataAbstractionCouplingCheck (10 lines)
  */
 @Immutable
-public final class AttachmentArrays {
+public final class AttachmentArrays implements AttachmentsFields {
 
     /**
      * Array of attachmentsFields.
@@ -82,14 +81,8 @@ public final class AttachmentArrays {
         this.properties = properties;
     }
 
-    /**
-     * Constructs Attachment strings for the wall WallPostAlbum.
-     * @return Attachment strings.
-     * @throws ClientException VK API Client error.
-     * @throws ApiException VK API error.
-     * @throws IOException If properties fail to load.
-     */
-    public List<String> attachmentsFields()
+    @Override
+    public Array<String> attachmentsFields()
         throws ApiException, ClientException, IOException {
         this.properties.load();
         final QueriesFromAttachments queries =
@@ -97,7 +90,7 @@ public final class AttachmentArrays {
         final JsonElement root =
             new VkApiClient(
                 new CachedExecuteBatchQueryClient(
-                    new QueryResults(
+                    new QueryResultsBasic(
                         queries.queries(true)
                     ).results().toArray(new JsonElement[0])
                 )

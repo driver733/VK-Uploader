@@ -38,7 +38,7 @@ import java.io.IOException;
  * @since 0.1
  */
 @Immutable
-public final class MessagePartArtist implements MessagePart {
+public final class MessagePartAlbumSafe implements MessagePart {
 
     /**
      * The {@link BasicTag} with {@link ID3v1} tags.
@@ -49,17 +49,20 @@ public final class MessagePartArtist implements MessagePart {
      * Ctor.
      * @param tag The {@link BasicTag} with {@link ID3v1} tags.
      */
-    public MessagePartArtist(final BasicTag tag) {
+    public MessagePartAlbumSafe(final BasicTag tag) {
         this.tag = tag;
     }
 
     @Override
     public String construct() throws IOException {
-        return String.format(
-            "Artist: %s",
-            this.tag.construct()
-                .getArtist()
-        );
+        final String result;
+        final String str = this.tag.construct().getAlbum();
+        if (str == null) {
+            result = "";
+        } else {
+            result = String.format("Album: %s", str);
+        }
+        return result;
     }
 
 }

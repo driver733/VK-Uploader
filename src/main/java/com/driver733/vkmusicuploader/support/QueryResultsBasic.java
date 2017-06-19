@@ -21,14 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support;
+package com.driver733.vkmusicuploader.support;
 
-import com.driver733.vkmusicuploader.support.QueryResultsBasic;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
+import com.vk.api.sdk.client.AbstractQueryBuilder;
+import com.vk.api.sdk.exceptions.ClientException;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,40 +45,44 @@ import java.util.List;
  * @since 0.1
  */
 @Immutable
-final class AttachmentsFromResults {
+public final class QueryResultsBasic implements QueryResults {
 
     /**
-     * JsonArray that contains the
-     *  {@link QueryResultsBasic}
-     *  of the queries.
+     * Queries.
      */
-    private final JsonArray root;
+    private final List<AbstractQueryBuilder> queries;
 
     /**
-    * Ctor.
-    * @param root JsonArray that contains the
-    *  {@link QueryResultsBasic}
-    *  of the queries.
-    */
-    AttachmentsFromResults(final JsonArray root) {
-        this.root = root;
+     * Ctor.
+     * @param queries Queries.
+     */
+    public QueryResultsBasic(final List<AbstractQueryBuilder> queries) {
+        this.queries = queries;
     }
 
-    /**
-     * Maps queries queriesResults to Attachment strings.
-     * @return Attachment strings.
-     * @throws IOException If unknown Attachment format is found.
-     */
+    @Override
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public Array<String> attachments() throws IOException {
-        final List<String> list = new ArrayList<>(this.root.size());
-        for (final JsonElement element : this.root) {
-            list.addAll(
-                new AttachmentFormatStrings(element)
-                    .attachmentStrings()
-            );
+    public Array<JsonElement> results() throws IOException {
+        final List<JsonElement> results =
+            new ArrayList<>(this.queries.size());
+        for (final AbstractQueryBuilder query : this.queries) {
+            if (query.getMethod().contains("cached_")) {
+                final String response;
+                try {
+                    response = query.executeAsString();
+                } catch (final ClientException ex) {
+                    throw new IOException("Failed to execute the query", ex);
+                }
+                results.add(
+                    new JsonParser().parse(
+                        new JsonReader(
+                            new StringReader(response)
+                        )
+                    ).getAsJsonPrimitive()
+                );
+            }
         }
-        return new Array<>(list);
+        return new Array<>(results);
     }
 
 }

@@ -25,6 +25,7 @@ package com.driver733.vkmusicuploader.post;
 
 // @checkstyle AvoidStaticImportCheck (30 lines)
 
+import com.driver733.vkmusicuploader.post.posts.Posts;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.jcabi.log.Logger;

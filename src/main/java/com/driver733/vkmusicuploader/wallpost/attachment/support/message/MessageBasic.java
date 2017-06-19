@@ -56,16 +56,23 @@ public final class MessageBasic implements Message {
     @Override
     public String construct() throws IOException {
         final StringBuilder builder = new StringBuilder();
-        for (final MessagePart part : this.parts) {
+        for (int index = 0; index < this.parts.size(); index += 1) {
             final String result;
             try {
-                result = part.construct();
+                result = this.parts.get(index)
+                    .construct();
             } catch (final IOException ex) {
                 throw new IOException("Failed to construct message part", ex);
             }
-            builder.append(
-                String.format("%s%n", result)
-            );
+            if (!result.isEmpty()) {
+                final String res;
+                if (index == this.parts.size() - 1) {
+                    res = String.format("%s", result);
+                } else {
+                    res = String.format("%s%n", result);
+                }
+                builder.append(res);
+            }
         }
         return builder.toString();
     }

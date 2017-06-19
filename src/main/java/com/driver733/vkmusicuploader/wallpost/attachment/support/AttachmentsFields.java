@@ -23,59 +23,30 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
-import com.driver733.vkmusicuploader.support.QueryResultsBasic;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
+import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ClientException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class or Interface description.
  * <p>
- * Additional info
+ * <p> Additional info
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
  */
-@Immutable
-final class AttachmentsFromResults {
+public interface AttachmentsFields {
 
     /**
-     * JsonArray that contains the
-     *  {@link QueryResultsBasic}
-     *  of the queries.
-     */
-    private final JsonArray root;
-
-    /**
-    * Ctor.
-    * @param root JsonArray that contains the
-    *  {@link QueryResultsBasic}
-    *  of the queries.
-    */
-    AttachmentsFromResults(final JsonArray root) {
-        this.root = root;
-    }
-
-    /**
-     * Maps queries queriesResults to Attachment strings.
+     * Constructs attachment strings for the wall WallPostAlbum.
      * @return Attachment strings.
-     * @throws IOException If unknown Attachment format is found.
+     * @throws ClientException VK API Client error.
+     * @throws ApiException VK API error.
+     * @throws IOException If properties fail to load.
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public Array<String> attachments() throws IOException {
-        final List<String> list = new ArrayList<>(this.root.size());
-        for (final JsonElement element : this.root) {
-            list.addAll(
-                new AttachmentFormatStrings(element)
-                    .attachmentStrings()
-            );
-        }
-        return new Array<>(list);
-    }
+    Array<String> attachmentsFields()
+        throws ApiException, ClientException, IOException;
 
 }

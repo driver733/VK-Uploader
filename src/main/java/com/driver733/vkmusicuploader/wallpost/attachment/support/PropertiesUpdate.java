@@ -24,6 +24,7 @@
 package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
 import com.driver733.vkmusicuploader.support.ImmutableProperties;
+import com.driver733.vkmusicuploader.support.QueryResultsBasic;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.jcabi.aspects.Immutable;
@@ -58,7 +59,7 @@ final class PropertiesUpdate {
 
     /**
      * {@link JsonArray} that contains the
-     *  {@link com.driver733.vkmusicuploader.support.QueryResults}
+     *  {@link QueryResultsBasic}
      *  of the queries.
      */
     private final JsonArray root;
@@ -69,7 +70,7 @@ final class PropertiesUpdate {
     *  the {@link AudioStatus} of audio files.
     * @param ids A map of with index-audio_id pairs from the audio queries.
     * @param root A {@link JsonArray} that contains the
-    *  {@link com.driver733.vkmusicuploader.support.QueryResults}
+    *  {@link QueryResultsBasic}
     *  of the queries.
     */
     PropertiesUpdate(

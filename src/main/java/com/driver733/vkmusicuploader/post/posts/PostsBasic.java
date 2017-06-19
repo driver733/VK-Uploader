@@ -21,10 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart;
+package com.driver733.vkmusicuploader.post.posts;
 
+import com.driver733.vkmusicuploader.post.Post;
+import com.driver733.vkmusicuploader.post.PostRootDir;
+import com.driver733.vkmusicuploader.post.UploadServers;
 import com.jcabi.aspects.Immutable;
-import java.io.IOException;
+import com.vk.api.sdk.client.actors.UserActor;
+import java.io.File;
 
 /**
  * Class or Interface description.
@@ -36,31 +40,36 @@ import java.io.IOException;
  * @since 0.1
  */
 @Immutable
-public final class MessagePartSafe implements MessagePart {
+public final class PostsBasic implements Posts {
 
     /**
-     * Origin.
+     * UserActor on behalf of which all requests will be sent.
      */
-    private final MessagePart origin;
+    private final UserActor actor;
+
+    /**
+     * Upload servers that provide upload URLs for attachmentsFields.
+     */
+    private final UploadServers servers;
 
     /**
      * Ctor.
-     * @param origin Origin.
+     * @param actor UserActor on behalf of which all requests will be sent.
+     * @param servers Upload servers that
+     *  provide upload URLs for attachmentsFields.
      */
-    public MessagePartSafe(final MessagePart origin) {
-        this.origin = origin;
+    public PostsBasic(final UserActor actor, final UploadServers servers) {
+        this.actor = actor;
+        this.servers = servers;
     }
 
     @Override
-    public String construct() throws IOException {
-        final String message = this.origin.construct();
-        final String result;
-        if (message == null || message.isEmpty() || message.contains("-1")) {
-            result = "";
-        } else {
-            result = message;
-        }
-        return result;
+    public Post postFromDir(final File dir) {
+        return new PostRootDir(
+            this.actor,
+            dir,
+            this.servers
+        );
     }
 
 }

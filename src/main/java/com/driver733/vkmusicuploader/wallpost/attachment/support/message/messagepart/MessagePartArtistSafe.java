@@ -21,16 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support;
+package com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart;
 
-import com.driver733.vkmusicuploader.support.QueryResultsBasic;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile.basictag.BasicTag;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
+import com.mpatric.mp3agic.ID3v1;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class or Interface description.
@@ -42,40 +38,31 @@ import java.util.List;
  * @since 0.1
  */
 @Immutable
-final class AttachmentsFromResults {
+public final class MessagePartArtistSafe implements MessagePart {
 
     /**
-     * JsonArray that contains the
-     *  {@link QueryResultsBasic}
-     *  of the queries.
+     * The {@link BasicTag} with {@link ID3v1} tags.
      */
-    private final JsonArray root;
+    private final BasicTag tag;
 
     /**
-    * Ctor.
-    * @param root JsonArray that contains the
-    *  {@link QueryResultsBasic}
-    *  of the queries.
-    */
-    AttachmentsFromResults(final JsonArray root) {
-        this.root = root;
+     * Ctor.
+     * @param tag The {@link BasicTag} with {@link ID3v1} tags.
+     */
+    public MessagePartArtistSafe(final BasicTag tag) {
+        this.tag = tag;
     }
 
-    /**
-     * Maps queries queriesResults to Attachment strings.
-     * @return Attachment strings.
-     * @throws IOException If unknown Attachment format is found.
-     */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public Array<String> attachments() throws IOException {
-        final List<String> list = new ArrayList<>(this.root.size());
-        for (final JsonElement element : this.root) {
-            list.addAll(
-                new AttachmentFormatStrings(element)
-                    .attachmentStrings()
-            );
+    @Override
+    public String construct() throws IOException {
+        final String result;
+        final String str = this.tag.construct().getArtist();
+        if (str == null) {
+            result = "";
+        } else {
+            result = String.format("Artist: %s", str);
         }
-        return new Array<>(list);
+        return result;
     }
 
 }

@@ -1,9 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Java template
-# Compiled class origin
+# Compiled class tag
 *.class
 
-# Log origin
+# Log tag
 *.log
 
 # BlueJ files
@@ -104,7 +104,7 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
-# Avoid ignoring Maven wrapper jar origin (.jar files are usually ignored)
+# Avoid ignoring Maven wrapper jar tag (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
 .idea/
 VKMusicUploader.iml

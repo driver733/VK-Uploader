@@ -140,7 +140,12 @@ public final class AttachmentAudio implements Attachment {
         ).execute();
         this.properties.setPropertyAndStore(
             audio.getName(),
-            String.format("%s_%d", AudioStatus.UPLOADED, result.getId())
+            String.format(
+                "%s_%d_%d",
+                AudioStatus.UPLOADED,
+                result.getOwnerId(),
+                result.getId()
+            )
         );
         return new AttachmentAddAudio(
             this.actor,

@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Class or Interface description.
@@ -101,6 +102,7 @@ final class PropertiesUpdate {
         }
     }
 
+    // @checkstyle StringLiteralsConcatenationCheck (50 lines)
     /**
      * Finds the key for the provided index.
      * @param index For which to find the key.
@@ -110,10 +112,13 @@ final class PropertiesUpdate {
     private Object key(final int index) throws IOException {
         for (final Map.Entry<Object, Object> entry
             : this.properties.entrySet()) {
+            final String value = entry.getValue().toString();
             if (
                 Objects.equals(
                     this.ids.get(index),
-                    entry.getValue().toString().substring(2)
+                    value.substring(
+                        StringUtils.ordinalIndexOf(value, "_", 2) + 1
+                    )
                 )
                 ) {
                 return entry.getKey();

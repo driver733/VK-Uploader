@@ -114,6 +114,7 @@ public final class AttachmentCachedAudio implements Attachment {
     }
 
     // @checkstyle LocalFinalVariableNameCheck (100 lines)
+    // @checkstyle StringLiteralsConcatenationCheck (100 lines)
     /**
      * Forms a {@link AbstractQueryBuilder} for uploading an audio {@link File}.
      * @param audio Audio {@link File} to upload.
@@ -138,20 +139,20 @@ public final class AttachmentCachedAudio implements Attachment {
             final String value = this.properties.getProperty(audio.getName());
             final int status = Integer.parseInt(
                 value.substring(
-                    StringUtils.ordinalIndexOf(value, "_", 0),
+                    0,
                     StringUtils.ordinalIndexOf(value, "_", 1)
                 )
             );
             if (status == 0) {
-                final int mediaId = Integer.parseInt(
+                final Integer ownerId = Integer.parseInt(
                     value.substring(
-                        StringUtils.ordinalIndexOf(value, "_", 1),
+                        StringUtils.ordinalIndexOf(value, "_", 1) + 1,
                         StringUtils.ordinalIndexOf(value, "_", 2)
                     )
                 );
-                final Integer ownerId = Integer.parseInt(
+                final int mediaId = Integer.parseInt(
                     value.substring(
-                        StringUtils.ordinalIndexOf(value, "_", 2)
+                        StringUtils.ordinalIndexOf(value, "_", 2) + 1
                     )
                 );
                 result = new AttachmentAddAudio(

@@ -72,7 +72,9 @@ public class SampleTest {
                         )
                     )
                 ).construct(),
-                Matchers.equalTo("Album: Elegant Testing\nArtist: Test Man")
+                Matchers.equalTo(
+                        String.format("Album: Elegant Testing%nArtist: Test Man")
+                )
             );
         } catch (IOException | UnsupportedTagException | InvalidDataException e) {
             fail();

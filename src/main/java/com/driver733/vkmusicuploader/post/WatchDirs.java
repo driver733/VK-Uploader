@@ -162,7 +162,7 @@ public final class WatchDirs implements Closeable {
             final Path child = dir.resolve(name);
             Logger.debug(
                 this,
-                "%s: %s\n", event.kind().name(), child
+                "%s: %s%n", event.kind().name(), child
             );
             if (kind == ENTRY_CREATE) {
                 try {

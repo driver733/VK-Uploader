@@ -78,7 +78,7 @@ public final class QueryResultsBasic implements QueryResults {
                         new JsonReader(
                             new StringReader(response)
                         )
-                    ).getAsJsonPrimitive()
+                    )
                 );
             }
         }

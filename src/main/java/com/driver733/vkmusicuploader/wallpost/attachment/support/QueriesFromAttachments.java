@@ -58,8 +58,8 @@ final class QueriesFromAttachments {
      * Ctor.
      * @param attachments An {@link Attachment} array.
      */
-    QueriesFromAttachments(final Array<Attachment> attachments) {
-        this.attachments = attachments;
+    QueriesFromAttachments(final List<Attachment> attachments) {
+        this.attachments = new Array<>(attachments);
     }
 
     /**

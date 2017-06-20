@@ -47,6 +47,7 @@ import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Class or Interface description.
@@ -98,7 +99,7 @@ public final class WallPostAlbum implements WallPost {
      */
     public WallPostAlbum(
         final UserActor actor,
-        final Array<File> audios,
+        final List<File> audios,
         final UploadServers servers,
         final ImmutableProperties properties
     ) {

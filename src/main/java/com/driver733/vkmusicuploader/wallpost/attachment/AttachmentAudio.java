@@ -40,7 +40,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
  * Class or Interface description.
@@ -145,7 +144,8 @@ public final class AttachmentAudio implements Attachment {
         );
         return new AttachmentAddAudio(
             this.actor,
-            new ImmutablePair<>(result.getId(), result.getOwnerId())
+            result.getOwnerId(),
+            result.getId()
         ).upload();
     }
 

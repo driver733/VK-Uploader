@@ -24,18 +24,16 @@
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
-import com.vk.api.sdk.queries.audio.AudioAddQuery;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.apache.commons.lang3.tuple.ImmutablePair;
+
+// @checkstyle MemberNameCheck (50 lines)
 
 /**
  * Class or Interface description.
@@ -65,22 +63,31 @@ public final class AttachmentAddAudio implements Attachment {
     private final UserActor actor;
 
     /**
-     * Audios files.
+     * Audio`s owner ID.
      */
-    private final Array<ImmutablePair<Integer, Integer>> audios;
+    private final int ownerId;
+
+    /**
+     * Audio`s media ID.
+     */
+    private final int mediaId;
+
+    // @checkstyle ParameterNameCheck (20 lines)
 
     /**
      * Ctor.
      * @param actor UserActor on behalf of which all requests will be sent.
-     * @param audios Audios files.
+     * @param ownerId Audio`s owner ID.
+     * @param mediaId Audio`s media ID.
      */
-    @SafeVarargs
     public AttachmentAddAudio(
         final UserActor actor,
-        final ImmutablePair<Integer, Integer>... audios
+        final int ownerId,
+        final int mediaId
     ) {
-        this.audios = new Array<>(audios);
         this.actor = actor;
+        this.ownerId = ownerId;
+        this.mediaId = mediaId;
         this.client = new VkApiClient(
             new HttpTransportClient()
         );
@@ -89,31 +96,12 @@ public final class AttachmentAddAudio implements Attachment {
     @Override
     public List<AbstractQueryBuilder> upload()
         throws ClientException, ApiException {
-        final List<AbstractQueryBuilder> list = new ArrayList<>(
-            this.audios.size()
-        );
-        for (final ImmutablePair<Integer, Integer> pair : this.audios) {
-            list.addAll(
-                this.upload(pair)
-            );
-        }
-        return list;
-    }
-
-    /**
-     * Adds the audio files.
-     * @param pair An audioID-ownerID pair.
-     * @return AudioAddQuery that will add the uploaded audio to the group page.
-     */
-    private List<AudioAddQuery> upload(
-        final ImmutablePair<Integer, Integer> pair
-    ) {
         return Collections.singletonList(
             this.client.audio()
                 .add(
                     this.actor,
-                    pair.getLeft(),
-                    pair.getRight()
+                    this.mediaId,
+                    this.ownerId
                 )
                 .groupId(AttachmentAddAudio.GROUP_ID)
         );

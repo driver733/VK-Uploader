@@ -145,7 +145,7 @@ public final class WallPostsAlbum implements WallPosts {
      */
     public List<ExecuteBatchQuery> postsQueries() throws IOException {
         final Array<File> audios = this.audios();
-        final Array<ExecuteBatchQuery> queries = new Array<>();
+        final List<ExecuteBatchQuery> queries = new ArrayList<>(audios.size());
         int iter = 0;
         Logger.debug(
             this,

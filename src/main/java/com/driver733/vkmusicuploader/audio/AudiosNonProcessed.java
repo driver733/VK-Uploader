@@ -75,13 +75,12 @@ public final class AudiosNonProcessed implements Audios {
         final List<File> result = new ArrayList<>(audios.size());
         for (final File file : audios) {
             if (
-                !(this.props.containsKey(file.getName())
-                    || this.props.containsKey(file.getName())
-                    && !this.props.get(file.getName())
+                !this.props.containsKey(file.getName())
+                    || !this.props
+                        .get(file.getName())
                         .toString()
                         .substring(0, 1)
                         .equals(AudioStatus.POSTED.toString())
-                    )
                 ) {
                 result.add(file);
             }

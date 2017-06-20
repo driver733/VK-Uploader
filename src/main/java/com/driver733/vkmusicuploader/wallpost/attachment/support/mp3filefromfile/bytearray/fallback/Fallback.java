@@ -23,8 +23,8 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile.bytearray.fallback;
 
-import com.jcabi.immutable.Array;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Class or Interface description.
@@ -43,6 +43,6 @@ public interface Fallback<T> {
      * @return First valid item
      * @throws IOException If no valid items were found.
      */
-    Array<T> firstValid() throws IOException;
+    List<T> firstValid() throws IOException;
 
 }

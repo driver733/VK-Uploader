@@ -96,7 +96,7 @@
                     <groupId>com.qulice</groupId>
                     <artifactId>qulice-maven-plugin</artifactId>
                     <configuration>
-                        <license>tag:${basedir}/LICENSE_qulice.txt</license>
+                        <license>tag:${basedir}/LICENSE.txt</license>
                         <excludes>
                             <exclude>checkstyle:/src/main/java/com.driver733.vkmusicuploader/Main.java</exclude>
                             <exclude>pmd:/src/main/java/com.driver733.vkmusicuploader/Main.java</exclude>

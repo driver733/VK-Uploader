@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.ClientResponse;
 import com.vk.api.sdk.client.TransportClient;
 import java.io.File;
@@ -14,6 +15,7 @@ import java.io.StringReader;
 import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
@@ -60,10 +62,14 @@ public class CachedExecuteBatchQueryClient implements TransportClient {
     private static com.vk.api.sdk.httpclient.HttpTransportClient instance;
     private static HttpClient httpClient;
 
-    private final JsonElement[] cachedResults;
+    private final QueryResults cachedResults;
 
-    public CachedExecuteBatchQueryClient(final JsonElement... cachedResults) {
+    public CachedExecuteBatchQueryClient(final QueryResults cachedResults) {
         this.cachedResults = cachedResults;
+        init();
+    }
+
+    private void init() {
         CookieStore cookieStore = new BasicCookieStore();
         RequestConfig requestConfig = RequestConfig.custom()
             .setSocketTimeout(SOCKET_TIMEOUT_MS)
@@ -84,6 +90,8 @@ public class CachedExecuteBatchQueryClient implements TransportClient {
             .setUserAgent(USER_AGENT)
             .build();
     }
+
+
 
     @SuppressWarnings("unused")
     public static com.vk.api.sdk.httpclient.HttpTransportClient getInstance() {
@@ -122,19 +130,15 @@ public class CachedExecuteBatchQueryClient implements TransportClient {
                     Map<String, String> headers = getHeaders(response.getAllHeaders());
                     logRequest(request, response, headers, result, resultTime);
 
-
                     JsonReader jsonReader = new JsonReader(new StringReader(result));
                     JsonObject json = new JsonParser().parse(jsonReader).getAsJsonObject();
                     JsonArray array = json.get("response").getAsJsonArray();
-                    for (final JsonElement element : cachedResults) {
+                    for (final JsonElement element : cachedResults.results()) {
                         array.add(element);
                     }
                     json.add("response", array);
 
-
                     return new ClientResponse(response.getStatusLine().getStatusCode(), json.toString(), headers);
-
-
                 } finally {
                     SUPERVISOR.removeRequest(request);
                 }

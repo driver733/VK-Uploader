@@ -37,7 +37,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Class or Interface description.
@@ -50,11 +50,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  */
 @Immutable
 public final class AttachmentCachedAudio implements Attachment {
-
-    /**
-     * Group ID.
-     */
-    private static final int GROUP_ID = 92444715;
 
     /**
      * UserActor on behalf of which all requests will be sent.
@@ -89,9 +84,9 @@ public final class AttachmentCachedAudio implements Attachment {
         final UserActor actor,
         final String url,
         final ImmutableProperties properties,
-        final Array<File> audios
+        final List<File> audios
     ) {
-        this.audios = audios;
+        this.audios = new Array<>(audios);
         this.actor = actor;
         this.url = url;
         this.properties = properties;
@@ -118,6 +113,7 @@ public final class AttachmentCachedAudio implements Attachment {
         return list;
     }
 
+    // @checkstyle LocalFinalVariableNameCheck (100 lines)
     /**
      * Forms a {@link AbstractQueryBuilder} for uploading an audio {@link File}.
      * @param audio Audio {@link File} to upload.
@@ -139,18 +135,36 @@ public final class AttachmentCachedAudio implements Attachment {
                 audio
             ).upload();
         } else {
+            final String value = this.properties.getProperty(audio.getName());
             final int status = Integer.parseInt(
-                this.properties.getProperty(audio.getName()).substring(0, 1)
-            );
-            final int mediaId = Integer.parseInt(
-                this.properties.getProperty(audio.getName()).substring(2)
+                value.substring(
+                    StringUtils.ordinalIndexOf(value, "_", 0),
+                    StringUtils.ordinalIndexOf(value, "_", 1)
+                )
             );
             if (status == 0) {
+                final int mediaId = Integer.parseInt(
+                    value.substring(
+                        StringUtils.ordinalIndexOf(value, "_", 1),
+                        StringUtils.ordinalIndexOf(value, "_", 2)
+                    )
+                );
+                final Integer ownerId = Integer.parseInt(
+                    value.substring(
+                        StringUtils.ordinalIndexOf(value, "_", 2)
+                    )
+                );
                 result = new AttachmentAddAudio(
                     this.actor,
-                    new ImmutablePair<>(mediaId, AttachmentCachedAudio.GROUP_ID)
+                    ownerId,
+                    mediaId
                 ).upload();
             } else if (status == 1) {
+                final int mediaId = Integer.parseInt(
+                    value.substring(
+                        StringUtils.ordinalIndexOf(value, "_", 1)
+                    )
+                );
                 final AbstractQueryBuilder query =
                     new CachedAudioAddQuery(mediaId);
                 query.unsafeParam("audio_id", mediaId);

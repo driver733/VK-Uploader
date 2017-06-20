@@ -36,6 +36,8 @@ import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import java.io.IOException;
 
+// @checkstyle ClassDataAbstractionCouplingCheck (20 lines)
+
 /**
  * Class or Interface description.
  * <p>
@@ -44,7 +46,6 @@ import java.io.IOException;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (10 lines)
  */
 @Immutable
 public final class AttachmentArrays implements AttachmentsFields {
@@ -92,7 +93,7 @@ public final class AttachmentArrays implements AttachmentsFields {
                 new CachedExecuteBatchQueryClient(
                     new QueryResultsBasic(
                         queries.queries(true)
-                    ).results().toArray(new JsonElement[0])
+                    )
                 )
             ).execute()
                 .batch(

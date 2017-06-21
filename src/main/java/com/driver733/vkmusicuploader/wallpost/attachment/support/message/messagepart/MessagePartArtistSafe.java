@@ -57,7 +57,7 @@ public final class MessagePartArtistSafe implements MessagePart {
     public String construct() throws IOException {
         final String result;
         final String str = this.tag.construct().getArtist();
-        if (str == null) {
+        if (str == null || str.isEmpty()) {
             result = "";
         } else {
             result = String.format("Artist: %s", str);

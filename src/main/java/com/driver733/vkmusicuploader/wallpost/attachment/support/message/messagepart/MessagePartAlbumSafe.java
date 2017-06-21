@@ -57,7 +57,7 @@ public final class MessagePartAlbumSafe implements MessagePart {
     public String construct() throws IOException {
         final String result;
         final String str = this.tag.construct().getAlbum();
-        if (str == null) {
+        if (str == null || str.isEmpty()) {
             result = "";
         } else {
             result = String.format("Album: %s", str);

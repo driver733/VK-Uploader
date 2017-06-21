@@ -42,9 +42,9 @@ import java.util.List;
  */
 @Immutable
 final class AttachmentsFromResults {
-    
+
     /**
-     * @todo #2 Need to create a test for this class.
+     * A @todo #2 Need to create a test for this class.
      */
 
     /**

@@ -27,6 +27,7 @@ import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Class or Interface description.
@@ -55,8 +56,8 @@ public final class AudiosVerified implements Audios {
     }
 
     @Override
-    public Array<File> audios() throws IOException {
-        final Array<File> audios = this.origin.audios();
+    public List<File> audios() throws IOException {
+        final Array<File> audios = new Array<>(this.origin.audios());
         if (audios.size() == 0) {
             throw new IOException("No audios found");
         }

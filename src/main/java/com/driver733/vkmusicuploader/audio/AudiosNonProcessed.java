@@ -23,7 +23,7 @@
  */
 package com.driver733.vkmusicuploader.audio;
 
-import com.driver733.vkmusicuploader.support.ImmutableProperties;
+import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
@@ -69,9 +69,9 @@ public final class AudiosNonProcessed implements Audios {
     }
 
     @Override
-    public Array<File> audios() throws IOException {
+    public List<File> audios() throws IOException {
         this.props.load();
-        final Array<File> audios = this.origin.audios();
+        final Array<File> audios = new Array<>(this.origin.audios());
         final List<File> result = new ArrayList<>(audios.size());
         for (final File file : audios) {
             if (
@@ -85,7 +85,7 @@ public final class AudiosNonProcessed implements Audios {
                 result.add(file);
             }
         }
-        return new Array<>(result);
+        return result;
     }
 
 }

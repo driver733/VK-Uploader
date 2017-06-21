@@ -26,7 +26,7 @@ package com.driver733.vkmusicuploader.wallpost.wallpost.wallposts;
 import com.driver733.vkmusicuploader.audio.AudiosBasic;
 import com.driver733.vkmusicuploader.audio.AudiosNonProcessed;
 import com.driver733.vkmusicuploader.post.UploadServers;
-import com.driver733.vkmusicuploader.support.ImmutableProperties;
+import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.wallpost.WallPostAlbum;
 import com.jcabi.aspects.Cacheable;
@@ -144,7 +144,7 @@ public final class WallPostsAlbum implements WallPosts {
      * @throws IOException If no audios are found.
      */
     public List<ExecuteBatchQuery> postsQueries() throws IOException {
-        final Array<File> audios = this.audios();
+        final List<File> audios = this.audios();
         final List<ExecuteBatchQuery> queries = new ArrayList<>(audios.size());
         int iter = 0;
         Logger.debug(
@@ -175,7 +175,7 @@ public final class WallPostsAlbum implements WallPosts {
     @Override
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public void updateProperties() throws IOException {
-        final Array<File> audios = this.audios();
+        final List<File> audios = this.audios();
         for (final File audio : audios) {
             this.properties.setProperty(
                 audio.getName(),
@@ -201,7 +201,7 @@ public final class WallPostsAlbum implements WallPosts {
      *  is not fulfilled.
      */
     @Cacheable(forever = true)
-    private Array<File> audios() throws IOException {
+    private List<File> audios() throws IOException {
         return new AudiosNonProcessed(
             new AudiosBasic(this.dir),
             this.properties

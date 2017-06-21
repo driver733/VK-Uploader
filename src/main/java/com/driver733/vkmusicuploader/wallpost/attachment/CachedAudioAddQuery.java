@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.support;
+package com.driver733.vkmusicuploader.wallpost.attachment;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
@@ -54,7 +54,7 @@ public class CachedAudioAddQuery extends AbstractQueryBuilder {
     public CachedAudioAddQuery(final int audioId) {
         super(
             new VkApiClient(
-                new CachedClient(
+                new TransportClientCached(
                     new JsonParser().parse(
                         new JsonReader(
                             new StringReader(

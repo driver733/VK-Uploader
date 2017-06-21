@@ -21,14 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader;
+package com.driver733.vkmusicuploader.messge;
 
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
-import java.io.File;
-import java.io.IOException;
-import org.hamcrest.Matchers;
-import org.junit.Test;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.message.MessageBasic;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart.MessagePartAlbumSafe;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart.MessagePartArtistSafe;
@@ -36,6 +30,11 @@ import com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
+import java.io.File;
+import java.io.IOException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
  * Class or Interface description.
@@ -45,67 +44,62 @@ import com.mpatric.mp3agic.UnsupportedTagException;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle AvoidDuplicateLiterals (200 lines)
  */
-public class SampleTest {
-
-    /**
-     * @todo #1 Create a proper name for the test class.
-     */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+public final class MessageTest {
 
     @Test
-    public void allTags() {
-        try {
-            assertThat(
-                new MessageBasic(
-                    new MessagePartAlbumSafe(
-                        new BasicTagFromMp3File(
-                            new Mp3File(
-                                new File("src/test/resources/test10sec.mp3")
-                            )
-                        )
-                    ),
-                    new MessagePartArtistSafe(
-                        new BasicTagFromMp3File(
-                            new Mp3File(
-                                new File("src/test/resources/test10sec.mp3")
-                            )
+    public void allTags()
+        throws InvalidDataException, IOException, UnsupportedTagException {
+        MatcherAssert.assertThat(
+            "Cannot construct a message with tags",
+            new MessageBasic(
+                new MessagePartAlbumSafe(
+                    new BasicTagFromMp3File(
+                        new Mp3File(
+                            new File("src/test/resources/test.mp3")
                         )
                     )
-                ).construct(),
-                Matchers.equalTo(
-                        String.format("Album: Elegant Testing%nArtist: Test Man")
+                ),
+                new MessagePartArtistSafe(
+                    new BasicTagFromMp3File(
+                        new Mp3File(
+                            new File("src/test/resources/test.mp3")
+                        )
+                    )
                 )
-            );
-        } catch (IOException | UnsupportedTagException | InvalidDataException e) {
-            fail();
-        }
+            ).construct(),
+            Matchers.equalTo(
+                String.format("Album: Elegant Testing%nArtist: Test Man")
+            )
+        );
     }
 
     @Test
-    public void missingTags() {
-        try {
-            assertThat(
-                new MessageBasic(
-                    new MessagePartAlbumSafe(
-                        new BasicTagFromMp3File(
-                            new Mp3File(
-                                new File("src/test/resources/test10secMissingTags.mp3")
-                            )
-                        )
-                    ),
-                    new MessagePartArtistSafe(
-                        new BasicTagFromMp3File(
-                            new Mp3File(
-                                new File("src/test/resources/test10secMissingTags.mp3")
-                            )
+    public void missingTags()
+        throws InvalidDataException, IOException, UnsupportedTagException {
+        MatcherAssert.assertThat(
+            "Failed to process missing tags",
+            new MessageBasic(
+                new MessagePartAlbumSafe(
+                    new BasicTagFromMp3File(
+                        new Mp3File(
+                            new File("src/test/resources/testMissingTags.mp3")
                         )
                     )
-                ).construct(),
-                Matchers.equalTo("")
-            );
-        } catch (IOException | UnsupportedTagException | InvalidDataException e) {
-            fail();
-        }
+                ),
+                new MessagePartArtistSafe(
+                    new BasicTagFromMp3File(
+                        new Mp3File(
+                            new File("src/test/resources/testMissingTags.mp3")
+                        )
+                    )
+                )
+            ).construct(),
+            Matchers.equalTo("")
+        );
     }
 
 }

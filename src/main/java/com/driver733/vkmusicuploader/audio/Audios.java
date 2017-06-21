@@ -23,9 +23,9 @@
  */
 package com.driver733.vkmusicuploader.audio;
 
-import com.jcabi.immutable.Array;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Class or Interface description.
@@ -44,5 +44,5 @@ public interface Audios {
      * @return Arrays of audio {@link File}s.
      * @throws IOException If a certain criteria is not fulfilled.
      */
-    Array<File> audios() throws IOException;
+    List<File> audios() throws IOException;
 }

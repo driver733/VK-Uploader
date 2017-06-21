@@ -26,6 +26,7 @@ package com.driver733.vkmusicuploader.audio;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import java.io.File;
+import java.util.List;
 
 /**
  * Class or Interface description.
@@ -54,7 +55,7 @@ public final class AudiosBasic implements Audios {
 
     // @checkstyle ParameterNameCheck (10 lines)
     @Override
-    public Array<File> audios() {
+    public List<File> audios() {
         return new Array<>(
             this.dir.listFiles(
                 (dirName, fileName) -> fileName.endsWith(".mp3")

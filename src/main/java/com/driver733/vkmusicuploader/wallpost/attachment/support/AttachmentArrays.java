@@ -23,9 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
-import com.driver733.vkmusicuploader.support.CachedExecuteBatchQueryClient;
-import com.driver733.vkmusicuploader.support.ImmutableProperties;
-import com.driver733.vkmusicuploader.support.QueryResultsBasic;
+import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.Attachment;
 import com.google.gson.JsonElement;
 import com.jcabi.aspects.Immutable;

@@ -98,21 +98,23 @@
                     <configuration>
                         <license>tag:${basedir}/LICENSE.txt</license>
                         <excludes>
+                            <exclude>checkstyle:/src/test/resources/.*</exclude>
+
                             <exclude>checkstyle:/src/main/java/com.driver733.vkmusicuploader/Main.java</exclude>
                             <exclude>pmd:/src/main/java/com.driver733.vkmusicuploader/Main.java</exclude>
                             <exclude>findbugs:com.driver733.vkmusicuploader.Main</exclude>
                             
                             <exclude>checkstyle:/src/test/java/com.driver733.vkmusicuploader/SampleTest.java</exclude>
                             <exclude>pmd:/src/test/java/com.driver733.vkmusicuploader/SampleTest.java</exclude>
-                            <exclude>findbugs:com.driver733.vkmusicuploader.SampleTest.java</exclude>
+                            <exclude>findbugs:com.driver733.vkmusicuploader.messge.MessageTest.java</exclude>
 
-                            <exclude>findbugs:com.driver733.vkmusicuploader.support.CachedExecuteBatchQueryClient</exclude>
-                            <exclude>findbugs:com.driver733.vkmusicuploader.support.ImmutableProperties</exclude>
+                            <exclude>findbugs:com.driver733.vkmusicuploader.wallpost.attachment.support.CachedExecuteBatchQueryClient</exclude>
+                            <exclude>findbugs:com.driver733.vkmusicuploader.properties.ImmutableProperties</exclude>
 
-                            <exclude>checkstyle:/src/main/java/com/driver733/vkmusicuploader/support/CachedExecuteBatchQueryClient.java</exclude>
-                            <exclude>pmd:/src/main/java/com/driver733/vkmusicuploader/support/CachedExecuteBatchQueryClient.java</exclude>
-                            <exclude>checkstyle:/src/main/java/com/driver733/vkmusicuploader/support/ConnectionsSupervisor.java</exclude>
-                            <exclude>pmd:/src/main/java/com/driver733/vkmusicuploader/support/ConnectionsSupervisor.java</exclude>
+                            <exclude>checkstyle:/src/main/java/com/driver733/vkmusicuploader/wallpost/attachment/support/CachedExecuteBatchQueryClient.java</exclude>
+                            <exclude>pmd:/src/main/java/com/driver733/vkmusicuploader/wallpost/attachment/support/CachedExecuteBatchQueryClient.java</exclude>
+                            <exclude>checkstyle:/src/main/java/com/driver733/vkmusicuploader/wallpost/attachment/support/ConnectionsSupervisor.java</exclude>
+                            <exclude>pmd:/src/main/java/com/driver733/vkmusicuploader/wallpost/attachment/support/ConnectionsSupervisor.java</exclude>
 
                             <exclude>xml:/src/main/resources/.*</exclude>
                             <exclude>duplicatefinder:.*</exclude>

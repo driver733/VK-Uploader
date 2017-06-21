@@ -1,4 +1,4 @@
-package com.driver733.vkmusicuploader.support;
+package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

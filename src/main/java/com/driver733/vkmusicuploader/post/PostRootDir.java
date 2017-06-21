@@ -24,7 +24,7 @@
 
 package com.driver733.vkmusicuploader.post;
 
-import com.driver733.vkmusicuploader.support.ImmutableProperties;
+import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPostsAlbum;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.actors.UserActor;

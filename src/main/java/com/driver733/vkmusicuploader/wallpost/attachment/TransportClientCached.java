@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.support;
+package com.driver733.vkmusicuploader.wallpost.attachment;
 
 import com.google.gson.JsonElement;
 import com.jcabi.aspects.Immutable;
@@ -43,7 +43,7 @@ import org.apache.http.HttpStatus;
  * @since 0.1
  */
 @Immutable
-final class CachedClient implements TransportClient {
+final class TransportClientCached implements TransportClient {
 
     /**
      * Cached request`s response.
@@ -55,7 +55,7 @@ final class CachedClient implements TransportClient {
      * @param result Cached request`s response.
      * @checkstyle ParameterNameCheck (50 lines)
      */
-    CachedClient(final JsonElement result) {
+    TransportClientCached(final JsonElement result) {
         this.result = result;
     }
 

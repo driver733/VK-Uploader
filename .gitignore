@@ -108,4 +108,3 @@ buildNumber.properties
 !/.mvn/wrapper/maven-wrapper.jar
 .idea/
 VKMusicUploader.iml
-!/src/main/java/com/driver733/vkmusicuploader/wallpost/attachment/support/AttachmentArrays.java

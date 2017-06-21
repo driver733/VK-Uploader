@@ -44,10 +44,6 @@ import java.util.List;
 final class AttachmentsFromResults {
 
     /**
-     * A @todo #2 Need to create a test for this class.
-     */
-
-    /**
      * JsonArray that contains the
      *  {@link QueryResultsBasic}
      *  of the queries.
@@ -70,7 +66,7 @@ final class AttachmentsFromResults {
      * @throws IOException If unknown Attachment format is found.
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public Array<String> attachments() throws IOException {
+    public List<String> attachments() throws IOException {
         final List<String> list = new ArrayList<>(this.root.size());
         for (final JsonElement element : this.root) {
             list.addAll(

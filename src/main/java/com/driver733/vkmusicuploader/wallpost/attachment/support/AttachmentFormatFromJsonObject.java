@@ -205,7 +205,12 @@ public final class AttachmentFormatFromJsonObject {
 
         @Override
         public String toString() {
-            return String.format("%s%d_%d", this.type, this.owner, this.media);
+            return String.format(
+                "%s%d_%d",
+                this.type.toString(),
+                this.owner,
+                this.media
+            );
         }
 
     }

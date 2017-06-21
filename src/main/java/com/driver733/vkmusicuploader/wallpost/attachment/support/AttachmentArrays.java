@@ -33,6 +33,7 @@ import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import java.io.IOException;
+import java.util.List;
 
 // @checkstyle ClassDataAbstractionCouplingCheck (20 lines)
 
@@ -81,7 +82,7 @@ public final class AttachmentArrays implements AttachmentsFields {
     }
 
     @Override
-    public Array<String> attachmentsFields()
+    public List<String> attachmentsFields()
         throws ApiException, ClientException, IOException {
         this.properties.load();
         final QueriesFromAttachments queries =

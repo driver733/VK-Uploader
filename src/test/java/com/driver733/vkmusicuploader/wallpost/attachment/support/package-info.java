@@ -22,31 +22,3 @@
  * SOFTWARE.
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.support;
-
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
-import java.io.IOException;
-import java.util.List;
-
-/**
- * Class or Interface description.
- * <p>
- * <p> Additional info
- *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
- * @since 0.1
- */
-public interface AttachmentsFields {
-
-    /**
-     * Constructs attachment strings for the wall WallPostAlbum.
-     * @return Attachment strings.
-     * @throws ClientException VK API Client error.
-     * @throws ApiException VK API error.
-     * @throws IOException If properties fail to load.
-     */
-    List<String> attachmentsFields()
-        throws ApiException, ClientException, IOException;
-
-}

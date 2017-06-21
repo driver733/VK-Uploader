@@ -31,6 +31,7 @@ import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -86,6 +87,8 @@ public class CachedAudioAddQuery extends AbstractQueryBuilder {
      * @checkstyle NonStaticMethodCheck (5 lines)
      */
     protected final List<String> essentialKeys() {
-        return new ArrayList<>(0);
+        return Collections.unmodifiableList(
+            new ArrayList<>(0)
+        );
     }
 }

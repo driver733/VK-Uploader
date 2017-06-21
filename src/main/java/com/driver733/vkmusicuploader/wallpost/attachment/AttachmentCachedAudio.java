@@ -162,7 +162,7 @@ public final class AttachmentCachedAudio implements Attachment {
             } else if (status == 1) {
                 final int mediaId = Integer.parseInt(
                     value.substring(
-                        StringUtils.ordinalIndexOf(value, "_", 1)
+                        StringUtils.ordinalIndexOf(value, "_", 1) + 1
                     )
                 );
                 final AbstractQueryBuilder query =

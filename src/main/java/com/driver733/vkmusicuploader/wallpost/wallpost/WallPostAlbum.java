@@ -30,8 +30,7 @@ import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhoto;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AttachmentArrays;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.message.MessageBasic;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart.MessagePartAlbumSafe;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart.MessagePartArtistSafe;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart.ID3v1AnnotatedSafe;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile.advancedtag.AdvancedTagFromMp3File;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile.advancedtag.AdvancedTagVerifiedAlbumImage;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile.basictag.BasicTagFromMp3File;
@@ -169,12 +168,12 @@ public final class WallPostAlbum implements WallPost {
                         )
                     ),
                     new MessageBasic(
-                        new MessagePartAlbumSafe(
-                            new BasicTagFromMp3File(file)
-                        ),
-                        new MessagePartArtistSafe(
-                            new BasicTagFromMp3File(file)
-                        )
+                        new ID3v1AnnotatedSafe(
+                            new BasicTagFromMp3File(file).construct()
+                        ).getAlbum(),
+                        new ID3v1AnnotatedSafe(
+                            new BasicTagFromMp3File(file).construct()
+                        ).getArtist()
                     ).construct()
                 )
             ),

@@ -24,9 +24,9 @@
 package com.driver733.vkmusicuploader.messge;
 
 import com.driver733.vkmusicuploader.wallpost.attachment.support.message.MessageBasic;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart.MessagePartAlbumSafe;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart.MessagePartArtistSafe;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart.ID3v1AnnotatedSafe;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile.basictag.BasicTagFromMp3File;
+import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
@@ -53,23 +53,18 @@ public final class MessageTest {
     @Test
     public void allTags()
         throws InvalidDataException, IOException, UnsupportedTagException {
+        final ID3v1 tag = new ID3v1AnnotatedSafe(
+            new BasicTagFromMp3File(
+                new Mp3File(
+                    new File("src/test/resources/test.mp3")
+                )
+            ).construct()
+        );
         MatcherAssert.assertThat(
             "Cannot construct a message with tags",
             new MessageBasic(
-                new MessagePartAlbumSafe(
-                    new BasicTagFromMp3File(
-                        new Mp3File(
-                            new File("src/test/resources/test.mp3")
-                        )
-                    )
-                ),
-                new MessagePartArtistSafe(
-                    new BasicTagFromMp3File(
-                        new Mp3File(
-                            new File("src/test/resources/test.mp3")
-                        )
-                    )
-                )
+                tag.getAlbum(),
+                tag.getArtist()
             ).construct(),
             Matchers.equalTo(
                 String.format("Album: Elegant Testing%nArtist: Test Man")
@@ -83,20 +78,20 @@ public final class MessageTest {
         MatcherAssert.assertThat(
             "Failed to process missing tags",
             new MessageBasic(
-                new MessagePartAlbumSafe(
+                new ID3v1AnnotatedSafe(
                     new BasicTagFromMp3File(
                         new Mp3File(
                             new File("src/test/resources/testMissingTags.mp3")
                         )
-                    )
-                ),
-                new MessagePartArtistSafe(
+                    ).construct()
+                ).getAlbum(),
+                new ID3v1AnnotatedSafe(
                     new BasicTagFromMp3File(
                         new Mp3File(
                             new File("src/test/resources/testMissingTags.mp3")
                         )
-                    )
-                )
+                    ).construct()
+                ).getArtist()
             ).construct(),
             Matchers.equalTo("")
         );

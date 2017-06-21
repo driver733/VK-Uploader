@@ -25,7 +25,6 @@ package com.driver733.vkmusicuploader.wallpost.attachment.support.message.messag
 
 import com.jcabi.aspects.Immutable;
 import com.mpatric.mp3agic.ID3v1;
-import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.NotSupportedException;
 
 //@checkstyle ParameterNameCheck (1000 lines)
@@ -41,18 +40,18 @@ import com.mpatric.mp3agic.NotSupportedException;
  */
 @Immutable
 @SuppressWarnings({"PMD.BooleanGetMethodName", "PMD.ExcessivePublicCount"})
-public final class ID3v2Safe implements ID3v1 {
+public final class ID3v1AnnotatedSafe implements ID3v1 {
 
     /**
      * Origin.
      */
-    private final ID3v2 tag;
+    private final ID3v1 tag;
 
     /**
      * Ctor.
      * @param tag Origin.
      */
-    public ID3v2Safe(final ID3v2 tag) {
+    public ID3v1AnnotatedSafe(final ID3v1 tag) {
         this.tag = tag;
     }
 
@@ -60,8 +59,8 @@ public final class ID3v2Safe implements ID3v1 {
     public String getVersion() {
         final String result;
         final String value = this.tag.getVersion();
-        if (ID3v2Safe.isPresent(value)) {
-            result = value;
+        if (ID3v1AnnotatedSafe.isPresent(value)) {
+            result = String.format("Version: %s", value);
         } else {
             result = "";
         }
@@ -72,7 +71,7 @@ public final class ID3v2Safe implements ID3v1 {
     public String getTrack() {
         final String result;
         final String value = this.tag.getTrack();
-        if (ID3v2Safe.isPresent(value)) {
+        if (ID3v1AnnotatedSafe.isPresent(value)) {
             result = value;
         } else {
             result = "";
@@ -89,8 +88,8 @@ public final class ID3v2Safe implements ID3v1 {
     public String getArtist() {
         final String result;
         final String value = this.tag.getArtist();
-        if (ID3v2Safe.isPresent(value)) {
-            result = value;
+        if (ID3v1AnnotatedSafe.isPresent(value)) {
+            result = String.format("Artist: %s", value);
         } else {
             result = "";
         }
@@ -106,7 +105,7 @@ public final class ID3v2Safe implements ID3v1 {
     public String getTitle() {
         final String result;
         final String value = this.tag.getTitle();
-        if (ID3v2Safe.isPresent(value)) {
+        if (ID3v1AnnotatedSafe.isPresent(value)) {
             result = value;
         } else {
             result = "";
@@ -123,8 +122,8 @@ public final class ID3v2Safe implements ID3v1 {
     public String getAlbum() {
         final String result;
         final String value = this.tag.getAlbum();
-        if (ID3v2Safe.isPresent(value)) {
-            result = value;
+        if (ID3v1AnnotatedSafe.isPresent(value)) {
+            result = String.format("Album: %s", value);
         } else {
             result = "";
         }
@@ -140,7 +139,7 @@ public final class ID3v2Safe implements ID3v1 {
     public String getYear() {
         final String result;
         final String value = this.tag.getYear();
-        if (ID3v2Safe.isPresent(value)) {
+        if (ID3v1AnnotatedSafe.isPresent(value)) {
             result = value;
         } else {
             result = "";
@@ -167,7 +166,7 @@ public final class ID3v2Safe implements ID3v1 {
     public String getGenreDescription() {
         final String result;
         final String value = this.tag.getGenreDescription();
-        if (ID3v2Safe.isPresent(value)) {
+        if (ID3v1AnnotatedSafe.isPresent(value)) {
             result = value;
         } else {
             result = "";
@@ -179,7 +178,7 @@ public final class ID3v2Safe implements ID3v1 {
     public String getComment() {
         final String result;
         final String value = this.tag.getComment();
-        if (ID3v2Safe.isPresent(value)) {
+        if (ID3v1AnnotatedSafe.isPresent(value)) {
             result = value;
         } else {
             result = "";
@@ -204,7 +203,7 @@ public final class ID3v2Safe implements ID3v1 {
      */
     private static boolean isPresent(final String str) {
         final boolean result;
-        if (str == null || "-1".equals(str)) {
+        if (str == null || str.isEmpty() || "-1".equals(str)) {
             result = false;
         } else {
             result = true;

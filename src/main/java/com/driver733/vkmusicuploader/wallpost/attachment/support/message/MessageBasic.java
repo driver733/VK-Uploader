@@ -23,7 +23,6 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.support.message;
 
-import com.driver733.vkmusicuploader.wallpost.attachment.support.message.messagepart.MessagePart;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import java.io.IOException;
@@ -43,13 +42,13 @@ public final class MessageBasic implements Message {
     /**
      * Parts of the message.
      */
-    private final Array<MessagePart> parts;
+    private final Array<String> parts;
 
     /**
      * Ctor.
      * @param parts Parts of the message.
      */
-    public MessageBasic(final MessagePart... parts) {
+    public MessageBasic(final String... parts) {
         this.parts = new Array<>(parts);
     }
 
@@ -57,13 +56,7 @@ public final class MessageBasic implements Message {
     public String construct() throws IOException {
         final StringBuilder builder = new StringBuilder();
         for (int index = 0; index < this.parts.size(); index += 1) {
-            final String result;
-            try {
-                result = this.parts.get(index)
-                    .construct();
-            } catch (final IOException ex) {
-                throw new IOException("Failed to construct message part", ex);
-            }
+            final String result = this.parts.get(index);
             if (!result.isEmpty()) {
                 final String res;
                 if (index == this.parts.size() - 1) {

@@ -31,6 +31,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 /**
  * Class or Interface description.
  * <p>
@@ -42,6 +44,9 @@ import java.util.List;
  */
 @Immutable
 final class AttachmentsFromResults {
+    /**
+     * @todo #2 Need to create a test for this class.
+     */
 
     /**
      * JsonArray that contains the

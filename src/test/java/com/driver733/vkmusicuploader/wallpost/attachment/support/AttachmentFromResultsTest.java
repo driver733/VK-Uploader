@@ -38,6 +38,7 @@ import org.junit.Test;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @todo #3 Need to create tests for all attachment types.
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle LocalFinalVariableNameCheck (50 lines)
  * @checkstyle StringLiteralsConcatenationCheck (50 lines)

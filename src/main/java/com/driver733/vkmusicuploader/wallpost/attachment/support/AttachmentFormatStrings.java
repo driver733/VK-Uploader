@@ -38,6 +38,8 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ *
+ * @todo Create tests for this for this class.
  */
 @Immutable
 final class AttachmentFormatStrings {

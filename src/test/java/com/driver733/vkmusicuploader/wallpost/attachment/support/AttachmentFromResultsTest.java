@@ -39,7 +39,6 @@ import org.junit.Test;
  * @version $Id$
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle LocalFinalVariableNameCheck (50 lines)
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  * @checkstyle CascadeIndentationCheck (50 lines)
  */

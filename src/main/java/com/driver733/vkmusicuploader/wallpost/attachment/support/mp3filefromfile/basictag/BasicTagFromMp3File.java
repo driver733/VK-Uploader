@@ -35,6 +35,7 @@ import java.io.IOException;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @todo #34 Create tests for this class.
  */
 public final class BasicTagFromMp3File implements BasicTag {
 

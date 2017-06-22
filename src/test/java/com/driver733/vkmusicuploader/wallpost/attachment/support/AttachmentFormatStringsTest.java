@@ -90,9 +90,9 @@ public final class AttachmentFormatStringsTest {
                             + "{"
                             + "\"owner_id\"  : 2222222,"
                             + "\"id\"        : 2000000,"
-                            + "\"artist\"    : \"Test Artist2\","
-                            + "\"title\"     : \"Test Title2\","
-                            + "\"url\"       : \"http://test2.com\" "
+                            + "\"artist\"    : \"Test Artist3\","
+                            + "\"title\"     : \"Test Title3\","
+                            + "\"url\"       : \"http://test3.com\" "
                             + "}"
                             + "]",
                         JsonArray.class

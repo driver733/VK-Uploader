@@ -51,7 +51,9 @@ public final class AdvancedTagFromMp3FileTest {
     @Test
     public void valid()
         throws InvalidDataException, IOException, UnsupportedTagException {
-        final Path path = Paths.get("src/test/resources/testTemp.jpg");
+        final Path path = Paths.get(
+            "src/test/resources/testTempAlbumCover.jpg"
+        );
         Files.write(
             path,
             new AdvancedTagFromMp3File(

@@ -40,13 +40,14 @@ import org.junit.Test;
  * @version $Id$
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
-public class AttachmentFormatStringsTest {
+public final class AttachmentFormatStringsTest {
 
     @Test
     public void object() throws IOException {
         MatcherAssert.assertThat(
-            "Failed to form an attacment string from JsonObject",
+            "Failed to form an attachment string from JsonObject",
             new AttachmentFormatStrings(
                 new GsonBuilder()
                     .setPrettyPrinting()
@@ -80,11 +81,11 @@ public class AttachmentFormatStringsTest {
                     .fromJson(
                         "["
                             + "{"
-                            + "\"owner_id\"  : 1111111,"
-                            + "\"id\"        : 1000000,"
-                            + "\"artist\"    : \"Test Artist1\","
-                            + "\"title\"     : \"Test Title1\","
-                            + "\"url\"       : \"http://test1.com\" "
+                            + "\"owner_id\"  : 111111,"
+                            + "\"id\"        : 3000000,"
+                            + "\"artist\"    : \"Test Artist2\","
+                            + "\"title\"     : \"Test Title2\","
+                            + "\"url\"       : \"http://test2.com\" "
                             + "},"
                             + "{"
                             + "\"owner_id\"  : 2222222,"
@@ -99,7 +100,7 @@ public class AttachmentFormatStringsTest {
                     .getAsJsonArray()
             ).attachmentStrings(),
             Matchers.containsInAnyOrder(
-                "audio1111111_1000000", "audio2222222_2000000"
+                "audio111111_3000000", "audio2222222_2000000"
             )
         );
     }

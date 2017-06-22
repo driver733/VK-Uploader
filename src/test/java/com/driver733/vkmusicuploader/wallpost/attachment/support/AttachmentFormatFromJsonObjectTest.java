@@ -39,8 +39,9 @@ import org.junit.Test;
  * @version $Id$
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
-public class AttachmentFormatFromJsonObjectTest {
+public final class AttachmentFormatFromJsonObjectTest {
 
     @Test
     public void test() throws IOException {

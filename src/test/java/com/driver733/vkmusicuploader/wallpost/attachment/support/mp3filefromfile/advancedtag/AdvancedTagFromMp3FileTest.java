@@ -29,6 +29,9 @@ import com.mpatric.mp3agic.UnsupportedTagException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import org.apache.commons.io.FileUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -48,18 +51,24 @@ public final class AdvancedTagFromMp3FileTest {
     @Test
     public void valid()
         throws InvalidDataException, IOException, UnsupportedTagException {
-        MatcherAssert.assertThat(
-            "Failed to get the tag from Mp3 file",
+        final Path path = Paths.get("src/test/resources/testTemp.jpg");
+        Files.write(
+            path,
             new AdvancedTagFromMp3File(
                 new Mp3File(
                     new File("src/test/resources/test.mp3")
                 )
-            ).construct().getAlbumImage(),
-            Matchers.equalTo(
-                Files.readAllBytes(
-                    new File("src/test/resources/testAlbumCover.jpg").toPath()
-                )
-            )
+            ).construct().getAlbumImage()
+        );
+        final File actual = path.toFile();
+        actual.deleteOnExit();
+        MatcherAssert.assertThat(
+            "Failed to get the tag from Mp3 file",
+            FileUtils.contentEquals(
+                actual,
+                new File("src/test/resources/testAlbumCover.jpg")
+            ),
+            Matchers.equalTo(true)
         );
     }
 

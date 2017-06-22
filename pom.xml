@@ -106,7 +106,7 @@
                             
                             <exclude>checkstyle:/src/test/java/com.driver733.vkmusicuploader/SampleTest.java</exclude>
                             <exclude>pmd:/src/test/java/com.driver733.vkmusicuploader/SampleTest.java</exclude>
-                            <exclude>findbugs:com.driver733.vkmusicuploader.messge.MessageTest.java</exclude>
+                            <exclude>findbugs:com.driver733.vkmusicuploader.wallpost.attachment.support.message.MessageTest.java</exclude>
 
                             <exclude>findbugs:com.driver733.vkmusicuploader.wallpost.attachment.support.CachedExecuteBatchQueryClient</exclude>
                             <exclude>findbugs:com.driver733.vkmusicuploader.properties.ImmutableProperties</exclude>

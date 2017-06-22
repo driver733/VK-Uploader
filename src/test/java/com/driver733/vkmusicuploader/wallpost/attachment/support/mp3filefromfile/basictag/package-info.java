@@ -21,4 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.messge;
+package com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile.basictag;

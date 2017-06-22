@@ -21,16 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile.bytearray.fallback;
+package com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile.advancedtag;
 
-import com.driver733.vkmusicuploader.wallpost.attachment.support.mp3filefromfile.bytearray.ByteArray;
-import com.jcabi.aspects.Cacheable;
-import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
-import com.jcabi.log.Logger;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
+import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import org.apache.commons.io.FileUtils;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
  * Class or Interface description.
@@ -40,41 +44,32 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo #36 Create tests for the class.
+ * @checkstyle JavadocMethodCheck (500 lines)
  */
-@Immutable
-public final class FallbackByteArrayImage implements Fallback<byte[]> {
+public final class AdvancedTagFromMp3FileTest {
 
-    /**
-     * Byte array providers. Some or all might be faulty and raise exception.
-     */
-    private final Array<ByteArray> arrays;
-
-    /**
-     * Ctor.
-     * @param arrays Byte array providers.
-     */
-    public FallbackByteArrayImage(final ByteArray... arrays) {
-        this.arrays = new Array<>(
-            Arrays.asList(arrays)
+    @Test
+    public void valid()
+        throws InvalidDataException, IOException, UnsupportedTagException {
+        final Path path = Paths.get("src/test/resources/testTemp.jpg");
+        Files.write(
+            path,
+            new AdvancedTagFromMp3File(
+                new Mp3File(
+                    new File("src/test/resources/test.mp3")
+                )
+            ).construct().getAlbumImage()
         );
-    }
-
-    @Override
-    @Cacheable(forever = true)
-    public List<byte[]> firstValid() {
-        final Array<byte[]> result = new Array<>();
-        for (final ByteArray array : this.arrays) {
-            try {
-                result.with(
-                    array.toByteArray()
-                );
-                break;
-            } catch (final IOException ignored) {
-                Logger.debug(this, ignored.getMessage());
-            }
-        }
-        return result;
+        final File actual = path.toFile();
+        actual.deleteOnExit();
+        MatcherAssert.assertThat(
+            "Failed to get the tag from Mp3 file",
+            FileUtils.contentEquals(
+                actual,
+                new File("src/test/resources/testAlbumCover.jpg")
+            ),
+            Matchers.equalTo(true)
+        );
     }
 
 }

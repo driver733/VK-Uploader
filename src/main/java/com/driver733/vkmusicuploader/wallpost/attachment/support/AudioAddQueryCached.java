@@ -40,7 +40,6 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo #5 Write tests for this class.
  */
 public class AudioAddQueryCached
     extends AbstractQueryBuilder<AudioAddQueryCached, Integer> {

@@ -46,7 +46,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo Test this class.
+ * @todo #6 Test this class.
  */
 @Immutable
 public final class AttachmentCachedAudio implements Attachment {

@@ -39,7 +39,7 @@ import java.io.IOException;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo Create applicable tests for this class.
+ * @todo #12 Create applicable tests for this class.
  */
 @Immutable
 public final class UploadServers {

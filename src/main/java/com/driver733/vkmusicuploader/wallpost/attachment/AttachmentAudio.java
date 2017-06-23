@@ -49,7 +49,7 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo Create a test class for this class.
+ * @todo #7 Create a test class for this class.
  */
 @Immutable
 public final class AttachmentAudio implements Attachment {

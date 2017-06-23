@@ -21,60 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support;
+package com.driver733.vkmusicuploader.wallpost.attachment.message;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
+import com.driver733.vkmusicuploader.wallpost.wallpost.WallPost;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class or Interface description.
  * <p>
- * Additional info
+ * <p> Additional info
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
  */
-@Immutable
-public final class AttachmentsFromResults {
+interface Message {
 
     /**
-     * JsonArray that contains the
-     *  {@link QueryResultsBasic}
-     *  of the queries.
+     * Constructs a message for the
+     *  {@link WallPost}.
+     * @return Constructed message.
+     * @throws IOException If the message cannot be constructed.
      */
-    private final JsonArray root;
-
-    /**
-    * Ctor.
-    * @param root JsonArray that contains the
-    *  {@link QueryResultsBasic}
-    *  of the queries.
-    */
-    public AttachmentsFromResults(final JsonArray root) {
-        this.root = root;
-    }
-
-    /**
-     * Maps queries queriesResults to Attachment strings.
-     * @return Attachment strings.
-     * @throws IOException If unknown Attachment format is found.
-     */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public List<String> attachments() throws IOException {
-        final List<String> list = new ArrayList<>(this.root.size());
-        for (final JsonElement element : this.root) {
-            list.addAll(
-                new AttachmentFormatStrings(element)
-                    .attachmentStrings()
-            );
-        }
-        return new Array<>(list);
-    }
+    String construct() throws IOException;
 
 }

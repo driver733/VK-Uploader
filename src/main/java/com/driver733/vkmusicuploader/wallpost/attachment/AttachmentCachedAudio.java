@@ -24,6 +24,7 @@
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioAddQueryCached;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
@@ -166,8 +167,7 @@ public final class AttachmentCachedAudio implements Attachment {
                     )
                 );
                 final AbstractQueryBuilder query =
-                    new CachedAudioAddQuery(mediaId);
-                query.unsafeParam("audio_id", mediaId);
+                    new AudioAddQueryCached(mediaId);
                 result = Collections.singletonList(query);
             } else {
                 throw new IOException("Invalid audio status");

@@ -21,14 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.post;
+package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback;
 
-import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPosts;
+import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArray;
+import com.jcabi.aspects.Cacheable;
 import com.jcabi.aspects.Immutable;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.queries.execute.ExecuteBatchQuery;
+import com.jcabi.immutable.Array;
+import com.jcabi.log.Logger;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,50 +40,41 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @todo #36 Create tests for the class.
  */
 @Immutable
-final class UploadVerification {
+public final class FallbackByteArrayImage implements Fallback<byte[]> {
 
     /**
-     * {@link WallPosts} to execute and save to properties.
+     * Byte array providers. Some or all might be faulty and raise exception.
      */
-    private final WallPosts posts;
+    private final Array<ByteArray> arrays;
 
     /**
      * Ctor.
-     * @param posts The {@link WallPosts} to execute and save to properties.
+     * @param arrays Byte array providers.
      */
-    UploadVerification(final WallPosts posts) {
-        this.posts = posts;
+    public FallbackByteArrayImage(final ByteArray... arrays) {
+        this.arrays = new Array<>(
+            Arrays.asList(arrays)
+        );
     }
 
-    /**
-     * Executes the {@link WallPosts}
-     *  and saves to properties the updated
-     *  {@link
-     *  AudioStatus
-     *  }.
-     *  @throws IOException If an exception occurs while executing queries.
-     */
-    public void execute() throws IOException {
-        final List<ExecuteBatchQuery> queries;
-        try {
-            queries = this.posts.postsQueries();
-        } catch (final IOException ex) {
-            throw new IOException("Failed to obtain queries", ex);
-        }
-        for (final ExecuteBatchQuery query : queries) {
+    @Override
+    @Cacheable(forever = true)
+    public List<byte[]> firstValid() {
+        final Array<byte[]> result = new Array<>();
+        for (final ByteArray array : this.arrays) {
             try {
-                query.execute();
-            } catch (final ApiException | ClientException ex) {
-                throw new IOException("Failed to execute query", ex);
-            }
-            try {
-                this.posts.updateProperties();
-            } catch (final IOException ex) {
-                throw new IOException("Failed to update properties", ex);
+                result.with(
+                    array.toByteArray()
+                );
+                break;
+            } catch (final IOException ignored) {
+                Logger.debug(this, ignored.getMessage());
             }
         }
+        return result;
     }
 
 }

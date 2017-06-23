@@ -21,15 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support;
+package com.driver733.vkmusicuploader.wallpost.attachment.message;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class or Interface description.
@@ -41,40 +37,36 @@ import java.util.List;
  * @since 0.1
  */
 @Immutable
-public final class AttachmentsFromResults {
+public final class MessageBasic implements Message {
 
     /**
-     * JsonArray that contains the
-     *  {@link QueryResultsBasic}
-     *  of the queries.
+     * Parts of the message.
      */
-    private final JsonArray root;
+    private final Array<String> parts;
 
     /**
-    * Ctor.
-    * @param root JsonArray that contains the
-    *  {@link QueryResultsBasic}
-    *  of the queries.
-    */
-    public AttachmentsFromResults(final JsonArray root) {
-        this.root = root;
+     * Ctor.
+     * @param parts Parts of the message.
+     */
+    public MessageBasic(final String... parts) {
+        this.parts = new Array<>(parts);
     }
 
-    /**
-     * Maps queries queriesResults to Attachment strings.
-     * @return Attachment strings.
-     * @throws IOException If unknown Attachment format is found.
-     */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public List<String> attachments() throws IOException {
-        final List<String> list = new ArrayList<>(this.root.size());
-        for (final JsonElement element : this.root) {
-            list.addAll(
-                new AttachmentFormatStrings(element)
-                    .attachmentStrings()
-            );
+    @Override
+    public String construct() throws IOException {
+        final StringBuilder builder = new StringBuilder();
+        for (int index = 0; index < this.parts.size(); index += 1) {
+            final String result = this.parts.get(index);
+            if (!result.isEmpty()) {
+                final String res;
+                if (index == this.parts.size() - 1) {
+                    res = String.format("%s", result);
+                } else {
+                    res = String.format("%s%n", result);
+                }
+                builder.append(res);
+            }
         }
-        return new Array<>(list);
+        return builder.toString();
     }
-
 }

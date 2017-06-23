@@ -48,6 +48,7 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @todo #13 Create tests for the class AttachmentWallPhoto.
  */
 @Immutable
 public final class AttachmentWallPhoto implements Attachment {

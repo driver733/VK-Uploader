@@ -21,15 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support;
+package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.basictag;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
+import com.mpatric.mp3agic.ID3v1;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class or Interface description.
@@ -40,41 +35,13 @@ import java.util.List;
  * @version $Id$
  * @since 0.1
  */
-@Immutable
-public final class AttachmentsFromResults {
+public interface BasicTag {
 
     /**
-     * JsonArray that contains the
-     *  {@link QueryResultsBasic}
-     *  of the queries.
+     * Checks the tag for missing items, such as album name.
+     * @return The {@link ID3v1} tag.
+     * @throws IOException If the tag has any of the requested items missing.
      */
-    private final JsonArray root;
-
-    /**
-    * Ctor.
-    * @param root JsonArray that contains the
-    *  {@link QueryResultsBasic}
-    *  of the queries.
-    */
-    public AttachmentsFromResults(final JsonArray root) {
-        this.root = root;
-    }
-
-    /**
-     * Maps queries queriesResults to Attachment strings.
-     * @return Attachment strings.
-     * @throws IOException If unknown Attachment format is found.
-     */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public List<String> attachments() throws IOException {
-        final List<String> list = new ArrayList<>(this.root.size());
-        for (final JsonElement element : this.root) {
-            list.addAll(
-                new AttachmentFormatStrings(element)
-                    .attachmentStrings()
-            );
-        }
-        return new Array<>(list);
-    }
+    ID3v1 construct() throws IOException;
 
 }

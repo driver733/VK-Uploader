@@ -21,15 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support;
+package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.file.Files;
 
 /**
  * Class or Interface description.
@@ -40,41 +36,24 @@ import java.util.List;
  * @version $Id$
  * @since 0.1
  */
-@Immutable
-public final class AttachmentsFromResults {
+public final class ByteArrayImageFromFile implements ByteArray {
 
     /**
-     * JsonArray that contains the
-     *  {@link QueryResultsBasic}
-     *  of the queries.
+     * A {@link File} with an image.
      */
-    private final JsonArray root;
+    private final File file;
 
     /**
-    * Ctor.
-    * @param root JsonArray that contains the
-    *  {@link QueryResultsBasic}
-    *  of the queries.
-    */
-    public AttachmentsFromResults(final JsonArray root) {
-        this.root = root;
+     * Ctor.
+     * @param file A {@link File} with an image.
+     */
+    public ByteArrayImageFromFile(final File file) {
+        this.file = file;
     }
 
-    /**
-     * Maps queries queriesResults to Attachment strings.
-     * @return Attachment strings.
-     * @throws IOException If unknown Attachment format is found.
-     */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public List<String> attachments() throws IOException {
-        final List<String> list = new ArrayList<>(this.root.size());
-        for (final JsonElement element : this.root) {
-            list.addAll(
-                new AttachmentFormatStrings(element)
-                    .attachmentStrings()
-            );
-        }
-        return new Array<>(list);
+    @Override
+    public byte[] toByteArray() throws IOException {
+        return Files.readAllBytes(this.file.toPath());
     }
 
 }

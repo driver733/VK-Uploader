@@ -21,15 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support;
+package com.driver733.vkmusicuploader.wallpost.attachment;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioAddQueryCached;
+import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ClientException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
  * Class or Interface description.
@@ -39,42 +38,18 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @checkstyle JavadocMethodCheck (500 lines)
  */
-@Immutable
-public final class AttachmentsFromResults {
+public final class AudioAddQueryCachedTest {
 
-    /**
-     * JsonArray that contains the
-     *  {@link QueryResultsBasic}
-     *  of the queries.
-     */
-    private final JsonArray root;
-
-    /**
-    * Ctor.
-    * @param root JsonArray that contains the
-    *  {@link QueryResultsBasic}
-    *  of the queries.
-    */
-    public AttachmentsFromResults(final JsonArray root) {
-        this.root = root;
-    }
-
-    /**
-     * Maps queries queriesResults to Attachment strings.
-     * @return Attachment strings.
-     * @throws IOException If unknown Attachment format is found.
-     */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public List<String> attachments() throws IOException {
-        final List<String> list = new ArrayList<>(this.root.size());
-        for (final JsonElement element : this.root) {
-            list.addAll(
-                new AttachmentFormatStrings(element)
-                    .attachmentStrings()
-            );
-        }
-        return new Array<>(list);
+    @Test
+    public void basic() throws ClientException, ApiException {
+        final int result = 123456789;
+        MatcherAssert.assertThat(
+            "Failed to execute a fake query",
+            new AudioAddQueryCached(result).execute(),
+            Matchers.equalTo(result)
+        );
     }
 
 }

@@ -21,14 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support;
+package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
+import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArray;
+import com.jcabi.aspects.Cacheable;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
+import com.jcabi.log.Logger;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,42 +40,41 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @todo #36 Create tests for the class.
  */
 @Immutable
-public final class AttachmentsFromResults {
+public final class FallbackByteArrayImage implements Fallback<byte[]> {
 
     /**
-     * JsonArray that contains the
-     *  {@link QueryResultsBasic}
-     *  of the queries.
+     * Byte array providers. Some or all might be faulty and raise exception.
      */
-    private final JsonArray root;
+    private final Array<ByteArray> arrays;
 
     /**
-    * Ctor.
-    * @param root JsonArray that contains the
-    *  {@link QueryResultsBasic}
-    *  of the queries.
-    */
-    public AttachmentsFromResults(final JsonArray root) {
-        this.root = root;
+     * Ctor.
+     * @param arrays Byte array providers.
+     */
+    public FallbackByteArrayImage(final ByteArray... arrays) {
+        this.arrays = new Array<>(
+            Arrays.asList(arrays)
+        );
     }
 
-    /**
-     * Maps queries queriesResults to Attachment strings.
-     * @return Attachment strings.
-     * @throws IOException If unknown Attachment format is found.
-     */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public List<String> attachments() throws IOException {
-        final List<String> list = new ArrayList<>(this.root.size());
-        for (final JsonElement element : this.root) {
-            list.addAll(
-                new AttachmentFormatStrings(element)
-                    .attachmentStrings()
-            );
+    @Override
+    @Cacheable(forever = true)
+    public List<byte[]> firstValid() {
+        final Array<byte[]> result = new Array<>();
+        for (final ByteArray array : this.arrays) {
+            try {
+                result.with(
+                    array.toByteArray()
+                );
+                break;
+            } catch (final IOException ignored) {
+                Logger.debug(this, ignored.getMessage());
+            }
         }
-        return new Array<>(list);
+        return result;
     }
 
 }

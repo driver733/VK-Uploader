@@ -21,15 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support;
+package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advancedtag;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
+import com.mpatric.mp3agic.ID3v2;
+import com.mpatric.mp3agic.Mp3File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class or Interface description.
@@ -40,41 +36,28 @@ import java.util.List;
  * @version $Id$
  * @since 0.1
  */
-@Immutable
-public final class AttachmentsFromResults {
+public final class AdvancedTagFromMp3File implements AdvancedTag {
 
     /**
-     * JsonArray that contains the
-     *  {@link QueryResultsBasic}
-     *  of the queries.
+     * Origin.
      */
-    private final JsonArray root;
+    private final Mp3File file;
 
     /**
-    * Ctor.
-    * @param root JsonArray that contains the
-    *  {@link QueryResultsBasic}
-    *  of the queries.
-    */
-    public AttachmentsFromResults(final JsonArray root) {
-        this.root = root;
+     * Ctor.
+     * @param file The {@link Mp3File} with tags.
+     */
+    public AdvancedTagFromMp3File(final Mp3File file) {
+        this.file = file;
     }
 
-    /**
-     * Maps queries queriesResults to Attachment strings.
-     * @return Attachment strings.
-     * @throws IOException If unknown Attachment format is found.
-     */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public List<String> attachments() throws IOException {
-        final List<String> list = new ArrayList<>(this.root.size());
-        for (final JsonElement element : this.root) {
-            list.addAll(
-                new AttachmentFormatStrings(element)
-                    .attachmentStrings()
-            );
+    @Override
+    public ID3v2 construct() throws IOException {
+        if (this.file.hasId3v2Tag()) {
+            return this.file.getId3v2Tag();
+        } else {
+            throw new IOException("No ID3v2 tag found");
         }
-        return new Array<>(list);
     }
 
 }

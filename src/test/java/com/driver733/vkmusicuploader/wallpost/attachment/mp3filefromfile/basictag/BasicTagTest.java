@@ -21,15 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support;
+package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.basictag;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
  * Class or Interface description.
@@ -39,42 +40,23 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @todo #36 Write tests for other conditions.
+ * @checkstyle JavadocMethodCheck (500 lines)
  */
-@Immutable
-public final class AttachmentsFromResults {
+public final class BasicTagTest {
 
-    /**
-     * JsonArray that contains the
-     *  {@link QueryResultsBasic}
-     *  of the queries.
-     */
-    private final JsonArray root;
-
-    /**
-    * Ctor.
-    * @param root JsonArray that contains the
-    *  {@link QueryResultsBasic}
-    *  of the queries.
-    */
-    public AttachmentsFromResults(final JsonArray root) {
-        this.root = root;
-    }
-
-    /**
-     * Maps queries queriesResults to Attachment strings.
-     * @return Attachment strings.
-     * @throws IOException If unknown Attachment format is found.
-     */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public List<String> attachments() throws IOException {
-        final List<String> list = new ArrayList<>(this.root.size());
-        for (final JsonElement element : this.root) {
-            list.addAll(
-                new AttachmentFormatStrings(element)
-                    .attachmentStrings()
-            );
-        }
-        return new Array<>(list);
+    @Test
+    public void valid()
+        throws InvalidDataException, IOException, UnsupportedTagException {
+        MatcherAssert.assertThat(
+            "Failed to get the tag from Mp3 file",
+            new BasicTagFromMp3File(
+                new Mp3File(
+                    new File("src/test/resources/test.mp3")
+                )
+            ).construct().getAlbum(),
+            Matchers.equalTo("Elegant Testing")
+        );
     }
 
 }

@@ -40,7 +40,7 @@ import java.util.List;
  * @since 0.1
  */
 @Immutable
-final class AttachmentFormatStrings {
+public final class AttachmentFormatStrings {
 
     /**
      * A {@link JsonElement} that contains attachment string(s).
@@ -51,7 +51,7 @@ final class AttachmentFormatStrings {
      * Ctor.
      * @param root A {@link JsonElement} that contains attachment string(s).
      */
-    AttachmentFormatStrings(final JsonElement root) {
+    public AttachmentFormatStrings(final JsonElement root) {
         this.root = root;
     }
 

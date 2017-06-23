@@ -55,6 +55,7 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @todo Create a test class for the current class.
  */
 @Immutable
 public final class WatchDirs implements Closeable {

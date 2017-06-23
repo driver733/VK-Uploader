@@ -42,6 +42,8 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @todo #4 Change class definition to generic one.
+ * @todo #5 Write tests for this class.
  */
 @Immutable
 public class CachedAudioAddQuery extends AbstractQueryBuilder {

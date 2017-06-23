@@ -21,15 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support;
+package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advancedtag;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
+import com.mpatric.mp3agic.ID3v2;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class or Interface description.
@@ -41,40 +37,28 @@ import java.util.List;
  * @since 0.1
  */
 @Immutable
-public final class AttachmentsFromResults {
+public final class AdvancedTagVerifiedAlbumImage implements AdvancedTag {
 
     /**
-     * JsonArray that contains the
-     *  {@link QueryResultsBasic}
-     *  of the queries.
+     * Origin.
      */
-    private final JsonArray root;
+    private final AdvancedTag origin;
 
     /**
-    * Ctor.
-    * @param root JsonArray that contains the
-    *  {@link QueryResultsBasic}
-    *  of the queries.
-    */
-    public AttachmentsFromResults(final JsonArray root) {
-        this.root = root;
+     * Ctor.
+     * @param origin Origin.
+     */
+    public AdvancedTagVerifiedAlbumImage(final AdvancedTag origin) {
+        this.origin = origin;
     }
 
-    /**
-     * Maps queries queriesResults to Attachment strings.
-     * @return Attachment strings.
-     * @throws IOException If unknown Attachment format is found.
-     */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public List<String> attachments() throws IOException {
-        final List<String> list = new ArrayList<>(this.root.size());
-        for (final JsonElement element : this.root) {
-            list.addAll(
-                new AttachmentFormatStrings(element)
-                    .attachmentStrings()
-            );
+    @Override
+    public ID3v2 construct() throws IOException {
+        final ID3v2 result = this.origin.construct();
+        if (result.getAlbumImage() == null) {
+            throw new IOException("No album toByteArray found");
         }
-        return new Array<>(list);
+        return result;
     }
 
 }

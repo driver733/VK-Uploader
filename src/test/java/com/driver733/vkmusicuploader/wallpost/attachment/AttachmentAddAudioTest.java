@@ -23,28 +23,19 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Map;
-
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-
-import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioAddQueryCached;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.CachedExecuteBatchQueryClient;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.QueryResultsBasic;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.TransportClientCached;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import com.jcabi.immutable.Array;
-import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.httpclient.HttpTransportClient;
+import com.vk.api.sdk.httpclient.TransportClientCached;
+import com.vk.api.sdk.httpclient.TransportClientHttp;
 import com.vk.api.sdk.queries.audio.AudioAddQuery;
+import java.io.StringReader;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
  * Class or Interface description.
@@ -54,28 +45,35 @@ import com.vk.api.sdk.queries.audio.AudioAddQuery;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @todo #14 Replace group id constant with maven exec param.
  */
 public final class AttachmentAddAudioTest {
+
+    /**
+     * Group ID.
+     */
+    private static final int GROUP_ID = 92444715;
 
     @Test
     public void testBasic() throws ClientException, ApiException {
         MatcherAssert.assertThat(
-             new AttachmentAddAudio(
-                new UserActor(123, "testToken"), 111, 222,
-                new VkApiClient(
-                    new HttpTransportClient()
-                )
+            new AttachmentAddAudio(
+                new UserActor(0, ""), 1, 2,
+                    new VkApiClient(
+                        new TransportClientHttp()
+                    )
             ).upload().get(0).build(),
             Matchers.equalTo(
                 new AudioAddQuery(
                     new VkApiClient(
-                        new HttpTransportClient()
+                        new TransportClientHttp()
                     ),
-                    new UserActor(123, "testToken"),
-                    222,
-                    111
-                ).groupId(92444715).build()
+                    new UserActor(0, ""),
+                    2,
+                    1
+                ).groupId(AttachmentAddAudioTest.GROUP_ID).build()
             )
         );
     }
@@ -84,7 +82,7 @@ public final class AttachmentAddAudioTest {
     public void cached() throws ClientException, ApiException {
         MatcherAssert.assertThat(
             new AttachmentAddAudio(
-                new UserActor(123, "testToken"), 111, 222,
+                new UserActor(0, ""), 0, 0,
                 new VkApiClient(
                     new TransportClientCached(
                         new JsonParser().parse(
@@ -92,7 +90,7 @@ public final class AttachmentAddAudioTest {
                                 new StringReader(
                                     String.format(
                                         "{\"response\" : %d}",
-                                        123456
+                                        1
                                     )
                                 )
                             )
@@ -101,13 +99,9 @@ public final class AttachmentAddAudioTest {
                 )
             ).upload().get(0).execute(),
             Matchers.equalTo(
-            123456
+            1
             )
         );
     }
-
-
-
-
 
 }

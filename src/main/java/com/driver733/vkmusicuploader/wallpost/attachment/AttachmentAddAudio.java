@@ -29,7 +29,6 @@ import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.httpclient.HttpTransportClient;
 import java.util.Collections;
 import java.util.List;
 

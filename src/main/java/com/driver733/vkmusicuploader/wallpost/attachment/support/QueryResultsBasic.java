@@ -30,6 +30,7 @@ import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.exceptions.ClientException;
+import com.vk.api.sdk.httpclient.QueryResults;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;

@@ -32,6 +32,7 @@ import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
+import com.vk.api.sdk.httpclient.TransportClientExecuteBatchCached;
 import java.io.IOException;
 import java.util.List;
 
@@ -89,7 +90,7 @@ public final class AttachmentArrays implements AttachmentsFields {
             new QueriesFromAttachments(this.attachments);
         final JsonElement root =
             new VkApiClient(
-                new CachedExecuteBatchQueryClient(
+                new TransportClientExecuteBatchCached(
                     new QueryResultsBasic(
                         queries.queries(true)
                     )

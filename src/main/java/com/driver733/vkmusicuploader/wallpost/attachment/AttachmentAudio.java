@@ -33,7 +33,7 @@ import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.httpclient.HttpTransportClient;
+import com.vk.api.sdk.httpclient.TransportClientHttp;
 import com.vk.api.sdk.objects.audio.Audio;
 import com.vk.api.sdk.objects.audio.responses.AudioUploadResponse;
 import java.io.File;
@@ -99,7 +99,7 @@ public final class AttachmentAudio implements Attachment {
         this.url = url;
         this.properties = properties;
         this.client = new VkApiClient(
-            new HttpTransportClient()
+            new TransportClientHttp()
         );
     }
 
@@ -152,7 +152,7 @@ public final class AttachmentAudio implements Attachment {
             this.actor,
             result.getOwnerId(),
             result.getId(),
-            new VkApiClient(new HttpTransportClient())
+            new VkApiClient(new TransportClientHttp())
         ).upload();
     }
 

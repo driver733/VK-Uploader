@@ -24,8 +24,9 @@
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioAddQueryCached;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
@@ -33,10 +34,12 @@ import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.httpclient.HttpTransportClient;
-
+import com.vk.api.sdk.httpclient.TransportClientCached;
+import com.vk.api.sdk.httpclient.TransportClientHttp;
+import com.vk.api.sdk.queries.audio.AudioAddQuery;
 import java.io.File;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -51,6 +54,7 @@ import org.apache.commons.lang3.StringUtils;
  * @version $Id$
  * @since 0.1
  * @todo #6 Test this class.
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @Immutable
 public final class AttachmentCachedAudio implements Attachment {
@@ -163,7 +167,7 @@ public final class AttachmentCachedAudio implements Attachment {
                     this.actor,
                     ownerId,
                     mediaId,
-                    new VkApiClient(new HttpTransportClient())
+                    new VkApiClient(new TransportClientHttp())
                 ).upload();
             } else if (status == 1) {
                 final int mediaId = Integer.parseInt(
@@ -171,8 +175,26 @@ public final class AttachmentCachedAudio implements Attachment {
                         StringUtils.ordinalIndexOf(value, "_", 1) + 1
                     )
                 );
-                final AbstractQueryBuilder query =
-                    new AudioAddQueryCached(mediaId);
+                final AudioAddQuery query =
+                    new AudioAddQuery(
+                        new VkApiClient(
+                            new TransportClientCached(
+                                new JsonParser().parse(
+                                    new JsonReader(
+                                        new StringReader(
+                                            String.format(
+                                                "{\"response\" : %d}",
+                                                mediaId
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        ),
+                        new UserActor(0, ""),
+                        0,
+                        0
+                    );
                 result = Collections.singletonList(query);
             } else {
                 throw new IOException("Invalid audio status");

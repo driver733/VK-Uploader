@@ -27,7 +27,7 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.httpclient.HttpTransportClient;
+import com.vk.api.sdk.httpclient.TransportClientHttp;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
 
 /**
@@ -58,7 +58,7 @@ public final class WallPostBase implements WallPost {
      */
     public WallPostBase(final UserActor actor) {
         this.actor = actor;
-        this.client = new VkApiClient(new HttpTransportClient());
+        this.client = new VkApiClient(new TransportClientHttp());
     }
 
     @Override

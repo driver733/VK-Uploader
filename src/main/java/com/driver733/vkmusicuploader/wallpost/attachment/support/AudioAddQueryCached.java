@@ -27,6 +27,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
+import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;

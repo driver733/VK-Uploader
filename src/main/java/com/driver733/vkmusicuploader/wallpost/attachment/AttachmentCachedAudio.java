@@ -29,9 +29,12 @@ import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
+import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
+import com.vk.api.sdk.httpclient.HttpTransportClient;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -159,7 +162,8 @@ public final class AttachmentCachedAudio implements Attachment {
                 result = new AttachmentAddAudio(
                     this.actor,
                     ownerId,
-                    mediaId
+                    mediaId,
+                    new VkApiClient(new HttpTransportClient())
                 ).upload();
             } else if (status == 1) {
                 final int mediaId = Integer.parseInt(

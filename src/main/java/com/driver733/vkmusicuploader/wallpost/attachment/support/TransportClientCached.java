@@ -43,7 +43,7 @@ import org.apache.http.HttpStatus;
  * @since 0.1
  */
 @Immutable
-final class TransportClientCached implements TransportClient {
+public final class TransportClientCached implements TransportClient {
 
     /**
      * Cached request`s response.
@@ -55,7 +55,7 @@ final class TransportClientCached implements TransportClient {
      * @param result Cached request`s response.
      * @checkstyle ParameterNameCheck (50 lines)
      */
-    TransportClientCached(final JsonElement result) {
+    public TransportClientCached(final JsonElement result) {
         this.result = result;
     }
 

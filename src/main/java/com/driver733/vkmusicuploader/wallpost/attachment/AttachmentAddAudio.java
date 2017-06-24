@@ -80,18 +80,19 @@ public final class AttachmentAddAudio implements Attachment {
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param ownerId Audio`s owner ID.
      * @param mediaId Audio`s media ID.
+     * @param client VKAPIClient that is used for all VK API requests.
+     * @checkstyle ParameterNumberCheck (10 lines)
      */
     public AttachmentAddAudio(
         final UserActor actor,
         final int ownerId,
-        final int mediaId
+        final int mediaId,
+        final VkApiClient client
     ) {
         this.actor = actor;
         this.ownerId = ownerId;
         this.mediaId = mediaId;
-        this.client = new VkApiClient(
-            new HttpTransportClient()
-        );
+        this.client = client;
     }
 
     @Override

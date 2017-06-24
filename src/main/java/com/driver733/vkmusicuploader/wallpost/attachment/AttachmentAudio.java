@@ -151,7 +151,8 @@ public final class AttachmentAudio implements Attachment {
         return new AttachmentAddAudio(
             this.actor,
             result.getOwnerId(),
-            result.getId()
+            result.getId(),
+            new VkApiClient(new HttpTransportClient())
         ).upload();
     }
 

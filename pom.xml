@@ -27,7 +27,7 @@
         <dependency>
             <groupId>com.github.driver733</groupId>
             <artifactId>vk-java-sdk</artifactId>
-            <version>0ee834cf5c</version>
+            <version>2106d5b9e2</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

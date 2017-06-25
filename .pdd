@@ -1,0 +1,8 @@
+--source=.
+--verbose
+--exclude target/**/*
+--exclude coverage/**/*
+--exclude README.md
+--exclude src/main/resources/*
+--exclude src/test/resources/*
+--rule max-duplicates:999999

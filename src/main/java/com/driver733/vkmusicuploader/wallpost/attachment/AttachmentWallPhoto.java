@@ -24,19 +24,14 @@
 
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
-import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.Fallback;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.httpclient.TransportClientHttp;
 import com.vk.api.sdk.objects.photos.responses.WallUploadResponse;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +43,6 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo #13 Create tests for the class AttachmentWallPhoto.
  */
 @Immutable
 public final class AttachmentWallPhoto implements Attachment {
@@ -69,63 +63,38 @@ public final class AttachmentWallPhoto implements Attachment {
     private final UserActor actor;
 
     /**
-     * Multiple sources of the photos. The first valid one will be chosen.
+     * Provides a query for uploading the photo.
      */
-    private final Fallback<byte[]> photo;
-
-    /**
-     * WallPhoto upload URL for the photo construct.
-     */
-    private final String url;
+    private final UploadWallPhoto photo;
 
     /**
      * Ctor.
+     * @param client VKAPIClient that is used for all VK API requests.
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param photo File that contains a photo. Typically an album toByteArray.
-     * @param url WallPhoto upload URL for the photo construct.
      */
     public AttachmentWallPhoto(
+        final VkApiClient client,
         final UserActor actor,
-        final Fallback<byte[]> photo,
-        final String url
+        final UploadWallPhoto photo
     ) {
-        this.photo = photo;
+        this.client = client;
         this.actor = actor;
-        this.url = url;
-        this.client = new VkApiClient(
-            new TransportClientHttp()
-        );
+        this.photo = photo;
     }
 
     @Override
     public List<AbstractQueryBuilder> upload()
         throws ClientException, ApiException, IOException {
         final List<AbstractQueryBuilder> result = new ArrayList<>(1);
-        for (final byte[] element : this.photo.firstValid()) {
-            final Path path;
-            try {
-                path = Files.write(
-                    File.createTempFile("albumCover", ".jpg").toPath(),
-                    element
-                );
-            } catch (final IOException ex) {
-                throw new IOException(
-                    "Failed to save album cover to byte array",
-                    ex
-                );
-            }
-            path.toFile().deleteOnExit();
-            final WallUploadResponse response = this.client.upload()
-                .photoWall(this.url, path.toFile())
-                .execute();
-            result.add(
-                this.client.photos()
-                    .saveWallPhoto(this.actor, response.getPhoto())
-                    .server(response.getServer())
-                    .hash(response.getHash())
-                    .groupId(AttachmentWallPhoto.GROUP_ID)
-            );
-        }
+        final WallUploadResponse response = this.photo.query().execute();
+        result.add(
+            this.client.photos()
+                .saveWallPhoto(this.actor, response.getPhoto())
+                .server(response.getServer())
+                .hash(response.getHash())
+                .groupId(AttachmentWallPhoto.GROUP_ID)
+        );
         return result;
     }
 

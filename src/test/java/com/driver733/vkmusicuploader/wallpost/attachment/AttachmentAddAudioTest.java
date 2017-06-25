@@ -81,7 +81,7 @@ public final class AttachmentAddAudioTest {
             new AttachmentAddAudio(
                 new UserActor(0, ""), 0, 0,
                 new VkApiClient(
-                    new TransportClientCached("1")
+                    new TransportClientCached("{ \"response\" : 1 }")
                 )
             ).upload().get(0).execute(),
             Matchers.equalTo(

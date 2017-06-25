@@ -118,8 +118,6 @@ public final class AttachmentCachedAudio implements Attachment {
         return list;
     }
 
-    // @checkstyle LocalFinalVariableNameCheck (100 lines)
-    // @checkstyle StringLiteralsConcatenationCheck (100 lines)
     /**
      * Forms a {@link AbstractQueryBuilder} for uploading an audio {@link File}.
      * @param audio Audio {@link File} to upload.
@@ -127,8 +125,10 @@ public final class AttachmentCachedAudio implements Attachment {
      *  which uploads the audio.
      * @throws ApiException VK API error.
      * @throws ClientException VK Client error.
-     * @throws IOException If the {@link AudioStatus} is invalid.
+     * @throws IOException If the {@link AudioStatus} is invalid
      * @checkstyle LocalFinalVariableNameCheck (20 lines)
+     * @checkstyle StringLiteralsConcatenationCheck (100 lines)
+     * @checkstyle LocalFinalVariableNameCheck (100 lines)
      */
     private List<AbstractQueryBuilder> upload(final File audio)
         throws ApiException, ClientException, IOException {
@@ -173,7 +173,11 @@ public final class AttachmentCachedAudio implements Attachment {
                 final AudioAddQuery query =
                     new AudioAddQuery(
                         new VkApiClient(
-                            new TransportClientCached(mediaId)
+                            new TransportClientCached(
+                                String.format(
+                                    "{ \"response\" : %s }", mediaId
+                                )
+                            )
                         ),
                         new UserActor(0, ""),
                         0,
@@ -186,4 +190,5 @@ public final class AttachmentCachedAudio implements Attachment {
         }
         return result;
     }
+
 }

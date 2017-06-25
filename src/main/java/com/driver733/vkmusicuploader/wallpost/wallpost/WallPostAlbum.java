@@ -27,6 +27,7 @@ import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentCachedAudio;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhoto;
+import com.driver733.vkmusicuploader.wallpost.attachment.UploadWallPhoto;
 import com.driver733.vkmusicuploader.wallpost.attachment.message.MessageBasic;
 import com.driver733.vkmusicuploader.wallpost.attachment.message.messagepart.ID3v1AnnotatedSafe;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advancedtag.AdvancedTagFromMp3File;
@@ -42,7 +43,9 @@ import com.jcabi.immutable.Array;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
+import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
+import com.vk.api.sdk.httpclient.TransportClientHttp;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
 import java.io.File;
 import java.io.IOException;
@@ -136,25 +139,33 @@ public final class WallPostAlbum implements WallPost {
                             this.actor,
                             this.properties,
                             new AttachmentWallPhoto(
+                                new VkApiClient(
+                                    new TransportClientHttp()
+                                ),
                                 this.actor,
-                                new FallbackByteArrayImage(
-                                    new ByteArrayImageFromAdvancedTag(
-                                        new AdvancedTagVerifiedAlbumImage(
-                                            new AdvancedTagFromMp3File(file)
-                                        )
+                                new UploadWallPhoto(
+                                    new VkApiClient(
+                                        new TransportClientHttp()
                                     ),
-                                    new ByteArrayImageFromFile(
-                                        new File(
-                                            String.format(
-                                                "%s/cover.jpg",
-                                                this.audios.get(0)
-                                                    .getParentFile()
+                                    this.servers.uploadUrl(
+                                        UploadServers.Type.WALL_PHOTO
+                                    ),
+                                    new FallbackByteArrayImage(
+                                        new ByteArrayImageFromAdvancedTag(
+                                            new AdvancedTagVerifiedAlbumImage(
+                                                new AdvancedTagFromMp3File(file)
+                                            )
+                                        ),
+                                        new ByteArrayImageFromFile(
+                                            new File(
+                                                String.format(
+                                                    "%s/cover.jpg",
+                                                    this.audios.get(0)
+                                                        .getParentFile()
+                                                )
                                             )
                                         )
                                     )
-                                ),
-                                this.servers.uploadUrl(
-                                    UploadServers.Type.WALL_PHOTO
                                 )
                             ),
                             new AttachmentCachedAudio(

@@ -57,7 +57,7 @@ public final class QueryResultsTest {
                 new Array<>(
                     new AbstractQueryBuilder(
                         new VkApiClient(
-                            new TransportClientCached("123")
+                            new TransportClientCached("{ \"response\" : 123 }")
                         ),
                         "test",
                         AbstractQueryBuilder.class

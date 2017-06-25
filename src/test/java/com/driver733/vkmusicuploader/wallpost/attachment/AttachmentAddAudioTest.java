@@ -23,8 +23,6 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
@@ -32,7 +30,6 @@ import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
 import com.vk.api.sdk.queries.audio.AudioAddQuery;
-import java.io.StringReader;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -84,18 +81,7 @@ public final class AttachmentAddAudioTest {
             new AttachmentAddAudio(
                 new UserActor(0, ""), 0, 0,
                 new VkApiClient(
-                    new TransportClientCached(
-                        new JsonParser().parse(
-                            new JsonReader(
-                                new StringReader(
-                                    String.format(
-                                        "{\"response\" : %d}",
-                                        1
-                                    )
-                                )
-                            )
-                        )
-                    )
+                    new TransportClientCached("1")
                 )
             ).upload().get(0).execute(),
             Matchers.equalTo(

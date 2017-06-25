@@ -25,13 +25,17 @@ package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.httpclient.TransportClientCached;
+import java.io.IOException;
 import java.io.StringReader;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
  * Class or Interface description.
@@ -41,53 +45,45 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (20 lines)
  */
-public class AudioAddQueryCached
-    extends AbstractQueryBuilder<AudioAddQueryCached, Integer> {
+public final class QueryResultsTest {
 
-    /**
-     * Creates a AbstractQueryBuilder instance that can be used
-     * to build api request with various parameters.
-     * @param audioId Value of "audio id" parameter. Minimum is 0.
-     * @checkstyle ParameterNameCheck (2 lines)
-     */
-    public AudioAddQueryCached(final int audioId) {
-        super(
-            new VkApiClient(
-                new TransportClientCached(
-                    new JsonParser().parse(
-                        new JsonReader(
-                            new StringReader(
-                                String.format(
-                                    "{\"response\" : %d}",
-                                    audioId
-                                )
-                            )
+    @Test
+    public void test() throws IOException {
+        MatcherAssert.assertThat(
+            new QueryResultsBasic(
+                new Array<>(
+                    new AbstractQueryBuilder(
+                        new VkApiClient(
+                            new TransportClientCached("123")
+                        ),
+                        "test",
+                        AbstractQueryBuilder.class
+                    ) {
+                        @Override
+                        protected Object getThis() {
+                            return null;
+                        }
+
+                        @Override
+                        protected Collection<String> essentialKeys() {
+                            return Collections.emptyList();
+                        }
+                    }
+                )
+            ).results(),
+            Matchers.containsInAnyOrder(
+                new JsonParser().parse(
+                    new JsonReader(
+                        new StringReader(
+                            "{\"response\" : 123}"
                         )
                     )
                 )
-            ),
-            "cached_audio.add",
-            Integer.class
+            )
         );
-    }
-    /**
-     * Get reference to this object.
-     * @return A reference to this {@code AbstractQueryBuilder}
-     *  object to fulfill the "Builder" pattern.
-     */
-    protected final AudioAddQueryCached getThis() {
-        return this;
     }
 
-    /**
-     * Params that are required.
-     * @return Essential params.
-     * @checkstyle NonStaticMethodCheck (5 lines)
-     */
-    protected final List<String> essentialKeys() {
-        return Collections.unmodifiableList(
-            new ArrayList<>(0)
-        );
-    }
 }

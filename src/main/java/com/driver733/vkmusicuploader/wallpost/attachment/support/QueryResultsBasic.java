@@ -63,11 +63,11 @@ public final class QueryResultsBasic implements QueryResults {
 
     @Override
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public Array<JsonElement> results() throws IOException {
+    public List<JsonElement> results() throws IOException {
         final List<JsonElement> results =
             new ArrayList<>(this.queries.size());
         for (final AbstractQueryBuilder query : this.queries) {
-            if (query.getMethod().contains("cached_")) {
+            if (query.isCached()) {
                 final String response;
                 try {
                     response = query.executeAsString();

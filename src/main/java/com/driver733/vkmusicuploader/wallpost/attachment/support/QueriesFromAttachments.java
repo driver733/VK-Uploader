@@ -107,8 +107,8 @@ final class QueriesFromAttachments {
         final List<AbstractQueryBuilder> list = new ArrayList<>(queries.size());
         for (final AbstractQueryBuilder query : queries) {
             if (
-                cached && query.getMethod().contains("cached_")
-                    || !cached && !query.getMethod().contains("cached_")
+                cached && query.isCached()
+                    || !cached && !query.isCached()
                 ) {
                 list.add(query);
             }

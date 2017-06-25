@@ -36,8 +36,6 @@ import com.vk.api.sdk.httpclient.TransportClientExecuteBatchCached;
 import java.io.IOException;
 import java.util.List;
 
-// @checkstyle ClassDataAbstractionCouplingCheck (20 lines)
-
 /**
  * Class or Interface description.
  * <p>
@@ -46,6 +44,7 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (20 lines)
  */
 @Immutable
 public final class AttachmentArrays implements AttachmentsFields {

@@ -25,8 +25,6 @@ package com.driver733.vkmusicuploader.wallpost.attachment;
 
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
@@ -39,7 +37,6 @@ import com.vk.api.sdk.httpclient.TransportClientHttp;
 import com.vk.api.sdk.queries.audio.AudioAddQuery;
 import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -170,26 +167,13 @@ public final class AttachmentCachedAudio implements Attachment {
                     new VkApiClient(new TransportClientHttp())
                 ).upload();
             } else if (status == 1) {
-                final int mediaId = Integer.parseInt(
-                    value.substring(
-                        StringUtils.ordinalIndexOf(value, "_", 1) + 1
-                    )
+                final String mediaId = value.substring(
+                    StringUtils.ordinalIndexOf(value, "_", 1) + 1
                 );
                 final AudioAddQuery query =
                     new AudioAddQuery(
                         new VkApiClient(
-                            new TransportClientCached(
-                                new JsonParser().parse(
-                                    new JsonReader(
-                                        new StringReader(
-                                            String.format(
-                                                "{\"response\" : %d}",
-                                                mediaId
-                                            )
-                                        )
-                                    )
-                                )
-                            )
+                            new TransportClientCached(mediaId)
                         ),
                         new UserActor(0, ""),
                         0,

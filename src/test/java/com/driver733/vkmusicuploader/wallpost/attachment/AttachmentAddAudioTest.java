@@ -45,9 +45,9 @@ import org.junit.Test;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @todo #14 Replace group id constant with maven exec param.
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle JavadocMethodCheck (500 lines)
- * @todo #14 Replace group id constant with maven exec param.
  */
 public final class AttachmentAddAudioTest {
 

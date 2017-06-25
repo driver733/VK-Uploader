@@ -6,7 +6,7 @@ cache:
 script:
   - set -e
   - mvn clean
-  - pdd --source=$(pwd) --file=/dev/null
+  - pdd --source=$(pwd) --file=/dev/null --rule=max-duplicates:999999
   - est --dir=est --file=/dev/null
   - mvn clean install -Pqulice --errors --batch-mode
 before_install:

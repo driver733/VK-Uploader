@@ -5,4 +5,3 @@
 --exclude README.md
 --exclude src/main/resources/*
 --exclude src/test/resources/*
---rule=max-duplicates:99999

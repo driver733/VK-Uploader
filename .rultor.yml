@@ -11,5 +11,5 @@ merge:
   fast-forward: default
   rebase: true
   script: |-
-    mvn clean install
+    mvn clean install -Pqulice
     

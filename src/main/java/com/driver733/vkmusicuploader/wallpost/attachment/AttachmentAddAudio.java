@@ -42,7 +42,6 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo #8 Make tests for this class.
  */
 @Immutable
 public final class AttachmentAddAudio implements Attachment {
@@ -83,10 +82,10 @@ public final class AttachmentAddAudio implements Attachment {
      * @checkstyle ParameterNumberCheck (10 lines)
      */
     public AttachmentAddAudio(
+        final VkApiClient client,
         final UserActor actor,
         final int ownerId,
-        final int mediaId,
-        final VkApiClient client
+        final int mediaId
     ) {
         this.actor = actor;
         this.ownerId = ownerId;

@@ -21,16 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.basictag;
+package com.driver733.vkmusicuploader.wallpost.attachment;
 
-import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.Mp3File;
-import com.mpatric.mp3agic.UnsupportedTagException;
+import com.driver733.vkmusicuploader.properties.ImmutableProperties;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
+import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ClientException;
+import com.vk.api.sdk.objects.audio.Audio;
 import java.io.File;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 /**
  * Class or Interface description.
@@ -40,22 +43,40 @@ import org.junit.Test;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo #17 Write tests for other conditions.
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle LocalFinalVariableNameCheck (500 lines)
  */
-public final class BasicTagTest {
+public final class AttachmentAudioPropsTest {
 
     @Test
-    public void valid()
-        throws InvalidDataException, IOException, UnsupportedTagException {
+    public void test() throws ApiException, ClientException, IOException {
+        final String fileName = "testName";
+        final Audio test = Mockito.mock(Audio.class);
+        final int mediaId = 123;
+        final int ownerId = 321;
+        Mockito.when(test.getId()).thenReturn(mediaId);
+        Mockito.when(test.getOwnerId()).thenReturn(ownerId);
+        final File file = new File("src/test/resources/temp.properties");
+        file.deleteOnExit();
+        new AttachmentAudioProps(
+            test,
+            fileName,
+            new ImmutableProperties(
+                file
+            )
+        ).saveProps();
+        final ImmutableProperties props = new ImmutableProperties(file);
+        props.load();
         MatcherAssert.assertThat(
-            "Failed to get the tag from Mp3 file",
-            new BasicTagFromMp3File(
-                new Mp3File(
-                    new File("src/test/resources/test.mp3")
+            props.getProperty(fileName),
+            Matchers.equalTo(
+                String.format(
+                    "%s_%d_%d",
+                    AudioStatus.UPLOADED,
+                    ownerId,
+                    mediaId
                 )
-            ).construct().getAlbum(),
-            Matchers.equalTo("Elegant Testing")
+            )
         );
     }
 

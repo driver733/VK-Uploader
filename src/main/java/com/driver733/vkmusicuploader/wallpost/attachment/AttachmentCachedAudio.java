@@ -33,7 +33,6 @@ import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientCached;
-import com.vk.api.sdk.httpclient.TransportClientHttp;
 import com.vk.api.sdk.queries.audio.AudioAddQuery;
 import java.io.File;
 import java.io.IOException;
@@ -57,6 +56,11 @@ import org.apache.commons.lang3.StringUtils;
 public final class AttachmentCachedAudio implements Attachment {
 
     /**
+     * {@link VkApiClient} for all requests.
+     */
+    private final VkApiClient client;
+
+    /**
      * UserActor on behalf of which all requests will be sent.
      */
     private final UserActor actor;
@@ -78,6 +82,7 @@ public final class AttachmentCachedAudio implements Attachment {
 
     /**
      * Ctor.
+     * @param client The {@link VkApiClient} for all requests.
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param url Audio upload URL for the audio files.
      * @param properties Properties that contain the
@@ -86,11 +91,13 @@ public final class AttachmentCachedAudio implements Attachment {
      * @checkstyle ParameterNumberCheck (2 lines)
      */
     public AttachmentCachedAudio(
+        final VkApiClient client,
         final UserActor actor,
         final String url,
         final ImmutableProperties properties,
         final List<File> audios
     ) {
+        this.client = client;
         this.audios = new Array<>(audios);
         this.actor = actor;
         this.url = url;
@@ -135,11 +142,13 @@ public final class AttachmentCachedAudio implements Attachment {
         final List<AbstractQueryBuilder> result;
         if (this.properties.getProperty(audio.getName()) == null) {
             result = new AttachmentAudio(
+                this.client,
                 this.actor,
-                this.url,
                 this.properties,
-                audio
-            ).upload();
+                new UploadAudio(
+                    this.client, this.url, audio
+                )
+                ).upload();
         } else {
             final String value = this.properties.getProperty(audio.getName());
             final int status = Integer.parseInt(
@@ -161,10 +170,10 @@ public final class AttachmentCachedAudio implements Attachment {
                     )
                 );
                 result = new AttachmentAddAudio(
+                    this.client,
                     this.actor,
                     ownerId,
-                    mediaId,
-                    new VkApiClient(new TransportClientHttp())
+                    mediaId
                 ).upload();
             } else if (status == 1) {
                 final String mediaId = value.substring(

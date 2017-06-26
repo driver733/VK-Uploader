@@ -27,6 +27,7 @@ package com.driver733.vkmusicuploader.post;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPostsAlbum;
 import com.jcabi.aspects.Immutable;
+import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import java.io.File;
 import java.io.IOException;
@@ -50,6 +51,11 @@ public final class PostRootDir implements Post {
     private final File directory;
 
     /**
+     * {@link VkApiClient} for all requests.
+     */
+    private final VkApiClient client;
+
+    /**
      * UserActor on behalf of which all requests will be sent.
      */
     private final UserActor actor;
@@ -61,16 +67,20 @@ public final class PostRootDir implements Post {
 
     /**
      * Ctor.
+     * @param client The {@link VkApiClient} for all requests.
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param dir Root directory that contains directories with albums.
      * @param servers Upload servers
      *  that provide upload URLs for attachmentsFields.
+     * @checkstyle ParameterNumberCheck (10 lines)
      */
     public PostRootDir(
+        final VkApiClient client,
         final UserActor actor,
         final File dir,
         final UploadServers servers
     ) {
+        this.client = client;
         this.directory = dir;
         this.actor = actor;
         this.servers = servers;
@@ -86,6 +96,7 @@ public final class PostRootDir implements Post {
         for (final File dir : dirs) {
             new UploadVerification(
                 new WallPostsAlbum(
+                    this.client,
                     this.actor,
                     dir,
                     this.servers,

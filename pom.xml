@@ -25,14 +25,19 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.10.19</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.driver733</groupId>
             <artifactId>vk-java-sdk</artifactId>
-            <version>2106d5b9e2</version>
+            <version>cf2316e1bb</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.5</version>
+            <version>3.6</version>
         </dependency>
         <dependency>
             <groupId>com.jcabi</groupId>

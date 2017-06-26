@@ -45,7 +45,6 @@ import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.httpclient.TransportClientHttp;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
 import java.io.File;
 import java.io.IOException;
@@ -71,6 +70,11 @@ public final class WallPostAlbum implements WallPost {
     private static final int GROUP_ID = 92444715;
 
     /**
+     * {@link VkApiClient} for all requests.
+     */
+    private final VkApiClient client;
+
+    /**
      * Audio files.
      */
     private final Array<File> audios;
@@ -91,6 +95,7 @@ public final class WallPostAlbum implements WallPost {
     private final ImmutableProperties properties;
     /**
      * Ctor.
+     * @param client The {@link VkApiClient} for all requests.
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param audios Audio files.
      * @param servers Upload servers
@@ -100,11 +105,13 @@ public final class WallPostAlbum implements WallPost {
      * @checkstyle ParameterNumberCheck (10 lines)
      */
     public WallPostAlbum(
+        final VkApiClient client,
         final UserActor actor,
         final List<File> audios,
         final UploadServers servers,
         final ImmutableProperties properties
     ) {
+        this.client = client;
         this.audios = new Array<>(audios);
         this.actor = actor;
         this.servers = servers;
@@ -139,14 +146,10 @@ public final class WallPostAlbum implements WallPost {
                             this.actor,
                             this.properties,
                             new AttachmentWallPhoto(
-                                new VkApiClient(
-                                    new TransportClientHttp()
-                                ),
+                                this.client,
                                 this.actor,
                                 new UploadWallPhoto(
-                                    new VkApiClient(
-                                        new TransportClientHttp()
-                                    ),
+                                    this.client,
                                     this.servers.uploadUrl(
                                         UploadServers.Type.WALL_PHOTO
                                     ),
@@ -169,6 +172,7 @@ public final class WallPostAlbum implements WallPost {
                                 )
                             ),
                             new AttachmentCachedAudio(
+                                this.client,
                                 this.actor,
                                 this.servers.uploadUrl(
                                     UploadServers.Type.AUDIO

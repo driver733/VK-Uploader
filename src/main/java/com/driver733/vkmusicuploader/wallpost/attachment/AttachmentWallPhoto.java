@@ -31,6 +31,7 @@ import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.photos.responses.WallUploadResponse;
+import com.vk.api.sdk.queries.upload.UploadPhotoWallQuery;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +66,7 @@ public final class AttachmentWallPhoto implements Attachment {
     /**
      * Provides a query for uploading the photo.
      */
-    private final UploadWallPhoto photo;
+    private final Upload<UploadPhotoWallQuery, WallUploadResponse> photo;
 
     /**
      * Ctor.

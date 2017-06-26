@@ -57,10 +57,12 @@ public final class AttachmentAddAudioTest {
     public void testBasic() throws ClientException, ApiException {
         MatcherAssert.assertThat(
             new AttachmentAddAudio(
-                new UserActor(0, ""), 1, 2,
-                    new VkApiClient(
-                        new TransportClientHttp()
-                    )
+                new VkApiClient(
+                    new TransportClientHttp()
+                ),
+                new UserActor(0, ""),
+                1,
+                2
             ).upload().get(0).build(),
             Matchers.equalTo(
                 new AudioAddQuery(
@@ -79,10 +81,12 @@ public final class AttachmentAddAudioTest {
     public void cached() throws ClientException, ApiException {
         MatcherAssert.assertThat(
             new AttachmentAddAudio(
-                new UserActor(0, ""), 0, 0,
                 new VkApiClient(
                     new TransportClientCached("{ \"response\" : 1 }")
-                )
+                ),
+                new UserActor(0, ""),
+                0,
+                0
             ).upload().get(0).execute(),
             Matchers.equalTo(
             1

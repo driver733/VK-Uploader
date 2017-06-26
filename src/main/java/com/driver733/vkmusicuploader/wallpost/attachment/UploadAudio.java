@@ -21,16 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.basictag;
+package com.driver733.vkmusicuploader.wallpost.attachment;
 
-import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.Mp3File;
-import com.mpatric.mp3agic.UnsupportedTagException;
+import com.vk.api.sdk.client.VkApiClient;
+import com.vk.api.sdk.objects.audio.responses.AudioUploadResponse;
+import com.vk.api.sdk.queries.upload.UploadAudioQuery;
+import com.vk.api.sdk.queries.upload.UploadQueryBuilder;
 import java.io.File;
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
 
 /**
  * Class or Interface description.
@@ -40,23 +38,44 @@ import org.junit.Test;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo #17 Write tests for other conditions.
- * @checkstyle JavadocMethodCheck (500 lines)
  */
-public final class BasicTagTest {
+public final class UploadAudio
+    implements Upload<UploadAudioQuery, AudioUploadResponse> {
 
-    @Test
-    public void valid()
-        throws InvalidDataException, IOException, UnsupportedTagException {
-        MatcherAssert.assertThat(
-            "Failed to get the tag from Mp3 file",
-            new BasicTagFromMp3File(
-                new Mp3File(
-                    new File("src/test/resources/test.mp3")
-                )
-            ).construct().getAlbum(),
-            Matchers.equalTo("Elegant Testing")
-        );
+    /**
+     * {@link VkApiClient} that is used for all VK API requests.
+     */
+    private final VkApiClient client;
+
+    /**
+     * Upload URL for the audio.
+     */
+    private final String url;
+
+    /**
+     * Audio file to upload.
+     */
+    private final File audio;
+
+    /**
+     * Ctor.
+     * @param client The {@link VkApiClient}
+     *  that is used for all VK API requests.
+     * @param url Upload URL for the audio.
+     * @param audio Audio file to upload.
+     */
+    public UploadAudio(
+        final VkApiClient client, final String url, final File audio
+    ) {
+        this.client = client;
+        this.url = url;
+        this.audio = audio;
+    }
+
+    @Override
+    public UploadQueryBuilder<UploadAudioQuery, AudioUploadResponse> query()
+        throws IOException {
+        return this.client.upload().audio(this.url, this.audio);
     }
 
 }

@@ -33,10 +33,10 @@ import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.httpclient.TransportClientHttp;
 import com.vk.api.sdk.objects.audio.Audio;
 import com.vk.api.sdk.objects.audio.responses.AudioUploadResponse;
-import java.io.File;
+import com.vk.api.sdk.queries.audio.AudioAddQuery;
+import com.vk.api.sdk.queries.upload.UploadAudioQuery;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ import java.util.List;
 public final class AttachmentAudio implements Attachment {
 
     /**
-     * VKAPIClient that is used for all VK API requests.
+     * {@link VkApiClient} that is used for all VK API requests.
      */
     private final VkApiClient client;
 
@@ -67,12 +67,7 @@ public final class AttachmentAudio implements Attachment {
     /**
      * Audios files.
      */
-    private final Array<File> audios;
-
-    /**
-     * Audio upload URL for the audio files.
-     */
-    private final String url;
+    private final Array<Upload<UploadAudioQuery, AudioUploadResponse>> audios;
 
     /**
      * Properties that contain the {@link AudioStatus} of audio files.
@@ -81,26 +76,24 @@ public final class AttachmentAudio implements Attachment {
 
     /**
      * Ctor.
+     * @param client The {@link VkApiClient}
+     *  that is used for all VK API requests.
      * @param actor UserActor on behalf of which all requests will be sent.
-     * @param url Audio upload URL for the audio files.
      * @param audios Audios files.
      * @param properties Properties that contain the
      *  {@link AudioStatus} of audio files.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
     public AttachmentAudio(
+        final VkApiClient client,
         final UserActor actor,
-        final String url,
         final ImmutableProperties properties,
-        final File... audios
+        final UploadAudio... audios
     ) {
-        this.audios = new Array<>(audios);
+        this.client = client;
         this.actor = actor;
-        this.url = url;
         this.properties = properties;
-        this.client = new VkApiClient(
-            new TransportClientHttp()
-        );
+        this.audios = new Array<>(audios);
     }
 
     @Override
@@ -109,7 +102,8 @@ public final class AttachmentAudio implements Attachment {
         final List<AbstractQueryBuilder> list = new ArrayList<>(
             this.audios.size()
         );
-        for (final File audio : this.audios) {
+        for (final Upload<UploadAudioQuery, AudioUploadResponse> audio
+            : this.audios) {
             list.addAll(
                 this.upload(audio)
             );
@@ -119,41 +113,38 @@ public final class AttachmentAudio implements Attachment {
 
     /**
      * Uploads the audio files.
-     * @param audio Audio construct to upload.
+     * @param upload Audio construct to upload.
      * @return AudioAddQuery that will add the uploaded audio to the group page.
      * @throws ApiException VK API error.
      * @throws ClientException VK API Client error.
      * @throws IOException If an exception occurs
      *  while loading/saving the properties.
      */
-    private List<AbstractQueryBuilder> upload(final File audio)
-        throws ApiException, ClientException, IOException {
+    private List<AbstractQueryBuilder> upload(
+        final Upload<UploadAudioQuery, AudioUploadResponse> upload
+    ) throws ApiException, ClientException, IOException {
         this.properties.load();
-        final AudioUploadResponse response = this.client
-            .upload()
-            .audio(this.url, audio)
-            .execute();
-        final Audio result = this.client.audio().save(
+        final String filename = upload.query().fileName();
+        final AudioUploadResponse response = upload.query().execute();
+        final Audio audio = this.client.audio().save(
             this.actor,
             response.getServer(),
             response.getAudio(),
             response.getHash()
         ).execute();
-        this.properties.setPropertyAndStore(
-            audio.getName(),
-            String.format(
-                "%s_%d_%d",
-                AudioStatus.UPLOADED,
-                result.getOwnerId(),
-                result.getId()
+        new AttachmentAudioProps(
+            audio,
+            filename,
+            this.properties
+        ).saveProps();
+        return new Array<>(
+            new AudioAddQuery(
+            this.client,
+            this.actor,
+            audio.getId(),
+            audio.getOwnerId()
             )
         );
-        return new AttachmentAddAudio(
-            this.actor,
-            result.getOwnerId(),
-            result.getId(),
-            new VkApiClient(new TransportClientHttp())
-        ).upload();
     }
 
 }

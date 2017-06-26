@@ -27,6 +27,7 @@ import com.driver733.vkmusicuploader.post.Post;
 import com.driver733.vkmusicuploader.post.PostRootDir;
 import com.driver733.vkmusicuploader.post.UploadServers;
 import com.jcabi.aspects.Immutable;
+import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import java.io.File;
 
@@ -43,6 +44,11 @@ import java.io.File;
 public final class PostsBasic implements Posts {
 
     /**
+     * {@link VkApiClient} for all requests.
+     */
+    private final VkApiClient client;
+
+    /**
      * UserActor on behalf of which all requests will be sent.
      */
     private final UserActor actor;
@@ -54,11 +60,17 @@ public final class PostsBasic implements Posts {
 
     /**
      * Ctor.
+     * @param client The {@link VkApiClient} for all requests.
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param servers Upload servers that
      *  provide upload URLs for attachmentsFields.
      */
-    public PostsBasic(final UserActor actor, final UploadServers servers) {
+    public PostsBasic(
+        final VkApiClient client,
+        final UserActor actor,
+        final UploadServers servers
+    ) {
+        this.client = client;
         this.actor = actor;
         this.servers = servers;
     }
@@ -66,6 +78,7 @@ public final class PostsBasic implements Posts {
     @Override
     public Post postFromDir(final File dir) {
         return new PostRootDir(
+            this.client,
             this.actor,
             dir,
             this.servers

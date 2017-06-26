@@ -95,6 +95,11 @@ public final class WallPostsAlbum implements WallPosts {
         WallPostsAlbum.MAX_ATTACHMENTS - WallPostsAlbum.PHOTOS_IN_POST;
 
     /**
+     * {@link VkApiClient} for all requests.
+     */
+    private final VkApiClient client;
+
+    /**
      * UserActor on behalf of which all requests will be sent.
      */
     private final UserActor actor;
@@ -116,6 +121,7 @@ public final class WallPostsAlbum implements WallPosts {
 
     /**
      * Ctor.
+     * @param client The {@link VkApiClient} for all requests.
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param dir Album dir.
      * @param servers Upload servers that provide upload URLs
@@ -125,11 +131,13 @@ public final class WallPostsAlbum implements WallPosts {
      * @checkstyle ParameterNumberCheck (10 lines)
      */
     public WallPostsAlbum(
+        final VkApiClient client,
         final UserActor actor,
         final File dir,
         final UploadServers servers,
         final ImmutableProperties properties
     ) {
+        this.client = client;
         this.actor = actor;
         this.dir = dir;
         this.servers = servers;
@@ -235,6 +243,7 @@ public final class WallPostsAlbum implements WallPosts {
             final WallPostQuery query;
             try {
                 query = new WallPostAlbum(
+                    this.client,
                     this.actor,
                     new Array<>(
                         audios.subList(from, to)

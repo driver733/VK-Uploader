@@ -61,8 +61,8 @@ final class UploadVerification {
      * Executes the {@link WallPosts}
      *  and saves to properties the updated
      *  {@link
-     *  AudioStatus
-     *  }.
+     *   com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus
+     *   }.
      *  @throws IOException If an exception occurs while executing queries.
      */
     public void execute() throws IOException {

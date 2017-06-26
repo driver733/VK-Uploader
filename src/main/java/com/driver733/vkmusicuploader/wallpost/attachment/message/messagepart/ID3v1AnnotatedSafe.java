@@ -27,8 +27,6 @@ import com.jcabi.aspects.Immutable;
 import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.NotSupportedException;
 
-//@checkstyle ParameterNameCheck (1000 lines)
-
 /**
  * Class or Interface description.
  * <p>
@@ -37,6 +35,7 @@ import com.mpatric.mp3agic.NotSupportedException;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @checkstyle ParameterNameCheck (1000 lines)
  */
 @Immutable
 @SuppressWarnings({"PMD.BooleanGetMethodName", "PMD.ExcessivePublicCount"})

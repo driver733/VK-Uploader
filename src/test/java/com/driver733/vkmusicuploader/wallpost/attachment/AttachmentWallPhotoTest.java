@@ -24,7 +24,6 @@
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.Fallback;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
@@ -34,7 +33,6 @@ import com.vk.api.sdk.queries.photos.PhotosSaveWallPhotoQuery;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -81,12 +79,10 @@ public final class AttachmentWallPhotoTest {
                     "",
                     new Fallback<byte[]>() {
                         @Override
-                        public List<byte[]> firstValid() throws IOException {
-                            return new Array<>(
-                                Files.readAllBytes(
-                                    Paths.get(
-                                        "src/test/resources/testAlbumCover.jpg"
-                                    )
+                        public byte[] firstValid() throws IOException {
+                            return Files.readAllBytes(
+                                Paths.get(
+                                    "src/test/resources/testAlbumCover.jpg"
                                 )
                             );
                         }

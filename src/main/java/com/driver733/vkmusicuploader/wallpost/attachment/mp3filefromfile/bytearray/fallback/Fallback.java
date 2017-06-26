@@ -24,7 +24,6 @@
 package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Class or Interface description.
@@ -43,6 +42,6 @@ public interface Fallback<T> {
      * @return First valid item
      * @throws IOException If no valid items were found.
      */
-    List<T> firstValid() throws IOException;
+    T firstValid() throws IOException;
 
 }

@@ -83,25 +83,31 @@ public final class UploadWallPhoto
      */
     @SuppressWarnings("PMD.AvoidBranchingStatementAsLastInLoop")
     public UploadPhotoWallQuery query() throws IOException {
-        for (final byte[] element : this.photo.firstValid()) {
-            final Path path;
-            try {
-                path = Files.write(
-                    File.createTempFile("albumCover", ".jpg").toPath(),
-                    element
-                );
-            } catch (final IOException ex) {
-                throw new IOException(
-                    "Failed to save album cover from byte array to file",
-                    ex
-                );
-            }
-            path.toFile().deleteOnExit();
-            return this.client
-                .upload()
-                .photoWall(this.url, path.toFile());
+        final byte[] element;
+        try {
+            element = this.photo.firstValid();
+        } catch (final IOException ex) {
+            throw new IOException(
+                "Failed to get photo from Fallback interface",
+                ex
+            );
         }
-        throw new IOException("Failed to get photo from Fallback interface");
+        final Path path;
+        try {
+            path = Files.write(
+                File.createTempFile("albumCover", ".jpg").toPath(),
+                element
+            );
+        } catch (final IOException ex) {
+            throw new IOException(
+                "Failed to save album cover from byte array to file",
+                ex
+            );
+        }
+        path.toFile().deleteOnExit();
+        return this.client
+            .upload()
+            .photoWall(this.url, path.toFile());
     }
 
 }

@@ -30,7 +30,6 @@ import com.jcabi.immutable.Array;
 import com.jcabi.log.Logger;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Class or Interface description.
@@ -62,17 +61,18 @@ public final class FallbackByteArrayImage implements Fallback<byte[]> {
 
     @Override
     @Cacheable(forever = true)
-    public List<byte[]> firstValid() {
-        final Array<byte[]> result = new Array<>();
+    public byte[] firstValid() throws IOException {
+        byte[] result = new byte[0];
         for (final ByteArray array : this.arrays) {
             try {
-                result.with(
-                    array.toByteArray()
-                );
+                result = array.toByteArray();
                 break;
             } catch (final IOException ignored) {
                 Logger.debug(this, ignored.getMessage());
             }
+        }
+        if (result.length == 0) {
+            throw new IOException("No valid ByteArray found.");
         }
         return result;
     }

@@ -35,7 +35,7 @@ import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advance
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.basictag.BasicTagFromMp3File;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayImageFromAdvancedTag;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayImageFromFile;
-import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.FallbackByteArrayImage;
+import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.FallbackByteArray;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AttachmentArrays;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.jcabi.aspects.Immutable;
@@ -153,7 +153,7 @@ public final class WallPostAlbum implements WallPost {
                                     this.servers.uploadUrl(
                                         UploadServers.Type.WALL_PHOTO
                                     ),
-                                    new FallbackByteArrayImage(
+                                    new FallbackByteArray(
                                         new ByteArrayImageFromAdvancedTag(
                                             new AdvancedTagVerifiedAlbumImage(
                                                 new AdvancedTagFromMp3File(file)

@@ -39,13 +39,12 @@ import java.util.Arrays;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo #36 Create tests for the class.
  */
 @Immutable
-public final class FallbackByteArrayImage implements Fallback<byte[]> {
+public final class FallbackByteArray implements Fallback<byte[]> {
 
     /**
-     * Byte array providers. Some or all might be faulty and raise exception.
+     * Byte array providers. Some or all might be faulty and raise an exception.
      */
     private final Array<ByteArray> arrays;
 
@@ -53,7 +52,7 @@ public final class FallbackByteArrayImage implements Fallback<byte[]> {
      * Ctor.
      * @param arrays Byte array providers.
      */
-    public FallbackByteArrayImage(final ByteArray... arrays) {
+    public FallbackByteArray(final ByteArray... arrays) {
         this.arrays = new Array<>(
             Arrays.asList(arrays)
         );

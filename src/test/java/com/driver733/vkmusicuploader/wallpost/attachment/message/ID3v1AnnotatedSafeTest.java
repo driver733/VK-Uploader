@@ -21,11 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.post;
+package com.driver733.vkmusicuploader.wallpost.attachment.message;
 
-import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.httpclient.TransportClientCached;
+import com.driver733.vkmusicuploader.wallpost.attachment.message.messagepart.ID3v1AnnotatedSafe;
+import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.basictag.BasicTagFromMp3File;
+import com.mpatric.mp3agic.ID3v1;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -39,37 +42,48 @@ import org.junit.Test;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @todo #20 Test other conditions (both valid and invalid).
  * @checkstyle JavadocMethodCheck (500 lines)
  */
-public final class UploadServersTest {
+public final class ID3v1AnnotatedSafeTest {
 
     @Test
-    public void audio() throws IOException {
+    public void valid()
+        throws InvalidDataException, IOException, UnsupportedTagException {
+        final ID3v1 tag = new ID3v1AnnotatedSafe(
+            new BasicTagFromMp3File(
+                new Mp3File("src/test/resources/test.mp3")
+            ).construct()
+        );
         MatcherAssert.assertThat(
-            new UploadServers(
-                new VkApiClient(
-                    new TransportClientCached(
-                        "{ \"upload_url\" : \"http://test.com/audio\" }"
-                    )
-                ),
-                new UserActor(1, "")
-            ).uploadUrl(UploadServers.Type.AUDIO),
-            Matchers.equalTo("http://test.com/audio")
+            tag.getAlbum(),
+            Matchers.equalTo(
+                "Album: Elegant Testing"
+            )
+        );
+        MatcherAssert.assertThat(
+            tag.getArtist(),
+            Matchers.equalTo(
+                "Artist: Test Man"
+            )
         );
     }
 
     @Test
-    public void wallPhoto() throws IOException {
+    public void invalid()
+        throws InvalidDataException, IOException, UnsupportedTagException {
+        final ID3v1 tag = new ID3v1AnnotatedSafe(
+            new BasicTagFromMp3File(
+                new Mp3File("src/test/resources/testMissingTags.mp3")
+            ).construct()
+        );
         MatcherAssert.assertThat(
-            new UploadServers(
-                new VkApiClient(
-                    new TransportClientCached(
-                        "{ \"upload_url\" : \"http://test.com/wallPhoto\" }"
-                    )
-                ),
-                new UserActor(1, "")
-            ).uploadUrl(UploadServers.Type.WALL_PHOTO),
-            Matchers.equalTo("http://test.com/wallPhoto")
+            tag.getAlbum(),
+            Matchers.equalTo("")
+        );
+        MatcherAssert.assertThat(
+            tag.getArtist(),
+            Matchers.equalTo("")
         );
     }
 

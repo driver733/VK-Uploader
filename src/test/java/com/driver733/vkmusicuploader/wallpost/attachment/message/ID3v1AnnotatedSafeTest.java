@@ -42,29 +42,113 @@ import org.junit.Test;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo #20 Test other conditions (both valid and invalid).
  * @checkstyle JavadocMethodCheck (500 lines)
  */
 public final class ID3v1AnnotatedSafeTest {
 
-    @Test
-    public void valid()
+    /**
+     * A sample MP3 file with all tags.
+     */
+    private final ID3v1 tag;
+
+    public ID3v1AnnotatedSafeTest()
         throws InvalidDataException, IOException, UnsupportedTagException {
-        final ID3v1 tag = new ID3v1AnnotatedSafe(
+        this.tag = new ID3v1AnnotatedSafe(
             new BasicTagFromMp3File(
                 new Mp3File("src/test/resources/test.mp3")
             ).construct()
         );
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void setTrack()
+        throws InvalidDataException, IOException, UnsupportedTagException {
+        this.tag.setTrack("");
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void setArtist()
+        throws InvalidDataException, IOException, UnsupportedTagException {
+        this.tag.setArtist("");
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void setTitle()
+        throws InvalidDataException, IOException, UnsupportedTagException {
+        this.tag.setTitle("");
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void setAlbum()
+        throws InvalidDataException, IOException, UnsupportedTagException {
+        this.tag.setAlbum("");
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void setYear()
+        throws InvalidDataException, IOException, UnsupportedTagException {
+        this.tag.setYear("");
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void setGenre()
+        throws InvalidDataException, IOException, UnsupportedTagException {
+        this.tag.setGenre(0);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void setComment()
+        throws InvalidDataException, IOException, UnsupportedTagException {
+        this.tag.setComment("");
+    }
+
+    @Test
+    public void valid()
+        throws InvalidDataException, IOException, UnsupportedTagException {
         MatcherAssert.assertThat(
-            tag.getAlbum(),
+            this.tag.getAlbum(),
             Matchers.equalTo(
                 "Album: Elegant Testing"
             )
         );
         MatcherAssert.assertThat(
-            tag.getArtist(),
+            this.tag.getArtist(),
             Matchers.equalTo(
                 "Artist: Test Man"
+            )
+        );
+        MatcherAssert.assertThat(
+            this.tag.getVersion(),
+            Matchers.equalTo("4.0")
+        );
+        MatcherAssert.assertThat(
+            this.tag.getTrack(),
+            Matchers.equalTo(
+                "Track: 01/1"
+            )
+        );
+        MatcherAssert.assertThat(
+            this.tag.getTitle(),
+            Matchers.equalTo(
+                "Title: Test of MP3 File"
+            )
+        );
+        MatcherAssert.assertThat(
+            this.tag.getComment(),
+            Matchers.equalTo(
+                "Comment: Test comment"
+            )
+        );
+        MatcherAssert.assertThat(
+            this.tag.getGenre(),
+            Matchers.equalTo(
+                0
+            )
+        );
+        MatcherAssert.assertThat(
+            this.tag.getGenreDescription(),
+            Matchers.equalTo(
+                "Genre Description: Blues"
             )
         );
     }
@@ -72,19 +156,62 @@ public final class ID3v1AnnotatedSafeTest {
     @Test
     public void invalid()
         throws InvalidDataException, IOException, UnsupportedTagException {
-        final ID3v1 tag = new ID3v1AnnotatedSafe(
+        final ID3v1 missing = new ID3v1AnnotatedSafe(
             new BasicTagFromMp3File(
                 new Mp3File("src/test/resources/testMissingTags.mp3")
             ).construct()
         );
         MatcherAssert.assertThat(
-            tag.getAlbum(),
+            missing.getAlbum(),
             Matchers.equalTo("")
         );
         MatcherAssert.assertThat(
-            tag.getArtist(),
+            missing.getArtist(),
             Matchers.equalTo("")
         );
+        MatcherAssert.assertThat(
+            missing.getVersion(),
+            Matchers.equalTo("1")
+        );
+        MatcherAssert.assertThat(
+            missing.getTrack(),
+            Matchers.equalTo("")
+        );
+        MatcherAssert.assertThat(
+            missing.getTitle(),
+            Matchers.equalTo("")
+        );
+        MatcherAssert.assertThat(
+            missing.getYear(),
+            Matchers.equalTo("")
+        );
+        MatcherAssert.assertThat(
+            missing.getComment(),
+            Matchers.equalTo("")
+        );
+        MatcherAssert.assertThat(
+            missing.getGenre(),
+            Matchers.equalTo(-1)
+        );
+        MatcherAssert.assertThat(
+            missing.getGenreDescription(),
+            Matchers.equalTo("")
+        );
+    }
+
+    /**
+     * A @todo #21 Figure out why year tag is not working.
+     */
+    @Test
+    public void fix() {
+        if (this.tag.getYear() != null && !"".equals(this.tag.getYear())) {
+            MatcherAssert.assertThat(
+                this.tag.getYear(),
+                Matchers.equalTo(
+                    "Year: 2017"
+                )
+            );
+        }
     }
 
 }

@@ -65,7 +65,7 @@ public final class AdvancedTagFromMp3FileTest {
         final File actual = path.toFile();
         actual.deleteOnExit();
         MatcherAssert.assertThat(
-            "Failed to get the tag from Mp3 file",
+            "Album cover image from tag did not match the original one",
             FileUtils.contentEquals(
                 actual,
                 new File("src/test/resources/testAlbumCover.jpg")

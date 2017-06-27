@@ -56,14 +56,7 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
 
     @Override
     public String getVersion() {
-        final String result;
-        final String value = this.tag.getVersion();
-        if (ID3v1AnnotatedSafe.isPresent(value)) {
-            result = String.format("Version: %s", value);
-        } else {
-            result = "";
-        }
-        return result;
+        return this.tag.getVersion();
     }
 
     @Override
@@ -71,7 +64,7 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
         final String result;
         final String value = this.tag.getTrack();
         if (ID3v1AnnotatedSafe.isPresent(value)) {
-            result = value;
+            result = String.format("Track: %s", value);
         } else {
             result = "";
         }
@@ -105,7 +98,7 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
         final String result;
         final String value = this.tag.getTitle();
         if (ID3v1AnnotatedSafe.isPresent(value)) {
-            result = value;
+            result = String.format("Title: %s", value);
         } else {
             result = "";
         }
@@ -139,7 +132,7 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
         final String result;
         final String value = this.tag.getYear();
         if (ID3v1AnnotatedSafe.isPresent(value)) {
-            result = value;
+            result = String.format("Year: %s", value);
         } else {
             result = "";
         }
@@ -153,7 +146,7 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
 
     @Override
     public int getGenre() {
-        throw new UnsupportedOperationException("#getGenre()");
+        return this.tag.getGenre();
     }
 
     @Override
@@ -165,8 +158,8 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
     public String getGenreDescription() {
         final String result;
         final String value = this.tag.getGenreDescription();
-        if (ID3v1AnnotatedSafe.isPresent(value)) {
-            result = value;
+        if (ID3v1AnnotatedSafe.isPresent(value) && !"Unknown".equals(value)) {
+            result = String.format("Genre Description: %s", value);
         } else {
             result = "";
         }
@@ -178,7 +171,7 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
         final String result;
         final String value = this.tag.getComment();
         if (ID3v1AnnotatedSafe.isPresent(value)) {
-            result = value;
+            result = String.format("Comment: %s", value);
         } else {
             result = "";
         }

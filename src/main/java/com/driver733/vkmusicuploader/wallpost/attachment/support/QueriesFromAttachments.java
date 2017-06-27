@@ -117,7 +117,7 @@ final class QueriesFromAttachments {
     }
 
     /**
-     * Executes all queries associated with attachments
+     * Constructs all queries associated with attachments
      *  and accumulates their results in a {@link List}.
      * @return A {@link List} with all attachments` results.
      * @throws IOException If any of the attachments fail to upload.

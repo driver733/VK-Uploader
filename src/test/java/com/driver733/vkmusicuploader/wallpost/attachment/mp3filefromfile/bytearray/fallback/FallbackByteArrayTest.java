@@ -23,11 +23,17 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback;
 
+import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advancedtag.AdvancedTagFromMp3File;
+import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayImageFromAdvancedTag;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayImageFromFile;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -45,22 +51,46 @@ import org.junit.Test;
  */
 public final class FallbackByteArrayTest {
 
+    /**
+     * Path to test album cover image.
+     */
+    private final Path path =
+        Paths.get("src/test/resources/testAlbumCover.jpg");
+
+    /**
+     * Test mp3 file.
+     */
+    private final File audio = new File("src/test/resources/test.mp3");
+
     @Test
-    public void test() throws IOException, URISyntaxException {
-        final String path = "src/test/resources/testAlbumCover.jpg";
+    public void advancedTag()
+        throws InvalidDataException, IOException, UnsupportedTagException {
+        MatcherAssert.assertThat(
+            new FallbackByteArray(
+                new ByteArrayImageFromAdvancedTag(
+                    new AdvancedTagFromMp3File(
+                        new Mp3File(this.audio)
+                    )
+                ),
+                new ByteArrayImageFromFile(this.audio)
+            ).firstValid(),
+            Matchers.equalTo(
+                Files.readAllBytes(this.path)
+            )
+        );
+    }
+
+    @Test
+    public void file() throws IOException, URISyntaxException {
         MatcherAssert.assertThat(
             new FallbackByteArray(
                 new ByteArrayImageFromFile(
-                    new File(path)
+                    this.path.toFile()
                 ),
-            new ByteArrayImageFromFile(
-                new File("src/test/resources/test.mp3")
-            )
+            new ByteArrayImageFromFile(this.audio)
         ).firstValid(),
             Matchers.equalTo(
-                Files.readAllBytes(
-                    Paths.get(path)
-                )
+                Files.readAllBytes(this.path)
             )
         );
     }

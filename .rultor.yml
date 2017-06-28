@@ -29,6 +29,6 @@ merge:
   #    After
       - "NEW=\"$(md5deep -r -x m2sumOld ${M2})\""
       - "echo NEW"
-      - "if [ \"${NEW}\" != "" ]; then zip -r m2.zip ${M2}; ./dropbox_uploader.sh upload m2.zip /m2.zip; fi"
+      - "if [ \"${NEW}\" != \"\" ]; then zip -r m2.zip ${M2}; ./dropbox_uploader.sh upload m2.zip /m2.zip; fi"
 
     

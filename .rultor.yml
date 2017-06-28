@@ -1,8 +1,9 @@
+docker:
+  as_root: true
 assets:
   dropboxAPIKey.txt: "driver733/VKMusicUploaderConfig#dropboxAPIKey.txt"
 #env:
 #  M2: "/root/.m2"
-
 architect:
   - driver733
 docker:

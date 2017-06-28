@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * Class or Interface description.
  * <p>
- * Additional info
+ * Additional info.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

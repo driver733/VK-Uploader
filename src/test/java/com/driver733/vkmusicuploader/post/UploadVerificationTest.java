@@ -46,6 +46,7 @@ import org.junit.Test;
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  */
+@SuppressWarnings({"PMD.TooManyMethods", "PMD.UncommentedEmptyMethodBody"})
 public final class UploadVerificationTest {
 
     @Test
@@ -90,7 +91,7 @@ public final class UploadVerificationTest {
 
         @Override
         public List<ExecuteBatchQuery> postsQueries() throws IOException {
-            throw new IOException("Test");
+            throw new IOException("Test1");
         }
 
         @Override
@@ -114,7 +115,7 @@ public final class UploadVerificationTest {
 
         @Override
         public JsonElement execute() throws ApiException, ClientException {
-            throw new ApiException(0, "Test");
+            throw new ApiException(0, "Test2");
         }
 
     }
@@ -135,7 +136,7 @@ public final class UploadVerificationTest {
 
         @Override
         public JsonElement execute() throws ApiException, ClientException {
-            throw new ClientException("Test");
+            throw new ClientException("Test3");
         }
 
     }
@@ -220,7 +221,7 @@ public final class UploadVerificationTest {
 
         @Override
         public void updateProperties() throws IOException {
-            throw new IOException("Test");
+            throw new IOException("Test4");
         }
 
     }

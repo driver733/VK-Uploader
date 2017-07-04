@@ -141,7 +141,10 @@ public final class WallPostAlbum implements WallPost {
             new WallPostFromGroup(
                 new WallPostWithMessage(
                     new WallPostWithAttachments(
-                        new WallPostBase(this.actor),
+                        new WallPostBase(
+                            this.client,
+                            this.actor
+                        ),
                         new AttachmentArrays(
                             this.actor,
                             this.properties,

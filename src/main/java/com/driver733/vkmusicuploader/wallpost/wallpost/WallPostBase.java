@@ -56,9 +56,9 @@ public final class WallPostBase implements WallPost {
      * Ctor.
      * @param actor UserActor on behalf of which all requests will be sent.
      */
-    public WallPostBase(final UserActor actor) {
+    public WallPostBase(final VkApiClient client, final UserActor actor) {
+        this.client = client;
         this.actor = actor;
-        this.client = new VkApiClient(new TransportClientHttp());
     }
 
     @Override

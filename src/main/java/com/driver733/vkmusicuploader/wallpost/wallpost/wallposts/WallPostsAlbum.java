@@ -35,7 +35,6 @@ import com.jcabi.immutable.Array;
 import com.jcabi.log.Logger;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.httpclient.TransportClientHttp;
 import com.vk.api.sdk.queries.execute.ExecuteBatchQuery;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
 import java.io.File;
@@ -259,9 +258,11 @@ public final class WallPostsAlbum implements WallPosts {
         }
         Collections.reverse(posts);
         return new ExecuteBatchQuery(
-            new VkApiClient(new TransportClientHttp()),
+            this.client,
             this.actor,
-            posts.toArray(new WallPostQuery[posts.size()])
+            posts.toArray(
+                new WallPostQuery[posts.size()]
+            )
         );
     }
 

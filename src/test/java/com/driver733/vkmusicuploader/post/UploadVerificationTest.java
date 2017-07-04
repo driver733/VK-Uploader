@@ -31,11 +31,10 @@ import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientCached;
-import com.vk.api.sdk.queries.audio.AudioAddQuery;
 import com.vk.api.sdk.queries.execute.ExecuteBatchQuery;
-import org.junit.Test;
 import java.io.IOException;
 import java.util.List;
+import org.junit.Test;
 
 /**
  * Class or Interface description.
@@ -51,173 +50,179 @@ public final class UploadVerificationTest {
 
     @Test
     public void valid() throws IOException {
-         class WallPostsTests implements WallPosts {
-             @Override
-             public List<ExecuteBatchQuery> postsQueries() throws IOException {
-                return new Array<>(
-                    new ExecuteBatchQuery(
-                        new VkApiClient(
-                            new TransportClientCached(
-                                "{ \"response\" : 123  }"
-                            )
-                        ),
-                        new UserActor(1, ""),
-                        new AudioAddQuery(
-                            new VkApiClient(
-                                new TransportClientCached(
-                                    "{ \"response\" : 123  }"
-                                )
-                            ),
-                            new UserActor(
-                                1,
-                                ""
-                            ),
-                            1,
-                            1
-                        )
-                    )
-                );
-            }
-
-            @Override
-            public void updateProperties() throws IOException { }
-        }
-        WallPosts posts = new WallPostsTests();
-        new UploadVerification(posts)
-                .execute();
+        new UploadVerification(
+            new WallPostsFake()
+        ).execute();
     }
 
     @Test(expected = IOException.class)
     public void postsQueriesException() throws IOException {
-        class WallPostsTests implements WallPosts {
-            @Override
-            public List<ExecuteBatchQuery> postsQueries() throws IOException {
-                throw new IOException("Test");
-            }
-
-            @Override
-            public void updateProperties() throws IOException { }
-        }
         new UploadVerification(
-                new WallPostsTests()
+            new WallPostsQueriesEx()
         ).execute();
     }
 
     @Test(expected = IOException.class)
     public void updatePropertiesException() throws IOException {
-        class WallPostsTests implements WallPosts {
-            @Override
-            public List<ExecuteBatchQuery> postsQueries() throws IOException {
-                return new Array<>(
-                    new ExecuteBatchQuery(
-                        new VkApiClient(
-                            new TransportClientCached(
-                                "{ \"response\" : 123  }"
-                            )
-                        ),
-                        new UserActor(1, ""),
-                        new AudioAddQuery(
-                            new VkApiClient(
-                                new TransportClientCached(
-                                    "{ \"response\" : 123  }"
-                                )
-                            ),
-                            new UserActor(
-                                1,
-                                ""
-                            ),
-                            1,
-                            1
-                        )
-                    )
-                );
-            }
-
-            @Override
-            public void updateProperties() throws IOException {
-                throw new IOException("Test");
-            }
-        }
         new UploadVerification(
-            new WallPostsTests()
+            new WallPostsPropsEx()
         ).execute();
     }
 
-
-
     @Test(expected = IOException.class)
     public void apiException() throws IOException {
-
-        class ExecApiEx extends ExecuteBatchQuery {
-
-            public ExecApiEx() {
-                super(
-                    new VkApiClient(
-                        new TransportClientCached("")
-                    ),
-                    new UserActor(0, "")
-                );
-            }
-
-            @Override
-            public JsonElement execute() throws ApiException, ClientException {
-                throw new ApiException(0, "Test");
-            }
-        }
-
-        class WallPostsTests implements WallPosts {
-
-            @Override
-            public List<ExecuteBatchQuery> postsQueries() throws IOException {
-                return new Array<>(
-                    new ExecApiEx()
-                );
-            }
-
-            @Override
-            public void updateProperties() throws IOException { }
-
-        }
         new UploadVerification(
-            new WallPostsTests()
+            new WallPostsFakeApiEx()
         ).execute();
     }
 
     @Test(expected = IOException.class)
     public void clientException() throws IOException {
-
-        class ExecApiEx extends ExecuteBatchQuery {
-
-            public ExecApiEx() {
-                super(
-                    new VkApiClient(
-                        new TransportClientCached("")
-                    ),
-                    new UserActor(0, "")
-                );
-            }
-
-            @Override
-            public JsonElement execute() throws ApiException, ClientException {
-                throw new ClientException("Test");
-            }
-        }
-
-        class WallPostsTests implements WallPosts {
-
-            @Override
-            public List<ExecuteBatchQuery> postsQueries() throws IOException {
-                return new Array<>(
-                    new ExecApiEx()
-                );
-            }
-
-            @Override
-            public void updateProperties() throws IOException { }
-        }
         new UploadVerification(
-            new WallPostsTests()
+            new WallPostsFakeClientEx()
         ).execute();
+    }
+
+    /**
+     * A fake {@link WallPosts} that fails to return the posts` queries.
+     */
+    final class WallPostsQueriesEx implements WallPosts {
+
+        @Override
+        public List<ExecuteBatchQuery> postsQueries() throws IOException {
+            throw new IOException("Test");
+        }
+
+        @Override
+        public void updateProperties() throws IOException { }
+
+    }
+
+    /**
+     * An {@link ExecuteBatchQuery} that throws an {@link ApiException}.
+     */
+    final class ExecuteBatchQueryFakeApiEx extends ExecuteBatchQuery {
+
+        ExecuteBatchQueryFakeApiEx() {
+            super(
+                new VkApiClient(
+                    new TransportClientCached("")
+                ),
+                new UserActor(0, "")
+            );
+        }
+
+        @Override
+        public JsonElement execute() throws ApiException, ClientException {
+            throw new ApiException(0, "Test");
+        }
+
+    }
+
+    /**
+     * An {@link ExecuteBatchQuery} that throws a {@link ClientException}.
+     */
+    final class ExecuteBatchQueryFakeClientEx extends ExecuteBatchQuery {
+
+        ExecuteBatchQueryFakeClientEx() {
+            super(
+                new VkApiClient(
+                    new TransportClientCached("")
+                ),
+                new UserActor(0, "")
+            );
+        }
+
+        @Override
+        public JsonElement execute() throws ApiException, ClientException {
+            throw new ClientException("Test");
+        }
+
+    }
+
+    /**
+     * Fake {@link ExecuteBatchQuery}.
+     */
+    final class ExecuteBatchQueryFake extends ExecuteBatchQuery {
+
+        ExecuteBatchQueryFake() {
+            super(
+                new VkApiClient(
+                    new TransportClientCached("{ response : 123 }")
+                ),
+                new UserActor(0, "")
+            );
+        }
+
+    }
+
+    /**
+     * A {@link WallPosts} that faces an {@link ApiException}.
+     */
+    final class WallPostsFakeApiEx implements WallPosts {
+
+        @Override
+        public List<ExecuteBatchQuery> postsQueries() throws IOException {
+            return new Array<>(
+                new ExecuteBatchQueryFakeApiEx()
+            );
+        }
+
+        @Override
+        public void updateProperties() throws IOException { }
+
+    }
+
+    /**
+     * A {@link WallPosts} that faces a {@link ClientException}.
+     */
+    final class WallPostsFakeClientEx implements WallPosts {
+
+        @Override
+        public List<ExecuteBatchQuery> postsQueries() throws IOException {
+            return new Array<>(
+                new ExecuteBatchQueryFakeClientEx()
+            );
+        }
+
+        @Override
+        public void updateProperties() throws IOException { }
+
+    }
+
+    /**
+     * A fake {@link WallPosts}.
+     */
+    final class WallPostsFake implements WallPosts {
+
+        @Override
+        public List<ExecuteBatchQuery> postsQueries() throws IOException {
+            return new Array<>(
+                new ExecuteBatchQueryFake()
+            );
+        }
+
+        @Override
+        public void updateProperties() throws IOException { }
+    }
+
+    /**
+     * A {@link WallPosts} that fails to update the properties..
+     */
+    final class WallPostsPropsEx implements WallPosts {
+
+        @Override
+        public List<ExecuteBatchQuery> postsQueries() throws IOException {
+            return new Array<>(
+                new ExecuteBatchQueryFake()
+            );
+        }
+
+        @Override
+        public void updateProperties() throws IOException {
+            throw new IOException("Test");
+        }
+
     }
 
 }

@@ -21,18 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support;
+package com.driver733.vkmusicuploader.wallpost.attachment;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
-import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
+import com.vk.api.sdk.client.VkApiClient;
+import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.httpclient.QueryResults;
+import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,55 +42,42 @@ import java.util.List;
  * @version $Id$
  * @since 0.1
  */
-@Immutable
-public final class QueryResultsBasic implements QueryResults {
+public final class AttachmentFakeAudio implements Attachment {
 
     /**
-     * Queries.
+     * Query results (audio IDs).
      */
-    private final List<AbstractQueryBuilder> queries;
+    private final List<Integer> results;
 
     /**
      * Ctor.
-     * @param queries Queries.
+     * @param results Query results (audio IDs).
      */
-    public QueryResultsBasic(final List<AbstractQueryBuilder> queries) {
-        this.queries = queries;
+    public AttachmentFakeAudio(final Integer... results) {
+        this.results = new Array<>(results);
     }
 
-    @Override
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public List<JsonElement> results() throws IOException {
-        final List<JsonElement> results =
-            new ArrayList<>(this.queries.size());
-        for (final AbstractQueryBuilder query : this.queries) {
-            if (query.isCached()) {
-                final String response;
-                try {
-                    response = query.executeAsString();
-                } catch (final ClientException ex) {
-                    throw new IOException("Failed to execute the query", ex);
-                }
-                results.add(
-                    new JsonParser().parse(
-                        new JsonReader(
-                            new StringReader(response)
+    @Override
+    public List<AbstractQueryBuilder> upload()
+        throws ApiException, ClientException, IOException {
+        final List<AbstractQueryBuilder> out = new ArrayList<>(
+            this.results.size()
+        );
+        for (final Integer res : this.results) {
+            out.add(
+                new QueryFakeAudioAdd(
+                    new VkApiClient(
+                        new TransportClientCached(
+                            String.format(
+                                "{ \"response\" : %d }", res
+                            )
                         )
                     )
-                );
-            }
+                ).unsafeParam("audio_id", res)
+            );
         }
-        return new Array<>(results);
+        return new Array<>(out);
     }
 
-    @Override
-    public boolean fullyCached() {
-        boolean result = true;
-        for (final AbstractQueryBuilder query : this.queries) {
-            if (!query.isCached()) {
-                result = false;
-            }
-        }
-        return result;
-    }
 }

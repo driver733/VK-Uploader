@@ -32,7 +32,7 @@
         <dependency>
             <groupId>com.github.driver733</groupId>
             <artifactId>vk-java-sdk</artifactId>
-            <version>cf2316e1bb</version>
+            <version>8f0787b2ea</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

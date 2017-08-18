@@ -75,7 +75,7 @@ public final class RecoverableFile implements Recoverable<File> {
             fop.close();
         } catch (final IOException ex) {
             throw new IOException(
-                "Failed to reset the properties file.",
+                "Failed to complete the recovery.",
                 ex
             );
         }

@@ -23,12 +23,11 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
-import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.objects.audio.responses.AudioUploadResponse;
-import com.vk.api.sdk.queries.upload.UploadAudioQuery;
-import com.vk.api.sdk.queries.upload.UploadQueryBuilder;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Arrays;
 
 /**
  * Class or Interface description.
@@ -39,43 +38,48 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.1
  */
-public final class UploadAudio
-    implements Upload<UploadAudioQuery, AudioUploadResponse> {
+public final class RecoverableFile implements Recoverable<File> {
 
     /**
-     * {@link VkApiClient} that is used for all VK API requests.
+     * Contents of the file to be saved and recovered.
      */
-    private final VkApiClient client;
+    private final byte[] contents;
 
     /**
-     * Upload URL for the audio.
+     * The {@link Path} of the file to be recovered.
      */
-    private final String url;
-
-    /**
-     * Audio file to upload.
-     */
-    private final File audio;
+    private final Path path;
 
     /**
      * Ctor.
-     * @param client The {@link VkApiClient}
-     *  that is used for all VK API requests.
-     * @param url Upload URL for the audio.
-     * @param audio Audio file to upload.
+     * @param contents Contents of the file to be saved and recovered.
+     * @param path The {@link Path} of the file to be recovered.
      */
-    public UploadAudio(
-        final VkApiClient client, final String url, final File audio
-    ) {
-        this.client = client;
-        this.url = url;
-        this.audio = audio;
+    public RecoverableFile(final byte[] contents, final Path path) {
+        this.contents = Arrays.copyOf(
+            contents,
+            contents.length
+        );
+        this.path = path;
     }
 
     @Override
-    public UploadQueryBuilder<UploadAudioQuery, AudioUploadResponse> query()
-        throws IOException {
-        return this.client.upload().audio(this.url, this.audio);
+    public File recover() throws IOException {
+        try (
+            FileOutputStream fop = new FileOutputStream(
+                this.path.toFile()
+            )
+        ) {
+            fop.write(this.contents);
+            fop.flush();
+            fop.close();
+        } catch (final IOException ex) {
+            throw new IOException(
+                "Failed to reset the properties file.",
+                ex
+            );
+        }
+        return this.path.toFile();
     }
 
 }

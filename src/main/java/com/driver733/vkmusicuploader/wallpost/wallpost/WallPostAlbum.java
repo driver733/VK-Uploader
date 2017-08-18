@@ -27,7 +27,6 @@ import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentCachedAudio;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhoto;
-import com.driver733.vkmusicuploader.wallpost.attachment.UploadWallPhoto;
 import com.driver733.vkmusicuploader.wallpost.attachment.message.MessageBasic;
 import com.driver733.vkmusicuploader.wallpost.attachment.message.messagepart.ID3v1AnnotatedSafe;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advancedtag.AdvancedTagFromMp3File;
@@ -38,6 +37,7 @@ import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearr
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.FallbackByteArray;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AttachmentArrays;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
+import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallPhoto;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.mpatric.mp3agic.InvalidDataException;

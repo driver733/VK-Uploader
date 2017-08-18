@@ -25,6 +25,7 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
+import com.driver733.vkmusicuploader.wallpost.attachment.RecoverableFile;
 import com.driver733.vkmusicuploader.wallpost.attachment.TransportClientComplex;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.TransportClient;
@@ -32,7 +33,6 @@ import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -106,8 +106,10 @@ public final class WallPostAlbumTest {
         })
     @Test
     public void test() throws IOException {
-        final File file = this.properties.toFile();
-        final byte[] bytes = Files.readAllBytes(file.toPath());
+        final RecoverableFile file = new RecoverableFile(
+            Files.readAllBytes(this.properties),
+            this.properties
+        );
         MatcherAssert.assertThat(
             "Incorrect query map produced.",
             new WallPostAlbum(
@@ -237,10 +239,15 @@ public final class WallPostAlbumTest {
                             }
                        )
                    ),
-                   new UserActor(1, "1")
+                   new UserActor(
+                       1, "1"
+                   )
                ),
-               new ImmutableProperties(file)
-            ).construct().build(),
+               new ImmutableProperties(
+                   this.properties.toFile()
+               )
+            ).construct()
+                .build(),
             Matchers.allOf(
                 Matchers.hasEntry("access_token", "1"),
                 Matchers.hasEntry("v", "5.63"),
@@ -256,16 +263,7 @@ public final class WallPostAlbumTest {
                 )
             )
         );
-        try (FileOutputStream fop = new FileOutputStream(file)) {
-            fop.write(bytes);
-            fop.flush();
-            fop.close();
-        } catch (final IOException ex) {
-            throw new IOException(
-                "Failed to reset the properties file.",
-                ex
-            );
-        }
+        file.recover();
     }
 
 }

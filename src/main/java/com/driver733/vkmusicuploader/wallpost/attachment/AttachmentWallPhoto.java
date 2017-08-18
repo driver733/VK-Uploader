@@ -24,6 +24,8 @@
 
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
+import com.driver733.vkmusicuploader.wallpost.attachment.upload.Upload;
+import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallPhoto;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;

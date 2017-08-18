@@ -21,30 +21,61 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment;
+package com.driver733.vkmusicuploader.wallpost.attachment.upload;
 
+import com.vk.api.sdk.client.VkApiClient;
+import com.vk.api.sdk.objects.audio.responses.AudioUploadResponse;
+import com.vk.api.sdk.queries.upload.UploadAudioQuery;
 import com.vk.api.sdk.queries.upload.UploadQueryBuilder;
+import java.io.File;
 import java.io.IOException;
 
 /**
  * Class or Interface description.
  * <p>
- * <p> Additional info
+ * Additional info
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
- * @param <T> Query type.
- * @param <R> Query return type.
  * @since 0.1
  */
-public interface Upload<T, R> {
+public final class UploadAudio
+    implements Upload<UploadAudioQuery, AudioUploadResponse> {
 
     /**
-     * Constructs a query for uploading something to Vk.
-     *  Such as a photo or audio.
-     * @return Constructed query.
-     * @throws IOException If an exception occurs while constructing a query.
+     * {@link VkApiClient} that is used for all VK API requests.
      */
-    UploadQueryBuilder<T, R> query() throws IOException;
+    private final VkApiClient client;
+
+    /**
+     * Upload URL for the audio.
+     */
+    private final String url;
+
+    /**
+     * Audio file to upload.
+     */
+    private final File audio;
+
+    /**
+     * Ctor.
+     * @param client The {@link VkApiClient}
+     *  that is used for all VK API requests.
+     * @param url Upload URL for the audio.
+     * @param audio Audio file to upload.
+     */
+    public UploadAudio(
+        final VkApiClient client, final String url, final File audio
+    ) {
+        this.client = client;
+        this.url = url;
+        this.audio = audio;
+    }
+
+    @Override
+    public UploadQueryBuilder<UploadAudioQuery, AudioUploadResponse> query()
+        throws IOException {
+        return this.client.upload().audio(this.url, this.audio);
+    }
 
 }

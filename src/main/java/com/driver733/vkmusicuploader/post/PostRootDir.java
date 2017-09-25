@@ -91,7 +91,9 @@ public final class PostRootDir implements Post {
     public void post() throws IOException {
         final File[] dirs = this.directory.listFiles(File::isDirectory);
         if (dirs == null) {
-            throw new IOException("No subdirectories found");
+            throw new IOException(
+                "Invalid directory specified (No subdirectories found)."
+            );
         }
         for (final File dir : dirs) {
             new UploadVerification(

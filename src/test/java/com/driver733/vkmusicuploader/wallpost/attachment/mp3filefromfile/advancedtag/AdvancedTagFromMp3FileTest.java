@@ -58,7 +58,7 @@ public final class AdvancedTagFromMp3FileTest {
             path,
             new AdvancedTagFromMp3File(
                 new Mp3File(
-                    new File("src/test/resources/test.mp3")
+                    new File("src/test/resources/album/test.mp3")
                 )
             ).construct().getAlbumImage()
         );
@@ -68,7 +68,7 @@ public final class AdvancedTagFromMp3FileTest {
             "Album cover image from tag did not match the original one",
             FileUtils.contentEquals(
                 actual,
-                new File("src/test/resources/testAlbumCover.jpg")
+                new File("src/test/resources/album/albumCover.jpg")
             ),
             Matchers.equalTo(true)
         );

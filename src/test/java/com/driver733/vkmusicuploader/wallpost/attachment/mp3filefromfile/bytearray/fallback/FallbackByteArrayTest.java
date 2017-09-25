@@ -55,12 +55,14 @@ public final class FallbackByteArrayTest {
      * Path to test album cover image.
      */
     private final Path path =
-        Paths.get("src/test/resources/testAlbumCover.jpg");
+        Paths.get("src/test/resources/album/albumCover.jpg");
 
     /**
      * Test mp3 file.
      */
-    private final File audio = new File("src/test/resources/test.mp3");
+    private final File audio = new File(
+        "src/test/resources/album/test.mp3"
+    );
 
     @Test
     public void advancedTag()

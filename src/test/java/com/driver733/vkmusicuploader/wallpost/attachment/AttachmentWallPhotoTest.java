@@ -83,7 +83,7 @@ public final class AttachmentWallPhotoTest {
                         public byte[] firstValid() throws IOException {
                             return Files.readAllBytes(
                                 Paths.get(
-                                    "src/test/resources/testAlbumCover.jpg"
+                                    "src/test/resources/album/albumCover.jpg"
                                 )
                             );
                         }

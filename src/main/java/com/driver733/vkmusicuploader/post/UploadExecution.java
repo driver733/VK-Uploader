@@ -21,44 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.audio;
+package com.driver733.vkmusicuploader.post;
 
-import com.driver733.vkmusicuploader.properties.ImmutableProperties;
-import java.io.File;
+import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPosts;
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
 
 /**
  * Class or Interface description.
  * <p>
- * Additional info
+ * <p> Additional info
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @checkstyle JavadocMethodCheck (500 lines)
  */
-public final class AudiosTest {
+public interface UploadExecution {
 
-    @Test
-    public void all() throws IOException {
-        MatcherAssert.assertThat(
-            new AudiosVerified(
-                new AudiosNonProcessed(
-                    new AudiosBasic(
-                        new File("src/test/resources/album")
-                    ),
-                    new ImmutableProperties(
-                        new File("src/test/resources/test.properties")
-                    )
-                )
-            ).audios(),
-            Matchers.containsInAnyOrder(
-                new File("src/test/resources/album/test.mp3")
-            )
-        );
-    }
+    /**
+     * Executes the {@link WallPosts}
+     *  and saves to properties the updated
+     *  {@link
+     *   com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus
+     *   }.
+     *  @throws IOException If an exception occurs while executing queries.
+     */
+    void execute() throws IOException;
 
 }

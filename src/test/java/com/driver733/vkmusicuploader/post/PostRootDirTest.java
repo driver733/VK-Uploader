@@ -86,6 +86,12 @@ public final class PostRootDirTest {
     private static final String EXECUTE_URL =
         "https://api.vk.com/method/execute";
 
+    @SuppressWarnings({
+        "PMD.ExcessiveMethodLength",
+        "PMD.NonStaticInitializer",
+        "PMD.AvoidDuplicateLiterals",
+        "PMD.ProhibitPlainJunitAssertionsRule"
+        })
     @Test
     public void test() throws IOException {
         new PostRootDir(
@@ -115,7 +121,7 @@ public final class PostRootDirTest {
                                 )
                             );
                             put(
-                                AUDIO_SAVE_URL,
+                                PostRootDirTest.AUDIO_SAVE_URL,
                                 new TransportClientCached(
                                     "{"
                                         + "\"id\"       : 123456,"
@@ -127,7 +133,7 @@ public final class PostRootDirTest {
                                 )
                             );
                             put(
-                                PHOTO_SAVE_URL,
+                                PostRootDirTest.PHOTO_SAVE_URL,
                                 new TransportClientCached(
                                     "{"
                                         + "\"id\"          : 123456,"
@@ -158,13 +164,13 @@ public final class PostRootDirTest {
                                 )
                             );
                             put(
-                                AUDIO_ADD_URL,
+                                PostRootDirTest.AUDIO_ADD_URL,
                                 new TransportClientCached(
                                     "{ \"response\" : 123456789 }"
                                 )
                             );
                             put(
-                                EXECUTE_URL,
+                                PostRootDirTest.EXECUTE_URL,
                                 new TransportClientCached(
                                     "{"
                                         + "\"response\": { \"post_id\": 3 }"
@@ -187,7 +193,7 @@ public final class PostRootDirTest {
                         new HashMap<String, TransportClient>() {
                             {
                                 put(
-                                    PHOTO_WALL_URL,
+                                    PostRootDirTest.PHOTO_WALL_URL,
                                     new TransportClientCached(
                                         "{"
                                             + "\"response\" : {"
@@ -200,7 +206,7 @@ public final class PostRootDirTest {
                                     )
                                 );
                                 put(
-                                    AUDIO_UPLOAD_URL,
+                                    PostRootDirTest.AUDIO_UPLOAD_URL,
                                     new TransportClientCached(
                                         "{"
                                             + "\"response\": {"
@@ -219,16 +225,12 @@ public final class PostRootDirTest {
                 )
             )
         ).post();
-        Assert.assertEquals(
-            "The files differ!",
-            FileUtils.readFileToString(
-                new File("src/test/resources/testAlbum/vkmu.properties"),
-                "utf-8"
-            ),
-            "#\n"
-                + "#Tue Sep 12 13:27:00 EDT 2017\n"
-                + "test.mp3=2_123456789\n"
-                + "testMissingTags.mp3=2_123456789\n"
+        Assert.assertTrue(
+            "The files differ",
+            FileUtils.contentEquals(
+                new File("src/test/resources/album/vkmu.properties"),
+                new File("src/test/resources/testAlbum.properties")
+            )
         );
     }
 

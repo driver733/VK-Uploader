@@ -52,7 +52,7 @@ public final class BasicTagTest {
             "Failed to get the tag from Mp3 file",
             new BasicTagFromMp3File(
                 new Mp3File(
-                    new File("src/test/resources/test.mp3")
+                    new File("src/test/resources/album/test.mp3")
                 )
             ).construct().getAlbum(),
             Matchers.equalTo("Elegant Testing")

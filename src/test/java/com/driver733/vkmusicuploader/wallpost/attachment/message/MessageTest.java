@@ -55,7 +55,7 @@ public final class MessageTest {
         final ID3v1 tag = new ID3v1AnnotatedSafe(
             new BasicTagFromMp3File(
                 new Mp3File(
-                    new File("src/test/resources/test.mp3")
+                    new File("src/test/resources/album/test.mp3")
                 )
             ).construct()
         );
@@ -80,14 +80,18 @@ public final class MessageTest {
                 new ID3v1AnnotatedSafe(
                     new BasicTagFromMp3File(
                         new Mp3File(
-                            new File("src/test/resources/testMissingTags.mp3")
+                            new File(
+                                "src/test/resources/album/testMissingTags.mp3"
+                            )
                         )
                     ).construct()
                 ).getAlbum(),
                 new ID3v1AnnotatedSafe(
                     new BasicTagFromMp3File(
                         new Mp3File(
-                            new File("src/test/resources/testMissingTags.mp3")
+                            new File(
+                                "src/test/resources/album/testMissingTags.mp3"
+                            )
                         )
                     ).construct()
                 ).getArtist()

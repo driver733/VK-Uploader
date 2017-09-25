@@ -42,7 +42,7 @@ import java.util.List;
  * @todo #10 Create test(s) for the class.
  */
 @Immutable
-final class UploadVerification {
+final class UploadVerification implements UploadExecution {
 
     /**
      * {@link WallPosts} to execute and save to properties.
@@ -57,31 +57,24 @@ final class UploadVerification {
         this.posts = posts;
     }
 
-    /**
-     * Executes the {@link WallPosts}
-     *  and saves to properties the updated
-     *  {@link
-     *   com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus
-     *   }.
-     *  @throws IOException If an exception occurs while executing queries.
-     */
+    @Override
     public void execute() throws IOException {
         final List<ExecuteBatchQuery> queries;
         try {
             queries = this.posts.postsQueries();
         } catch (final IOException ex) {
-            throw new IOException("Failed to obtain queries", ex);
+            throw new IOException("Failed to obtain queries.", ex);
         }
         for (final ExecuteBatchQuery query : queries) {
             try {
                 query.execute();
             } catch (final ApiException | ClientException ex) {
-                throw new IOException("Failed to execute query", ex);
+                throw new IOException("Failed to execute query.", ex);
             }
             try {
                 this.posts.updateProperties();
             } catch (final IOException ex) {
-                throw new IOException("Failed to update properties", ex);
+                throw new IOException("Failed to update properties.", ex);
             }
         }
     }

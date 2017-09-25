@@ -59,7 +59,7 @@ public final class QueryResultsTest {
                         new VkApiClient(
                             new TransportClientCached("{ \"response\" : 123 }")
                         ),
-                        "test",
+                        "testRoot",
                         AbstractQueryBuilder.class
                     ) {
                         @Override

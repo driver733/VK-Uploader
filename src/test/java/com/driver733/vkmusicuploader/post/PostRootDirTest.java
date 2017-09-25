@@ -23,20 +23,16 @@
  */
 package com.driver733.vkmusicuploader.post;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import com.driver733.vkmusicuploader.wallpost.attachment.TransportClientComplex;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import org.apache.commons.io.FileUtils;
-import org.hamcrest.MatcherAssert;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -47,6 +43,11 @@ import org.junit.Test;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @checkstyle AnonInnerLengthCheck (500 lines)
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle StringLiteralsConcatenationCheck (500 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
+ * @checkstyle MethodLength (50 lines)
  */
 public final class PostRootDirTest {
 
@@ -218,20 +219,17 @@ public final class PostRootDirTest {
                 )
             )
         ).post();
-
-        assertEquals(
+        Assert.assertEquals(
             "The files differ!",
             FileUtils.readFileToString(
                 new File("src/test/resources/testAlbum/vkmu.properties"),
                 "utf-8"
             ),
-            "#\n" +
-                "#Tue Sep 12 13:27:00 EDT 2017\n" +
-                "test.mp3=2_123456789\n" +
-                "testMissingTags.mp3=2_123456789\n"
+            "#\n"
+                + "#Tue Sep 12 13:27:00 EDT 2017\n"
+                + "test.mp3=2_123456789\n"
+                + "testMissingTags.mp3=2_123456789\n"
         );
-
     }
-
 
 }

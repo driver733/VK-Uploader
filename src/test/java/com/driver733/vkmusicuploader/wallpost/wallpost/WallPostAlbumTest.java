@@ -204,7 +204,7 @@ public final class WallPostAlbumTest {
                     "1"
                 ),
                 new Array<>(
-                    new File("src/test/resources/test.mp3")
+                    new File("src/test/resources/album/test.mp3")
                 ),
                 new UploadServers(
                     new VkApiClient(

@@ -55,7 +55,7 @@ public final class ID3v1AnnotatedSafeTest {
         throws InvalidDataException, IOException, UnsupportedTagException {
         this.tag = new ID3v1AnnotatedSafe(
             new BasicTagFromMp3File(
-                new Mp3File("src/test/resources/test.mp3")
+                new Mp3File("src/test/resources/album/test.mp3")
             ).construct()
         );
     }
@@ -158,7 +158,7 @@ public final class ID3v1AnnotatedSafeTest {
         throws InvalidDataException, IOException, UnsupportedTagException {
         final ID3v1 missing = new ID3v1AnnotatedSafe(
             new BasicTagFromMp3File(
-                new Mp3File("src/test/resources/testMissingTags.mp3")
+                new Mp3File("src/test/resources/album/testMissingTags.mp3")
             ).construct()
         );
         MatcherAssert.assertThat(

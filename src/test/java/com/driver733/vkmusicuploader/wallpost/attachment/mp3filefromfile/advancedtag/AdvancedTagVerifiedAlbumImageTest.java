@@ -50,12 +50,12 @@ public final class AdvancedTagVerifiedAlbumImageTest {
      * Test album cover image.
      */
     private final Path image =
-        Paths.get("src/test/resources/testAlbumCover.jpg");
+        Paths.get("src/test/resources/album/albumCover.jpg");
 
     @Test
     public void valid()
         throws InvalidDataException, IOException, UnsupportedTagException {
-        final Path path = Paths.get("src/test/resources/test.mp3");
+        final Path path = Paths.get("src/test/resources/album/test.mp3");
         MatcherAssert.assertThat(
             new AdvancedTagVerifiedAlbumImage(
                 new AdvancedTagFromMp3File(
@@ -76,7 +76,9 @@ public final class AdvancedTagVerifiedAlbumImageTest {
         MatcherAssert.assertThat(
             new AdvancedTagVerifiedAlbumImage(
                 new AdvancedTagFromMp3File(
-                    new Mp3File("src/test/resources/testMissingTags.mp3")
+                    new Mp3File(
+                        "src/test/resources/album/testMissingTags.mp3"
+                    )
                 )
             ).construct().getAlbumImage(),
             Matchers.equalTo(

@@ -36,6 +36,8 @@ import org.junit.Test;
  * <p>
  * Additional info
  *
+ * @todo #23 Test all conditions to get 100% test coverage.
+ *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1

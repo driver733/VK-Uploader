@@ -74,7 +74,7 @@ public final class ImmutableProperties extends Properties {
      */
     @SuppressWarnings("PMD.AvoidSynchronizedAtMethodLevel")
     public synchronized void load() throws IOException {
-        if (!this.file.exists() && !this.file.createNewFile()) {
+        if (!this.file.exists()) {
             throw new IOException("Failed to create the Properties construct.");
         }
         final FileInputStream fis = new FileInputStream(this.file);

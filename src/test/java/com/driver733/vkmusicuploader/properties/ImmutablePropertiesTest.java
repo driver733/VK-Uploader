@@ -24,7 +24,11 @@
 package com.driver733.vkmusicuploader.properties;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import org.hamcrest.Matchers;
@@ -35,8 +39,6 @@ import org.junit.Test;
  * Class or Interface description.
  * <p>
  * Additional info
- *
- * @todo #23 Test all conditions to get 100% test coverage.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -71,6 +73,49 @@ public final class ImmutablePropertiesTest {
                 Matchers.isIn(result.entrySet())
             )
         );
+    }
+
+    @Test(expected = IOException.class)
+    public void store() throws IOException {
+        final File file = new File("anyStream1-2");
+        file.deleteOnExit();
+        final ImmutableProperties props = new ImmutableProperties(
+            new File("anyFile1-1")
+        );
+        props.store(
+            new FileOutputStream(file),
+            ""
+        );
+    }
+
+    @Test(expected = IOException.class)
+    public void storeInvalidFile() throws IOException, URISyntaxException {
+        final ImmutableProperties props = new ImmutableProperties(
+            new File(
+                new URI("file:///home/username/RomeoAndJuliet.pdf")
+            )
+        );
+        props.store();
+    }
+
+    @Test(expected = IOException.class)
+    public void load() throws IOException {
+        final ImmutableProperties props = new ImmutableProperties(
+            new File("anyFile2-1")
+        );
+        props.load(
+            new FileInputStream("anyFile2-2")
+        );
+    }
+
+    @Test(expected = IOException.class)
+    public void loadInvalidFile() throws IOException, URISyntaxException {
+        final ImmutableProperties props = new ImmutableProperties(
+            new File(
+                new URI("file:///home/username/RomeoAndJuliet.pdf")
+            )
+        );
+        props.load();
     }
 
 }

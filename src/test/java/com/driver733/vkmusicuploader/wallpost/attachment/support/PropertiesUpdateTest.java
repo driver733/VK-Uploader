@@ -62,6 +62,7 @@ public final class PropertiesUpdateTest {
     public void test() throws IOException {
         final String fileName = "test.mp3";
         final File file = new File("src/test/resources/temp.properties");
+        file.deleteOnExit();
         final ImmutableProperties props = new ImmutableProperties(file);
         final int ownerId = 111;
         final int uploadedMediaId = 222;

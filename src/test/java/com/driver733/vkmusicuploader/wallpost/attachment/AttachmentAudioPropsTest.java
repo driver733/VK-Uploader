@@ -29,7 +29,9 @@ import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.audio.Audio;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Properties;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -56,8 +58,13 @@ public final class AttachmentAudioPropsTest {
         final int ownerId = 321;
         Mockito.when(test.getId()).thenReturn(mediaId);
         Mockito.when(test.getOwnerId()).thenReturn(ownerId);
-        final File file = new File("src/test/resources/temp.properties");
+        final Properties temp = new Properties();
+        final File file = new File("temp.properties");
         file.deleteOnExit();
+        temp.store(
+            new FileOutputStream(file),
+            ""
+        );
         new AttachmentAudioProps(
             test,
             fileName,

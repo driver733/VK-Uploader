@@ -97,7 +97,7 @@ public final class WallPostAlbumTest {
      * Test properties.
      */
     private final Path properties =
-        Paths.get("src/test/resources/test2.properties");
+        Paths.get("src/test/resources/wallPostAlbumTest.properties");
 
     @SuppressWarnings({
         "PMD.ExcessiveMethodLength",

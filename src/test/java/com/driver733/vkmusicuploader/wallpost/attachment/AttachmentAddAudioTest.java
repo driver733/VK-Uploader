@@ -60,7 +60,10 @@ public final class AttachmentAddAudioTest {
                 new VkApiClient(
                     new TransportClientHttp()
                 ),
-                new UserActor(0, ""),
+                new UserActor(
+                    0,
+                    ""
+                ),
                 1,
                 2
             ).upload().get(0).build(),
@@ -84,7 +87,10 @@ public final class AttachmentAddAudioTest {
                 new VkApiClient(
                     new TransportClientCached("{ \"response\" : 1 }")
                 ),
-                new UserActor(0, ""),
+                new UserActor(
+                    0,
+                    ""
+                ),
                 0,
                 0
             ).upload().get(0).execute(),

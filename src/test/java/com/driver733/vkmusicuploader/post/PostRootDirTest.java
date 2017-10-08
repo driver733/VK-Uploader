@@ -229,7 +229,7 @@ public final class PostRootDirTest {
             "The files differ",
             FileUtils.contentEquals(
                 new File("src/test/resources/album/vkmu.properties"),
-                new File("src/test/resources/testAlbum.properties")
+                new File("src/test/resources/postRootDirTest.properties")
             )
         );
     }

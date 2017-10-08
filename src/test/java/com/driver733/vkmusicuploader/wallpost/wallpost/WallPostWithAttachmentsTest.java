@@ -55,7 +55,7 @@ public final class WallPostWithAttachmentsTest {
      * Test properties.
      */
     private final Path properties =
-        Paths.get("src/test/resources/test1.properties");
+        Paths.get("src/test/resources/wallPostWithAttachmentsTest.properties");
 
     @Test
     public void test() throws IOException {

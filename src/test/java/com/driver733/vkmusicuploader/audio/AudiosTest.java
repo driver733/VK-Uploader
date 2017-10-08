@@ -51,7 +51,7 @@ public final class AudiosTest {
                         new File("src/test/resources/album")
                     ),
                     new ImmutableProperties(
-                        new File("src/test/resources/test.properties")
+                        new File("src/test/resources/audiosTest.properties")
                     )
                 )
             ).audios(),

@@ -25,7 +25,6 @@
 package com.driver733.vkmusicuploader.post;
 
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
-import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPosts;
 import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPostsAlbum;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
@@ -79,7 +78,7 @@ public final class PostRootDir implements Post {
         final UserActor actor,
         final File dir,
         final UploadServers servers
-        ) {
+    ) {
         this.client = client;
         this.directory = dir;
         this.actor = actor;

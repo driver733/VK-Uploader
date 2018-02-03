@@ -21,20 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.driver733.vkmusicuploader.post.posts;
 
-package com.driver733.vkmusicuploader.post;
-
-import com.driver733.vkmusicuploader.properties.ImmutableProperties;
-import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPosts;
-import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPostsAlbum;
+import com.driver733.vkmusicuploader.post.Post;
+import com.driver733.vkmusicuploader.post.PostRootDir;
+import com.driver733.vkmusicuploader.post.UploadServers;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import java.io.File;
-import java.io.IOException;
 
 /**
- * Class or Interface description Test.
+ * Class or Interface description.
  * <p>
  * Additional info
  *
@@ -43,12 +41,7 @@ import java.io.IOException;
  * @since 0.1
  */
 @Immutable
-public final class PostRootDir implements Post {
-
-    /**
-     * Root directory that contains directories with albums.
-     */
-    private final File directory;
+public final class PostsBasic implements Posts {
 
     /**
      * {@link VkApiClient} for all requests.
@@ -69,50 +62,27 @@ public final class PostRootDir implements Post {
      * Ctor.
      * @param client The {@link VkApiClient} for all requests.
      * @param actor UserActor on behalf of which all requests will be sent.
-     * @param dir Root directory that contains directories with albums.
-     * @param servers Upload servers
-     *  that provide upload URLs for attachmentsFields.
-     * @checkstyle ParameterNumberCheck (10 lines)
+     * @param servers Upload servers that
+     *  provide upload URLs for attachmentsFields.
      */
-    public PostRootDir(
+    public PostsBasic(
         final VkApiClient client,
         final UserActor actor,
-        final File dir,
         final UploadServers servers
-        ) {
+    ) {
         this.client = client;
-        this.directory = dir;
         this.actor = actor;
         this.servers = servers;
     }
 
     @Override
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public void post() throws IOException {
-        final File[] dirs = this.directory.listFiles(File::isDirectory);
-        if (dirs == null) {
-            throw new IOException(
-                "Invalid directory specified (No subdirectories found)."
-            );
-        }
-        for (final File dir : dirs) {
-            new UploadVerification(
-                new WallPostsAlbum(
-                    this.client,
-                    this.actor,
-                    dir,
-                    this.servers,
-                    new ImmutableProperties(
-                        new File(
-                            String.format(
-                                "%s/vkmu.properties",
-                                dir.getAbsolutePath()
-                            )
-                        )
-                    )
-                )
-            ).execute();
-        }
+    public Post postFromDir(final File dir) {
+        return new PostRootDir(
+            this.client,
+            this.actor,
+            dir,
+            this.servers
+        );
     }
 
 }

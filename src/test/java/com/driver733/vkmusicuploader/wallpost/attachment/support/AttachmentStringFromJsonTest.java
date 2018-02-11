@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,8 +23,8 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
+import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.string.AttachmentStringFromJson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
@@ -42,13 +42,13 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
-public final class AttachmentFormatStringsTest {
+public final class AttachmentStringFromJsonTest {
 
     @Test
-    public void object() throws IOException {
+    public void test() throws IOException {
         MatcherAssert.assertThat(
-            "Failed to form an attachment string from JsonObject",
-            new AttachmentFormatStrings(
+            "Failed to form an attachment attachmentString from JsonObject",
+            new AttachmentStringFromJson(
                 new GsonBuilder()
                     .setPrettyPrinting()
                     .create()
@@ -61,46 +61,10 @@ public final class AttachmentFormatStringsTest {
                             + "\"url\"       : \"http://test1.com\" "
                             + "}",
                         JsonObject.class
-                    )
-                    .getAsJsonObject()
-            ).attachmentStrings(),
-            Matchers.containsInAnyOrder(
+                    ).getAsJsonObject()
+            ).attachmentString(),
+            Matchers.equalTo(
                 "audio1111111_1000000"
-            )
-        );
-    }
-
-    @Test
-    public void array() throws IOException {
-        MatcherAssert.assertThat(
-            "Failed to form an attachment string from JsonArray",
-            new AttachmentFormatStrings(
-                new GsonBuilder()
-                    .setPrettyPrinting()
-                    .create()
-                    .fromJson(
-                        "["
-                            + "{"
-                            + "\"owner_id\"  : 111111,"
-                            + "\"id\"        : 3000000,"
-                            + "\"artist\"    : \"Test Artist2\","
-                            + "\"title\"     : \"Test Title2\","
-                            + "\"url\"       : \"http://test2.com\" "
-                            + "},"
-                            + "{"
-                            + "\"owner_id\"  : 2222222,"
-                            + "\"id\"        : 2000000,"
-                            + "\"artist\"    : \"Test Artist3\","
-                            + "\"title\"     : \"Test Title3\","
-                            + "\"url\"       : \"http://test3.com\" "
-                            + "}"
-                            + "]",
-                        JsonArray.class
-                    )
-                    .getAsJsonArray()
-            ).attachmentStrings(),
-            Matchers.containsInAnyOrder(
-                "audio111111_3000000", "audio2222222_2000000"
             )
         );
     }

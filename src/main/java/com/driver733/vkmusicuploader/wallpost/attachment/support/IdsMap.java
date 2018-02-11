@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,14 +24,11 @@
 package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
 import com.driver733.vkmusicuploader.wallpost.attachment.Attachment;
-import com.jcabi.aspects.Cacheable;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.queries.QueriesFromAttachments;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +43,7 @@ import java.util.Map;
  * @since 0.1
  */
 @Immutable
-final class QueriesFromAttachments {
+public final class IdsMap {
 
     /**
      * {@link Attachment} array.
@@ -58,7 +55,7 @@ final class QueriesFromAttachments {
      * Ctor.
      * @param attachments An {@link Attachment} array.
      */
-    QueriesFromAttachments(final List<Attachment> attachments) {
+    public IdsMap(final List<Attachment> attachments) {
         this.attachments = new Array<>(attachments);
     }
 
@@ -71,7 +68,7 @@ final class QueriesFromAttachments {
     public Map<Integer, String> idsMap() throws IOException {
         final List<AbstractQueryBuilder> queries;
         try {
-            queries = this.queries();
+            queries = new QueriesFromAttachments(this.attachments).queries();
         } catch (final IOException ex) {
             throw new IOException("Failed to obtain queries` results", ex);
         }
@@ -87,55 +84,6 @@ final class QueriesFromAttachments {
             index += 1;
         }
         return ids;
-    }
-
-    /**
-     * Finds which queries have no cache and thus need to be executed.
-     * @param cached Whether to return cached or non-cached queries.
-     * @return A {@link List} of {@link AbstractQueryBuilder} to be executed.
-     * @throws IOException If queries cannot to be obtained.
-     */
-    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-    public List<AbstractQueryBuilder> queries(final boolean cached)
-        throws IOException {
-        final List<AbstractQueryBuilder> queries;
-        try {
-            queries = this.queries();
-        } catch (final IOException ex) {
-            throw new IOException("Failed to obtain queries` results", ex);
-        }
-        final List<AbstractQueryBuilder> list = new ArrayList<>(queries.size());
-        for (final AbstractQueryBuilder query : queries) {
-            if (
-                cached && query.isCached()
-                    || !cached && !query.isCached()
-                ) {
-                list.add(query);
-            }
-        }
-        return list;
-    }
-
-    /**
-     * Constructs all queries associated with attachments
-     *  and accumulates their results in a {@link List}.
-     * @return A {@link List} with all attachments` results.
-     * @throws IOException If any of the attachments fail to upload.
-     */
-    @Cacheable(forever = true)
-    private List<AbstractQueryBuilder> queries() throws IOException {
-        final List<AbstractQueryBuilder> list =
-            new ArrayList<>(this.attachments.size());
-        for (final Attachment attachment : this.attachments) {
-            final List<AbstractQueryBuilder> queries;
-            try {
-                queries = attachment.upload();
-            } catch (final ApiException | ClientException | IOException ex) {
-                throw new IOException("Failed to upload attachments", ex);
-            }
-            list.addAll(queries);
-        }
-        return list;
     }
 
 }

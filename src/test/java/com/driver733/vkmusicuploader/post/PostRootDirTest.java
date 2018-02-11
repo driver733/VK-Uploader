@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,8 @@
  */
 package com.driver733.vkmusicuploader.post;
 
-import com.driver733.vkmusicuploader.wallpost.attachment.TransportClientComplex;
+import com.driver733.vkmusicuploader.post.post.PostRootDir;
+import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientComplex;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;

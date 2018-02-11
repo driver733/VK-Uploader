@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,13 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment;
+package com.driver733.vkmusicuploader.wallpost.attachment.upload;
 
-import com.vk.api.sdk.client.ClientResponse;
-import com.vk.api.sdk.client.TransportClient;
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
+import com.jcabi.immutable.Array;
+import com.vk.api.sdk.client.AbstractQueryBuilder;
+import com.vk.api.sdk.client.VkApiClient;
+import java.util.Collection;
 
 /**
  * Class or Interface description.
@@ -37,51 +36,27 @@ import java.util.Map;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @checkstyle ProtectedMethodInFinalClassCheck (500 lines)
  */
-public final class TransportClientComplex implements TransportClient {
+public final class QueryFakeAudioAdd
+    extends AbstractQueryBuilder<QueryFakeAudioAdd, Integer> {
 
     /**
-     * {@link TransportClient} for each API endpoint.
+     * Fake audio.add query.
+     * @param client A {@link VkApiClient} that is used for all VK API requests.
      */
-    private final Map<String, TransportClient> clients;
-
-    /**
-     * Ctor.
-     * @param clients A {@link TransportClient} for each API endpoint.
-     */
-    public TransportClientComplex(final Map<String, TransportClient> clients) {
-        this.clients = clients;
+    public QueryFakeAudioAdd(final VkApiClient client) {
+        super(client, "fake.audio.add", Integer.class);
     }
 
     @Override
-    public ClientResponse post(
-        final String url,
-        final String body
-    ) throws IOException {
-        return this.clients.get(url)
-            .post(url, body);
-    }
-
-    // @checkstyle ParameterNameCheck (5 lines)
-    @Override
-    public ClientResponse post(
-        final String url, final String fileName,
-        final File file
-    ) throws IOException {
-        return this.clients.get(url)
-            .post(url, fileName, file);
+    protected QueryFakeAudioAdd getThis() {
+        return this;
     }
 
     @Override
-    public ClientResponse post(
-        final String url
-    ) throws IOException {
-        return this.clients.get(url)
-            .post(url);
+    protected Collection<String> essentialKeys() {
+        return new Array<>();
     }
 
-    @Override
-    public boolean isCached() {
-        return true;
-    }
 }

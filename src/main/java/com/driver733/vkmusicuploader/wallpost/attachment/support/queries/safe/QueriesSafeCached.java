@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,13 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment;
+package com.driver733.vkmusicuploader.wallpost.attachment.support.queries.safe;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Arrays;
+import com.jcabi.aspects.Immutable;
+import com.vk.api.sdk.client.AbstractQueryBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class or Interface description.
@@ -38,48 +37,32 @@ import java.util.Arrays;
  * @version $Id$
  * @since 0.1
  */
-public final class RecoverableFile implements Recoverable<File> {
+@Immutable
+public final class QueriesSafeCached implements QueriesSafe {
 
     /**
-     * Contents of file to be saved and recovered.
+     * Origin.
      */
-    private final byte[] contents;
-
-    /**
-     * The {@link Path} of the file to be recovered.
-     */
-    private final Path path;
+    private final List<AbstractQueryBuilder> origin;
 
     /**
      * Ctor.
-     * @param contents Contents of the file to be saved and recovered.
-     * @param path The {@link Path} of the file to be recovered.
+     * @param origin Origin.
      */
-    public RecoverableFile(final byte[] contents, final Path path) {
-        this.contents = Arrays.copyOf(
-            contents,
-            contents.length
-        );
-        this.path = path;
+    public QueriesSafeCached(final List<AbstractQueryBuilder> origin) {
+        this.origin = origin;
     }
 
     @Override
-    public File recover() throws IOException {
-        try (
-            FileOutputStream fop = new FileOutputStream(
-                this.path.toFile()
-            )
-        ) {
-            fop.write(this.contents);
-            fop.flush();
-            fop.close();
-        } catch (final IOException ex) {
-            throw new IOException(
-                "Failed to complete the recovery.",
-                ex
-            );
+    public List<AbstractQueryBuilder> queries() {
+        final List<AbstractQueryBuilder> list = new ArrayList<>(
+            this.origin.size()
+        );
+        for (final AbstractQueryBuilder query : this.origin) {
+            if (query.isCached()) {
+                list.add(query);
+            }
         }
-        return this.path.toFile();
+        return list;
     }
-
 }

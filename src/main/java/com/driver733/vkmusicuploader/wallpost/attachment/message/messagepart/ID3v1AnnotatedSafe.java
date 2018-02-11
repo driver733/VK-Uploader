@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -191,7 +191,7 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
     /**
      * Checks if the tag exists.
      * @param str Tag.
-     * @return Tag if it exists. Empty string otherwise.
+     * @return Tag if it exists. Empty attachmentString otherwise.
      */
     private static boolean isPresent(final String str) {
         final boolean result;

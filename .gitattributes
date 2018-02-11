@@ -1,12 +1,12 @@
 # Check out all text files in UNIX format.
-* text eol=lf
+* text=auto eol=lf
+*.xml ident
+*.java indent
 
 # Explicitly declare text files we want to always be normalized and converted
 # to native line endings on checkout.
 *.txt text
-*.java text
 *.groovy text
-*.xml text
 *.md text
 *.pom text
 *.properties text

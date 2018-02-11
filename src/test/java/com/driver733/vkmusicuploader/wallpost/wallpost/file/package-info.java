@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,30 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.post;
-
-import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPosts;
-import java.io.IOException;
-
-/**
- * Class or Interface description.
- * <p>
- * <p> Additional info
- *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
- * @since 0.1
- */
-public interface UploadExecution {
-
-    /**
-     * Executes the {@link WallPosts}
-     *  and saves to properties the updated
-     *  {@link
-     *   com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus
-     *   }.
-     *  @throws IOException If an exception occurs while executing queries.
-     */
-    void execute() throws IOException;
-
-}
+package com.driver733.vkmusicuploader.wallpost.wallpost.file;

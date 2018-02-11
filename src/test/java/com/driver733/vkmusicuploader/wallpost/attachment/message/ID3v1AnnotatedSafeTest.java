@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -208,7 +208,7 @@ public final class ID3v1AnnotatedSafeTest {
             MatcherAssert.assertThat(
                 this.tag.getYear(),
                 Matchers.equalTo(
-                    "Year: 2017"
+                    "Year: 2018"
                 )
             );
         }

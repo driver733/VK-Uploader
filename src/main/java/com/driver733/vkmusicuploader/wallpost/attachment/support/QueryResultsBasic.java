@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
+import com.driver733.vkmusicuploader.wallpost.attachment.support.queries.safe.QueriesSafe;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
@@ -51,22 +52,23 @@ public final class QueryResultsBasic implements QueryResults {
     /**
      * Queries.
      */
-    private final List<AbstractQueryBuilder> queries;
+    private final QueriesSafe queries;
 
     /**
      * Ctor.
      * @param queries Queries.
      */
-    public QueryResultsBasic(final List<AbstractQueryBuilder> queries) {
+    public QueryResultsBasic(final QueriesSafe queries) {
         this.queries = queries;
     }
 
     @Override
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public List<JsonElement> results() throws IOException {
+        final List<AbstractQueryBuilder> constructed = this.queries.queries();
         final List<JsonElement> results =
-            new ArrayList<>(this.queries.size());
-        for (final AbstractQueryBuilder query : this.queries) {
+            new ArrayList<>(constructed.size());
+        for (final AbstractQueryBuilder query : constructed) {
             if (query.isCached()) {
                 final String response;
                 try {
@@ -89,7 +91,7 @@ public final class QueryResultsBasic implements QueryResults {
     @Override
     public boolean fullyCached() {
         boolean result = true;
-        for (final AbstractQueryBuilder query : this.queries) {
+        for (final AbstractQueryBuilder query : this.queries.queries()) {
             if (!query.isCached()) {
                 result = false;
             }

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,28 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment;
-
-import java.io.IOException;
-
-/**
- * Class or Interface description.
- * <p>
- * <p> Additional info
- *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
- * @param <T> Data objects of the specified type can be recovered.
- * @since 0.1
- */
-public interface Recoverable<T> {
-
-    /**
-     * Recover the provided data object (such as {@link java.io.File})
-     *  to its original state.
-     * @return The reference to the restored data object.
-     * @throws IOException If an error occurs while recovering.
-     */
-    T recover() throws IOException;
-
-}
+package com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.strings;

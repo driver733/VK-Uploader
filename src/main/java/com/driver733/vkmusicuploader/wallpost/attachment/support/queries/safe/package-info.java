@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,42 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment;
-
-import com.jcabi.immutable.Array;
-import com.vk.api.sdk.client.AbstractQueryBuilder;
-import com.vk.api.sdk.client.VkApiClient;
-import java.util.Collection;
-
-/**
- * Class or Interface description.
- * <p>
- * Additional info
- *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
- * @since 0.1
- * @checkstyle ProtectedMethodInFinalClassCheck (500 lines)
- */
-public final class QueryFakeAudioAdd
-    extends AbstractQueryBuilder<QueryFakeAudioAdd, Integer> {
-
-    /**
-     * Fake audio.add query.
-     * @param client A {@link VkApiClient} that is used for all VK API requests.
-     */
-    public QueryFakeAudioAdd(final VkApiClient client) {
-        super(client, "fake.audio.add", Integer.class);
-    }
-
-    @Override
-    protected QueryFakeAudioAdd getThis() {
-        return this;
-    }
-
-    @Override
-    protected Collection<String> essentialKeys() {
-        return new Array<>();
-    }
-
-}
+package com.driver733.vkmusicuploader.wallpost.attachment.support.queries.safe;

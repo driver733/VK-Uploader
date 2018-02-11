@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,17 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support;
+package com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.strings;
 
+import com.driver733.vkmusicuploader.wallpost.attachment.support.QueryResultsBasic;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.jcabi.aspects.Immutable;
+import com.jcabi.immutable.Array;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class or Interface description.
+ * Maps queries queriesResults to Attachment attachmentStrings.
  * <p>
  * Additional info
  *
@@ -40,52 +42,36 @@ import java.util.List;
  * @since 0.1
  */
 @Immutable
-public final class AttachmentFormatStrings {
+public final class AttachmentsFromResults implements AttachmentStrings {
 
     /**
-     * A {@link JsonElement} that contains attachment string(s).
+     * JsonArray that contains the
+     *  {@link QueryResultsBasic}
+     *  of the queries.
      */
-    private final JsonElement root;
+    private final JsonArray root;
 
     /**
-     * Ctor.
-     * @param root A {@link JsonElement} that contains attachment string(s).
-     */
-    public AttachmentFormatStrings(final JsonElement root) {
+    * Ctor.
+    * @param root JsonArray that contains the
+    *  {@link QueryResultsBasic}
+    *  of the queries.
+    */
+    public AttachmentsFromResults(final JsonArray root) {
         this.root = root;
     }
 
-    /**
-     * Extracts attachment string from the provided Json Elements.
-     * @return A {@link List} with attachment string(s).
-     * @throws IOException If attachment string cannot be extracted.
-     */
+    @Override
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public List<String> attachmentStrings() throws IOException {
-        final List<String> list;
-        try {
-            if (this.root.isJsonArray()) {
-                list = new ArrayList<>(this.root.getAsJsonArray().size());
-                final JsonArray array = this.root.getAsJsonArray();
-                for (final JsonElement element : array) {
-                    list.add(
-                        new AttachmentFormatFromJsonObject(
-                            element.getAsJsonObject()
-                        ).attachmentFormat()
-                    );
-                }
-            } else {
-                list = new ArrayList<>(1);
-                list.add(
-                    new AttachmentFormatFromJsonObject(
-                        this.root
-                    ).attachmentFormat()
-                );
-            }
-        } catch (final IOException ex) {
-            throw new IOException("Could not extract attachment string.", ex);
+        final List<String> list = new ArrayList<>(this.root.size());
+        for (final JsonElement element : this.root) {
+            list.addAll(
+                new AttachmentStringsFromJson(element)
+                    .attachmentStrings()
+            );
         }
-        return list;
+        return new Array<>(list);
     }
 
 }

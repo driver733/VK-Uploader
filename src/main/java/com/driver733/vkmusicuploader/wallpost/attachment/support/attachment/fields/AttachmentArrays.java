@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,13 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support;
+package com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields;
 
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.Attachment;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.IdsMap;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.PropertiesUpdate;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.QueryResultsBasic;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.strings.AttachmentsFromResults;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.queries.QueriesFromAttachments;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.queries.safe.QueriesSafeCached;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.queries.safe.QueriesSafeNonCached;
 import com.google.gson.JsonElement;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
+import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
@@ -85,34 +94,36 @@ public final class AttachmentArrays implements AttachmentsFields {
     public List<String> attachmentsFields()
         throws ApiException, ClientException, IOException {
         this.properties.load();
-        final QueriesFromAttachments queries =
-            new QueriesFromAttachments(this.attachments);
+        final List<AbstractQueryBuilder> queries = new QueriesFromAttachments(
+            this.attachments
+        ).queries();
+        final IdsMap ids =
+            new IdsMap(this.attachments);
         final JsonElement root =
             new VkApiClient(
                 new TransportClientExecuteBatchCached(
                     new QueryResultsBasic(
-                        queries.queries(true)
+                        new QueriesSafeCached(queries)
                     )
                 )
             ).execute()
                 .batch(
                     this.actor,
-                    queries.queries(false)
+                    new QueriesSafeNonCached(queries).queries()
                 ).execute();
         new PropertiesUpdate(
             this.properties,
-            queries.idsMap(),
+            ids.idsMap(),
             root.getAsJsonArray()
         ).save();
         try {
             return new AttachmentsFromResults(
                 root.getAsJsonArray()
-            ).attachments();
+            ).attachmentStrings();
         } catch (final IOException ex) {
             throw new IOException(
                 "Could not map idsMap queriesResults to attachments", ex
             );
         }
     }
-
 }

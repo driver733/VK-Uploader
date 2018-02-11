@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,13 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment;
+package com.driver733.vkmusicuploader.wallpost.attachment.support.queries.safe;
 
-import com.vk.api.sdk.client.ClientResponse;
-import com.vk.api.sdk.client.TransportClient;
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
+import com.jcabi.aspects.Immutable;
+import com.vk.api.sdk.client.AbstractQueryBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class or Interface description.
@@ -38,50 +37,32 @@ import java.util.Map;
  * @version $Id$
  * @since 0.1
  */
-public final class TransportClientComplex implements TransportClient {
+@Immutable
+public final class QueriesSafeCached implements QueriesSafe {
 
     /**
-     * {@link TransportClient} for each API endpoint.
+     * Origin.
      */
-    private final Map<String, TransportClient> clients;
+    private final List<AbstractQueryBuilder> origin;
 
     /**
      * Ctor.
-     * @param clients A {@link TransportClient} for each API endpoint.
+     * @param origin Origin.
      */
-    public TransportClientComplex(final Map<String, TransportClient> clients) {
-        this.clients = clients;
+    public QueriesSafeCached(final List<AbstractQueryBuilder> origin) {
+        this.origin = origin;
     }
 
     @Override
-    public ClientResponse post(
-        final String url,
-        final String body
-    ) throws IOException {
-        return this.clients.get(url)
-            .post(url, body);
-    }
-
-    // @checkstyle ParameterNameCheck (5 lines)
-    @Override
-    public ClientResponse post(
-        final String url, final String fileName,
-        final File file
-    ) throws IOException {
-        return this.clients.get(url)
-            .post(url, fileName, file);
-    }
-
-    @Override
-    public ClientResponse post(
-        final String url
-    ) throws IOException {
-        return this.clients.get(url)
-            .post(url);
-    }
-
-    @Override
-    public boolean isCached() {
-        return true;
+    public List<AbstractQueryBuilder> queries() {
+        final List<AbstractQueryBuilder> list = new ArrayList<>(
+            this.origin.size()
+        );
+        for (final AbstractQueryBuilder query : this.origin) {
+            if (query.isCached()) {
+                list.add(query);
+            }
+        }
+        return list;
     }
 }

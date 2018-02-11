@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
+import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.strings.AttachmentsFromResults;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import java.io.IOException;
@@ -71,7 +72,7 @@ public final class AttachmentFromResultsTest {
                         JsonArray.class
                     )
                     .getAsJsonArray()
-            ).attachments(),
+            ).attachmentStrings(),
             Matchers.containsInAnyOrder(
                 "audio1111111_1000000", "audio2222222_2000000"
             )
@@ -123,7 +124,7 @@ public final class AttachmentFromResultsTest {
                         JsonArray.class
                     )
                     .getAsJsonArray()
-            ).attachments(),
+            ).attachmentStrings(),
             Matchers.containsInAnyOrder(
                 "photo111111_333333", "photo222222_444444"
             )
@@ -139,7 +140,7 @@ public final class AttachmentFromResultsTest {
                     .create()
                     .fromJson("[123456789, 987654321]", JsonArray.class)
                     .getAsJsonArray()
-            ).attachments(),
+            ).attachmentStrings(),
             Matchers.containsInAnyOrder(
                 "audio-92444715_123456789", "audio-92444715_987654321"
             )

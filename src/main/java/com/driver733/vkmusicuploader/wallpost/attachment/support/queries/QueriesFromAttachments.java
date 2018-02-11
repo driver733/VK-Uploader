@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,32 +21,58 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.support;
+package com.driver733.vkmusicuploader.wallpost.attachment.support.queries;
 
+import com.driver733.vkmusicuploader.wallpost.attachment.Attachment;
+import com.jcabi.aspects.Cacheable;
+import com.jcabi.aspects.Immutable;
+import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Class or Interface description.
  * <p>
- * <p> Additional info
+ * Additional info
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
  */
-public interface AttachmentsFields {
+@Immutable
+public final class QueriesFromAttachments implements Queries {
 
     /**
-     * Constructs attachment strings for the wall WallPostAlbum.
-     * @return Attachment strings.
-     * @throws ClientException VK API Client error.
-     * @throws ApiException VK API error.
-     * @throws IOException If properties fail to load.
+     * List of {@link Attachment}s.
      */
-    List<String> attachmentsFields()
-        throws ApiException, ClientException, IOException;
+    private final List<Attachment> attachments;
+
+    /**
+     * List of {@link Attachment}s.
+     * @param attachments List of {@link Attachment}s.
+     */
+    public QueriesFromAttachments(final List<Attachment> attachments) {
+        this.attachments = attachments;
+    }
+
+    @Override
+    @Cacheable(forever = true)
+    public List<AbstractQueryBuilder> queries() throws IOException {
+        final List<AbstractQueryBuilder> list =
+            new ArrayList<>(this.attachments.size());
+        for (final Attachment attachment : this.attachments) {
+            final List<AbstractQueryBuilder> queries;
+            try {
+                queries = attachment.upload();
+            } catch (final ApiException | ClientException | IOException ex) {
+                throw new IOException("Failed to upload attachments", ex);
+            }
+            list.addAll(queries);
+        }
+        return list;
+    }
 
 }

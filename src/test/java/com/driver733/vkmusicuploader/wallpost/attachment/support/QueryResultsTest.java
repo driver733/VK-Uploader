@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
+import com.driver733.vkmusicuploader.wallpost.attachment.support.queries.safe.QueriesSafeCached;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.jcabi.immutable.Array;
@@ -54,24 +55,28 @@ public final class QueryResultsTest {
     public void test() throws IOException {
         MatcherAssert.assertThat(
             new QueryResultsBasic(
-                new Array<>(
-                    new AbstractQueryBuilder(
-                        new VkApiClient(
-                            new TransportClientCached("{ \"response\" : 123 }")
-                        ),
-                        "testRoot",
-                        AbstractQueryBuilder.class
-                    ) {
-                        @Override
-                        protected Object getThis() {
-                            return null;
-                        }
+                new QueriesSafeCached(
+                    new Array<>(
+                        new AbstractQueryBuilder(
+                            new VkApiClient(
+                                new TransportClientCached(
+                                    "{ \"response\" : 123 }"
+                                )
+                            ),
+                            "testRoot",
+                            AbstractQueryBuilder.class
+                        ) {
+                            @Override
+                            protected Object getThis() {
+                                return null;
+                            }
 
-                        @Override
-                        protected Collection<String> essentialKeys() {
-                            return Collections.emptyList();
+                            @Override
+                            protected Collection<String> essentialKeys() {
+                                return Collections.emptyList();
+                            }
                         }
-                    }
+                    )
                 )
             ).results(),
             Matchers.containsInAnyOrder(

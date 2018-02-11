@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -45,7 +45,7 @@ import org.apache.commons.lang3.StringUtils;
  * @since 0.1
  */
 @Immutable
-final class PropertiesUpdate {
+public final class PropertiesUpdate {
 
     /**
      * Properties that contain the {@link AudioStatus} of audio files.
@@ -73,7 +73,7 @@ final class PropertiesUpdate {
     *  {@link QueryResultsBasic}
     *  of the queries.
     */
-    PropertiesUpdate(
+    public PropertiesUpdate(
         final ImmutableProperties properties,
         final Map<Integer, String> ids,
         final JsonArray root
@@ -127,8 +127,10 @@ final class PropertiesUpdate {
     }
 
     /**
-     * Forms a {@link Map} with attachment strings with corresponding indexes.
-     * @return A {@link Map} with attachment strings with corresponding indexes.
+     * Forms a {@link Map} with attachment
+     *  attachmentStrings with corresponding indexes.
+     * @return A {@link Map} with attachment
+     *  attachmentStrings with corresponding indexes.
      */
     private Map<Integer, String> resStrings() {
         final List<Integer> integers = new ArrayList<>(this.ids.keySet());

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.post;
+package com.driver733.vkmusicuploader.post.execution;
 
 import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPosts;
 import com.jcabi.aspects.Immutable;
@@ -42,7 +42,7 @@ import java.util.List;
  * @todo #10 Create test(s) for the class.
  */
 @Immutable
-final class UploadVerification implements UploadExecution {
+public final class UploadVerification implements UploadExecution {
 
     /**
      * {@link WallPosts} to execute and save to properties.
@@ -53,7 +53,7 @@ final class UploadVerification implements UploadExecution {
      * Ctor.
      * @param posts The {@link WallPosts} to execute and save to properties.
      */
-    UploadVerification(final WallPosts posts) {
+    public UploadVerification(final WallPosts posts) {
         this.posts = posts;
     }
 

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,8 +22,10 @@
  * SOFTWARE.
  */
 
-package com.driver733.vkmusicuploader.post;
+package com.driver733.vkmusicuploader.post.post;
 
+import com.driver733.vkmusicuploader.post.UploadServers;
+import com.driver733.vkmusicuploader.post.execution.UploadVerification;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPostsAlbum;
 import com.jcabi.aspects.Immutable;

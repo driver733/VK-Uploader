@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,28 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment;
+package com.driver733.vkmusicuploader.wallpost.attachment.upload;
 
-import java.io.IOException;
+import com.jcabi.immutable.Array;
+import com.vk.api.sdk.client.AbstractQueryBuilder;
+import com.vk.api.sdk.client.VkApiClient;
+import java.util.Collection;
 
 /**
  * Class or Interface description.
  * <p>
- * <p> Additional info
+ * Additional info
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
- * @param <T> Data objects of the specified type can be recovered.
  * @since 0.1
+ * @checkstyle ProtectedMethodInFinalClassCheck (500 lines)
  */
-public interface Recoverable<T> {
+public final class QueryFakeAudioAdd
+    extends AbstractQueryBuilder<QueryFakeAudioAdd, Integer> {
 
     /**
-     * Recover the provided data object (such as {@link java.io.File})
-     *  to its original state.
-     * @return The reference to the restored data object.
-     * @throws IOException If an error occurs while recovering.
+     * Fake audio.add query.
+     * @param client A {@link VkApiClient} that is used for all VK API requests.
      */
-    T recover() throws IOException;
+    public QueryFakeAudioAdd(final VkApiClient client) {
+        super(client, "fake.audio.add", Integer.class);
+    }
+
+    @Override
+    protected QueryFakeAudioAdd getThis() {
+        return this;
+    }
+
+    @Override
+    protected Collection<String> essentialKeys() {
+        return new Array<>();
+    }
 
 }

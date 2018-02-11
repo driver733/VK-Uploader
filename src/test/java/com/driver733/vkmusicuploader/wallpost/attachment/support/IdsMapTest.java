@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Mikhail Yakushin
+ * Copyright (c) 2018 Mikhail Yakushin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,8 +27,6 @@ import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentAddAudio;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
 import java.io.IOException;
@@ -49,7 +47,7 @@ import org.junit.Test;
  * @todo # 22 Write tests for exceptions.
  * @checkstyle JavadocMethodCheck (500 lines)
  */
-public final class QueriesFromAttachmentsTest {
+public final class IdsMapTest {
 
     /**
      * Constant.
@@ -69,10 +67,10 @@ public final class QueriesFromAttachmentsTest {
     /**
      * Object for testing purposes.
      */
-    private final QueriesFromAttachments queries;
+    private final IdsMap queries;
 
-    public QueriesFromAttachmentsTest() {
-        this.queries = new QueriesFromAttachments(
+    public IdsMapTest() {
+        this.queries = new IdsMap(
             new Array<>(
                 new AttachmentAddAudio(
                     new VkApiClient(
@@ -80,7 +78,7 @@ public final class QueriesFromAttachmentsTest {
                     ),
                     new UserActor(
                         0,
-                        QueriesFromAttachmentsTest.TOKEN1
+                        IdsMapTest.TOKEN1
                     ),
                     0,
                     1
@@ -88,12 +86,12 @@ public final class QueriesFromAttachmentsTest {
                 new AttachmentAddAudio(
                     new VkApiClient(
                         new TransportClientCached(
-                            QueriesFromAttachmentsTest.CACHE
+                            IdsMapTest.CACHE
                         )
                     ),
                     new UserActor(
                         0,
-                        QueriesFromAttachmentsTest.TOKEN2
+                        IdsMapTest.TOKEN2
                     ),
                     0,
                     2
@@ -103,55 +101,13 @@ public final class QueriesFromAttachmentsTest {
     }
 
     @Test
-    public void idsMap() throws IOException, ClientException, ApiException {
+    public void idsMap() throws IOException {
         final Map<Integer, String> expected = new HashMap<>();
         expected.put(0, "1");
         expected.put(1, "2");
         MatcherAssert.assertThat(
             this.queries.idsMap(),
             Matchers.equalTo(expected)
-        );
-    }
-
-    @Test
-    public void cached() throws IOException, ClientException, ApiException {
-        MatcherAssert.assertThat(
-            this.queries.queries(true).get(0).build(),
-            Matchers.equalTo(
-                new AttachmentAddAudio(
-                    new VkApiClient(
-                        new TransportClientCached(
-                            QueriesFromAttachmentsTest.CACHE
-                        )
-                    ),
-                    new UserActor(
-                        0,
-                        QueriesFromAttachmentsTest.TOKEN2
-                    ),
-                    0,
-                    2
-                ).upload().get(0).build()
-            )
-        );
-    }
-
-    @Test
-    public void nonCached() throws IOException, ClientException, ApiException {
-        MatcherAssert.assertThat(
-            this.queries.queries(false).get(0).build(),
-            Matchers.equalTo(
-                new AttachmentAddAudio(
-                    new VkApiClient(
-                        new TransportClientHttp()
-                    ),
-                    new UserActor(
-                        0,
-                        QueriesFromAttachmentsTest.TOKEN1
-                    ),
-                    0,
-                    1
-                ).upload().get(0).build()
-            )
         );
     }
 

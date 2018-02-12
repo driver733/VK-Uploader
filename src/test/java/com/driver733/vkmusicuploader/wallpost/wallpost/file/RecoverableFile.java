@@ -41,7 +41,7 @@ import java.util.Arrays;
 public final class RecoverableFile implements Recoverable<File> {
 
     /**
-     * Contents of file to be saved and recovered.
+     * Contents of the file to be saved and recovered.
      */
     private final byte[] contents;
 

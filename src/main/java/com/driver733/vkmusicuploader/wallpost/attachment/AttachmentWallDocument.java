@@ -23,33 +23,28 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
-import com.jcabi.aspects.Immutable;
+import com.driver733.vkmusicuploader.wallpost.attachment.upload.Upload;
+import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallDocument;
+import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import java.util.Collections;
+import com.vk.api.sdk.objects.docs.responses.DocUploadResponse;
+import com.vk.api.sdk.queries.upload.UploadDocQuery;
+import java.io.IOException;
 import java.util.List;
 
-// @checkstyle MemberNameCheck (50 lines)
-
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Attachment of a document that had been uploaded
+ *  to the wall.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
  */
-@Immutable
-public final class AttachmentAddAudio implements Attachment {
-
-    /**
-     * Group ID.
-     */
-    private static final int GROUP_ID = 161929264;
+public final class AttachmentWallDocument implements Attachment {
 
     /**
      * VKAPIClient that is used for all VK API requests.
@@ -62,48 +57,35 @@ public final class AttachmentAddAudio implements Attachment {
     private final UserActor actor;
 
     /**
-     * Audio`s owner ID.
+     * Provides a query for uploading the doc.
      */
-    private final int ownerId;
-
-    /**
-     * Audio`s media ID.
-     */
-    private final int mediaId;
-
-    // @checkstyle ParameterNameCheck (20 lines)
+    private final Upload<UploadDocQuery, DocUploadResponse> doc;
 
     /**
      * Ctor.
-     * @param actor UserActor on behalf of which all requests will be sent.
-     * @param ownerId Audio`s owner ID.
-     * @param mediaId Audio`s media ID.
      * @param client VKAPIClient that is used for all VK API requests.
-     * @checkstyle ParameterNumberCheck (10 lines)
+     * @param actor UserActor on behalf of which all requests will be sent.
+     * @param doc File that contains a doc. Typically an album toByteArray.
      */
-    public AttachmentAddAudio(
+    public AttachmentWallDocument(
         final VkApiClient client,
         final UserActor actor,
-        final int ownerId,
-        final int mediaId
+        final UploadWallDocument doc
     ) {
-        this.actor = actor;
-        this.ownerId = ownerId;
-        this.mediaId = mediaId;
         this.client = client;
+        this.actor = actor;
+        this.doc = doc;
     }
 
     @Override
     public List<AbstractQueryBuilder> upload()
-        throws ClientException, ApiException {
-        return Collections.singletonList(
-            this.client.audio()
-                .add(
-                    this.actor,
-                    this.mediaId,
-                    this.ownerId
-                )
-                .groupId(AttachmentAddAudio.GROUP_ID)
+        throws ClientException, ApiException, IOException {
+        final DocUploadResponse response = this.doc.query().execute();
+        return new Array<>(
+            this.client.docs().save(
+                this.actor,
+                response.getFile()
+            )
         );
     }
 

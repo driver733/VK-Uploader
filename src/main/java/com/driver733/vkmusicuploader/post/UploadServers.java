@@ -46,7 +46,7 @@ public final class UploadServers {
     /**
      * Group ID.
      */
-    private static final int GROUP_ID = 92444715;
+    private static final int GROUP_ID = 161929264;
 
     /**
      * VKAPIClient that is used for all VK API requests.
@@ -80,7 +80,12 @@ public final class UploadServers {
         /**
          * AUDIO.
          */
-        AUDIO
+        AUDIO,
+
+        /**
+         * Document that will be uploaded to wall.
+         */
+        WALL_DOC,
     }
 
     /**
@@ -101,6 +106,9 @@ public final class UploadServers {
                     break;
                 case WALL_PHOTO:
                     result = this.wallPhotoUploadUrl();
+                    break;
+                case WALL_DOC:
+                    result = this.wallDocUploadUrl();
                     break;
                 default:
                     throw new IOException("Unknown upload server requested");
@@ -125,6 +133,22 @@ public final class UploadServers {
     private String audioUploadUrl() throws ClientException, ApiException {
         return this.client.audio()
             .getUploadServer(this.actor)
+            .execute()
+            .getUploadUrl();
+    }
+
+    /**
+     * Acquires an upload URL for wall docs
+     * (or uses a cached one if it is available).
+     * @return Upload URL for wall photos.
+     * @throws ClientException VK client error.
+     * @throws ApiException VK API error.
+     */
+    @Cacheable(forever = true)
+    private String wallDocUploadUrl() throws ClientException, ApiException {
+        return this.client.docs()
+            .getWallUploadServer(this.actor)
+            .groupId(UploadServers.GROUP_ID)
             .execute()
             .getUploadUrl();
     }

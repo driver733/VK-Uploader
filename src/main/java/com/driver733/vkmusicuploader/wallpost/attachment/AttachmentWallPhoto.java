@@ -53,7 +53,7 @@ public final class AttachmentWallPhoto implements Attachment {
     /**
      * Group ID.
      */
-    private static final int GROUP_ID = 92444715;
+    private static final int GROUP_ID = 161929264;
 
     /**
      * VKAPIClient that is used for all VK API requests.

@@ -56,6 +56,11 @@ import java.util.List;
 public final class AttachmentAudio implements Attachment {
 
     /**
+     * Group ID.
+     */
+    private static final int GROUP_ID = 161929264;
+
+    /**
      * {@link VkApiClient} that is used for all VK API requests.
      */
     private final VkApiClient client;
@@ -140,11 +145,11 @@ public final class AttachmentAudio implements Attachment {
         ).saveProps();
         return new Array<>(
             new AudioAddQuery(
-            this.client,
-            this.actor,
-            audio.getId(),
-            audio.getOwnerId()
-            )
+                this.client,
+                this.actor,
+                audio.getId(),
+                audio.getOwnerId()
+            ).groupId(AttachmentAudio.GROUP_ID)
         );
     }
 

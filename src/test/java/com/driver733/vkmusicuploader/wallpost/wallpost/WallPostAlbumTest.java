@@ -253,9 +253,9 @@ public final class WallPostAlbumTest {
                 Matchers.hasEntry("v", "5.63"),
                 Matchers.hasEntry(
                     "attachments",
-                    "photo6785_123456,audio-92444715_123456789"
+                    "photo6785_123456,audio-161929264_123456789"
                 ),
-                Matchers.hasEntry("owner_id", "-92444715"),
+                Matchers.hasEntry("owner_id", "-161929264"),
                 Matchers.hasEntry("from_group", "1"),
                 Matchers.hasEntry(
                     "message",

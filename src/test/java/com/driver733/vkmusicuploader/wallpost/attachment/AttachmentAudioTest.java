@@ -58,6 +58,11 @@ import org.junit.Test;
 public final class AttachmentAudioTest {
 
     /**
+     * Group ID.
+     */
+    private static final int GROUP_ID = 161929264;
+
+    /**
      * VK API endpoint - audio.save.
      */
     private static final String AUDIO_SAVE_URL =
@@ -142,7 +147,8 @@ public final class AttachmentAudioTest {
                     ),
                     1,
                     2
-                ).build()
+                ).groupId(AttachmentAudioTest.GROUP_ID)
+                    .build()
             )
         );
     }

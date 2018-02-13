@@ -93,7 +93,7 @@ public final class WallPostWithAttachmentsTest {
                 Matchers.hasEntry("v", "5.63"),
                 Matchers.hasEntry(
                     "attachments",
-                    "audio-92444715_1,audio-92444715_2"
+                    "audio-161929264_1,audio-161929264_2"
                 )
             )
         );

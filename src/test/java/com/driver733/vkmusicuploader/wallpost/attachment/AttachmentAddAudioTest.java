@@ -51,7 +51,7 @@ public final class AttachmentAddAudioTest {
     /**
      * Group ID.
      */
-    private static final int GROUP_ID = 92444715;
+    private static final int GROUP_ID = 161929264;
 
     @Test
     public void testBasic() throws ClientException, ApiException {

@@ -56,7 +56,7 @@ public final class AttachmentWallPhotoTest {
     /**
      * Group ID.
      */
-    private static final int GROUP_ID = 92444715;
+    private static final int GROUP_ID = 161929264;
 
     @Test
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")

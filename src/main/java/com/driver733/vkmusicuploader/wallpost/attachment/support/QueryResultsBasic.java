@@ -90,8 +90,12 @@ public final class QueryResultsBasic implements QueryResults {
 
     @Override
     public boolean fullyCached() {
+        final List<AbstractQueryBuilder> list = this.queries.queries();
         boolean result = true;
-        for (final AbstractQueryBuilder query : this.queries.queries()) {
+        if (list.isEmpty()) {
+            result = false;
+        }
+        for (final AbstractQueryBuilder query : list) {
             if (!query.isCached()) {
                 result = false;
             }

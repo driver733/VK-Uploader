@@ -67,7 +67,7 @@ public final class WallPostAlbum implements WallPost {
     /**
      * Group ID.
      */
-    private static final int GROUP_ID = 92444715;
+    private static final int GROUP_ID = 161929264;
 
     /**
      * {@link VkApiClient} for all requests.

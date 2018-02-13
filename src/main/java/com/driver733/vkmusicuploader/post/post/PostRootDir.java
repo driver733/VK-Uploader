@@ -88,7 +88,9 @@ public final class PostRootDir implements Post {
     }
 
     @Override
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    @SuppressWarnings({"PMD.AvoidInstantiatingObjectsInLoops",
+        "PMD.ExceptionAsFlowControl",
+        "PMD.PreserveStackTrace"})
     public void post() throws IOException {
         final File[] dirs = this.directory.listFiles(File::isDirectory);
         if (dirs == null) {
@@ -97,20 +99,30 @@ public final class PostRootDir implements Post {
             );
         }
         for (final File dir : dirs) {
+            final ImmutableProperties props = new ImmutableProperties(
+                new File(
+                    String.format(
+                        "%s/vkmu.properties",
+                        dir.getAbsolutePath()
+                    )
+                )
+            );
+            try {
+                props.load();
+            } catch (final IOException ex) {
+                try {
+                    props.store();
+                } catch (final IOException exx) {
+                    throw new IOException("Failed to init props", exx);
+                }
+            }
             new UploadVerification(
                 new WallPostsAlbum(
                     this.client,
                     this.actor,
                     dir,
                     this.servers,
-                    new ImmutableProperties(
-                        new File(
-                            String.format(
-                                "%s/vkmu.properties",
-                                dir.getAbsolutePath()
-                            )
-                        )
-                    )
+                    props
                 )
             ).execute();
         }

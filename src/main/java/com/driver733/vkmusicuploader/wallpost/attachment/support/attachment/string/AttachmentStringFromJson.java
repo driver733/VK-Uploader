@@ -44,7 +44,7 @@ public final class AttachmentStringFromJson implements AttachmentString {
      * Group ID.
      * @checkstyle ConstantUsageCheck (3 lines)
      */
-    private static final int GROUP_ID = 92444715;
+    private static final int GROUP_ID = 161929264;
 
     /**
      * JsonElement that contains the response of the query.
@@ -84,6 +84,13 @@ public final class AttachmentStringFromJson implements AttachmentString {
                 formatted = String.format(
                     "%s%d_%d",
                     AttachmentType.PHOTO,
+                    object.get("owner_id").getAsInt(),
+                    object.get("id").getAsInt()
+                );
+            } else if (object.has("ext")) {
+                formatted = String.format(
+                    "%s%d_%d",
+                    AttachmentType.DOC,
                     object.get("owner_id").getAsInt(),
                     object.get("id").getAsInt()
                 );

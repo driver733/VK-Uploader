@@ -42,9 +42,8 @@ public final class AttachmentStringFromJson implements AttachmentString {
 
     /**
      * Group ID.
-     * @checkstyle ConstantUsageCheck (3 lines)
      */
-    private static final int GROUP_ID = 161929264;
+    private final int group;
 
     /**
      * JsonElement that contains the response of the query.
@@ -54,9 +53,14 @@ public final class AttachmentStringFromJson implements AttachmentString {
     /**
      * Ctor.
      * @param element JsonElement that contains the response of the query.
+     * @param group Group ID.
      */
-    public AttachmentStringFromJson(final JsonElement element) {
+    public AttachmentStringFromJson(
+        final JsonElement element,
+        final int group
+    ) {
         this.element = element;
+        this.group = group;
     }
 
     @Override
@@ -68,7 +72,7 @@ public final class AttachmentStringFromJson implements AttachmentString {
             formatted = String.format(
                 "%s%d_%d",
                 AttachmentType.AUDIO,
-                -AttachmentStringFromJson.GROUP_ID,
+                -this.group,
                 this.element.getAsInt()
             );
         } else if (this.element.isJsonObject()) {

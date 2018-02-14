@@ -49,10 +49,15 @@ import org.junit.Test;
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (20 lines)
- * @checkstyle LocalFinalVariableNameCheck (20 lines)
+ * @checkstyle LocalFinalVariableNameCheck (200 lines)
  */
 @Immutable
 public final class PropertiesUpdateTest {
+
+    /**
+     * Group ID.
+     */
+    private static final int GROUP_ID = 161929264;
 
     /**
      * UploadedMediaId - AudioStatus.Uploaded .
@@ -86,7 +91,8 @@ public final class PropertiesUpdateTest {
                         ),
                         new UserActor(0, ""),
                         ownerId,
-                        uploadedMediaId
+                        uploadedMediaId,
+                        PropertiesUpdateTest.GROUP_ID
                     )
                 )
             ).idsMap(),

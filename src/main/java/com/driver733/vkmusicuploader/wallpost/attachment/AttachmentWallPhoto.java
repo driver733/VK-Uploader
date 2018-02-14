@@ -53,7 +53,7 @@ public final class AttachmentWallPhoto implements Attachment {
     /**
      * Group ID.
      */
-    private static final int GROUP_ID = 161929264;
+    private final int group;
 
     /**
      * VKAPIClient that is used for all VK API requests.
@@ -75,15 +75,19 @@ public final class AttachmentWallPhoto implements Attachment {
      * @param client VKAPIClient that is used for all VK API requests.
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param photo File that contains a photo. Typically an album toByteArray.
+     * @param group Group ID.
+     * @checkstyle ParameterNumberCheck (10 lines)
      */
     public AttachmentWallPhoto(
         final VkApiClient client,
         final UserActor actor,
-        final UploadWallPhoto photo
+        final UploadWallPhoto photo,
+        final int group
     ) {
         this.client = client;
         this.actor = actor;
         this.photo = photo;
+        this.group = group;
     }
 
     @Override
@@ -96,7 +100,7 @@ public final class AttachmentWallPhoto implements Attachment {
                 .saveWallPhoto(this.actor, response.getPhoto())
                 .server(response.getServer())
                 .hash(response.getHash())
-                .groupId(AttachmentWallPhoto.GROUP_ID)
+                .groupId(this.group)
         );
         return result;
     }

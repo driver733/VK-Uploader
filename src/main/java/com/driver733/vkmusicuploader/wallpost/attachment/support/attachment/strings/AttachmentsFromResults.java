@@ -45,6 +45,11 @@ import java.util.List;
 public final class AttachmentsFromResults implements AttachmentStrings {
 
     /**
+     * Group ID.
+     */
+    private final int group;
+
+    /**
      * JsonArray that contains the
      *  {@link QueryResultsBasic}
      *  of the queries.
@@ -56,9 +61,11 @@ public final class AttachmentsFromResults implements AttachmentStrings {
     * @param root JsonArray that contains the
     *  {@link QueryResultsBasic}
     *  of the queries.
+    * @param group Group ID.
     */
-    public AttachmentsFromResults(final JsonArray root) {
+    public AttachmentsFromResults(final JsonArray root, final int group) {
         this.root = root;
+        this.group = group;
     }
 
     @Override
@@ -67,7 +74,7 @@ public final class AttachmentsFromResults implements AttachmentStrings {
         final List<String> list = new ArrayList<>(this.root.size());
         for (final JsonElement element : this.root) {
             list.addAll(
-                new AttachmentStringsFromJson(element)
+                new AttachmentStringsFromJson(element, this.group)
                     .attachmentStrings()
             );
         }

@@ -53,6 +53,11 @@ import org.junit.Test;
 public final class PostRootDirTest {
 
     /**
+     * Group ID.
+     */
+    private static final int GROUP_ID = 161929264;
+
+    /**
      * VK API endpoint - photos.saveWallPhoto.
      */
     private static final String PHOTO_SAVE_URL =
@@ -223,8 +228,10 @@ public final class PostRootDirTest {
                 ),
                 new UserActor(
                     1, "1"
-                )
-            )
+                ),
+                PostRootDirTest.GROUP_ID
+            ),
+            PostRootDirTest.GROUP_ID
         ).post();
         Assert.assertTrue(
             "The files differ",

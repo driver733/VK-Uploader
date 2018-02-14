@@ -54,9 +54,15 @@ import java.util.List;
  * @version $Id$
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (20 lines)
+ * @checkstyle ParameterNumberCheck (10 lines)
  */
 @Immutable
 public final class AttachmentArrays implements AttachmentsFields {
+
+    /**
+     * Group ID.
+     */
+    private final int group;
 
     /**
      * Array of attachmentsFields.
@@ -78,16 +84,20 @@ public final class AttachmentArrays implements AttachmentsFields {
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param properties Properties that contain the
      *  {@link AudioStatus} of audio files.
+     * @param group Group ID.
      * @param attachments Attachments.
+     * @checkstyle ParameterNumberCheck (10 lines)
      */
     public AttachmentArrays(
         final UserActor actor,
         final ImmutableProperties properties,
+        final int group,
         final Attachment... attachments
     ) {
         this.attachments = new Array<>(attachments);
         this.actor = actor;
         this.properties = properties;
+        this.group = group;
     }
 
     @Override
@@ -118,7 +128,8 @@ public final class AttachmentArrays implements AttachmentsFields {
         ).save();
         try {
             return new AttachmentsFromResults(
-                root.getAsJsonArray()
+                root.getAsJsonArray(),
+                this.group
             ).attachmentStrings();
         } catch (final IOException ex) {
             throw new IOException(

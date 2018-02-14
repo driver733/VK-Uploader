@@ -45,6 +45,11 @@ import org.junit.Test;
  */
 public final class AttachmentFromResultsTest {
 
+    /**
+     * Group ID.
+     */
+    private static final int GROUP_ID = 161929264;
+
     @Test
     public void statusUploadedAudio() throws IOException {
         MatcherAssert.assertThat(
@@ -71,7 +76,8 @@ public final class AttachmentFromResultsTest {
                             + "]",
                         JsonArray.class
                     )
-                    .getAsJsonArray()
+                    .getAsJsonArray(),
+                AttachmentFromResultsTest.GROUP_ID
             ).attachmentStrings(),
             Matchers.containsInAnyOrder(
                 "audio1111111_1000000", "audio2222222_2000000"
@@ -123,7 +129,8 @@ public final class AttachmentFromResultsTest {
                             + "]",
                         JsonArray.class
                     )
-                    .getAsJsonArray()
+                    .getAsJsonArray(),
+                AttachmentFromResultsTest.GROUP_ID
             ).attachmentStrings(),
             Matchers.containsInAnyOrder(
                 "photo111111_333333", "photo222222_444444"
@@ -139,7 +146,8 @@ public final class AttachmentFromResultsTest {
                     .setPrettyPrinting()
                     .create()
                     .fromJson("[123456789, 987654321]", JsonArray.class)
-                    .getAsJsonArray()
+                    .getAsJsonArray(),
+                AttachmentFromResultsTest.GROUP_ID
             ).attachmentStrings(),
             Matchers.containsInAnyOrder(
                 "audio-161929264_123456789", "audio-161929264_987654321"

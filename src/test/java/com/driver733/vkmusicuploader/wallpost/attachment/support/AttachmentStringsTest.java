@@ -45,6 +45,11 @@ import org.junit.Test;
  */
 public final class AttachmentStringsTest {
 
+    /**
+     * Group ID.
+     */
+    private static final int GROUP_ID = 161929264;
+
     @Test
     public void object() throws IOException {
         MatcherAssert.assertThat(
@@ -63,7 +68,8 @@ public final class AttachmentStringsTest {
                             + "}",
                         JsonObject.class
                     )
-                    .getAsJsonObject()
+                    .getAsJsonObject(),
+                AttachmentStringsTest.GROUP_ID
             ).attachmentStrings(),
             Matchers.containsInAnyOrder(
                 "audio1111111_1000000"
@@ -98,7 +104,8 @@ public final class AttachmentStringsTest {
                             + "]",
                         JsonArray.class
                     )
-                    .getAsJsonArray()
+                    .getAsJsonArray(),
+                AttachmentStringsTest.GROUP_ID
             ).attachmentStrings(),
             Matchers.containsInAnyOrder(
                 "audio111111_3000000", "audio2222222_2000000"

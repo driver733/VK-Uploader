@@ -52,6 +52,11 @@ import org.junit.Test;
 public final class WallPostWithAttachmentsTest {
 
     /**
+     * Group ID.
+     */
+    private static final int GROUP_ID = 161929264;
+
+    /**
      * Test properties.
      */
     private final Path properties =
@@ -83,6 +88,7 @@ public final class WallPostWithAttachmentsTest {
                     new ImmutableProperties(
                         this.properties.toFile()
                     ),
+                    WallPostWithAttachmentsTest.GROUP_ID,
                     new AttachmentFakeAudio(
                         1, 2
                     )

@@ -58,7 +58,7 @@ public final class AttachmentAudio implements Attachment {
     /**
      * Group ID.
      */
-    private static final int GROUP_ID = 161929264;
+    private final int group;
 
     /**
      * {@link VkApiClient} that is used for all VK API requests.
@@ -86,6 +86,7 @@ public final class AttachmentAudio implements Attachment {
      *  that is used for all VK API requests.
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param audios Audios files.
+     * @param group Group ID.
      * @param properties Properties that contain the
      *  {@link AudioStatus} of audio files.
      * @checkstyle ParameterNumberCheck (10 lines)
@@ -94,11 +95,13 @@ public final class AttachmentAudio implements Attachment {
         final VkApiClient client,
         final UserActor actor,
         final ImmutableProperties properties,
+        final int group,
         final UploadAudio... audios
     ) {
         this.client = client;
         this.actor = actor;
         this.properties = properties;
+        this.group = group;
         this.audios = new Array<>(audios);
     }
 
@@ -149,7 +152,7 @@ public final class AttachmentAudio implements Attachment {
                 this.actor,
                 audio.getId(),
                 audio.getOwnerId()
-            ).groupId(AttachmentAudio.GROUP_ID)
+            ).groupId(this.group)
         );
     }
 

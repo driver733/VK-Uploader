@@ -47,6 +47,11 @@ import java.io.IOException;
 public final class PostRootDir implements Post {
 
     /**
+     * Group ID.
+     */
+    private final int group;
+
+    /**
      * Root directory that contains directories with albums.
      */
     private final File directory;
@@ -73,18 +78,21 @@ public final class PostRootDir implements Post {
      * @param dir Root directory that contains directories with albums.
      * @param servers Upload servers
      *  that provide upload URLs for attachmentsFields.
+     * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
     public PostRootDir(
         final VkApiClient client,
         final UserActor actor,
         final File dir,
-        final UploadServers servers
+        final UploadServers servers,
+        final int group
     ) {
         this.client = client;
         this.directory = dir;
         this.actor = actor;
         this.servers = servers;
+        this.group = group;
     }
 
     @Override
@@ -122,7 +130,8 @@ public final class PostRootDir implements Post {
                     this.actor,
                     dir,
                     this.servers,
-                    props
+                    props,
+                    this.group
                 )
             ).execute();
         }

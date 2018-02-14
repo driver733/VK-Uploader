@@ -88,7 +88,8 @@ public final class AttachmentWallPhotoTest {
                             );
                         }
                     }
-                )
+                ),
+                AttachmentWallPhotoTest.GROUP_ID
             ).upload().get(0).build(),
             Matchers.equalTo(
                 new PhotosSaveWallPhotoQuery(

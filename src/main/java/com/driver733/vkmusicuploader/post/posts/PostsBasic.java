@@ -44,6 +44,11 @@ import java.io.File;
 public final class PostsBasic implements Posts {
 
     /**
+     * Group ID.
+     */
+    private final int group;
+
+    /**
      * {@link VkApiClient} for all requests.
      */
     private final VkApiClient client;
@@ -64,15 +69,19 @@ public final class PostsBasic implements Posts {
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param servers Upload servers that
      *  provide upload URLs for attachmentsFields.
+     * @param group Group ID.
+     * @checkstyle ParameterNumberCheck (10 lines)
      */
     public PostsBasic(
         final VkApiClient client,
         final UserActor actor,
-        final UploadServers servers
+        final UploadServers servers,
+        final int group
     ) {
         this.client = client;
         this.actor = actor;
         this.servers = servers;
+        this.group = group;
     }
 
     @Override
@@ -81,7 +90,8 @@ public final class PostsBasic implements Posts {
             this.client,
             this.actor,
             dir,
-            this.servers
+            this.servers,
+            this.group
         );
     }
 

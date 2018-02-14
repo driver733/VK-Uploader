@@ -27,8 +27,6 @@ import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,7 +47,7 @@ public final class AttachmentAddAudio implements Attachment {
     /**
      * Group ID.
      */
-    private static final int GROUP_ID = 161929264;
+    private final int group;
 
     /**
      * VKAPIClient that is used for all VK API requests.
@@ -79,23 +77,25 @@ public final class AttachmentAddAudio implements Attachment {
      * @param ownerId Audio`s owner ID.
      * @param mediaId Audio`s media ID.
      * @param client VKAPIClient that is used for all VK API requests.
+     * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
     public AttachmentAddAudio(
         final VkApiClient client,
         final UserActor actor,
         final int ownerId,
-        final int mediaId
+        final int mediaId,
+        final int group
     ) {
         this.actor = actor;
         this.ownerId = ownerId;
         this.mediaId = mediaId;
         this.client = client;
+        this.group = group;
     }
 
     @Override
-    public List<AbstractQueryBuilder> upload()
-        throws ClientException, ApiException {
+    public List<AbstractQueryBuilder> upload() {
         return Collections.singletonList(
             this.client.audio()
                 .add(
@@ -103,7 +103,7 @@ public final class AttachmentAddAudio implements Attachment {
                     this.mediaId,
                     this.ownerId
                 )
-                .groupId(AttachmentAddAudio.GROUP_ID)
+                .groupId(this.group)
         );
     }
 

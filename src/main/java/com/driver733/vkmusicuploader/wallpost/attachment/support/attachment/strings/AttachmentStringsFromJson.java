@@ -44,6 +44,11 @@ import java.util.List;
 public final class AttachmentStringsFromJson implements AttachmentStrings {
 
     /**
+     * Group ID.
+     */
+    private final int group;
+
+    /**
      * A {@link JsonElement} that contains attachment attachmentString(s).
      */
     private final JsonElement root;
@@ -52,9 +57,11 @@ public final class AttachmentStringsFromJson implements AttachmentStrings {
      * Ctor.
      * @param root A {@link JsonElement}
      *  that contains attachment attachmentString(s).
+     * @param group Group ID.
      */
-    public AttachmentStringsFromJson(final JsonElement root) {
+    public AttachmentStringsFromJson(final JsonElement root, final int group) {
         this.root = root;
+        this.group = group;
     }
 
     @Override
@@ -68,7 +75,8 @@ public final class AttachmentStringsFromJson implements AttachmentStrings {
                 for (final JsonElement element : array) {
                     list.add(
                         new AttachmentStringFromJson(
-                            element.getAsJsonObject()
+                            element.getAsJsonObject(),
+                            this.group
                         ).attachmentString()
                     );
                 }
@@ -76,7 +84,8 @@ public final class AttachmentStringsFromJson implements AttachmentStrings {
                 list = new ArrayList<>(1);
                 list.add(
                     new AttachmentStringFromJson(
-                        this.root
+                        this.root,
+                        this.group
                     ).attachmentString()
                 );
             }

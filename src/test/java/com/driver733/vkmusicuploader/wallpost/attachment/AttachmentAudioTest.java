@@ -117,6 +117,7 @@ public final class AttachmentAudioTest {
                         "src/test/resources/attachmentAudioTest.properties"
                     )
                 ),
+                AttachmentAudioTest.GROUP_ID,
                 new UploadAudio(
                     new VkApiClient(
                         new TransportClientCached(

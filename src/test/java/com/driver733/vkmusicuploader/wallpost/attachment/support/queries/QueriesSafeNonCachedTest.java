@@ -49,6 +49,11 @@ import org.junit.Test;
 public final class QueriesSafeNonCachedTest {
 
     /**
+     * Group ID.
+     */
+    private static final int GROUP_ID = 161929264;
+
+    /**
      * Constant.
      */
     private static final String TOKEN1 = "TOKEN1";
@@ -78,7 +83,8 @@ public final class QueriesSafeNonCachedTest {
                                 QueriesSafeNonCachedTest.TOKEN1
                             ),
                             0,
-                            1
+                            1,
+                            QueriesSafeNonCachedTest.GROUP_ID
                         ),
                         new AttachmentAddAudio(
                             new VkApiClient(
@@ -91,7 +97,8 @@ public final class QueriesSafeNonCachedTest {
                                 QueriesSafeNonCachedTest.TOKEN2
                             ),
                             0,
-                            2
+                            2,
+                            QueriesSafeNonCachedTest.GROUP_ID
                         )
                     )
                 ).queries()
@@ -106,7 +113,8 @@ public final class QueriesSafeNonCachedTest {
                             QueriesSafeNonCachedTest.TOKEN1
                         ),
                         0,
-                        1
+                        1,
+                        QueriesSafeNonCachedTest.GROUP_ID
                     ).upload().get(0).build()
                 )
         );

@@ -43,6 +43,11 @@ import org.junit.Test;
  */
 public final class UploadServersTest {
 
+    /**
+     * Group ID.
+     */
+    private static final int GROUP_ID = 161929264;
+
     @Test
     public void audio() throws IOException {
         MatcherAssert.assertThat(
@@ -52,7 +57,8 @@ public final class UploadServersTest {
                         "{ \"upload_url\" : \"http://test.com/audio\" }"
                     )
                 ),
-                new UserActor(1, "")
+                new UserActor(1, ""),
+                UploadServersTest.GROUP_ID
             ).uploadUrl(UploadServers.Type.AUDIO),
             Matchers.equalTo("http://test.com/audio")
         );
@@ -67,7 +73,8 @@ public final class UploadServersTest {
                         "{ \"upload_url\" : \"http://test.com/wallPhoto\" }"
                     )
                 ),
-                new UserActor(1, "")
+                new UserActor(1, ""),
+                UploadServersTest.GROUP_ID
             ).uploadUrl(UploadServers.Type.WALL_PHOTO),
             Matchers.equalTo("http://test.com/wallPhoto")
         );

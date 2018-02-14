@@ -59,6 +59,11 @@ import org.junit.Test;
 public final class WallPostAlbumTest {
 
     /**
+     * Group ID.
+     */
+    private static final int GROUP_ID = 161929264;
+
+    /**
      * VK API endpoint - photos.saveWallPhoto.
      */
     private static final String PHOTO_SAVE_URL =
@@ -238,14 +243,16 @@ public final class WallPostAlbumTest {
                                 }
                             }
                        )
-                   ),
-                   new UserActor(
-                       1, "1"
-                   )
-               ),
-               new ImmutableProperties(
-                   this.properties.toFile()
-               )
+                    ),
+                    new UserActor(
+                        1, "1"
+                    ),
+                    WallPostAlbumTest.GROUP_ID
+                ),
+                new ImmutableProperties(
+                    this.properties.toFile()
+                ),
+                WallPostAlbumTest.GROUP_ID
             ).construct()
                 .build(),
             Matchers.allOf(

@@ -46,7 +46,7 @@ public final class UploadServers {
     /**
      * Group ID.
      */
-    private static final int GROUP_ID = 161929264;
+    private final int group;
 
     /**
      * VKAPIClient that is used for all VK API requests.
@@ -62,10 +62,16 @@ public final class UploadServers {
      * Ctor.
      * @param client VKAPIClient that is used for all VK API requests.
      * @param actor UserActor on behalf of which all requests will be sent.
+     * @param group Group ID.
      */
-    public UploadServers(final VkApiClient client, final UserActor actor) {
+    public UploadServers(
+        final VkApiClient client,
+        final UserActor actor,
+        final int group
+    ) {
         this.client = client;
         this.actor = actor;
+        this.group = group;
     }
 
     /**
@@ -148,7 +154,7 @@ public final class UploadServers {
     private String wallDocUploadUrl() throws ClientException, ApiException {
         return this.client.docs()
             .getWallUploadServer(this.actor)
-            .groupId(UploadServers.GROUP_ID)
+            .groupId(this.group)
             .execute()
             .getUploadUrl();
     }
@@ -164,7 +170,7 @@ public final class UploadServers {
     private String wallPhotoUploadUrl() throws ClientException, ApiException {
         return this.client.photos()
             .getWallUploadServer(this.actor)
-            .groupId(UploadServers.GROUP_ID)
+            .groupId(this.group)
             .execute()
             .getUploadUrl();
     }

@@ -94,6 +94,11 @@ public final class WallPostsAlbum implements WallPosts {
         WallPostsAlbum.MAX_ATTACHMENTS - WallPostsAlbum.PHOTOS_IN_POST;
 
     /**
+     * Group ID.
+     */
+    private final int group;
+
+    /**
      * {@link VkApiClient} for all requests.
      */
     private final VkApiClient client;
@@ -127,6 +132,7 @@ public final class WallPostsAlbum implements WallPosts {
      *  for attachmentsFields.
      * @param properties Properties that contain the
      *  {@link AudioStatus}es of audio files.
+     * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
     public WallPostsAlbum(
@@ -134,13 +140,15 @@ public final class WallPostsAlbum implements WallPosts {
         final UserActor actor,
         final File dir,
         final UploadServers servers,
-        final ImmutableProperties properties
+        final ImmutableProperties properties,
+        final int group
     ) {
         this.client = client;
         this.actor = actor;
         this.dir = dir;
         this.servers = servers;
         this.properties = properties;
+        this.group = group;
     }
 
     // @checkstyle LocalFinalVariableNameCheck (20 lines)
@@ -248,7 +256,8 @@ public final class WallPostsAlbum implements WallPosts {
                         audios.subList(from, to)
                     ),
                     this.servers,
-                    this.properties
+                    this.properties,
+                    this.group
                 ).construct();
             } catch (final IOException ex) {
                 throw new IOException("Failed to obtain a WallPost query", ex);

@@ -44,6 +44,11 @@ import org.junit.Test;
  */
 public final class AttachmentStringFromJsonTest {
 
+    /**
+     * Group ID.
+     */
+    private static final int GROUP_ID = 161929264;
+
     @Test
     public void test() throws IOException {
         MatcherAssert.assertThat(
@@ -61,7 +66,8 @@ public final class AttachmentStringFromJsonTest {
                             + "\"url\"       : \"http://test1.com\" "
                             + "}",
                         JsonObject.class
-                    ).getAsJsonObject()
+                    ).getAsJsonObject(),
+                AttachmentStringFromJsonTest.GROUP_ID
             ).attachmentString(),
             Matchers.equalTo(
                 "audio1111111_1000000"

@@ -67,7 +67,7 @@ public final class WallPostAlbum implements WallPost {
     /**
      * Group ID.
      */
-    private static final int GROUP_ID = 161929264;
+    private final int group;
 
     /**
      * {@link VkApiClient} for all requests.
@@ -102,6 +102,7 @@ public final class WallPostAlbum implements WallPost {
      *  that provide upload URLs for attachmentsFields.
      * @param properties Properties that contain the
      *  {@link AudioStatus} of audio files.
+     * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
     public WallPostAlbum(
@@ -109,13 +110,15 @@ public final class WallPostAlbum implements WallPost {
         final UserActor actor,
         final List<File> audios,
         final UploadServers servers,
-        final ImmutableProperties properties
+        final ImmutableProperties properties,
+        final int group
     ) {
         this.client = client;
         this.audios = new Array<>(audios);
         this.actor = actor;
         this.servers = servers;
         this.properties = properties;
+        this.group = group;
     }
 
     /**
@@ -148,6 +151,7 @@ public final class WallPostAlbum implements WallPost {
                         new AttachmentArrays(
                             this.actor,
                             this.properties,
+                            this.group,
                             new AttachmentWallPhoto(
                                 this.client,
                                 this.actor,
@@ -172,7 +176,8 @@ public final class WallPostAlbum implements WallPost {
                                             )
                                         )
                                     )
-                                )
+                                ),
+                                this.group
                             ),
                             new AttachmentCachedAudio(
                                 this.client,
@@ -181,7 +186,8 @@ public final class WallPostAlbum implements WallPost {
                                     UploadServers.Type.AUDIO
                                 ),
                                 this.properties,
-                                this.audios
+                                this.audios,
+                                this.group
                             )
                         )
                     ),
@@ -195,7 +201,7 @@ public final class WallPostAlbum implements WallPost {
                     ).construct()
                 )
             ),
-            -WallPostAlbum.GROUP_ID
+            -this.group
         ).construct();
     }
 

@@ -57,6 +57,11 @@ import org.apache.commons.lang3.StringUtils;
 public final class AttachmentCachedAudio implements Attachment {
 
     /**
+     * Group ID.
+     */
+    private final int group;
+
+    /**
      * {@link VkApiClient} for all requests.
      */
     private final VkApiClient client;
@@ -88,7 +93,8 @@ public final class AttachmentCachedAudio implements Attachment {
      * @param url Audio upload URL for the audio files.
      * @param properties Properties that contain the
      *  {@link AudioStatus} of audio files.
-     * @param audios Audios files.*
+     * @param audios Audios files.
+     * @param group Group ID.
      * @checkstyle ParameterNumberCheck (2 lines)
      */
     public AttachmentCachedAudio(
@@ -96,13 +102,15 @@ public final class AttachmentCachedAudio implements Attachment {
         final UserActor actor,
         final String url,
         final ImmutableProperties properties,
-        final List<File> audios
+        final List<File> audios,
+        final int group
     ) {
         this.client = client;
         this.audios = new Array<>(audios);
         this.actor = actor;
         this.url = url;
         this.properties = properties;
+        this.group = group;
     }
 
     @Override
@@ -146,6 +154,7 @@ public final class AttachmentCachedAudio implements Attachment {
                 this.client,
                 this.actor,
                 this.properties,
+                this.group,
                 new UploadAudio(
                     this.client, this.url, audio
                 )
@@ -174,7 +183,8 @@ public final class AttachmentCachedAudio implements Attachment {
                     this.client,
                     this.actor,
                     ownerId,
-                    mediaId
+                    mediaId,
+                    this.group
                 ).upload();
             } else if (status == 1) {
                 final String mediaId = value.substring(

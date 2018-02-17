@@ -30,6 +30,8 @@ import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
 import com.vk.api.sdk.objects.wall.WallpostFull;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -53,17 +55,38 @@ public final class WallPostWithMessageIT {
 
     @Test
     public void test() throws IOException, ClientException, ApiException {
+        final String user = new String(
+            Files.readAllBytes(
+                Paths.get(
+                    System.getProperty("userId")
+                )
+            )
+        );
+        final String token = new String(
+            Files.readAllBytes(
+                Paths.get(
+                    System.getProperty("token")
+                )
+            )
+        );
+        final String group = new String(
+            Files.readAllBytes(
+                Paths.get(
+                    System.getProperty("groupId")
+                )
+            )
+        );
         final VkApiClient client = new VkApiClient(
             new TransportClientHttp()
         );
         final UserActor actor = new UserActor(
             Integer.parseInt(
-                System.getProperty("userId")
+                user
             ),
-            System.getProperty("token")
+            token
         );
-        final int group = Integer.parseInt(
-            System.getProperty("groupId")
+        final int groupid = Integer.parseInt(
+            group
         );
         final int post = new WallPostWithOwnerId(
             new WallPostWithMessage(
@@ -73,10 +96,10 @@ public final class WallPostWithMessageIT {
                 ),
                 WallPostWithMessageIT.MESSAGE
             ),
-            -group
+            -groupid
         ).construct().execute().getPostId();
         final List<WallpostFull> result = client.wall().getById(
-            actor, String.format("%d_%d", -group, post)
+            actor, String.format("%d_%d", -groupid, post)
         ).execute();
         MatcherAssert.assertThat(
             result.get(0).getText(),
@@ -86,7 +109,7 @@ public final class WallPostWithMessageIT {
         );
         client.wall()
             .delete(actor)
-            .ownerId(-group)
+            .ownerId(-groupid)
             .postId(post)
             .execute();
     }

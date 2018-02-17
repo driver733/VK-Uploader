@@ -1,18 +1,18 @@
 /**
  * The MIT License (MIT)
- * <p>
+ *
  * Copyright (c) 2018 Mikhail Yakushin
- * <p>
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * <p>
+ *
  * The above copyright notice and this permission notice shall be included
  * in all copies or substantial portions of the Software.
- * <p>
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
@@ -59,27 +59,35 @@ public abstract class AbstractCredentials {
     }
 
     /**
-     * VK user ID.
-     * @return User ID.
-     * @throws Exception If properties cannot be read.
+     * Test method.
+     * @throws Exception Properties exceptions.
+     * @throws ClientException If VK client error occurs.
+     * @throws ApiException If VK API error occurs.
      */
-    protected int userId() throws Exception {
-        return Integer.parseInt(
-            String.valueOf(
-                this.props.value().get("userId")
-            )
-        );
-    }
+    public abstract void test() throws Exception;
 
     /**
      * VK group ID.
      * @return Group ID.
      * @throws Exception If properties cannot be read.
      */
-    protected int groupId() throws Exception {
+    protected final int groupId() throws Exception {
         return Integer.parseInt(
             String.valueOf(
                 this.props.value().get("groupId")
+            )
+        );
+    }
+
+    /**
+     * VK user ID.
+     * @return User ID.
+     * @throws Exception If properties cannot be read.
+     */
+    protected final int userId() throws Exception {
+        return Integer.parseInt(
+            String.valueOf(
+                this.props.value().get("userId")
             )
         );
     }
@@ -89,18 +97,10 @@ public abstract class AbstractCredentials {
      * @return Token.
      * @throws Exception If properties cannot be read.
      */
-    protected String token() throws Exception {
+    protected final String token() throws Exception {
         return String.valueOf(
             this.props.value().get("token")
         );
     }
-
-    /**
-     * Test method.
-     * @throws Exception Properties exceptions.
-     * @throws ClientException If VK client error occurs.
-     * @throws ApiException If VK API error occurs.
-     */
-    abstract void test() throws Exception;
 
 }

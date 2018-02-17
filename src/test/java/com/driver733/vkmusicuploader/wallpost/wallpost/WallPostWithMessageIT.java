@@ -25,13 +25,8 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
 import com.vk.api.sdk.objects.wall.WallpostFull;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -46,7 +41,7 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  */
-public final class WallPostWithMessageIT {
+public final class WallPostWithMessageIT extends AbstractCredentials {
 
     /**
      * Test message.
@@ -54,40 +49,15 @@ public final class WallPostWithMessageIT {
     private static final String MESSAGE = "Test message.";
 
     @Test
-    public void test() throws IOException, ClientException, ApiException {
-        final String user = new String(
-            Files.readAllBytes(
-                Paths.get(
-                    System.getProperty("userId")
-                )
-            )
-        );
-        final String token = new String(
-            Files.readAllBytes(
-                Paths.get(
-                    System.getProperty("token")
-                )
-            )
-        );
-        final String group = new String(
-            Files.readAllBytes(
-                Paths.get(
-                    System.getProperty("groupId")
-                )
-            )
-        );
+    public void test() throws Exception {
         final VkApiClient client = new VkApiClient(
             new TransportClientHttp()
         );
         final UserActor actor = new UserActor(
-            Integer.parseInt(
-                user
-            ),
-            token
+            userId(),
+            token()
         );
-        final int groupid = Integer.parseInt(
-            group
-        );
+        final int group = groupId();
         final int post = new WallPostWithOwnerId(
             new WallPostWithMessage(
                 new WallPostBase(
@@ -96,10 +66,10 @@ public final class WallPostWithMessageIT {
                 ),
                 WallPostWithMessageIT.MESSAGE
             ),
-            -groupid
+            -group
         ).construct().execute().getPostId();
         final List<WallpostFull> result = client.wall().getById(
-            actor, String.format("%d_%d", -groupid, post)
+            actor, String.format("%d_%d", -group, post)
         ).execute();
         MatcherAssert.assertThat(
             result.get(0).getText(),
@@ -109,7 +79,7 @@ public final class WallPostWithMessageIT {
         );
         client.wall()
             .delete(actor)
-            .ownerId(-groupid)
+            .ownerId(-group)
             .postId(post)
             .execute();
     }

@@ -23,9 +23,6 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
-import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.httpclient.TransportClientHttp;
 import com.vk.api.sdk.objects.wall.WallpostFull;
 import java.util.List;
 import org.hamcrest.MatcherAssert;
@@ -33,7 +30,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * {@link WallPostWithMessage}  IT.
+ * {@link WallPostWithMessage} IT.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -41,7 +38,7 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  */
-public final class WallPostWithMessageIT extends AbstractCredentials {
+public final class WallPostWithMessageIT extends AbstractEntrance {
 
     /**
      * Test message.
@@ -50,26 +47,23 @@ public final class WallPostWithMessageIT extends AbstractCredentials {
 
     @Test
     public void test() throws Exception {
-        final VkApiClient client = new VkApiClient(
-            new TransportClientHttp()
-        );
-        final UserActor actor = new UserActor(
-            userId(),
-            token()
-        );
         final int group = groupId();
         final int post = new WallPostWithOwnerId(
             new WallPostWithMessage(
                 new WallPostBase(
-                    client,
-                    actor
+                    client(),
+                    actor()
                 ),
                 WallPostWithMessageIT.MESSAGE
             ),
             -group
-        ).construct().execute().getPostId();
-        final List<WallpostFull> result = client.wall().getById(
-            actor, String.format("%d_%d", -group, post)
+        ).construct()
+            .execute()
+            .getPostId();
+        final List<WallpostFull> result = client()
+            .wall().getById(
+                actor(),
+                String.format("%d_%d", -group, post)
         ).execute();
         MatcherAssert.assertThat(
             result.get(0).getText(),
@@ -77,8 +71,10 @@ public final class WallPostWithMessageIT extends AbstractCredentials {
                 WallPostWithMessageIT.MESSAGE
             )
         );
-        client.wall()
-            .delete(actor)
+        client().wall()
+            .delete(
+                actor()
+            )
             .ownerId(-group)
             .postId(post)
             .execute();

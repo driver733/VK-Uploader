@@ -1,6 +1,6 @@
 assets:
   dropboxAPIKey.txt: "driver733/VKMusicUploaderConfig#dropboxAPIKey.txt"
-  userId.txt: "driver733/VKMusicUploaderConfig#groupId.txt"
+  userId.txt: "driver733/VKMusicUploaderConfig#userId.txt"
   groupId.txt: "driver733/VKMusicUploaderConfig#groupId.txt"
   token.txt: "driver733/VKMusicUploaderConfig#token.txt"
 architect:

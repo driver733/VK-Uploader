@@ -30,32 +30,28 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * {@link WallPostWithMessage} IT.
+ * Class description.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.2
  * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  */
-public final class WallPostWithMessageIT extends AbstractEntrance {
-
-    /**
-     * Test message.
-     */
-    private static final String MESSAGE = "Test message.";
+public final class WallPostFromGroupIT extends AbstractEntrance {
 
     @Test
     public void test() throws Exception {
-        final int post = new WallPostWithOwnerId(
-            new WallPostWithMessage(
-                new WallPostBase(
-                    client(),
-                    actor()
+        final int post = new WallPostFromGroup(
+            new WallPostWithOwnerId(
+                new WallPostWithMessage(
+                    new WallPostBase(
+                        client(),
+                        actor()
+                    ),
+                    "Test message."
                 ),
-                WallPostWithMessageIT.MESSAGE
-            ),
-            -groupId()
+                -groupId()
+            )
         ).construct()
             .execute()
             .getPostId();
@@ -63,11 +59,11 @@ public final class WallPostWithMessageIT extends AbstractEntrance {
             .wall().getById(
                 actor(),
                 String.format("%d_%d", -groupId(), post)
-        ).execute();
+            ).execute();
         MatcherAssert.assertThat(
-            result.get(0).getText(),
+            result.get(0).getOwnerId(),
             Matchers.equalTo(
-                WallPostWithMessageIT.MESSAGE
+                -groupId()
             )
         );
         client().wall()

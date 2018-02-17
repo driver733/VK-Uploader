@@ -25,11 +25,8 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
 import com.vk.api.sdk.objects.wall.WallpostFull;
-import java.io.IOException;
 import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;

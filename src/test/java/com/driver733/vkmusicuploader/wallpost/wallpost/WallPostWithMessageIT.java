@@ -36,7 +36,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * {@link WallPostWithMessage} IT.
+ * {@link WallPostWithMessage}  IT.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

@@ -11,7 +11,7 @@ script:
   - mvn clean
   - pdd --source=$(pwd) --file=/dev/null
 #  - est --dir=est --file=/dev/null
-  - mvn clean install failsafe:integration-test -Pqulice --errors --batch-mode
+  - mvn clean install failsafe:integration-test -DuserId=`cat /home/r/userId.txt` -DgroupId=`cat /home/r/groupId.txt` -Dtoken=`cat /home/r/token.txt` -Pqulice --errors --batch-mode
 before_install:
   - rvm install 2.2.2
   - rvm use 2.2.2

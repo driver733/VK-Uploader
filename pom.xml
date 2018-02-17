@@ -139,6 +139,7 @@
                     <version>2.20.1</version>
                     <configuration>
                         <systemPropertyVariables>
+                            <environment>${env.userId}</environment>
                             <environment>${env.groupId}</environment>
                             <environment>${env.token}</environment>
                         </systemPropertyVariables>

@@ -31,9 +31,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * A {@link TransportClient} with cached responses.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

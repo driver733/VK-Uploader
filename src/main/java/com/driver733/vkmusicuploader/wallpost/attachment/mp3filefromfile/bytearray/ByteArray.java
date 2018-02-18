@@ -26,9 +26,7 @@ package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytear
 import java.io.IOException;
 
 /**
- * Class or Interface description.
- * <p>
- * <p> Additional info
+ * Transforms object to a byte array.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

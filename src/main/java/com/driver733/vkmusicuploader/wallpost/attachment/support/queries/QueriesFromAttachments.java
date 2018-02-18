@@ -34,9 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Returns all queries for attachments.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

@@ -39,9 +39,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * An {@link Attachment} with a photo uploaded
+ *  to the wall.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

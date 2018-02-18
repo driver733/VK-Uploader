@@ -27,9 +27,7 @@ import com.vk.api.sdk.queries.upload.UploadQueryBuilder;
 import java.io.IOException;
 
 /**
- * Class or Interface description.
- * <p>
- * <p> Additional info
+ * Constructs a query for uploading an file.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

@@ -28,9 +28,8 @@ import com.jcabi.immutable.Array;
 import java.io.IOException;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Constructs a {@link com.driver733.vkmusicuploader.wallpost.wallpost.WallPost}
+ *  message by combining the specified strings.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

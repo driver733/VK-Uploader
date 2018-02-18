@@ -32,9 +32,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Finds the first valid byte array.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

@@ -30,9 +30,7 @@ import java.nio.file.Path;
 import java.util.Arrays;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Recovers file to its original state.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

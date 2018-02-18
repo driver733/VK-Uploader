@@ -38,9 +38,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Test for {@link AttachmentAudioProps}.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

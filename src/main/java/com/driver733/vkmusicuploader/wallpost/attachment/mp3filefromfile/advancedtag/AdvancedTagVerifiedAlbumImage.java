@@ -28,9 +28,7 @@ import com.mpatric.mp3agic.ID3v2;
 import java.io.IOException;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Verifies that the tag contains an album image.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

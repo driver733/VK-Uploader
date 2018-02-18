@@ -38,9 +38,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Combines the responses of cached
+ *  {@link AbstractQueryBuilder}s.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

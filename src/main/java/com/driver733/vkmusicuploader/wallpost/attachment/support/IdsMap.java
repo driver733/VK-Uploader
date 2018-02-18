@@ -34,9 +34,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Forms a map of with  index (queries) - audio_id pairs
+ *  from the audio queries.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

@@ -51,10 +51,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
- *
+ * Creates a {@link WallPost} with the specified
+ *  audio files and an album cover (from an audio file tag or
+ *  cover.jpg).
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1

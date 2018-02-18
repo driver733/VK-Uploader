@@ -29,9 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Returns non-cached queries.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

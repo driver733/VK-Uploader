@@ -27,9 +27,8 @@ import com.driver733.vkmusicuploader.wallpost.wallpost.WallPost;
 import java.io.IOException;
 
 /**
- * Class or Interface description.
- * <p>
- * <p> Additional info
+ * Constructs a message for the
+ *  {@link WallPost}.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

@@ -29,9 +29,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * <p> Additional info
+ * Attachment strings for a wall post.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -40,7 +38,7 @@ import java.util.List;
 public interface AttachmentsFields {
 
     /**
-     * Constructs attachment attachmentStrings for the wall WallPostAlbum.
+     * Constructs attachment strings for the wall WallPostAlbum.
      * @return Attachment attachmentStrings.
      * @throws ClientException VK API Client error.
      * @throws ApiException VK API error.

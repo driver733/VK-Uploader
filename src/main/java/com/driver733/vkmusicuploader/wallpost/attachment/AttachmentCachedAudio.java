@@ -43,9 +43,9 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Determines if audio has been already
+ *  uploaded and returns a fake a real
+ *  query accordingly.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

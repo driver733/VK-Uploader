@@ -33,9 +33,8 @@ import java.util.List;
 // @checkstyle MemberNameCheck (50 lines)
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * An {@link Attachment} with audio added
+ *  to a page. (with the specified user ID).
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

@@ -44,9 +44,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Creates {@link com.driver733.vkmusicuploader.wallpost.wallpost.WallPost}s
+ *  with albums found in the specified directory.
+ *  Each wall post has up 9 audios.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

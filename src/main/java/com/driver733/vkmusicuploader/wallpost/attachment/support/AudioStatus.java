@@ -26,9 +26,7 @@ package com.driver733.vkmusicuploader.wallpost.attachment.support;
 import com.jcabi.aspects.Immutable;
 
 /**
- * Class or Interface description.
- *
- * <p> Additional info
+ * Audio status for caching purposes.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

@@ -34,9 +34,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Constructs a query for uploading a photo
+ *  to the wall.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

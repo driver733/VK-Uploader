@@ -27,9 +27,7 @@ import com.vk.api.sdk.client.AbstractQueryBuilder;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Queries that do not throw an exception.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -38,7 +36,7 @@ import java.util.List;
 public interface QueriesSafe {
 
     /**
-     * Finds which queries have no cache and thus need to be executed.
+     * A {@link List} of {@link AbstractQueryBuilder}s.
      * @return A {@link List} of {@link AbstractQueryBuilder} to be executed.
      */
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")

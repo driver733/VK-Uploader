@@ -148,7 +148,7 @@
                             <goals>
                                 <goal>integration-test</goal>
                             </goals>
-                            <phase>test</phase>
+                            <phase>integration-test</phase>
                         </execution>
                         <execution>
                             <id>verify</id>

@@ -120,6 +120,7 @@ public final class WallPostWithAttachmentsIT extends AbstractEntrance {
             )
             .postId(post)
             .execute();
+        exit();
     }
 
 }

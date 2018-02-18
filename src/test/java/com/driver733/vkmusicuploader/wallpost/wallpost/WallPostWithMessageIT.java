@@ -81,6 +81,7 @@ public final class WallPostWithMessageIT extends AbstractEntrance {
             )
             .postId(post)
             .execute();
+        exit();
     }
 
 }

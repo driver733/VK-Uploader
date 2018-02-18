@@ -75,6 +75,7 @@ public final class WallPostWithOwnerIdIT extends AbstractEntrance {
             )
             .postId(post)
             .execute();
+        exit();
     }
 
 }

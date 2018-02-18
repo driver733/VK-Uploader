@@ -94,10 +94,10 @@ public final class AttachmentArrays implements AttachmentsFields {
         final int group,
         final Attachment... attachments
     ) {
-        this.attachments = new Array<>(attachments);
         this.actor = actor;
         this.properties = properties;
         this.group = group;
+        this.attachments = new Array<>(attachments);
     }
 
     @Override

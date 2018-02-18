@@ -98,9 +98,14 @@
             <artifactId>cactoos</artifactId>
             <version>0.29</version>
         </dependency>
+        <dependency>
+            <groupId>net.jcip</groupId>
+            <artifactId>jcip-annotations</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <build>
-        <pluginManagement>
+        <!--<pluginManagement>-->
             <plugins>
                 <plugin>
                     <groupId>com.qulice</groupId>
@@ -135,11 +140,6 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.20.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>2.20.1</version>
                     <configuration>
@@ -151,10 +151,18 @@
                     </configuration>
                     <executions>
                         <execution>
+                            <id>integration-test</id>
                             <goals>
                                 <goal>integration-test</goal>
+                            </goals>
+                            <phase>test</phase>
+                        </execution>
+                        <execution>
+                            <id>verify</id>
+                            <goals>
                                 <goal>verify</goal>
                             </goals>
+                            <phase>verify</phase>
                         </execution>
                     </executions>
                 </plugin>
@@ -191,7 +199,7 @@
                     </configuration>
                 </plugin>
             </plugins>
-        </pluginManagement>
+        <!--</pluginManagement>-->
     </build>
     <reporting>
         <plugins>

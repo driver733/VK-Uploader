@@ -25,6 +25,7 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.vk.api.sdk.objects.wall.WallpostFull;
 import java.util.List;
+import net.jcip.annotations.NotThreadSafe;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -37,6 +38,7 @@ import org.junit.Test;
  * @since 0.2
  * @checkstyle JavadocMethodCheck (500 lines)
  */
+@NotThreadSafe
 public final class WallPostFromGroupIT extends AbstractEntrance {
 
     @Test

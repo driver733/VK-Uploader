@@ -110,3 +110,4 @@ buildNumber.properties
 VKMusicUploader.iml
 /LICENSE_qulice.txt
 /src/main/java/com/driver733/vkmusicuploader/Main.java
+/credentials.properties

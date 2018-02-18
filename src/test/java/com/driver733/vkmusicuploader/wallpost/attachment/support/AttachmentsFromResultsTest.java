@@ -32,9 +32,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Test for {@link AttachmentsFromResults}.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -43,7 +41,7 @@ import org.junit.Test;
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  * @checkstyle CascadeIndentationCheck (50 lines)
  */
-public final class AttachmentFromResultsTest {
+public final class AttachmentsFromResultsTest {
 
     /**
      * Group ID.
@@ -77,7 +75,7 @@ public final class AttachmentFromResultsTest {
                         JsonArray.class
                     )
                     .getAsJsonArray(),
-                AttachmentFromResultsTest.GROUP_ID
+                AttachmentsFromResultsTest.GROUP_ID
             ).attachmentStrings(),
             Matchers.containsInAnyOrder(
                 "audio1111111_1000000", "audio2222222_2000000"
@@ -130,7 +128,7 @@ public final class AttachmentFromResultsTest {
                         JsonArray.class
                     )
                     .getAsJsonArray(),
-                AttachmentFromResultsTest.GROUP_ID
+                AttachmentsFromResultsTest.GROUP_ID
             ).attachmentStrings(),
             Matchers.containsInAnyOrder(
                 "photo111111_333333", "photo222222_444444"
@@ -147,7 +145,7 @@ public final class AttachmentFromResultsTest {
                     .create()
                     .fromJson("[123456789, 987654321]", JsonArray.class)
                     .getAsJsonArray(),
-                AttachmentFromResultsTest.GROUP_ID
+                AttachmentsFromResultsTest.GROUP_ID
             ).attachmentStrings(),
             Matchers.containsInAnyOrder(
                 "audio-161929264_123456789", "audio-161929264_987654321"

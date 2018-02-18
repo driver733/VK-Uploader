@@ -28,9 +28,7 @@ import com.mpatric.mp3agic.Mp3File;
 import java.io.IOException;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * A {@link ID3v1} from an MP3 file.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

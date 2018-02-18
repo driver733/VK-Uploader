@@ -36,9 +36,8 @@ import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Records the audio files that have been
+ *  posted.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

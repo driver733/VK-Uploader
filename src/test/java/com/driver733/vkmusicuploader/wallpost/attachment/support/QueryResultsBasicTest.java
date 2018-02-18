@@ -39,9 +39,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Test for {@link QueryResultsBasic}.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -49,7 +47,7 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (20 lines)
  */
-public final class QueryResultsTest {
+public final class QueryResultsBasicTest {
 
     @Test
     public void test() throws IOException {

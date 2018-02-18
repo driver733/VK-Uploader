@@ -30,9 +30,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Constructs {@link AbstractQueryBuilder}(s)
+ *  for the wall attachments.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -42,7 +41,7 @@ public interface Attachment {
 
     /**
      * Uploads the Attachment(s).
-     * @return The result(s) of uploaded Attachment(s).
+     * @return The resulting queries of uploaded Attachment(s).
      * @throws ApiException VK API error.
      * @throws ClientException VK Client error.
      * @throws IOException If query fails to be constructed.

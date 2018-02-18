@@ -44,9 +44,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Upload the audios, caches the upload result
+ *  in {@link java.util.Properties} and returns
+ *  {@link AudioAddQuery} for the uploaded
+ *  audios.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

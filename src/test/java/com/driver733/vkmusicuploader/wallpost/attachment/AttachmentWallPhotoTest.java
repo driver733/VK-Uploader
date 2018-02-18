@@ -39,9 +39,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Test for {@link AttachmentWallPhoto}.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

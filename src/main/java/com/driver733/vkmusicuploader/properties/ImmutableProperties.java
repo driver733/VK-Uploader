@@ -33,9 +33,7 @@ import java.io.OutputStream;
 import java.util.Properties;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Immutable {@link Properties}.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

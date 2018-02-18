@@ -31,9 +31,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Constructs a query for uploading an audio file.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

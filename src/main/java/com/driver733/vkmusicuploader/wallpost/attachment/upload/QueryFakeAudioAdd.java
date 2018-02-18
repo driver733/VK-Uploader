@@ -29,9 +29,7 @@ import com.vk.api.sdk.client.VkApiClient;
 import java.util.Collection;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * A fake {@link com.vk.api.sdk.queries.audio.AudioAddQuery}.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

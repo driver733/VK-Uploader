@@ -26,9 +26,8 @@ package com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.str
 import java.io.IOException;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Returns an attachments string for
+ *  a wall post.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

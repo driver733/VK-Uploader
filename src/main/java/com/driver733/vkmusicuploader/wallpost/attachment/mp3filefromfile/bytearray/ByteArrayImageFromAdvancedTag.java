@@ -27,9 +27,8 @@ import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advance
 import java.io.IOException;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Acquires album cover in byte array
+ *  format from the specified {@link AdvancedTag}.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

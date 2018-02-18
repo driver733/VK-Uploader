@@ -28,9 +28,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Transforms file to byte array.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

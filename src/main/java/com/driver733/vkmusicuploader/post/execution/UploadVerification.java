@@ -33,7 +33,7 @@ import java.util.List;
 
 /**
  * Executes the queries and
- *  notifies {@link WallPosts} to cache the changes,
+ *  notifies {@link WallPosts} to cache the changes.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

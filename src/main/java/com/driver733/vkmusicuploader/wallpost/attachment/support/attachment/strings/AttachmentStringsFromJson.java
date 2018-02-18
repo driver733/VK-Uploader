@@ -32,9 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Returns an attachments string for
+ *  a wall post from a response json.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

@@ -28,9 +28,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * <p> Additional info
+ * Constructs and returns queries.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -39,7 +37,7 @@ import java.util.List;
 public interface Queries {
 
     /**
-     * Finds which queries have no cache and thus need to be executed.
+     * Constructs a list of queries.
      * @return A {@link List} of {@link AbstractQueryBuilder} to be executed.
      * @throws IOException If queries cannot to be obtained.
      */

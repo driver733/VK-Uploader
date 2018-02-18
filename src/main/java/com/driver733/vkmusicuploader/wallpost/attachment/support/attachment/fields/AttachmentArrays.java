@@ -46,9 +46,10 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Returns attachment strings from
+ *  all of the specified attachments.
+ *
+ * Saves the results in specified {@link java.util.Properties}.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

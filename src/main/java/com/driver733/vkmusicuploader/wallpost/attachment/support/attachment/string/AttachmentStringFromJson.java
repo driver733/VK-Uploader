@@ -29,9 +29,8 @@ import com.jcabi.aspects.Immutable;
 import java.io.IOException;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Creates an attachment string
+ *  from the response json.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

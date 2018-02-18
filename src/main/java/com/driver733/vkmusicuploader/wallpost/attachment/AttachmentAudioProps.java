@@ -32,9 +32,8 @@ import com.vk.api.sdk.objects.audio.Audio;
 import java.io.IOException;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Saves the result of a successful
+ *  audio upload.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

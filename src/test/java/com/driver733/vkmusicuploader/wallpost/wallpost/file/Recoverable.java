@@ -26,9 +26,7 @@ package com.driver733.vkmusicuploader.wallpost.wallpost.file;
 import java.io.IOException;
 
 /**
- * Class or Interface description.
- * <p>
- * <p> Additional info
+ * Recover to original state.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

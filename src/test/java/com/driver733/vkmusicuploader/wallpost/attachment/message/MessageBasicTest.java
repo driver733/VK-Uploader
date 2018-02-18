@@ -36,9 +36,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Test for {@link MessageBasic}.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -47,7 +45,7 @@ import org.junit.Test;
  * @checkstyle AvoidDuplicateLiterals (200 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class MessageTest {
+public final class MessageBasicTest {
 
     @Test
     public void allTags()

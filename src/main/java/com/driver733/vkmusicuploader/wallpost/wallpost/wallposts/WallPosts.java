@@ -28,9 +28,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * <p> Additional info
+ * Constructs queries and updates
+ *  the properties with files that
+ *  have been used. (uploaded successfully)
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

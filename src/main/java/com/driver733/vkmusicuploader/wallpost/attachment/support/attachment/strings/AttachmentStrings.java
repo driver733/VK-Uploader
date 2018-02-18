@@ -27,9 +27,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * <p> Additional info
+ * Returns an attachments string for
+ *  a wall post.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

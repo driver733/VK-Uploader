@@ -33,9 +33,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Test for {@link AttachmentStringsFromJson}.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -43,7 +41,7 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
-public final class AttachmentStringsTest {
+public final class AttachmentStringsFromJsonTest {
 
     /**
      * Group ID.
@@ -69,7 +67,7 @@ public final class AttachmentStringsTest {
                         JsonObject.class
                     )
                     .getAsJsonObject(),
-                AttachmentStringsTest.GROUP_ID
+                AttachmentStringsFromJsonTest.GROUP_ID
             ).attachmentStrings(),
             Matchers.containsInAnyOrder(
                 "audio1111111_1000000"
@@ -105,7 +103,7 @@ public final class AttachmentStringsTest {
                         JsonArray.class
                     )
                     .getAsJsonArray(),
-                AttachmentStringsTest.GROUP_ID
+                AttachmentStringsFromJsonTest.GROUP_ID
             ).attachmentStrings(),
             Matchers.containsInAnyOrder(
                 "audio111111_3000000", "audio2222222_2000000"

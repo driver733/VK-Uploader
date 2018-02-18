@@ -26,6 +26,7 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallDocument;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.ZippedDirectory;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArrays;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallDocument;
 import com.vk.api.sdk.objects.wall.WallpostFull;
@@ -89,7 +90,7 @@ public final class WallPostWithAttachmentsIT extends AbstractEntrance {
                             servers.uploadUrl(
                                 UploadServers.Type.WALL_DOC
                             ),
-                            new File("/Users/mikhailyakushin/Desktop/topic.txt")
+                            new File("src/test/resources/attachment.txt")
                         )
                     )
                 )
@@ -108,7 +109,7 @@ public final class WallPostWithAttachmentsIT extends AbstractEntrance {
                 .getDoc()
                 .getTitle(),
             Matchers.equalTo(
-                "topic.txt"
+                "attachment.txt"
             )
         );
         client().wall()

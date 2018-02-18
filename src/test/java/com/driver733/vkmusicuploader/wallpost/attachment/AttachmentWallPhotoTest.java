@@ -44,7 +44,6 @@ import org.junit.Test;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo #15 Replace constant with maven parameter.
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (20 lines)
  * @checkstyle StringLiteralsConcatenationCheck (500 lines)

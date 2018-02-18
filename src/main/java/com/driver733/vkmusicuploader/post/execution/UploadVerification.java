@@ -38,7 +38,6 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo #10 Create test(s) for the class.
  */
 @Immutable
 public final class UploadVerification implements UploadExecution {

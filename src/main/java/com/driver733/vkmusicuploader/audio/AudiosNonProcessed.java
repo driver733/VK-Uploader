@@ -33,9 +33,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Returns a {@link List} of audio
+ * files that have not been processed
+ * yet.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

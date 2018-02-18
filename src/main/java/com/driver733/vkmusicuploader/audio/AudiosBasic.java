@@ -29,9 +29,8 @@ import java.io.File;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Constructs a list of audio files
+ *  in the specified folder.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

@@ -27,9 +27,7 @@ package com.driver733.vkmusicuploader.post.post;
 import java.io.IOException;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Executes the wall posts` queries.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

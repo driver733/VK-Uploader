@@ -28,9 +28,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Returns a {@link List}
+ *  of audio files.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

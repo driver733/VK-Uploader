@@ -48,9 +48,8 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Tracks the specified folder for changes
+ *  and restarts the processing.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

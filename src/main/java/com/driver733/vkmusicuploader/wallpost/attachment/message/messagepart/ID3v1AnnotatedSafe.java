@@ -28,9 +28,7 @@ import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.NotSupportedException;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Returns empty string if a tag is missing.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

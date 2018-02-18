@@ -27,9 +27,7 @@ import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPosts;
 import java.io.IOException;
 
 /**
- * Class or Interface description.
- * <p>
- * <p> Additional info
+ * Executes a {@link com.vk.api.sdk.queries.upload.UploadQueryBuilder}.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

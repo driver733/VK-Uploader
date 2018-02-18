@@ -32,9 +32,7 @@ import com.vk.api.sdk.exceptions.ClientException;
 import java.io.IOException;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Acquires upload servers for various files.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

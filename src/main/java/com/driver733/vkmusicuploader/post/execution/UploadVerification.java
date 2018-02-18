@@ -32,9 +32,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Executes the queries and
+ *  notifies {@link WallPosts} to cache the changes,
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

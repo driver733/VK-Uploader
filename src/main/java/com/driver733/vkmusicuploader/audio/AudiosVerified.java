@@ -30,15 +30,13 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Verifies that the {@link List}
+ * of audio files is not empty.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
  */
-@SuppressWarnings("unused")
 @Immutable
 public final class AudiosVerified implements Audios {
 

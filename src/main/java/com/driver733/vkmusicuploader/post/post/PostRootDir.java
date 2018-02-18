@@ -35,9 +35,8 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Class or Interface description Test.
- * <p>
- * Additional info
+ * Constructs {@link com.driver733.vkmusicuploader.post.posts.Posts}
+ * from the specified director.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

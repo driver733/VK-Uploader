@@ -28,9 +28,8 @@ import com.vk.api.sdk.queries.wall.WallPostQuery;
 import java.io.IOException;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Specified where the {@link WallPost} will
+ *  be posted.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

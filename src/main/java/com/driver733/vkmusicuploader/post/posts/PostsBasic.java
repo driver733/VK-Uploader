@@ -32,9 +32,8 @@ import com.vk.api.sdk.client.actors.UserActor;
 import java.io.File;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * Creates {@link PostRootDir} from
+ *  the specified directory.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

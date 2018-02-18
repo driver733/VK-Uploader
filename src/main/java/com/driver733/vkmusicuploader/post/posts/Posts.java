@@ -27,9 +27,8 @@ import com.driver733.vkmusicuploader.post.post.Post;
 import java.io.File;
 
 /**
- * Class or Interface description.
- * <p>
- * <p> Additional info
+ * Constructs a {@link Post}
+ *  using a provided directory.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

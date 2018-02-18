@@ -30,9 +30,7 @@ import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
 
 /**
- * Class or Interface description.
- * <p>
- * Additional info
+ * The base for all {@link WallPost}s.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

@@ -26,7 +26,6 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallDocument;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.ZippedDirectory;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArrays;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallDocument;
 import com.vk.api.sdk.objects.wall.WallpostFull;

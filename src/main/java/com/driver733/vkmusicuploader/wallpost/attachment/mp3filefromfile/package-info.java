@@ -21,4 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+/**
+ * Construction and processing of {@link com.mpatric.mp3agic.Mp3File}
+ *  from {@link java.io.File}.
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ */
 package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile;

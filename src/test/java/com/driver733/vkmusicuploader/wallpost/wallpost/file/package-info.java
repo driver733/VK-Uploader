@@ -21,4 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+/**
+ * Recoverable {@link java.io.File} for test's
+ *  resources.
+ *
+ * @author Mikhail Yakushin (driver733@me.com)
+ * @version $Id$
+ * @since 0.1
+ */
 package com.driver733.vkmusicuploader.wallpost.wallpost.file;

@@ -24,6 +24,7 @@
 package com.driver733.vkmusicuploader.wallpost.attachment.upload;
 
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.Fallback;
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.objects.photos.responses.WallUploadResponse;
 import com.vk.api.sdk.queries.upload.UploadPhotoWallQuery;
@@ -42,6 +43,7 @@ import java.nio.file.Path;
  * @since 0.1
  * @todo #16 Move Fallback handing to a new class.
  */
+@Immutable
 public final class UploadWallPhoto
     implements Upload<UploadPhotoWallQuery, WallUploadResponse> {
 

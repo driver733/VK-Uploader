@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.upload;
 
+import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
@@ -38,6 +39,7 @@ import java.util.Collection;
  * @since 0.1
  * @checkstyle ProtectedMethodInFinalClassCheck (500 lines)
  */
+@Immutable
 public final class QueryFakeAudioAdd
     extends AbstractQueryBuilder<QueryFakeAudioAdd, Integer> {
 

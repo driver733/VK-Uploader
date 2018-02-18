@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.upload;
 
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.ClientResponse;
 import com.vk.api.sdk.client.TransportClient;
 import java.io.File;
@@ -38,6 +39,7 @@ import java.util.Map;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class TransportClientComplex implements TransportClient {
 
     /**

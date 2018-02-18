@@ -24,6 +24,7 @@
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.QueryFakeAudioAdd;
+import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
@@ -43,6 +44,7 @@ import java.util.List;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class AttachmentFakeAudio implements Attachment {
 
     /**

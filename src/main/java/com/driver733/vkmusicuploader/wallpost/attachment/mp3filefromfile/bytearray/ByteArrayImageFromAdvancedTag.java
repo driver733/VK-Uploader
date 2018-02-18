@@ -24,6 +24,7 @@
 package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray;
 
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advancedtag.AdvancedTag;
+import com.jcabi.aspects.Immutable;
 import java.io.IOException;
 
 /**
@@ -35,6 +36,7 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class ByteArrayImageFromAdvancedTag implements ByteArray {
 
     /**

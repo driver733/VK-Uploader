@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.upload;
 
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.objects.docs.responses.DocUploadResponse;
 import com.vk.api.sdk.queries.upload.UploadDocQuery;
@@ -37,6 +38,7 @@ import java.io.File;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class UploadWallDocument
     implements Upload<UploadDocQuery, DocUploadResponse> {
 

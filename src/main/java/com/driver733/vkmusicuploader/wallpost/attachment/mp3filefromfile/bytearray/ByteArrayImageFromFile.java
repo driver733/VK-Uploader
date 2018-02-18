@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray;
 
+import com.jcabi.aspects.Immutable;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -36,6 +37,7 @@ import java.nio.file.Files;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class ByteArrayImageFromFile implements ByteArray {
 
     /**

@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
+import com.jcabi.aspects.Immutable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -37,6 +38,7 @@ import java.util.zip.ZipOutputStream;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class ZippedDirectory {
 
     /**

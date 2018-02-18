@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advancedtag;
 
+import com.jcabi.aspects.Immutable;
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.Mp3File;
 import java.io.IOException;
@@ -36,6 +37,7 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class AdvancedTagFromMp3File implements AdvancedTag {
 
     /**

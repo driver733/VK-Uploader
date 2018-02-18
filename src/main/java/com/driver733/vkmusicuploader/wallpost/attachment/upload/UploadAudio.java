@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.upload;
 
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.objects.audio.responses.AudioUploadResponse;
 import com.vk.api.sdk.queries.upload.UploadAudioQuery;
@@ -39,6 +40,7 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.1
  */
+@Immutable
 public final class UploadAudio
     implements Upload<UploadAudioQuery, AudioUploadResponse> {
 

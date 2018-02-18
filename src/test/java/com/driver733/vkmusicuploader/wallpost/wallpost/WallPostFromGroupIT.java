@@ -77,6 +77,7 @@ public final class WallPostFromGroupIT extends AbstractEntrance {
             )
             .postId(post)
             .execute();
+        exit();
     }
 
 }

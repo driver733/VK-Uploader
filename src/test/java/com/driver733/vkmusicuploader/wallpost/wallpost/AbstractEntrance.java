@@ -41,6 +41,11 @@ import org.cactoos.scalar.StickyScalar;
 public abstract class AbstractEntrance extends AbstractCredentials {
 
     /**
+     * Exit delay before next IT.
+     */
+    private final int delay;
+
+    /**
      * {@link VkApiClient}.
      */
     private final Scalar<VkApiClient> client;
@@ -66,6 +71,7 @@ public abstract class AbstractEntrance extends AbstractCredentials {
                 token()
             )
         );
+        this.delay = 1;
     }
 
     /**
@@ -84,6 +90,15 @@ public abstract class AbstractEntrance extends AbstractCredentials {
      */
     protected final VkApiClient client() throws Exception {
         return this.client.value();
+    }
+
+    /**
+     * Delay before next IT.
+     * @throws InterruptedException If thread sleep fails.
+     * @checkstyle MagicNumberCheck (5 lines)
+     */
+    protected final void exit() throws InterruptedException {
+        Thread.sleep(this.delay * 1000);
     }
 
 }

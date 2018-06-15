@@ -46,7 +46,7 @@ import java.util.List;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo #6 Test this class.
+ * @todo #6 Test the class.
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @Immutable

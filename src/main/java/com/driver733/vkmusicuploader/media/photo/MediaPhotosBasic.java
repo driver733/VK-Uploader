@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.audio;
+package com.driver733.vkmusicuploader.media.photo;
 
+import com.driver733.vkmusicuploader.media.Media;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import java.io.File;
@@ -34,30 +35,30 @@ import java.util.List;
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.2
  */
 @Immutable
-public final class AudiosBasic implements Audios {
+public final class MediaPhotosBasic implements Media {
 
     /**
-     * Directory that contains audio files.
+     * Directory that contains files.
      */
     private final File dir;
 
     /**
      * Ctor.
-     * @param dir Directory that contains audio files.
+     * @param dir Directory that contains files.
      */
-    public AudiosBasic(final File dir) {
+    public MediaPhotosBasic(final File dir) {
         this.dir = dir;
     }
 
     // @checkstyle ParameterNameCheck (10 lines)
     @Override
-    public List<File> audios() {
+    public List<File> files() {
         return new Array<>(
             this.dir.listFiles(
-                (dirName, fileName) -> fileName.endsWith(".mp3")
+                (dirName, fileName) -> fileName.endsWith(".jpg")
             )
         );
     }

@@ -21,27 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.audio;
+package com.driver733.vkmusicuploader.media.audio;
 
+import com.driver733.vkmusicuploader.media.Media;
+import com.jcabi.aspects.Immutable;
+import com.jcabi.immutable.Array;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 /**
- * Returns a {@link List}
- *  of audio files.
+ * Constructs a list of audio files
+ *  in the specified folder.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
  */
-public interface Audios {
+@Immutable
+public final class AudiosBasic implements Media {
 
     /**
-     * Locates the audio {@link File} that match a certain criteria.
-     *  (See decorator classes)
-     * @return Arrays of audio {@link File}s.
-     * @throws IOException If a certain criteria is not fulfilled.
+     * Directory that contains audio files.
      */
-    List<File> audios() throws IOException;
+    private final File dir;
+
+    /**
+     * Ctor.
+     * @param dir Directory that contains audio files.
+     */
+    public AudiosBasic(final File dir) {
+        this.dir = dir;
+    }
+
+    // @checkstyle ParameterNameCheck (10 lines)
+    @Override
+    public List<File> files() {
+        return new Array<>(
+            this.dir.listFiles(
+                (dirName, fileName) -> fileName.endsWith(".mp3")
+            )
+        );
+    }
+
 }

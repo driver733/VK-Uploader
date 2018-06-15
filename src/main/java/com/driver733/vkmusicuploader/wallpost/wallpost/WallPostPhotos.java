@@ -25,24 +25,12 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
-import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentCachedAudio;
-import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhoto;
+import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhotos;
 import com.driver733.vkmusicuploader.wallpost.attachment.message.MessageBasic;
-import com.driver733.vkmusicuploader.wallpost.attachment.message.messagepart.ID3v1AnnotatedSafe;
-import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advancedtag.AdvancedTagFromMp3File;
-import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advancedtag.AdvancedTagVerifiedAlbumImage;
-import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.basictag.BasicTagFromMp3File;
-import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayFromFile;
-import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayImageFromAdvancedTag;
-import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.FallbackByteArray;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArrays;
-import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallPhoto;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
-import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.Mp3File;
-import com.mpatric.mp3agic.UnsupportedTagException;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
@@ -52,16 +40,15 @@ import java.util.List;
 
 /**
  * Creates a {@link WallPost} with the specified
- *  audio files and an album cover (from an audio file tag or
- *  cover.jpg).
+ *  photos.
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.2
  *
  * @checkstyle ClassDataAbstractionCouplingCheck (2 lines)
  */
 @Immutable
-public final class WallPostAlbum implements WallPost {
+public final class WallPostPhotos implements WallPost {
 
     /**
      * Group ID.
@@ -74,9 +61,9 @@ public final class WallPostAlbum implements WallPost {
     private final VkApiClient client;
 
     /**
-     * Audio files.
+     * Photos files.
      */
-    private final Array<File> audios;
+    private final Array<File> photos;
 
     /**
      * UserActor on behalf of which all requests will be sent.
@@ -96,7 +83,7 @@ public final class WallPostAlbum implements WallPost {
      * Ctor.
      * @param client The {@link VkApiClient} for all requests.
      * @param actor UserActor on behalf of which all requests will be sent.
-     * @param audios Audio files.
+     * @param photos Audio files.
      * @param servers Upload servers
      *  that provide upload URLs for attachmentsFields.
      * @param properties Properties that contain the
@@ -104,16 +91,16 @@ public final class WallPostAlbum implements WallPost {
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
-    public WallPostAlbum(
+    public WallPostPhotos(
         final VkApiClient client,
         final UserActor actor,
-        final List<File> audios,
+        final List<File> photos,
         final UploadServers servers,
         final ImmutableProperties properties,
         final int group
     ) {
         this.client = client;
-        this.audios = new Array<>(audios);
+        this.photos = new Array<>(photos);
         this.actor = actor;
         this.servers = servers;
         this.properties = properties;
@@ -127,18 +114,6 @@ public final class WallPostAlbum implements WallPost {
      *  while constructing the {@link WallPost}.
      */
     public WallPostQuery construct() throws IOException {
-        final Mp3File file;
-        try {
-            file = new Mp3File(this.audios.get(0));
-        } catch (final UnsupportedTagException | InvalidDataException ex) {
-            throw new IOException(
-                String.format(
-                    "Failed to get Mp3File from File %s",
-                    this.audios.get(0).getAbsolutePath()
-                ),
-                ex
-            );
-        }
         return new WallPostWithOwnerId(
             new WallPostFromGroup(
                 new WallPostWithMessage(
@@ -151,52 +126,20 @@ public final class WallPostAlbum implements WallPost {
                             this.actor,
                             this.properties,
                             this.group,
-                            new AttachmentWallPhoto(
-                                this.client,
-                                this.actor,
-                                this.group,
-                                new UploadWallPhoto(
-                                    this.client,
-                                    this.servers.uploadUrl(
-                                        UploadServers.Type.WALL_PHOTO
-                                    ),
-                                    new FallbackByteArray(
-                                        new ByteArrayImageFromAdvancedTag(
-                                            new AdvancedTagVerifiedAlbumImage(
-                                                new AdvancedTagFromMp3File(file)
-                                            )
-                                        ),
-                                        new ByteArrayFromFile(
-                                            new File(
-                                                String.format(
-                                                    "%s/cover.jpg",
-                                                    this.audios.get(0)
-                                                        .getParentFile()
-                                                )
-                                            )
-                                        )
-                                    )
-                                )
-                            ),
-                            new AttachmentCachedAudio(
+                            new AttachmentWallPhotos(
                                 this.client,
                                 this.actor,
                                 this.servers.uploadUrl(
-                                    UploadServers.Type.AUDIO
+                                    UploadServers.Type.WALL_PHOTO
                                 ),
                                 this.properties,
-                                this.audios,
+                                this.photos,
                                 this.group
                             )
                         )
                     ),
                     new MessageBasic(
-                        new ID3v1AnnotatedSafe(
-                            new BasicTagFromMp3File(file).construct()
-                        ).getAlbum(),
-                        new ID3v1AnnotatedSafe(
-                            new BasicTagFromMp3File(file).construct()
-                        ).getArtist()
+
                     ).construct()
                 )
             ),

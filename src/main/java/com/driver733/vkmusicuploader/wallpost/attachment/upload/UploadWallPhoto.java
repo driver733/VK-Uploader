@@ -23,7 +23,9 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.upload;
 
+import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayFromFile;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.Fallback;
+import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.FallbackByteArray;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.objects.photos.responses.WallUploadResponse;
@@ -57,7 +59,7 @@ public final class UploadWallPhoto
     private final String url;
 
     /**
-     * Multiple sources of the photos. The first valid one will be chosen.
+     * Multiple sources of the files. The first valid one will be chosen.
      */
     private final Fallback<byte[]> photo;
 
@@ -66,15 +68,33 @@ public final class UploadWallPhoto
      * @param client The {@link VkApiClient}
      *  that is used for all VK API requests.
      * @param url Wall Photo upload URL for the photo construct.
-     * @param photo Multiple sources of the photos.
+     * @param photo Multiple sources of the files.
      *  The first valid one will be chosen.
      */
     public UploadWallPhoto(
-        final VkApiClient client, final String url, final Fallback<byte[]> photo
+        final VkApiClient client,
+        final String url,
+        final Fallback<byte[]> photo
     ) {
         this.client = client;
         this.url = url;
         this.photo = photo;
+    }
+
+    public UploadWallPhoto(
+        final VkApiClient client,
+        final String url,
+        final File file
+    ) {
+        this(
+            client,
+            url,
+            new FallbackByteArray(
+                new ByteArrayFromFile(
+                    file
+                )
+            )
+        );
     }
 
     /**

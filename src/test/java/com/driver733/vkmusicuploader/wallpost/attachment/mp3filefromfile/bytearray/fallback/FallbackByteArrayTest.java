@@ -24,8 +24,8 @@
 package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback;
 
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advancedtag.AdvancedTagFromMp3File;
+import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayFromFile;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayImageFromAdvancedTag;
-import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayImageFromFile;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
@@ -72,7 +72,7 @@ public final class FallbackByteArrayTest {
                         new Mp3File(this.audio)
                     )
                 ),
-                new ByteArrayImageFromFile(this.audio)
+                new ByteArrayFromFile(this.audio)
             ).firstValid(),
             Matchers.equalTo(
                 Files.readAllBytes(this.path)
@@ -84,10 +84,10 @@ public final class FallbackByteArrayTest {
     public void file() throws IOException, URISyntaxException {
         MatcherAssert.assertThat(
             new FallbackByteArray(
-                new ByteArrayImageFromFile(
+                new ByteArrayFromFile(
                     this.path.toFile()
                 ),
-            new ByteArrayImageFromFile(this.audio)
+            new ByteArrayFromFile(this.audio)
         ).firstValid(),
             Matchers.equalTo(
                 Files.readAllBytes(this.path)

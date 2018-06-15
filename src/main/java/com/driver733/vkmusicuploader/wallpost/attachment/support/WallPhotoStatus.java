@@ -21,12 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.driver733.vkmusicuploader.wallpost.attachment.support;
+
+import com.jcabi.aspects.Immutable;
 
 /**
- * Classes for audio files processing.
+ * Photo status for caching purposes.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.2
  */
-package com.driver733.vkmusicuploader.audio;
+@Immutable
+public enum WallPhotoStatus {
+
+    /**
+     * Photo has been uploaded (and saved using photo.save() VK API method).
+     */
+    UPLOADED(0),
+
+    /**
+     * Photo has been posted to the group page wall
+     * using (wall.postFromDir() VK API method).
+     */
+    POSTED(1);
+
+    /**
+     * Int value.
+     */
+    private final int value;
+
+    /**
+     * Ctor.
+     * @param value Int value.
+     */
+    WallPhotoStatus(final Integer value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.value);
+    }
+}

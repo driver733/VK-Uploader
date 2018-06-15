@@ -21,39 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray;
+package com.driver733.vkmusicuploader.media.audio;
 
-import com.jcabi.aspects.Immutable;
+import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
- * Transforms file to byte array.
+ * Test for {@link Audios}.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @checkstyle JavadocMethodCheck (500 lines)
  */
-@Immutable
-public final class ByteArrayImageFromFile implements ByteArray {
+public final class AudiosTest {
 
-    /**
-     * A {@link File} with an image.
-     */
-    private final File file;
-
-    /**
-     * Ctor.
-     * @param file A {@link File} with an image.
-     */
-    public ByteArrayImageFromFile(final File file) {
-        this.file = file;
-    }
-
-    @Override
-    public byte[] toByteArray() throws IOException {
-        return Files.readAllBytes(this.file.toPath());
+    @Test
+    public void all() throws IOException {
+        MatcherAssert.assertThat(
+            new MediaVerified(
+                new AudiosNonProcessed(
+                    new AudiosBasic(
+                        new File("src/test/resources/album")
+                    ),
+                    new ImmutableProperties(
+                        new File("src/test/resources/audiosTest.properties")
+                    )
+                )
+            ).files(),
+            Matchers.containsInAnyOrder(
+                new File("src/test/resources/album/test.mp3")
+            )
+        );
     }
 
 }

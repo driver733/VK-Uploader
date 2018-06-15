@@ -80,13 +80,13 @@ public final class AttachmentWallPhoto implements Attachment {
     public AttachmentWallPhoto(
         final VkApiClient client,
         final UserActor actor,
-        final UploadWallPhoto photo,
-        final int group
+        final int group,
+        final UploadWallPhoto photo
     ) {
         this.client = client;
         this.actor = actor;
-        this.photo = photo;
         this.group = group;
+        this.photo = photo;
     }
 
     @Override

@@ -42,7 +42,7 @@ import org.junit.Test;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo #22 Write tests for the exceptions.
+ * @todo #22 Write tests for exceptions.
  * @checkstyle JavadocMethodCheck (500 lines)
  */
 public final class IdsMapTest {

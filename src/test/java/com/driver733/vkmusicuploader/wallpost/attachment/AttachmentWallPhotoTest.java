@@ -64,6 +64,7 @@ public final class AttachmentWallPhotoTest {
                     new TransportClientCached("1")
                 ),
                 new UserActor(0, ""),
+                AttachmentWallPhotoTest.GROUP_ID,
                 new UploadWallPhoto(
                     new VkApiClient(
                         new TransportClientCached(
@@ -85,8 +86,7 @@ public final class AttachmentWallPhotoTest {
                             );
                         }
                     }
-                ),
-                AttachmentWallPhotoTest.GROUP_ID
+                )
             ).upload().get(0).build(),
             Matchers.equalTo(
                 new PhotosSaveWallPhotoQuery(

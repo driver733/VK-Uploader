@@ -21,12 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.driver733.vkmusicuploader.media.audio;
+
+import com.driver733.vkmusicuploader.media.Media;
+import com.jcabi.aspects.Immutable;
+import com.jcabi.immutable.Array;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 /**
- * Audios test.
+ * Verifies that the {@link List}
+ * of audio files is not empty.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
  */
-package com.driver733.vkmusicuploader.audio;
+@Immutable
+public final class MediaVerified implements Media {
+
+    /**
+     * Origin.
+     */
+    private final Media origin;
+
+    /**
+     * Ctor.
+     * @param origin Origin.
+     */
+    public MediaVerified(final Media origin) {
+        this.origin = origin;
+    }
+
+    @Override
+    public List<File> files() throws IOException {
+        final Array<File> audios = new Array<>(this.origin.files());
+        if (audios.isEmpty()) {
+            throw new IOException("No media found");
+        }
+        return audios;
+    }
+}

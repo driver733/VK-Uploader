@@ -144,7 +144,7 @@ public final class UploadServers {
     /**
      * Acquires an upload URL for wall docs
      * (or uses a cached one if it is available).
-     * @return Upload URL for wall photos.
+     * @return Upload URL for wall files.
      * @throws ClientException VK client error.
      * @throws ApiException VK API error.
      */
@@ -158,9 +158,9 @@ public final class UploadServers {
     }
 
     /**
-     * Acquires an upload URL for wall photos
+     * Acquires an upload URL for wall files
      * (or used a cached one if it is available).
-     * @return Upload URL for wall photos.
+     * @return Upload URL for wall files.
      * @throws ClientException VK client error.
      * @throws ApiException VK API error.
      */

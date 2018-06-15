@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.audio;
+package com.driver733.vkmusicuploader.media.audio;
 
+import com.driver733.vkmusicuploader.media.Media;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.jcabi.aspects.Immutable;
@@ -42,12 +43,12 @@ import java.util.List;
  * @since 0.1
  */
 @Immutable
-public final class AudiosNonProcessed implements Audios {
+public final class AudiosNonProcessed implements Media {
 
     /**
      * Origin.
      */
-    private final Audios origin;
+    private final Media origin;
 
     /**
      * Properties that contain the {@link AudioStatus}es of audio files.
@@ -61,7 +62,7 @@ public final class AudiosNonProcessed implements Audios {
      *  the {@link AudioStatus}es of audio files.
      */
     public AudiosNonProcessed(
-        final Audios origin,
+        final Media origin,
         final ImmutableProperties properties
     ) {
         this.origin = origin;
@@ -69,9 +70,9 @@ public final class AudiosNonProcessed implements Audios {
     }
 
     @Override
-    public List<File> audios() throws IOException {
+    public List<File> files() throws IOException {
         this.props.load();
-        final Array<File> audios = new Array<>(this.origin.audios());
+        final Array<File> audios = new Array<>(this.origin.files());
         final List<File> result = new ArrayList<>(audios.size());
         for (final File file : audios) {
             if (

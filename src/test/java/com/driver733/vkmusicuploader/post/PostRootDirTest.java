@@ -232,7 +232,7 @@ public final class PostRootDirTest {
             PostRootDirTest.GROUP_ID
         ).post();
         Assert.assertTrue(
-            "The files differ",
+            "The properties files differ",
             FileUtils.contentEquals(
                 new File("src/test/resources/album/vkmu.properties"),
                 new File("src/test/resources/postRootDirTest.properties")

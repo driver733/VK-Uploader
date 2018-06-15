@@ -27,7 +27,7 @@ package com.driver733.vkmusicuploader.post.post;
 import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.post.execution.UploadVerification;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
-import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPostsAlbum;
+import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPostsPhoto;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -124,7 +124,7 @@ public final class PostRootDir implements Post {
                 }
             }
             new UploadVerification(
-                new WallPostsAlbum(
+                new WallPostsPhoto(
                     this.client,
                     this.actor,
                     dir,

@@ -21,44 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.audio;
+package com.driver733.vkmusicuploader.media;
 
-import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 /**
- * Verifies that the {@link List}
- * of audio files is not empty.
+ * Returns a {@link List}
+ *  of audio files.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.2
  */
-@Immutable
-public final class AudiosVerified implements Audios {
+public interface Media {
 
     /**
-     * Origin.
+     * Locates the files {@link File} that match a certain criteria.
+     *  (See decorator classes)
+     * @return A list of {@link File}s.
+     * @throws IOException If a certain criteria is not fulfilled.
      */
-    private final Audios origin;
-
-    /**
-     * Ctor.
-     * @param origin Origin.
-     */
-    public AudiosVerified(final Audios origin) {
-        this.origin = origin;
-    }
-
-    @Override
-    public List<File> audios() throws IOException {
-        final Array<File> audios = new Array<>(this.origin.audios());
-        if (audios.size() == 0) {
-            throw new IOException("No audios found");
-        }
-        return audios;
-    }
+    List<File> files() throws IOException;
 }

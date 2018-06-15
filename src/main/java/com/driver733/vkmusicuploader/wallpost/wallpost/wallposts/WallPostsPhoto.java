@@ -23,12 +23,12 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost.wallposts;
 
-import com.driver733.vkmusicuploader.media.audio.AudiosBasic;
-import com.driver733.vkmusicuploader.media.audio.AudiosNonProcessed;
+import com.driver733.vkmusicuploader.media.photo.MediaPhotosBasic;
+import com.driver733.vkmusicuploader.media.photo.MediaPhotosNonProcessed;
 import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
-import com.driver733.vkmusicuploader.wallpost.wallpost.WallPostAlbum;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.WallPhotoStatus;
+import com.driver733.vkmusicuploader.wallpost.wallpost.WallPostPhotos;
 import com.jcabi.aspects.Cacheable;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
@@ -40,34 +40,32 @@ import com.vk.api.sdk.queries.wall.WallPostQuery;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * Creates {@link com.driver733.vkmusicuploader.wallpost.wallpost.WallPost}s
- *  with albums found in the specified directory.
- *  Each wall post has up 9 audios.
+ *  with photos found in the specified directory.
+ *  Each wall post has up to 10 photos.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.2
  *
  * @checkstyle ClassDataAbstractionCouplingCheck (2 lines)
  */
 @Immutable
-public final class WallPostsAlbum implements WallPosts {
+public final class WallPostsPhoto implements WallPosts {
 
     /**
      * Maximum number of requests in each batch request.
-     * @see
      */
     private static final int BATCH_MAX_REQUESTS = 25;
 
     /**
      * Number of files in each wall post.
-     * 1 (Album image)
+     *  (Equal to the number of attachments)
      */
-    private static final int PHOTOS_IN_POST = 1;
+    private static final int PHOTOS_IN_POST = WallPostsPhoto.MAX_ATTACHMENTS;
 
     /**
      * The "cost" of a wall.post request.
@@ -75,23 +73,16 @@ public final class WallPostsAlbum implements WallPosts {
     private static final int WALL_POST_REQUEST = 1;
 
     /**
+     * Photos in each batch request.
+     */
+    private static final int PHOTOS_IN_REQUEST =
+        WallPostsPhoto.BATCH_MAX_REQUESTS
+            - 3 * WallPostsPhoto.WALL_POST_REQUEST;
+
+    /**
      * Maximum number of attachments in a wall post.
      */
     private static final int MAX_ATTACHMENTS = 10;
-
-    /**
-     * Audios in each batch request.
-     */
-    private static final int AUDIOS_IN_REQUEST =
-        WallPostsAlbum.BATCH_MAX_REQUESTS
-            - 3 * (WallPostsAlbum.PHOTOS_IN_POST
-            + WallPostsAlbum.WALL_POST_REQUEST);
-
-    /**
-     * Audios in each Wall Post.
-     */
-    private static final int AUDIOS_IN_POST =
-        WallPostsAlbum.MAX_ATTACHMENTS - WallPostsAlbum.PHOTOS_IN_POST;
 
     /**
      * Group ID.
@@ -119,7 +110,7 @@ public final class WallPostsAlbum implements WallPosts {
     private final UploadServers servers;
 
     /**
-     * Properties that contain the {@link AudioStatus}es of audio files.
+     * Properties that contain the {@link WallPhotoStatus}es of photos.
      */
     private final ImmutableProperties properties;
 
@@ -131,11 +122,11 @@ public final class WallPostsAlbum implements WallPosts {
      * @param servers Upload servers that provide upload URLs
      *  for attachmentsFields.
      * @param properties Properties that contain the
-     *  {@link AudioStatus}es of audio files.
+     *  {@link WallPhotoStatus}es of photos.
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
-    public WallPostsAlbum(
+    public WallPostsPhoto(
         final VkApiClient client,
         final UserActor actor,
         final File dir,
@@ -156,33 +147,32 @@ public final class WallPostsAlbum implements WallPosts {
      * Constructs queries for batch posting wall postsQueries
      * associated with the album.
      * @return ExecuteBatchQuery.
-     * @throws IOException If no audios are found.
+     * @throws IOException If no photos are found.
      */
     public List<ExecuteBatchQuery> postsQueries() throws IOException {
-        final List<File> audios = this.audios();
-        final List<ExecuteBatchQuery> queries = new ArrayList<>(audios.size());
+        final List<File> photos = this.photos();
+        final List<ExecuteBatchQuery> queries = new ArrayList<>(photos.size());
         int iter = 0;
         Logger.debug(
             this,
             "Analyzing directory '%s'...", this.dir.getPath()
         );
-        while (iter < audios.size()) {
+        while (iter < photos.size()) {
             final int to;
-            if (audios.size() < iter + WallPostsAlbum.AUDIOS_IN_REQUEST) {
-                to = audios.size() - iter;
+            if (photos.size() < iter + WallPostsPhoto.PHOTOS_IN_REQUEST) {
+                to = photos.size() - iter;
             } else {
-                to = iter + WallPostsAlbum.AUDIOS_IN_REQUEST;
+                to = iter + WallPostsPhoto.PHOTOS_IN_REQUEST;
             }
             queries.add(
                 this.postsBatch(
-                    audios.subList(iter, to)
+                    photos.subList(iter, to)
                 )
             );
-            iter += WallPostsAlbum.AUDIOS_IN_REQUEST;
+            iter += WallPostsPhoto.PHOTOS_IN_REQUEST;
         }
-        Collections.reverse(queries);
         if (queries.isEmpty()) {
-            Logger.debug(this, "No audio files to upload. Skipping...");
+            Logger.debug(this, "No photos to upload. Skipping...");
         }
         return queries;
     }
@@ -190,34 +180,28 @@ public final class WallPostsAlbum implements WallPosts {
     @Override
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public void updateProperties() throws IOException {
-        final List<File> audios = this.audios();
-        for (final File audio : audios) {
+        final List<File> photos = this.photos();
+        for (final File photo : photos) {
             this.properties.setProperty(
-                audio.getName(),
-                new StringBuilder(
-                    this.properties.getProperty(
-                        audio.getName()
-                    )
-                ).replace(
-                    0,
-                    1,
-                    AudioStatus.POSTED.toString()
-                ).toString()
+                photo.getName(),
+                WallPhotoStatus.POSTED.toString()
             );
         }
         this.properties.store();
     }
 
     /**
-     * Finds audio files that have not been posted yet.
-     * @return An array of audio {@link File}s.
+     * Finds photo files that have not been posted yet.
+     * @return A list of photos {@link File}s.
      * @throws IOException If a certain criteria of
      *  is not fulfilled.
      */
     @Cacheable(forever = true)
-    private List<File> audios() throws IOException {
-        return new AudiosNonProcessed(
-            new AudiosBasic(this.dir),
+    private List<File> photos() throws IOException {
+        return new MediaPhotosNonProcessed(
+            new MediaPhotosBasic(
+                this.dir
+            ),
             this.properties
         ).files();
     }
@@ -226,45 +210,52 @@ public final class WallPostsAlbum implements WallPosts {
     /**
      * Constructs a query for batch posting wall postsQueries
      * associated with the album.
-     * @param audios Audio files to include with the wall postsQueries.
+     * @param photos Photos to include with the wall postsQueries.
      * @return ExecuteBatchQuery.
      * @throws IOException If the WallPost query cannot be obtained.
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    private ExecuteBatchQuery postsBatch(final List<File> audios) throws
+    private ExecuteBatchQuery postsBatch(final List<File> photos) throws
         IOException {
         Logger.info(
             this,
             "Processing directory: '%s'...", this.dir.getPath()
         );
-        final List<WallPostQuery> posts = new ArrayList<>(audios.size());
+        final List<WallPostQuery> posts = new ArrayList<>(
+            photos.size()
+        );
         int from = 0;
-        while (from < audios.size()) {
+        while (from < photos.size()) {
             final int to;
-            if (audios.size() < from + WallPostsAlbum.AUDIOS_IN_POST) {
-                to = audios.size();
+            if (photos.size() < from + WallPostsPhoto.PHOTOS_IN_POST) {
+                to = photos.size();
             } else {
-                to = from + WallPostsAlbum.AUDIOS_IN_POST;
+                to = from + WallPostsPhoto.PHOTOS_IN_POST;
             }
             final WallPostQuery query;
             try {
-                query = new WallPostAlbum(
+                query = new WallPostPhotos(
                     this.client,
                     this.actor,
                     new Array<>(
-                        audios.subList(from, to)
+                        photos.subList(
+                            from,
+                            to
+                        )
                     ),
                     this.servers,
                     this.properties,
                     this.group
                 ).construct();
             } catch (final IOException ex) {
-                throw new IOException("Failed to obtain a WallPost query", ex);
+                throw new IOException(
+                    "Failed to obtain a WallPost query",
+                    ex
+                );
             }
             posts.add(query);
-            from += WallPostsAlbum.AUDIOS_IN_POST;
+            from += WallPostsPhoto.PHOTOS_IN_POST;
         }
-        Collections.reverse(posts);
         return new ExecuteBatchQuery(
             this.client,
             this.actor,

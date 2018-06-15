@@ -21,42 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.audio;
-
-import com.driver733.vkmusicuploader.properties.ImmutableProperties;
-import java.io.File;
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-
-/**
- * Test for {@link Audios}.
- *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
- * @since 0.1
- * @checkstyle JavadocMethodCheck (500 lines)
- */
-public final class AudiosTest {
-
-    @Test
-    public void all() throws IOException {
-        MatcherAssert.assertThat(
-            new AudiosVerified(
-                new AudiosNonProcessed(
-                    new AudiosBasic(
-                        new File("src/test/resources/album")
-                    ),
-                    new ImmutableProperties(
-                        new File("src/test/resources/audiosTest.properties")
-                    )
-                )
-            ).audios(),
-            Matchers.containsInAnyOrder(
-                new File("src/test/resources/album/test.mp3")
-            )
-        );
-    }
-
-}
+package com.driver733.vkmusicuploader.media.photo;

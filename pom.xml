@@ -96,7 +96,7 @@
         <dependency>
             <groupId>org.cactoos</groupId>
             <artifactId>cactoos</artifactId>
-            <version>0.29</version>
+            <version>0.35</version>
         </dependency>
         <dependency>
             <groupId>net.jcip</groupId>

@@ -59,30 +59,25 @@ public final class WallPostsPhoto implements WallPosts {
     /**
      * Maximum number of requests in each batch request.
      */
-    private static final int BATCH_MAX_REQUESTS = 25;
+    private static final int BATCH_MAX_REQ = 25;
 
     /**
      * Number of files in each wall post.
-     *  (Equal to the number of attachments)
+     *  (Equal to the maximum number of attachments)
      */
-    private static final int PHOTOS_IN_POST = WallPostsPhoto.MAX_ATTACHMENTS;
+    private static final int PHOTOS_IN_POST = 10;
 
     /**
      * The "cost" of a wall.post request.
      */
-    private static final int WALL_POST_REQUEST = 1;
+    private static final int WALL_POST_REQ = 1;
 
     /**
      * Photos in each batch request.
      */
-    private static final int PHOTOS_IN_REQUEST =
-        WallPostsPhoto.BATCH_MAX_REQUESTS
-            - 3 * WallPostsPhoto.WALL_POST_REQUEST;
-
-    /**
-     * Maximum number of attachments in a wall post.
-     */
-    private static final int MAX_ATTACHMENTS = 10;
+    private static final int PHOTOS_IN_REQ =
+        WallPostsPhoto.BATCH_MAX_REQ
+            - 3 * WallPostsPhoto.WALL_POST_REQ;
 
     /**
      * Group ID.
@@ -159,17 +154,17 @@ public final class WallPostsPhoto implements WallPosts {
         );
         while (iter < photos.size()) {
             final int to;
-            if (photos.size() < iter + WallPostsPhoto.PHOTOS_IN_REQUEST) {
+            if (photos.size() < iter + WallPostsPhoto.PHOTOS_IN_REQ) {
                 to = photos.size() - iter;
             } else {
-                to = iter + WallPostsPhoto.PHOTOS_IN_REQUEST;
+                to = iter + WallPostsPhoto.PHOTOS_IN_REQ;
             }
             queries.add(
                 this.postsBatch(
                     photos.subList(iter, to)
                 )
             );
-            iter += WallPostsPhoto.PHOTOS_IN_REQUEST;
+            iter += WallPostsPhoto.PHOTOS_IN_REQ;
         }
         if (queries.isEmpty()) {
             Logger.debug(this, "No photos to upload. Skipping...");
@@ -214,7 +209,9 @@ public final class WallPostsPhoto implements WallPosts {
      * @return ExecuteBatchQuery.
      * @throws IOException If the WallPost query cannot be obtained.
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    @SuppressWarnings({"PMD.AvoidInstantiatingObjectsInLoops",
+        "PMD.OptimizableToArrayCall"
+        })
     private ExecuteBatchQuery postsBatch(final List<File> photos) throws
         IOException {
         Logger.info(

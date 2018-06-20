@@ -22,27 +22,3 @@
  * SOFTWARE.
  */
 package com.driver733.vkmusicuploader.media;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
-/**
- * Returns a {@link List}
- *  of audio files.
- *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
- * @since 0.2
- */
-public interface Media {
-
-    /**
-     * Locates the files {@link File} that match a certain criteria.
-     *  (See decorator classes)
-     * @return A list of {@link File}s.
-     * @throws IOException If a certain criteria is not fulfilled.
-     */
-    List<File> files() throws IOException;
-
-}

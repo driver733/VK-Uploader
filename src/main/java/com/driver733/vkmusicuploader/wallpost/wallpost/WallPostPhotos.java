@@ -132,14 +132,12 @@ public final class WallPostPhotos implements WallPost {
                                 this.servers.uploadUrl(
                                     UploadServers.Type.WALL_PHOTO
                                 ),
-                                this.properties,
                                 this.photos,
                                 this.group
                             )
                         )
                     ),
                     new MessageBasic(
-
                     ).construct()
                 )
             ),

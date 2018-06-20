@@ -81,17 +81,24 @@ public final class UploadWallPhoto
         this.photo = photo;
     }
 
+    /**
+     * Ctor.
+     * @param client The {@link VkApiClient}
+     *  that is used for all VK API requests.
+     * @param url Wall Photo upload URL for the photo construct.
+     * @param photo Photo file.
+     */
     public UploadWallPhoto(
         final VkApiClient client,
         final String url,
-        final File file
+        final File photo
     ) {
         this(
             client,
             url,
             new FallbackByteArray(
                 new ByteArrayFromFile(
-                    file
+                    photo
                 )
             )
         );

@@ -61,7 +61,7 @@ public final class WallPostsAlbum implements WallPosts {
      * Maximum number of requests in each batch request.
      * @see
      */
-    private static final int BATCH_MAX_REQUESTS = 25;
+    private static final int BATCH_MAX_REQ = 25;
 
     /**
      * Number of files in each wall post.
@@ -72,7 +72,7 @@ public final class WallPostsAlbum implements WallPosts {
     /**
      * The "cost" of a wall.post request.
      */
-    private static final int WALL_POST_REQUEST = 1;
+    private static final int WALL_POST_REQ = 1;
 
     /**
      * Maximum number of attachments in a wall post.
@@ -82,10 +82,11 @@ public final class WallPostsAlbum implements WallPosts {
     /**
      * Audios in each batch request.
      */
-    private static final int AUDIOS_IN_REQUEST =
-        WallPostsAlbum.BATCH_MAX_REQUESTS
+    private static final int AUDIOS_IN_REQ =
+        WallPostsAlbum.BATCH_MAX_REQ
             - 3 * (WallPostsAlbum.PHOTOS_IN_POST
-            + WallPostsAlbum.WALL_POST_REQUEST);
+            + WallPostsAlbum.WALL_POST_REQ
+        );
 
     /**
      * Audios in each Wall Post.
@@ -168,17 +169,17 @@ public final class WallPostsAlbum implements WallPosts {
         );
         while (iter < audios.size()) {
             final int to;
-            if (audios.size() < iter + WallPostsAlbum.AUDIOS_IN_REQUEST) {
+            if (audios.size() < iter + WallPostsAlbum.AUDIOS_IN_REQ) {
                 to = audios.size() - iter;
             } else {
-                to = iter + WallPostsAlbum.AUDIOS_IN_REQUEST;
+                to = iter + WallPostsAlbum.AUDIOS_IN_REQ;
             }
             queries.add(
                 this.postsBatch(
                     audios.subList(iter, to)
                 )
             );
-            iter += WallPostsAlbum.AUDIOS_IN_REQUEST;
+            iter += WallPostsAlbum.AUDIOS_IN_REQ;
         }
         Collections.reverse(queries);
         if (queries.isEmpty()) {
@@ -230,7 +231,9 @@ public final class WallPostsAlbum implements WallPosts {
      * @return ExecuteBatchQuery.
      * @throws IOException If the WallPost query cannot be obtained.
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    @SuppressWarnings({"PMD.AvoidInstantiatingObjectsInLoops",
+        "PMD.OptimizableToArrayCall"
+        })
     private ExecuteBatchQuery postsBatch(final List<File> audios) throws
         IOException {
         Logger.info(

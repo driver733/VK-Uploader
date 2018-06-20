@@ -23,7 +23,6 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
-import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallPhoto;
 import com.jcabi.aspects.Immutable;
@@ -78,17 +77,10 @@ public final class AttachmentWallPhotos implements Attachment {
     private final String url;
 
     /**
-     * Properties that contain the {@link AudioStatus} of audio files.
-     */
-    private final ImmutableProperties properties;
-
-    /**
      * Ctor.
      * @param client The {@link VkApiClient} for all requests.
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param url Audio upload URL for the audio files.
-     * @param properties Properties that contain the
-     *  {@link AudioStatus} of audio files.
      * @param photos Audios files.
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (2 lines)
@@ -97,7 +89,6 @@ public final class AttachmentWallPhotos implements Attachment {
         final VkApiClient client,
         final UserActor actor,
         final String url,
-        final ImmutableProperties properties,
         final List<File> photos,
         final int group
     ) {
@@ -105,7 +96,6 @@ public final class AttachmentWallPhotos implements Attachment {
         this.photos = new Array<>(photos);
         this.actor = actor;
         this.url = url;
-        this.properties = properties;
         this.group = group;
     }
 
@@ -144,16 +134,16 @@ public final class AttachmentWallPhotos implements Attachment {
      */
     private List<AbstractQueryBuilder> upload(final File photo)
         throws ApiException, ClientException, IOException {
-            return new AttachmentWallPhoto(
+        return new AttachmentWallPhoto(
+            this.client,
+            this.actor,
+            this.group,
+            new UploadWallPhoto(
                 this.client,
-                this.actor,
-                this.group,
-                new UploadWallPhoto(
-                    this.client,
-                    this.url,
-                    photo
-                )
-            ).upload();
+                this.url,
+                photo
+            )
+        ).upload();
     }
 
 }

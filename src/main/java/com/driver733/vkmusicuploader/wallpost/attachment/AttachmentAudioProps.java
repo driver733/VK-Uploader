@@ -26,8 +26,6 @@ package com.driver733.vkmusicuploader.wallpost.attachment;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.jcabi.aspects.Immutable;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.audio.Audio;
 import java.io.IOException;
 
@@ -78,13 +76,11 @@ public final class AttachmentAudioProps {
 
     /**
      * Uploads the audio files.
-     * @throws ApiException VK API error.
-     * @throws ClientException VK API Client error.
      * @throws IOException If an exception occurs
      *  while loading/saving the properties.
      */
     public void saveProps()
-        throws ApiException, ClientException, IOException {
+        throws IOException {
         this.properties.load();
         this.properties.setPropertyAndStore(
             this.fileName,

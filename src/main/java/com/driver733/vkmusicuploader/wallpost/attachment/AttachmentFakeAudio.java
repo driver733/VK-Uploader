@@ -28,10 +28,7 @@ import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientCached;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,8 +57,7 @@ public final class AttachmentFakeAudio implements Attachment {
 
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     @Override
-    public List<AbstractQueryBuilder> upload()
-        throws ApiException, ClientException, IOException {
+    public List<AbstractQueryBuilder> upload() {
         final List<AbstractQueryBuilder> out = new ArrayList<>(
             this.results.size()
         );
@@ -75,7 +71,10 @@ public final class AttachmentFakeAudio implements Attachment {
                             )
                         )
                     )
-                ).unsafeParam("audio_id", res)
+                ).unsafeParam(
+                    "audio_id",
+                    res
+                )
             );
         }
         return new Array<>(out);

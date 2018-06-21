@@ -54,14 +54,18 @@ public final class WallPostBase implements WallPost {
      * @param client VKAPIClient that is used for all VK API requests.
      * @param actor UserActor on behalf of which all requests will be sent.
      */
-    public WallPostBase(final VkApiClient client, final UserActor actor) {
+    public WallPostBase(
+        final VkApiClient client,
+        final UserActor actor
+    ) {
         this.client = client;
         this.actor = actor;
     }
 
     @Override
     public WallPostQuery construct() {
-        return this.client.wall().post(this.actor);
+        return this.client.wall()
+            .post(this.actor);
     }
 
 }

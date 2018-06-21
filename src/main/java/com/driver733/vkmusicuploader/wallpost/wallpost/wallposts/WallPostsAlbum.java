@@ -161,11 +161,14 @@ public final class WallPostsAlbum implements WallPosts {
      */
     public List<ExecuteBatchQuery> postsQueries() throws IOException {
         final List<File> audios = this.audios();
-        final List<ExecuteBatchQuery> queries = new ArrayList<>(audios.size());
+        final List<ExecuteBatchQuery> queries = new ArrayList<>(
+            audios.size()
+        );
         int iter = 0;
         Logger.debug(
             this,
-            "Analyzing directory '%s'...", this.dir.getPath()
+            "Analyzing directory '%s'...",
+            this.dir.getPath()
         );
         while (iter < audios.size()) {
             final int to;
@@ -176,14 +179,20 @@ public final class WallPostsAlbum implements WallPosts {
             }
             queries.add(
                 this.postsBatch(
-                    audios.subList(iter, to)
+                    audios.subList(
+                        iter,
+                        to
+                    )
                 )
             );
             iter += WallPostsAlbum.AUDIOS_IN_REQ;
         }
         Collections.reverse(queries);
         if (queries.isEmpty()) {
-            Logger.debug(this, "No audio files to upload. Skipping...");
+            Logger.debug(
+                this,
+                "No audio files to upload. Skipping..."
+            );
         }
         return queries;
     }
@@ -202,7 +211,8 @@ public final class WallPostsAlbum implements WallPosts {
                 ).replace(
                     0,
                     1,
-                    AudioStatus.POSTED.toString()
+                    AudioStatus.POSTED
+                        .toString()
                 ).toString()
             );
         }
@@ -218,7 +228,9 @@ public final class WallPostsAlbum implements WallPosts {
     @Cacheable(forever = true)
     private List<File> audios() throws IOException {
         return new AudiosNonProcessed(
-            new AudiosBasic(this.dir),
+            new AudiosBasic(
+                this.dir
+            ),
             this.properties
         ).files();
     }
@@ -234,13 +246,18 @@ public final class WallPostsAlbum implements WallPosts {
     @SuppressWarnings({"PMD.AvoidInstantiatingObjectsInLoops",
         "PMD.OptimizableToArrayCall"
         })
-    private ExecuteBatchQuery postsBatch(final List<File> audios) throws
+    private ExecuteBatchQuery postsBatch(
+        final List<File> audios
+    ) throws
         IOException {
         Logger.info(
             this,
-            "Processing directory: '%s'...", this.dir.getPath()
+            "Processing directory: '%s'...",
+            this.dir.getPath()
         );
-        final List<WallPostQuery> posts = new ArrayList<>(audios.size());
+        final List<WallPostQuery> posts = new ArrayList<>(
+            audios.size()
+        );
         int from = 0;
         while (from < audios.size()) {
             final int to;
@@ -255,14 +272,20 @@ public final class WallPostsAlbum implements WallPosts {
                     this.client,
                     this.actor,
                     new Array<>(
-                        audios.subList(from, to)
+                        audios.subList(
+                            from,
+                            to
+                        )
                     ),
                     this.servers,
                     this.properties,
                     this.group
                 ).construct();
             } catch (final IOException ex) {
-                throw new IOException("Failed to obtain a WallPost query", ex);
+                throw new IOException(
+                    "Failed to obtain a WallPost query",
+                    ex
+                );
             }
             posts.add(query);
             from += WallPostsAlbum.AUDIOS_IN_POST;

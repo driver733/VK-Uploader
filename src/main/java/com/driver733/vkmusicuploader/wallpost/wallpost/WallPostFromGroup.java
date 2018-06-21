@@ -54,7 +54,8 @@ public final class WallPostFromGroup implements WallPost {
 
     @Override
     public WallPostQuery construct() throws IOException {
-        return this.post.construct().fromGroup(true);
+        return this.post.construct()
+            .fromGroup(true);
     }
 
 }

@@ -134,14 +134,18 @@ public final class AttachmentAudio implements Attachment {
         final Upload<UploadAudioQuery, AudioUploadResponse> upload
     ) throws ApiException, ClientException, IOException {
         this.properties.load();
-        final String filename = upload.query().fileName();
-        final AudioUploadResponse response = upload.query().execute();
-        final Audio audio = this.client.audio().save(
-            this.actor,
-            response.getServer(),
-            response.getAudio(),
-            response.getHash()
-        ).execute();
+        final String filename = upload.query()
+            .fileName();
+        final AudioUploadResponse response = upload.query()
+            .execute();
+        final Audio audio = this.client
+            .audio()
+            .save(
+                this.actor,
+                response.getServer(),
+                response.getAudio(),
+                response.getHash()
+            ).execute();
         new AttachmentAudioProps(
             audio,
             filename,

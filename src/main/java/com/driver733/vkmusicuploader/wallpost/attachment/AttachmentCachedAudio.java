@@ -149,34 +149,58 @@ public final class AttachmentCachedAudio implements Attachment {
     private List<AbstractQueryBuilder> upload(final File audio)
         throws ApiException, ClientException, IOException {
         final List<AbstractQueryBuilder> result;
-        if (this.properties.getProperty(audio.getName()) == null) {
+        if (
+            this.properties.getProperty(
+            audio.getName()
+        ) == null
+            ) {
             result = new AttachmentAudio(
                 this.client,
                 this.actor,
                 this.properties,
                 this.group,
                 new UploadAudio(
-                    this.client, this.url, audio
+                    this.client,
+                    this.url,
+                    audio
                 )
                 ).upload();
         } else {
-            final String value = this.properties.getProperty(audio.getName());
+            final String value = this.properties.getProperty(
+                audio.getName()
+            );
             final int status = Integer.parseInt(
                 value.substring(
                     0,
-                    StringUtils.ordinalIndexOf(value, "_", 1)
+                    StringUtils.ordinalIndexOf(
+                        value,
+                        "_",
+                        1
+                    )
                 )
             );
             if (status == 0) {
                 final Integer ownerId = Integer.parseInt(
                     value.substring(
-                        StringUtils.ordinalIndexOf(value, "_", 1) + 1,
-                        StringUtils.ordinalIndexOf(value, "_", 2)
+                        StringUtils.ordinalIndexOf(
+                            value,
+                            "_",
+                            1
+                        ) + 1,
+                        StringUtils.ordinalIndexOf(
+                            value,
+                            "_",
+                            2
+                        )
                     )
                 );
                 final int mediaId = Integer.parseInt(
                     value.substring(
-                        StringUtils.ordinalIndexOf(value, "_", 2) + 1
+                        StringUtils.ordinalIndexOf(
+                            value,
+                            "_",
+                            2
+                        ) + 1
                     )
                 );
                 result = new AttachmentAddAudio(
@@ -188,7 +212,11 @@ public final class AttachmentCachedAudio implements Attachment {
                 ).upload();
             } else if (status == 1) {
                 final String mediaId = value.substring(
-                    StringUtils.ordinalIndexOf(value, "_", 1) + 1
+                    StringUtils.ordinalIndexOf(
+                        value,
+                        "_",
+                        1
+                    ) + 1
                 );
                 final AudioAddQuery query =
                     new AudioAddQuery(
@@ -199,7 +227,10 @@ public final class AttachmentCachedAudio implements Attachment {
                                 )
                             )
                         ),
-                        new UserActor(0, ""),
+                        new UserActor(
+                            0,
+                            ""
+                        ),
                         0,
                         0
                     );

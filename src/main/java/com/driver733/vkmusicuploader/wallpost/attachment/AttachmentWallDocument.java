@@ -82,7 +82,9 @@ public final class AttachmentWallDocument implements Attachment {
     @Override
     public List<AbstractQueryBuilder> upload()
         throws ClientException, ApiException, IOException {
-        final DocUploadResponse response = this.doc.query().execute();
+        final DocUploadResponse response =
+            this.doc.query()
+                .execute();
         return new Array<>(
             this.client.docs().save(
                 this.actor,

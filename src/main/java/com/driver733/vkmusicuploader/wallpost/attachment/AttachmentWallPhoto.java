@@ -93,13 +93,19 @@ public final class AttachmentWallPhoto implements Attachment {
     public List<AbstractQueryBuilder> upload()
         throws ClientException, ApiException, IOException {
         final List<AbstractQueryBuilder> result = new ArrayList<>(1);
-        final WallUploadResponse response = this.photo.query().execute();
+        final WallUploadResponse response =
+            this.photo.query()
+                .execute();
         result.add(
             this.client.photos()
-                .saveWallPhoto(this.actor, response.getPhoto())
-                .server(response.getServer())
-                .hash(response.getHash())
-                .groupId(this.group)
+                .saveWallPhoto(
+                    this.actor,
+                    response.getPhoto()
+                ).server(
+                    response.getServer()
+                ).hash(
+                    response.getHash()
+                ).groupId(this.group)
         );
         return result;
     }

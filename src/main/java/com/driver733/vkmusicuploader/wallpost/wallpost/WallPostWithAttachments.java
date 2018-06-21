@@ -74,7 +74,10 @@ public final class WallPostWithAttachments implements WallPost {
                     this.attachments.attachmentsFields()
                 );
         } catch (final ApiException | ClientException | IOException ex) {
-            throw new IOException("Failed to obtain attachment fields", ex);
+            throw new IOException(
+                "Failed to obtain attachment fields",
+                ex
+            );
         }
     }
 

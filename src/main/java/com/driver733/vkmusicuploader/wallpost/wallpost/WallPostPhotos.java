@@ -26,7 +26,6 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhotos;
-import com.driver733.vkmusicuploader.wallpost.attachment.message.MessageBasic;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArrays;
 import com.jcabi.aspects.Immutable;
@@ -116,29 +115,25 @@ public final class WallPostPhotos implements WallPost {
     public WallPostQuery construct() throws IOException {
         return new WallPostWithOwnerId(
             new WallPostFromGroup(
-                new WallPostWithMessage(
-                    new WallPostWithAttachments(
-                        new WallPostBase(
-                            this.client,
-                            this.actor
-                        ),
-                        new AttachmentArrays(
-                            this.actor,
-                            this.properties,
-                            this.group,
-                            new AttachmentWallPhotos(
-                                this.client,
-                                this.actor,
-                                this.servers.uploadUrl(
-                                    UploadServers.Type.WALL_PHOTO
-                                ),
-                                this.photos,
-                                this.group
-                            )
-                        )
+                new WallPostWithAttachments(
+                    new WallPostBase(
+                        this.client,
+                        this.actor
                     ),
-                    new MessageBasic(
-                    ).construct()
+                    new AttachmentArrays(
+                        this.actor,
+                        this.properties,
+                        this.group,
+                        new AttachmentWallPhotos(
+                            this.client,
+                            this.actor,
+                            this.servers.uploadUrl(
+                                UploadServers.Type.WALL_PHOTO
+                            ),
+                            this.photos,
+                            this.group
+                        )
+                    )
                 )
             ),
             -this.group

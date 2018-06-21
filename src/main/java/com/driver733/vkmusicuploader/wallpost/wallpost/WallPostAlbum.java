@@ -134,7 +134,8 @@ public final class WallPostAlbum implements WallPost {
             throw new IOException(
                 String.format(
                     "Failed to get Mp3File from File %s",
-                    this.audios.get(0).getAbsolutePath()
+                    this.audios.get(0)
+                        .getAbsolutePath()
                 ),
                 ex
             );
@@ -192,10 +193,12 @@ public final class WallPostAlbum implements WallPost {
                     ),
                     new MessageBasic(
                         new ID3v1AnnotatedSafe(
-                            new BasicTagFromMp3File(file).construct()
+                            new BasicTagFromMp3File(file)
+                                .construct()
                         ).getAlbum(),
                         new ID3v1AnnotatedSafe(
-                            new BasicTagFromMp3File(file).construct()
+                            new BasicTagFromMp3File(file)
+                                .construct()
                         ).getArtist()
                     ).construct()
                 )

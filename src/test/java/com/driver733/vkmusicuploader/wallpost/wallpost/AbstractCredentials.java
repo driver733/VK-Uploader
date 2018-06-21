@@ -74,7 +74,8 @@ public abstract class AbstractCredentials {
     protected final int groupId() throws Exception {
         return Integer.parseInt(
             String.valueOf(
-                this.props.value().get("groupId")
+                this.props.value()
+                    .get("groupId")
             )
         );
     }
@@ -87,7 +88,8 @@ public abstract class AbstractCredentials {
     protected final int userId() throws Exception {
         return Integer.parseInt(
             String.valueOf(
-                this.props.value().get("userId")
+                this.props.value()
+                    .get("userId")
             )
         );
     }
@@ -99,7 +101,8 @@ public abstract class AbstractCredentials {
      */
     protected final String token() throws Exception {
         return String.valueOf(
-            this.props.value().get("token")
+            this.props.value()
+                .get("token")
         );
     }
 

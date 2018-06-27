@@ -26,6 +26,7 @@ package com.driver733.vkmusicuploader.wallpost.attachment;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientComplex;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadAudio;
+import com.driver733.vkmusicuploader.wallpost.wallpost.file.RecoverableFile;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
@@ -34,6 +35,7 @@ import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.queries.audio.AudioAddQuery;
 import java.io.File;
 import java.util.HashMap;
+import org.cactoos.io.BytesOf;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -72,6 +74,15 @@ public final class AttachmentAudioTest {
         })
     @Test
     public void test() throws Exception {
+        final File props = new File(
+            "src/test/resources/attachmentAudioTest.properties"
+        );
+        final RecoverableFile original = new RecoverableFile(
+            new BytesOf(
+                props
+            ).asBytes(),
+            props.toPath()
+        );
         Assert.assertThat(
             new AttachmentAudio(
                 new VkApiClient(
@@ -110,9 +121,7 @@ public final class AttachmentAudioTest {
                     "1"
                 ),
                 new ImmutableProperties(
-                    new File(
-                        "src/test/resources/attachmentAudioTest.properties"
-                    )
+                    props
                 ),
                 AttachmentAudioTest.GROUP_ID,
                 new UploadAudio(
@@ -149,6 +158,7 @@ public final class AttachmentAudioTest {
                     .build()
             )
         );
+        original.recover();
     }
 
 }

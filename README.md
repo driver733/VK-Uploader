@@ -12,6 +12,6 @@
 
 [![PDD status](http://www.0pdd.com/svg?name=driver733/VKMusicUploader)](http://www.0pdd.com/p?name=driver733/VKMusicUploader)
 
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/driver733/VKMusicUploader/blob/master/LICENSE.txt)
 [![](https://tokei.rs/b1/github/driver733/VKMusicUploader)](https://github.com/driver733/VKMusicUploader)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/driver733/VKMusicUploader/blob/master/LICENSE.txt)
 

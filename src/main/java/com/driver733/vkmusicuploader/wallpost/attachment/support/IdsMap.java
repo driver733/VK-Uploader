@@ -61,7 +61,7 @@ public final class IdsMap {
     /**
      * Forms a map of with index-audio_id pairs from the audio queries.
      * @return Map.
-     * @throws IOException If queries` results cannot to be obtained.
+     * @throws Exception If queries` results cannot to be obtained.
      */
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     public Map<Integer, String> idsMap() throws Exception {

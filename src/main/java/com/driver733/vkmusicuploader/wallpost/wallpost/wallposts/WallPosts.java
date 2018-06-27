@@ -41,7 +41,7 @@ public interface WallPosts {
     /**
      * Constructs queries for batch posting the wall postsQueries.
      * @return ExecuteBatchQueries that will send the wall postsQueries.
-     * @throws IOException If an error occurs while forming the queries.
+     * @throws Exception If an error occurs while forming the queries.
      */
     List<ExecuteBatchQuery> postsQueries() throws Exception;
 

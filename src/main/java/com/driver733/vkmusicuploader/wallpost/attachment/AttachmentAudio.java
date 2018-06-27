@@ -33,13 +33,10 @@ import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.audio.Audio;
 import com.vk.api.sdk.objects.audio.responses.AudioUploadResponse;
 import com.vk.api.sdk.queries.audio.AudioAddQuery;
 import com.vk.api.sdk.queries.upload.UploadAudioQuery;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,7 +105,7 @@ public final class AttachmentAudio implements Attachment {
 
     @Override
     public List<AbstractQueryBuilder> upload()
-        throws ClientException, ApiException, IOException {
+        throws Exception {
         final List<AbstractQueryBuilder> list = new ArrayList<>(
             this.audios.size()
         );
@@ -125,40 +122,37 @@ public final class AttachmentAudio implements Attachment {
      * Uploads the audio files.
      * @param upload Audio construct to upload.
      * @return AudioAddQuery that will add the uploaded audio to the group page.
+     * @throws Exception If a query cannot be created.
      */
     private List<AbstractQueryBuilder> upload(
         final Upload<UploadAudioQuery, AudioUploadResponse> upload
-    ) {
-        try {
-            this.properties.load();
-            final String filename = upload.query()
-                .fileName();
-            final AudioUploadResponse response = upload.query()
-                .execute();
-            final Audio audio = this.client
-                .audio()
-                .save(
-                    this.actor,
-                    response.getServer(),
-                    response.getAudio(),
-                    response.getHash()
-                ).execute();
-            new AttachmentAudioProps(
-                audio,
-                filename,
-                this.properties
-            ).saveProps();
-            return new Array<>(
-                new AudioAddQuery(
-                    this.client,
-                    this.actor,
-                    audio.getId(),
-                    audio.getOwnerId()
-                ).groupId(this.group)
-            );
-        } catch (final Exception ex) {
-            return null;
-        }
+    ) throws Exception {
+        this.properties.load();
+        final String filename = upload.query()
+            .fileName();
+        final AudioUploadResponse response = upload.query()
+            .execute();
+        final Audio audio = this.client
+            .audio()
+            .save(
+                this.actor,
+                response.getServer(),
+                response.getAudio(),
+                response.getHash()
+            ).execute();
+        new AttachmentAudioProps(
+            audio,
+            filename,
+            this.properties
+        ).saveProps();
+        return new Array<>(
+            new AudioAddQuery(
+                this.client,
+                this.actor,
+                audio.getId(),
+                audio.getOwnerId()
+            ).groupId(this.group)
+        );
     }
 
 }

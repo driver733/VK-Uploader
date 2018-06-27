@@ -157,7 +157,7 @@ public final class WallPostsAlbum implements WallPosts {
      * Constructs queries for batch posting wall postsQueries
      * associated with the album.
      * @return ExecuteBatchQuery.
-     * @throws IOException If no audios are found.
+     * @throws Exception If no audios are found.
      */
     public List<ExecuteBatchQuery> postsQueries() throws Exception {
         final List<File> audios = this.audios();
@@ -241,7 +241,7 @@ public final class WallPostsAlbum implements WallPosts {
      * associated with the album.
      * @param audios Audio files to include with the wall postsQueries.
      * @return ExecuteBatchQuery.
-     * @throws IOException If the WallPost query cannot be obtained.
+     * @throws Exception If the WallPost query cannot be obtained.
      */
     @SuppressWarnings({"PMD.AvoidInstantiatingObjectsInLoops",
         "PMD.OptimizableToArrayCall"

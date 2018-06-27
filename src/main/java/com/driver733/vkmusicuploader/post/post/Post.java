@@ -24,8 +24,6 @@
 
 package com.driver733.vkmusicuploader.post.post;
 
-import java.io.IOException;
-
 /**
  * Executes the wall posts` queries.
  *
@@ -37,7 +35,7 @@ public interface Post {
 
     /**
      * Constructs album postsQueries and executes them.
-     * @throws IOException If no subdirectories with albums are found.
+     * @throws Exception If no subdirectories with albums are found.
      */
     void post() throws Exception;
 

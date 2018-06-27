@@ -76,8 +76,9 @@ public final class AttachmentWallPhotoTest {
                     "",
                     new BytesOf(
                         new File(
-                           "src/test/resources/album/albumCover.jpg")
+                            "src/test/resources/album/albumCover.jpg"
                         )
+                    )
                 )
             ).upload()
             .get(0)

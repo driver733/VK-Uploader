@@ -34,7 +34,6 @@ import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -109,7 +108,7 @@ public final class WallPostPhotos implements WallPost {
     /**
      * Constructs a WallPostQuery for a wall WallPostAlbum.
      * @return WallPostQuery.
-     * @throws IOException If an exception occurs
+     * @throws Exception If an exception occurs
      *  while constructing the {@link WallPost}.
      */
     public WallPostQuery construct() throws Exception {

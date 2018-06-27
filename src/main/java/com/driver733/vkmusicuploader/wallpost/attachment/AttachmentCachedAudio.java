@@ -115,21 +115,14 @@ public final class AttachmentCachedAudio implements Attachment {
 
     @Override
     public List<AbstractQueryBuilder> upload()
-        throws ClientException, ApiException, IOException {
+    throws Exception {
         final List<AbstractQueryBuilder> list = new ArrayList<>(
             this.audios.size()
         );
         for (final File audio : this.audios) {
-            final List<AbstractQueryBuilder> queries;
-            try {
-                queries = this.upload(audio);
-            } catch (final IOException ex) {
-                throw new IOException(
-                    "Failed to get upload query for audio upload",
-                    ex
-                );
-            }
-            list.addAll(queries);
+            list.addAll(
+                this.upload(audio)
+            );
         }
         return list;
     }
@@ -141,13 +134,13 @@ public final class AttachmentCachedAudio implements Attachment {
      *  which uploads the audio.
      * @throws ApiException VK API error.
      * @throws ClientException VK Client error.
-     * @throws IOException If the {@link AudioStatus} is invalid
+     * @throws Exception If the {@link AudioStatus} is invalid.
      * @checkstyle LocalFinalVariableNameCheck (20 lines)
      * @checkstyle StringLiteralsConcatenationCheck (100 lines)
      * @checkstyle LocalFinalVariableNameCheck (100 lines)
      */
     private List<AbstractQueryBuilder> upload(final File audio)
-        throws ApiException, ClientException, IOException {
+        throws Exception {
         final List<AbstractQueryBuilder> result;
         if (
             this.properties.getProperty(

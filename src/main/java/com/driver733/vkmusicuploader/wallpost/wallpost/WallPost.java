@@ -37,6 +37,7 @@ public interface WallPost {
     /**
      * Constructs a WallPostQuery from a decorated WallPost.
      * @return WallPostQuery.
+     * @throws Exception When a query cannot be constructed.
      */
     WallPostQuery construct() throws Exception;
 

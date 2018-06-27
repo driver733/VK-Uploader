@@ -24,9 +24,6 @@
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
 import com.vk.api.sdk.client.AbstractQueryBuilder;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -42,9 +39,7 @@ public interface Attachment {
     /**
      * Uploads the Attachment(s).
      * @return The resulting queries of uploaded Attachment(s).
-     * @throws ApiException VK API error.
-     * @throws ClientException VK Client error.
-     * @throws IOException If query fails to be constructed.
+     * @throws Exception If query fails to be constructed.
      */
     List<AbstractQueryBuilder> upload()
         throws Exception;

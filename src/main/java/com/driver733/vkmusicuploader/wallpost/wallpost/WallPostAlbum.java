@@ -123,7 +123,7 @@ public final class WallPostAlbum implements WallPost {
     /**
      * Constructs a WallPostQuery for a wall WallPostAlbum.
      * @return WallPostQuery.
-     * @throws IOException If an exception occurs
+     * @throws Exception If an exception occurs
      *  while constructing the {@link WallPost}.
      */
     public WallPostQuery construct() throws Exception {

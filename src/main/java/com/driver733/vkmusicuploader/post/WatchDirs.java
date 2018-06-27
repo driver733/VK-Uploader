@@ -25,9 +25,6 @@ package com.driver733.vkmusicuploader.post;
 
 // @checkstyle AvoidStaticImportCheck (30 lines)
 
-import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 import com.driver733.vkmusicuploader.post.posts.Posts;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
@@ -40,6 +37,7 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
+import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
@@ -104,7 +102,7 @@ public final class WatchDirs implements Closeable {
 
     /**
      * Starts watching the directories for changes.
-     * @throws IOException If a directory cannot be registered.
+     * @throws Exception If a directory cannot be registered.
      */
     public void start() throws Exception {
         for (final File dir : this.dirs) {
@@ -120,7 +118,7 @@ public final class WatchDirs implements Closeable {
 
     /**
      * Process all events for the keys that have new events.
-     * @throws IOException If an error occurs while processing
+     * @throws Exception If an error occurs while processing
      */
     private void processEvents() throws Exception {
         while (true) {
@@ -168,7 +166,7 @@ public final class WatchDirs implements Closeable {
                 this,
                 "%s: %s%n", event.kind().name(), child
             );
-            if (kind == ENTRY_CREATE) {
+            if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
                 try {
                     if (Files.isDirectory(child)) {
                         this.processSubevents(child);
@@ -192,9 +190,9 @@ public final class WatchDirs implements Closeable {
         try {
             final WatchKey key = dir.register(
                 this.watcher,
-                ENTRY_CREATE,
-                ENTRY_DELETE,
-                ENTRY_MODIFY
+                StandardWatchEventKinds.ENTRY_CREATE,
+                StandardWatchEventKinds.ENTRY_DELETE,
+                StandardWatchEventKinds.ENTRY_MODIFY
             );
             this.keys.put(key, dir);
         } catch (final IOException ex) {

@@ -70,9 +70,11 @@ public final class WallPostWithMessage implements WallPost {
         final WallPost post,
         final String message
     ) {
-        this.post = post;
-        this.message = new Constant<>(
-            message
+        this(
+            post,
+            new Constant<>(
+                message
+            )
         );
     }
 

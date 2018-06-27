@@ -27,15 +27,13 @@ import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientComplex;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadAudio;
 import com.driver733.vkmusicuploader.wallpost.wallpost.file.RecoverableFile;
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.queries.audio.AudioAddQuery;
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import org.cactoos.io.BytesOf;
 import org.hamcrest.Matchers;
@@ -55,6 +53,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (50 lines)
  */
+@Immutable
 public final class AttachmentAudioTest {
 
     /**
@@ -74,7 +73,7 @@ public final class AttachmentAudioTest {
         "PMD.ProhibitPlainJunitAssertionsRule"
         })
     @Test
-    public void test() throws ClientException, ApiException, IOException {
+    public void test() throws Exception {
         final File props = new File(
             "src/test/resources/attachmentAudioTest.properties"
         );

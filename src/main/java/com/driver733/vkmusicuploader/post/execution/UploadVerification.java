@@ -56,7 +56,7 @@ public final class UploadVerification implements UploadExecution {
     }
 
     @Override
-    public void execute() throws IOException {
+    public void execute() throws Exception {
         final List<ExecuteBatchQuery> queries;
         try {
             queries = this.posts.postsQueries();

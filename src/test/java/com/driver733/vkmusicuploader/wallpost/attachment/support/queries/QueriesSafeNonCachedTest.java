@@ -25,14 +25,12 @@ package com.driver733.vkmusicuploader.wallpost.attachment.support.queries;
 
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentAddAudio;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.queries.safe.QueriesSafeNonCached;
+import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -46,6 +44,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle JavadocMethodCheck (500 lines)
  */
+@Immutable
 public final class QueriesSafeNonCachedTest {
 
     /**
@@ -69,7 +68,7 @@ public final class QueriesSafeNonCachedTest {
     private static final String CACHE = "cache";
 
     @Test
-    public void test() throws IOException, ClientException, ApiException {
+    public void test() throws Exception {
         MatcherAssert.assertThat(
             new QueriesSafeNonCached(
                 new QueriesFromAttachments(

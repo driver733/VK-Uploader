@@ -23,17 +23,14 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
-import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.Fallback;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallPhoto;
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.queries.photos.PhotosSaveWallPhotoQuery;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.File;
+import org.cactoos.io.BytesOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -48,6 +45,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (20 lines)
  * @checkstyle StringLiteralsConcatenationCheck (500 lines)
  */
+@Immutable
 public final class AttachmentWallPhotoTest {
 
     /**
@@ -57,7 +55,7 @@ public final class AttachmentWallPhotoTest {
 
     @Test
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-    public void test() throws ClientException, ApiException, IOException {
+    public void test() throws Exception {
         MatcherAssert.assertThat(
             new AttachmentWallPhoto(
                 new VkApiClient(
@@ -76,18 +74,15 @@ public final class AttachmentWallPhotoTest {
                         )
                     ),
                     "",
-                    new Fallback<byte[]>() {
-                        @Override
-                        public byte[] firstValid() throws IOException {
-                            return Files.readAllBytes(
-                                Paths.get(
-                                    "src/test/resources/album/albumCover.jpg"
-                                )
-                            );
-                        }
-                    }
+                    new BytesOf(
+                        new File(
+                            "src/test/resources/album/albumCover.jpg"
+                        )
+                    )
                 )
-            ).upload().get(0).build(),
+            ).upload()
+            .get(0)
+            .build(),
             Matchers.equalTo(
                 new PhotosSaveWallPhotoQuery(
                     new VkApiClient(

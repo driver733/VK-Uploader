@@ -58,7 +58,7 @@ public final class QueriesFromAttachments implements Queries {
 
     @Override
     @Cacheable(forever = true)
-    public List<AbstractQueryBuilder> queries() throws IOException {
+    public List<AbstractQueryBuilder> queries() throws Exception {
         final List<AbstractQueryBuilder> list =
             new ArrayList<>(this.attachments.size());
         for (final Attachment attachment : this.attachments) {

@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
@@ -37,6 +38,7 @@ import org.cactoos.scalar.StickyScalar;
  * @version $Id$
  * @since 0.2
  */
+@Immutable
 @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
 public abstract class AbstractEntrance extends AbstractCredentials {
 

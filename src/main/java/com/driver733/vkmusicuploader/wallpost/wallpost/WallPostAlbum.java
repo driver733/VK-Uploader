@@ -27,8 +27,8 @@ import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentCachedAudio;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhoto;
+import com.driver733.vkmusicuploader.wallpost.attachment.message.ID3v1AnnotatedSafe;
 import com.driver733.vkmusicuploader.wallpost.attachment.message.MessageBasic;
-import com.driver733.vkmusicuploader.wallpost.attachment.message.messagepart.ID3v1AnnotatedSafe;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advancedtag.AdvancedTagFromMp3File;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advancedtag.AdvancedTagVerifiedAlbumImage;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.basictag.BasicTagFromMp3File;
@@ -36,7 +36,7 @@ import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearr
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayImageFromAdvancedTag;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.FallbackByteArray;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArrays;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArraysWithProps;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallPhoto;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
@@ -123,10 +123,10 @@ public final class WallPostAlbum implements WallPost {
     /**
      * Constructs a WallPostQuery for a wall WallPostAlbum.
      * @return WallPostQuery.
-     * @throws IOException If an exception occurs
+     * @throws Exception If an exception occurs
      *  while constructing the {@link WallPost}.
      */
-    public WallPostQuery construct() throws IOException {
+    public WallPostQuery construct() throws Exception {
         final Mp3File file;
         try {
             file = new Mp3File(this.audios.get(0));
@@ -148,7 +148,7 @@ public final class WallPostAlbum implements WallPost {
                             this.client,
                             this.actor
                         ),
-                        new AttachmentArrays(
+                        new AttachmentArraysWithProps(
                             this.actor,
                             this.properties,
                             this.group,
@@ -176,7 +176,7 @@ public final class WallPostAlbum implements WallPost {
                                                 )
                                             )
                                         )
-                                    )
+                                    ).firstValid()
                                 )
                             ),
                             new AttachmentCachedAudio(
@@ -200,7 +200,7 @@ public final class WallPostAlbum implements WallPost {
                             new BasicTagFromMp3File(file)
                                 .construct()
                         ).getArtist()
-                    ).construct()
+                    )
                 )
             ),
             -this.group

@@ -26,6 +26,7 @@ package com.driver733.vkmusicuploader.post;
 import com.driver733.vkmusicuploader.post.execution.UploadVerification;
 import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPosts;
 import com.google.gson.JsonElement;
+import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -45,39 +46,40 @@ import org.junit.Test;
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  */
+@Immutable
 @SuppressWarnings({"PMD.TooManyMethods", "PMD.UncommentedEmptyMethodBody"})
 public final class UploadVerificationTest {
 
     @Test
-    public void valid() throws IOException {
+    public void valid() throws Exception {
         new UploadVerification(
             new WallPostsFake()
         ).execute();
     }
 
     @Test(expected = IOException.class)
-    public void postsQueriesException() throws IOException {
+    public void postsQueriesException() throws Exception {
         new UploadVerification(
             new WallPostsQueriesEx()
         ).execute();
     }
 
     @Test(expected = IOException.class)
-    public void updatePropertiesException() throws IOException {
+    public void updatePropertiesException() throws Exception {
         new UploadVerification(
             new WallPostsPropsEx()
         ).execute();
     }
 
     @Test(expected = IOException.class)
-    public void apiException() throws IOException {
+    public void apiException() throws Exception {
         new UploadVerification(
             new WallPostsFakeApiEx()
         ).execute();
     }
 
     @Test(expected = IOException.class)
-    public void clientException() throws IOException {
+    public void clientException() throws Exception {
         new UploadVerification(
             new WallPostsFakeClientEx()
         ).execute();
@@ -94,7 +96,7 @@ public final class UploadVerificationTest {
         }
 
         @Override
-        public void updateProperties() throws IOException { }
+        public void updateProperties() { }
 
     }
 
@@ -113,7 +115,7 @@ public final class UploadVerificationTest {
         }
 
         @Override
-        public JsonElement execute() throws ApiException, ClientException {
+        public JsonElement execute() throws ApiException {
             throw new ApiException(0, "Test2");
         }
 
@@ -134,7 +136,7 @@ public final class UploadVerificationTest {
         }
 
         @Override
-        public JsonElement execute() throws ApiException, ClientException {
+        public JsonElement execute() throws ClientException {
             throw new ClientException("Test3");
         }
 
@@ -162,14 +164,14 @@ public final class UploadVerificationTest {
     final class WallPostsFakeApiEx implements WallPosts {
 
         @Override
-        public List<ExecuteBatchQuery> postsQueries() throws IOException {
+        public List<ExecuteBatchQuery> postsQueries() {
             return new Array<>(
                 new ExecuteBatchQueryFakeApiEx()
             );
         }
 
         @Override
-        public void updateProperties() throws IOException { }
+        public void updateProperties() { }
 
     }
 
@@ -179,14 +181,14 @@ public final class UploadVerificationTest {
     final class WallPostsFakeClientEx implements WallPosts {
 
         @Override
-        public List<ExecuteBatchQuery> postsQueries() throws IOException {
+        public List<ExecuteBatchQuery> postsQueries() {
             return new Array<>(
                 new ExecuteBatchQueryFakeClientEx()
             );
         }
 
         @Override
-        public void updateProperties() throws IOException { }
+        public void updateProperties() { }
 
     }
 
@@ -196,14 +198,14 @@ public final class UploadVerificationTest {
     final class WallPostsFake implements WallPosts {
 
         @Override
-        public List<ExecuteBatchQuery> postsQueries() throws IOException {
+        public List<ExecuteBatchQuery> postsQueries() {
             return new Array<>(
                 new ExecuteBatchQueryFake()
             );
         }
 
         @Override
-        public void updateProperties() throws IOException { }
+        public void updateProperties() { }
     }
 
     /**
@@ -212,7 +214,7 @@ public final class UploadVerificationTest {
     final class WallPostsPropsEx implements WallPosts {
 
         @Override
-        public List<ExecuteBatchQuery> postsQueries() throws IOException {
+        public List<ExecuteBatchQuery> postsQueries() {
             return new Array<>(
                 new ExecuteBatchQueryFake()
             );

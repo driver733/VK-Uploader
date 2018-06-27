@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advancedtag;
 
+import com.jcabi.aspects.Immutable;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
@@ -44,6 +45,7 @@ import org.junit.Test;
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  */
+@Immutable
 public final class AdvancedTagFromMp3FileTest {
 
     @Test

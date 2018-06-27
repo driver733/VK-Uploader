@@ -25,7 +25,8 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
-import java.io.IOException;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.Constant;
 
 /**
  * A {@link WallPost} with a specified message.
@@ -45,23 +46,46 @@ public final class WallPostWithMessage implements WallPost {
     /**
      * Wall WallPostAlbum text.
      */
-    private final String message;
+    private final Scalar<String> message;
 
     /**
      * Ctor.
      * @param post Origin.
      * @param message Wall WallPostAlbum text.
      */
-    public WallPostWithMessage(final WallPost post, final String message) {
+    public WallPostWithMessage(
+        final WallPost post,
+        final Scalar<String> message
+    ) {
         this.post = post;
         this.message = message;
     }
 
+    /**
+     * Ctor.
+     * @param post Origin.
+     * @param message Wall WallPostAlbum text.
+     */
+    public WallPostWithMessage(
+        final WallPost post,
+        final String message
+    ) {
+        this(
+            post,
+            new Constant<>(
+                message
+            )
+        );
+    }
+
     @Override
-    public WallPostQuery construct() throws IOException {
+    public WallPostQuery construct() throws Exception {
         return this.post
             .construct()
-            .message(this.message);
+            .message(
+                this.message
+                    .value()
+            );
     }
 
 }

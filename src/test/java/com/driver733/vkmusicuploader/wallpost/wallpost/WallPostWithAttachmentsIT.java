@@ -26,7 +26,7 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallDocument;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArrays;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArraysWithProps;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallDocument;
 import com.vk.api.sdk.objects.wall.WallpostFull;
 import java.io.File;
@@ -75,7 +75,7 @@ public final class WallPostWithAttachmentsIT extends AbstractEntrance {
                     ),
                     -groupId()
                 ),
-                new AttachmentArrays(
+                new AttachmentArraysWithProps(
                     actor(),
                     new ImmutableProperties(
                         props
@@ -89,7 +89,9 @@ public final class WallPostWithAttachmentsIT extends AbstractEntrance {
                             servers.uploadUrl(
                                 UploadServers.Type.WALL_DOC
                             ),
-                            new File("src/test/resources/attachment.txt")
+                            new File(
+                                "src/test/resources/attachment.txt"
+                            )
                         )
                     )
                 )
@@ -99,7 +101,11 @@ public final class WallPostWithAttachmentsIT extends AbstractEntrance {
         final List<WallpostFull> result = client()
             .wall().getById(
                 actor(),
-                String.format("%d_%d", -groupId(), post)
+                String.format(
+                    "%d_%d",
+                    -groupId(),
+                    post
+                )
             ).execute();
         MatcherAssert.assertThat(
             result.get(0)

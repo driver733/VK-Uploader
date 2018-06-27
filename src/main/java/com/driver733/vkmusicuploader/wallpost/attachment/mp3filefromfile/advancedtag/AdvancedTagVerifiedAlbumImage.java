@@ -54,7 +54,7 @@ public final class AdvancedTagVerifiedAlbumImage implements AdvancedTag {
     public ID3v2 construct() throws IOException {
         final ID3v2 result = this.origin.construct();
         if (result.getAlbumImage() == null) {
-            throw new IOException("No album toByteArray found");
+            throw new IOException("No album byteArray found");
         }
         return result;
     }

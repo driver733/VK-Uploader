@@ -24,7 +24,6 @@
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.vk.api.sdk.queries.wall.WallPostQuery;
-import java.io.IOException;
 
 /**
  * Constructs a query for a wall post.
@@ -38,8 +37,8 @@ public interface WallPost {
     /**
      * Constructs a WallPostQuery from a decorated WallPost.
      * @return WallPostQuery.
-     * @throws IOException If a {@link WallPostQuery} cannot be constructed.
+     * @throws Exception When a query cannot be constructed.
      */
-    WallPostQuery construct() throws IOException;
+    WallPostQuery construct() throws Exception;
 
 }

@@ -24,7 +24,6 @@
 package com.driver733.vkmusicuploader.post.execution;
 
 import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPosts;
-import java.io.IOException;
 
 /**
  * Executes a {@link com.vk.api.sdk.queries.upload.UploadQueryBuilder}.
@@ -41,8 +40,8 @@ public interface UploadExecution {
      *  {@link
      *   com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus
      *   }.
-     *  @throws IOException If an exception occurs while executing queries.
+     *  @throws Exception If an exception occurs while executing queries.
      */
-    void execute() throws IOException;
+    void execute() throws Exception;
 
 }

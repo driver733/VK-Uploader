@@ -24,7 +24,6 @@
 package com.driver733.vkmusicuploader.wallpost.attachment.upload;
 
 import com.vk.api.sdk.queries.upload.UploadQueryBuilder;
-import java.io.IOException;
 
 /**
  * Constructs a query for uploading an file.
@@ -41,8 +40,8 @@ public interface Upload<T, R> {
      * Constructs a query for uploading something to Vk.
      *  Such as a photo or audio.
      * @return Constructed query.
-     * @throws IOException If an exception occurs while constructing a query.
+     * @throws Exception If an exception occurs while constructing a query.
      */
-    UploadQueryBuilder<T, R> query() throws IOException;
+    UploadQueryBuilder<T, R> query() throws Exception;
 
 }

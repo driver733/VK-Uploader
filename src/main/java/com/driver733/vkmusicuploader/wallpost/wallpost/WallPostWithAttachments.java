@@ -24,7 +24,7 @@
 
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
-import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArrays;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentsFields;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
@@ -50,7 +50,7 @@ public final class WallPostWithAttachments implements WallPost {
     /**
      * Attachments.
      */
-    private final AttachmentArrays attachments;
+    private final AttachmentsFields attachments;
 
     /**
      * Ctor.
@@ -59,14 +59,14 @@ public final class WallPostWithAttachments implements WallPost {
      */
     public WallPostWithAttachments(
         final WallPost post,
-        final AttachmentArrays attachments
+        final AttachmentsFields attachments
     ) {
         this.attachments = attachments;
         this.post = post;
     }
 
     @Override
-    public WallPostQuery construct() throws IOException {
+    public WallPostQuery construct() throws Exception {
         try {
             return this.post
                 .construct()

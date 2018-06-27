@@ -23,25 +23,34 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.message;
 
-import com.driver733.vkmusicuploader.wallpost.wallpost.WallPost;
+import com.jcabi.aspects.Immutable;
 import java.io.IOException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
- * Constructs a message for the
- *  {@link WallPost}.
+ * Test for {@link MessageWithRandomQuote}.
  *
- * @author Mikhail Yakushin (driver733@me.com)
+ * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
  * @version $Id$
- * @since 0.1
+ * @since 0.2
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle AvoidDuplicateLiterals (200 lines)
  */
-interface Message {
+@Immutable
+public final class MessageWithRandomQuoteTest {
 
-    /**
-     * Constructs a message for the
-     *  {@link WallPost}.
-     * @return Constructed message.
-     * @throws IOException If the message cannot be constructed.
-     */
-    String construct() throws IOException;
+    @Test
+    public void testQuote() throws IOException {
+        MatcherAssert.assertThat(
+            "Quote text is empty",
+            new MessageWithRandomQuote()
+            .value(),
+            Matchers.not(
+                Matchers.isEmptyOrNullString()
+            )
+        );
+    }
 
 }

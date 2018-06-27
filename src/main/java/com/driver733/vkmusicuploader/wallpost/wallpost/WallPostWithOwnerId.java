@@ -25,7 +25,6 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
-import java.io.IOException;
 
 /**
  * Specified where the {@link WallPost} will
@@ -59,10 +58,12 @@ public final class WallPostWithOwnerId implements WallPost {
     }
 
     @Override
-    public WallPostQuery construct() throws IOException {
+    public WallPostQuery construct() throws Exception {
         return this.post
             .construct()
-            .ownerId(this.owner);
+            .ownerId(
+                this.owner
+            );
     }
 
 }

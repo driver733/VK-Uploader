@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.objects.wall.WallpostFull;
 import java.util.List;
 import net.jcip.annotations.NotThreadSafe;
@@ -38,6 +39,7 @@ import org.junit.Test;
  * @since 0.2
  * @checkstyle JavadocMethodCheck (500 lines)
  */
+@Immutable
 @NotThreadSafe
 public final class WallPostWithOwnerIdIT extends AbstractEntrance {
 

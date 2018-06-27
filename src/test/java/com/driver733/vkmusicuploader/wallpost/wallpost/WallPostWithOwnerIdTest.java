@@ -23,10 +23,10 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -39,10 +39,11 @@ import org.junit.Test;
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  */
+@Immutable
 public final class WallPostWithOwnerIdTest {
 
     @Test
-    public void test() throws IOException {
+    public void test() throws Exception {
         MatcherAssert.assertThat(
             "Incorrect query map produced.",
             new WallPostWithOwnerId(
@@ -58,7 +59,8 @@ public final class WallPostWithOwnerIdTest {
                     )
                 ),
                 2
-            ).construct().build(),
+            ).construct()
+                .build(),
             Matchers.allOf(
                 Matchers.hasEntry("access_token", "1"),
                 Matchers.hasEntry("v", "5.63"),

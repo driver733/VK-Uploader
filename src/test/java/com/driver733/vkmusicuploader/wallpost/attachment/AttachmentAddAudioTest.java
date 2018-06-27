@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
@@ -44,6 +45,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle JavadocMethodCheck (500 lines)
  */
+@Immutable
 public final class AttachmentAddAudioTest {
 
     /**
@@ -52,7 +54,7 @@ public final class AttachmentAddAudioTest {
     private static final int GROUP_ID = 161929264;
 
     @Test
-    public void testBasic() throws ClientException, ApiException {
+    public void testBasic() {
         MatcherAssert.assertThat(
             new AttachmentAddAudio(
                 new VkApiClient(

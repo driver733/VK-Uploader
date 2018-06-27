@@ -27,6 +27,7 @@ import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.stri
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.jcabi.aspects.Immutable;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -41,6 +42,7 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
+@Immutable
 public final class AttachmentStringsFromJsonTest {
 
     /**

@@ -37,15 +37,13 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
+import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
 import java.util.Map;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 
 /**
  * Tracks the specified folder for changes
@@ -98,27 +96,31 @@ public final class WatchDirs implements Closeable {
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
         throw new UnsupportedOperationException("#close()");
     }
 
     /**
      * Starts watching the directories for changes.
-     * @throws IOException If a directory cannot be registered.
+     * @throws Exception If a directory cannot be registered.
      */
-    public void start() throws IOException {
+    public void start() throws Exception {
         for (final File dir : this.dirs) {
-            this.posts.postFromDir(dir).post();
-            this.registerDirectory(dir.toPath());
+            this.posts
+                .postFromDir(dir)
+                .post();
+            this.registerDirectory(
+                dir.toPath()
+            );
         }
         this.processEvents();
     }
 
     /**
      * Process all events for the keys that have new events.
-     * @throws IOException If an error occurs while processing
+     * @throws Exception If an error occurs while processing
      */
-    private void processEvents() throws IOException {
+    private void processEvents() throws Exception {
         while (true) {
             final WatchKey key;
             try {
@@ -164,7 +166,7 @@ public final class WatchDirs implements Closeable {
                 this,
                 "%s: %s%n", event.kind().name(), child
             );
-            if (kind == ENTRY_CREATE) {
+            if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
                 try {
                     if (Files.isDirectory(child)) {
                         this.processSubevents(child);
@@ -188,9 +190,9 @@ public final class WatchDirs implements Closeable {
         try {
             final WatchKey key = dir.register(
                 this.watcher,
-                ENTRY_CREATE,
-                ENTRY_DELETE,
-                ENTRY_MODIFY
+                StandardWatchEventKinds.ENTRY_CREATE,
+                StandardWatchEventKinds.ENTRY_DELETE,
+                StandardWatchEventKinds.ENTRY_MODIFY
             );
             this.keys.put(key, dir);
         } catch (final IOException ex) {

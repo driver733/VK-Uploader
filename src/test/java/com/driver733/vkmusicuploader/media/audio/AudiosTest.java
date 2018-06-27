@@ -24,6 +24,7 @@
 package com.driver733.vkmusicuploader.media.audio;
 
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
+import com.jcabi.aspects.Immutable;
 import java.io.File;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
@@ -38,6 +39,7 @@ import org.junit.Test;
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  */
+@Immutable
 public final class AudiosTest {
 
     @Test

@@ -23,9 +23,6 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.upload;
 
-import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayFromFile;
-import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.Fallback;
-import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.FallbackByteArray;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.objects.photos.responses.WallUploadResponse;
@@ -34,6 +31,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.cactoos.Bytes;
+import org.cactoos.io.BytesOf;
 
 /**
  * Constructs a query for uploading a photo
@@ -61,7 +60,7 @@ public final class UploadWallPhoto
     /**
      * Multiple sources of the files. The first valid one will be chosen.
      */
-    private final Fallback<byte[]> photo;
+    private final Bytes photo;
 
     /**
      * Ctor.
@@ -74,11 +73,30 @@ public final class UploadWallPhoto
     public UploadWallPhoto(
         final VkApiClient client,
         final String url,
-        final Fallback<byte[]> photo
+        final Bytes photo
     ) {
         this.client = client;
         this.url = url;
         this.photo = photo;
+    }
+
+    /**
+     * Ctor.
+     * @param client The {@link VkApiClient}
+     *  that is used for all VK API requests.
+     * @param url Wall Photo upload URL for the photo construct.
+     * @param photo Photo to upload.
+     */
+    public UploadWallPhoto(
+        final VkApiClient client,
+        final String url,
+        final byte[] photo
+    ) {
+        this(
+            client,
+            url,
+            () -> photo
+        );
     }
 
     /**
@@ -96,35 +114,25 @@ public final class UploadWallPhoto
         this(
             client,
             url,
-            new FallbackByteArray(
-                new ByteArrayFromFile(
-                    photo
-                )
-            )
+            new BytesOf(photo)
         );
     }
 
     /**
      * Constructs a query for uploading a photo to the wall.
      * @return A {@link UploadPhotoWallQuery}.
-     * @throws IOException If an exception occurs while constructing a query.
+     * @throws Exception If an exception occurs while constructing a query.
      */
     @SuppressWarnings("PMD.AvoidBranchingStatementAsLastInLoop")
-    public UploadPhotoWallQuery query() throws IOException {
-        final byte[] element;
-        try {
-            element = this.photo.firstValid();
-        } catch (final IOException ex) {
-            throw new IOException(
-                "Failed to get photo from Fallback interface",
-                ex
-            );
-        }
+    public UploadPhotoWallQuery query() throws Exception {
         final Path path;
         try {
             path = Files.write(
-                File.createTempFile("albumCover", ".jpg").toPath(),
-                element
+                File.createTempFile(
+                    "albumCover",
+                    ".jpg"
+                ).toPath(),
+             this.photo.asBytes()
             );
         } catch (final IOException ex) {
             throw new IOException(
@@ -135,7 +143,10 @@ public final class UploadWallPhoto
         path.toFile().deleteOnExit();
         return this.client
             .upload()
-            .photoWall(this.url, path.toFile());
+            .photoWall(
+                this.url,
+                path.toFile()
+            );
     }
 
 }

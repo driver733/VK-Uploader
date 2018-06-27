@@ -23,8 +23,8 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.message;
 
-import com.driver733.vkmusicuploader.wallpost.attachment.message.messagepart.ID3v1AnnotatedSafe;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.basictag.BasicTagFromMp3File;
+import com.jcabi.aspects.Immutable;
 import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
@@ -44,6 +44,7 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle AvoidDuplicateLiterals (200 lines)
  */
+@Immutable
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class MessageBasicTest {
 
@@ -62,7 +63,7 @@ public final class MessageBasicTest {
             new MessageBasic(
                 tag.getAlbum(),
                 tag.getArtist()
-            ).construct(),
+            ).value(),
             Matchers.equalTo(
                 String.format("Album: Elegant Testing%nArtist: Test Man")
             )
@@ -93,7 +94,7 @@ public final class MessageBasicTest {
                         )
                     ).construct()
                 ).getArtist()
-            ).construct(),
+            ).value(),
             Matchers.equalTo("")
         );
     }

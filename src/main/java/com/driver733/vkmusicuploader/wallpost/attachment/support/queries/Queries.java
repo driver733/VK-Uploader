@@ -24,7 +24,6 @@
 package com.driver733.vkmusicuploader.wallpost.attachment.support.queries;
 
 import com.vk.api.sdk.client.AbstractQueryBuilder;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -39,9 +38,9 @@ public interface Queries {
     /**
      * Constructs a list of queries.
      * @return A {@link List} of {@link AbstractQueryBuilder} to be executed.
-     * @throws IOException If queries cannot to be obtained.
+     * @throws Exception If queries cannot to be obtained.
      */
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-    List<AbstractQueryBuilder> queries() throws IOException;
+    List<AbstractQueryBuilder> queries() throws Exception;
 
 }

@@ -23,13 +23,14 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import java.io.File;
 import java.util.Properties;
 import org.cactoos.Scalar;
 import org.cactoos.io.InputOf;
-import org.cactoos.iterable.PropertiesOf;
+import org.cactoos.scalar.PropertiesOf;
 
 /**
  * VK credentials for IT.
@@ -38,6 +39,7 @@ import org.cactoos.iterable.PropertiesOf;
  * @version $Id$
  * @since 0.2
  */
+@Immutable
 public abstract class AbstractCredentials {
 
     /**

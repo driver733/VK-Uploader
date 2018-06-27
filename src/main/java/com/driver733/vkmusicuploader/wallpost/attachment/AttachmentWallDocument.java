@@ -30,11 +30,8 @@ import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.docs.responses.DocUploadResponse;
 import com.vk.api.sdk.queries.upload.UploadDocQuery;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -67,7 +64,7 @@ public final class AttachmentWallDocument implements Attachment {
      * Ctor.
      * @param client VKAPIClient that is used for all VK API requests.
      * @param actor UserActor on behalf of which all requests will be sent.
-     * @param doc File that contains a doc. Typically an album toByteArray.
+     * @param doc File that contains a doc. Typically an album byteArray.
      */
     public AttachmentWallDocument(
         final VkApiClient client,
@@ -81,7 +78,7 @@ public final class AttachmentWallDocument implements Attachment {
 
     @Override
     public List<AbstractQueryBuilder> upload()
-        throws ClientException, ApiException, IOException {
+        throws Exception {
         final DocUploadResponse response =
             this.doc.query()
                 .execute();

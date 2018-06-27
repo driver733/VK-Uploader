@@ -25,14 +25,12 @@ package com.driver733.vkmusicuploader.wallpost.attachment.support.queries;
 
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentAddAudio;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.queries.safe.QueriesSafeCached;
+import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -42,10 +40,11 @@ import org.junit.Test;
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
- * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @since 0.1
  */
+@Immutable
 public final class QueriesSafeCachedTest {
 
     /**
@@ -69,7 +68,7 @@ public final class QueriesSafeCachedTest {
     private static final String CACHE = "cache";
 
     @Test
-    public void test() throws IOException, ClientException, ApiException {
+    public void test() throws Exception {
         MatcherAssert.assertThat(
             "Queries do not match.",
             new QueriesSafeCached(
@@ -103,7 +102,9 @@ public final class QueriesSafeCachedTest {
                         )
                     )
                 ).queries()
-            ).queries().get(0).build(),
+            ).queries()
+                .get(0)
+                .build(),
             Matchers.equalTo(
                 new AttachmentAddAudio(
                     new VkApiClient(
@@ -118,7 +119,9 @@ public final class QueriesSafeCachedTest {
                     0,
                     2,
                     QueriesSafeCachedTest.GROUP_ID
-                ).upload().get(0).build()
+                ).upload()
+                    .get(0)
+                    .build()
             )
         );
     }

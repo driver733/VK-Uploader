@@ -24,44 +24,33 @@
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.driver733.vkmusicuploader.post.UploadServers;
-import com.driver733.vkmusicuploader.properties.ImmutableProperties;
-import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhotos;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArraysWithProps;
+import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhoto;
+import com.driver733.vkmusicuploader.wallpost.attachment.message.MessageWithRandomQuote;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.RandomImage;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArrays;
+import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallPhoto;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
-import java.io.File;
-import java.util.List;
 
 /**
- * Creates a {@link WallPost} with the specified
- *  photos.
- * @author Mikhail Yakushin (driver733@me.com)
+ * A Wallpost with a random quote
+ *  and a random image.
+ *
+ * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
  * @version $Id$
  * @since 0.2
  *
  * @checkstyle ClassDataAbstractionCouplingCheck (2 lines)
  */
 @Immutable
-public final class WallPostPhotos implements WallPost {
+public final class WallPostAphorism implements WallPost {
 
     /**
-     * Group ID.
-     */
-    private final int group;
-
-    /**
-     * {@link VkApiClient} for all requests.
+     * VKAPIClient that is used for all VK API requests.
      */
     private final VkApiClient client;
-
-    /**
-     * Photos files.
-     */
-    private final Array<File> photos;
 
     /**
      * UserActor on behalf of which all requests will be sent.
@@ -74,65 +63,59 @@ public final class WallPostPhotos implements WallPost {
     private final UploadServers servers;
 
     /**
-     * Properties that contain the {@link AudioStatus} of audio files.
+     * Group ID.
      */
-    private final ImmutableProperties properties;
+    private final int group;
+
     /**
      * Ctor.
-     * @param client The {@link VkApiClient} for all requests.
+     * @param client VKAPIClient that is used for all VK API requests.
      * @param actor UserActor on behalf of which all requests will be sent.
-     * @param photos Audio files.
-     * @param servers Upload servers
-     *  that provide upload URLs for attachmentsFields.
-     * @param properties Properties that contain the
-     *  {@link AudioStatus} of audio files.
+     * @param servers Upload servers that provide upload URLs
+     *  for attachmentsFields.
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
-    public WallPostPhotos(
+    public WallPostAphorism(
         final VkApiClient client,
         final UserActor actor,
-        final List<File> photos,
         final UploadServers servers,
-        final ImmutableProperties properties,
         final int group
     ) {
         this.client = client;
-        this.photos = new Array<>(photos);
         this.actor = actor;
         this.servers = servers;
-        this.properties = properties;
         this.group = group;
     }
 
-    /**
-     * Constructs a WallPostQuery for a wall WallPostAlbum.
-     * @return WallPostQuery.
-     * @throws Exception If an exception occurs
-     *  while constructing the {@link WallPost}.
-     */
+    @Override
     public WallPostQuery construct() throws Exception {
         return new WallPostWithOwnerId(
             new WallPostFromGroup(
-                new WallPostWithAttachments(
-                    new WallPostBase(
-                        this.client,
-                        this.actor
-                    ),
-                    new AttachmentArraysWithProps(
-                        this.actor,
-                        this.properties,
-                        this.group,
-                        new AttachmentWallPhotos(
+                new WallPostWithMessage(
+                    new WallPostWithAttachments(
+                        new WallPostBase(
                             this.client,
+                            this.actor
+                        ),
+                        new AttachmentArrays(
                             this.actor,
-                            this.servers.uploadUrl(
-                                UploadServers.Type.WALL_PHOTO
-                            ),
-                            this.photos,
-                            this.group
+                            this.group,
+                            new AttachmentWallPhoto(
+                                this.client,
+                                this.actor,
+                                this.group,
+                                new UploadWallPhoto(
+                                    this.client,
+                                    this.servers.uploadUrl(
+                                        UploadServers.Type.WALL_PHOTO
+                                    ),
+                                    new RandomImage()
+                                )
+                            )
                         )
-                    )
+                    ),
+                    new MessageWithRandomQuote()
                 )
             ),
             -this.group

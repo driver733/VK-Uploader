@@ -98,7 +98,7 @@ public final class PostRootDir implements Post {
     @SuppressWarnings({"PMD.AvoidInstantiatingObjectsInLoops",
         "PMD.ExceptionAsFlowControl",
         "PMD.PreserveStackTrace"})
-    public void post() throws IOException {
+    public void post() throws Exception {
         final File[] dirs = this.directory.listFiles(File::isDirectory);
         if (dirs == null) {
             throw new IOException(

@@ -142,9 +142,9 @@ public final class WallPostsPhoto implements WallPosts {
      * Constructs queries for batch posting wall postsQueries
      * associated with the album.
      * @return ExecuteBatchQuery.
-     * @throws IOException If no photos are found.
+     * @throws Exception If no photos are found.
      */
-    public List<ExecuteBatchQuery> postsQueries() throws IOException {
+    public List<ExecuteBatchQuery> postsQueries() throws Exception {
         final List<File> photos = this.photos();
         final List<ExecuteBatchQuery> queries = new ArrayList<>(photos.size());
         int iter = 0;
@@ -207,13 +207,13 @@ public final class WallPostsPhoto implements WallPosts {
      * associated with the album.
      * @param photos Photos to include with the wall postsQueries.
      * @return ExecuteBatchQuery.
-     * @throws IOException If the WallPost query cannot be obtained.
+     * @throws Exception If the WallPost query cannot be obtained.
      */
     @SuppressWarnings({"PMD.AvoidInstantiatingObjectsInLoops",
         "PMD.OptimizableToArrayCall"
         })
     private ExecuteBatchQuery postsBatch(final List<File> photos) throws
-        IOException {
+        Exception {
         Logger.info(
             this,
             "Processing directory: '%s'...", this.dir.getPath()

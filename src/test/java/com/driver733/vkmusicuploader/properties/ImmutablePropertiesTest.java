@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.properties;
 
+import com.jcabi.aspects.Immutable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -45,6 +46,7 @@ import org.junit.Test;
  * @checkstyle LocalFinalVariableNameCheck (50 lines)
  * @checkstyle AvoidDuplicateLiterals (100 lines)
  */
+@Immutable
 @SuppressWarnings(
     {
         "PMD.AvoidDuplicateLiterals",

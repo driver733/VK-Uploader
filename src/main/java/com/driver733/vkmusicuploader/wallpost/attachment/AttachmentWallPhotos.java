@@ -101,7 +101,7 @@ public final class AttachmentWallPhotos implements Attachment {
 
     @Override
     public List<AbstractQueryBuilder> upload()
-        throws ClientException, ApiException, IOException {
+        throws Exception {
         final List<AbstractQueryBuilder> list = new ArrayList<>(
             this.photos.size()
         );
@@ -127,13 +127,13 @@ public final class AttachmentWallPhotos implements Attachment {
      *  which uploads the photo.
      * @throws ApiException VK API error.
      * @throws ClientException VK Client error.
-     * @throws IOException If the {@link AudioStatus} is invalid
+     * @throws Exception If the {@link AudioStatus} is invalid
      * @checkstyle LocalFinalVariableNameCheck (20 lines)
      * @checkstyle StringLiteralsConcatenationCheck (100 lines)
      * @checkstyle LocalFinalVariableNameCheck (100 lines)
      */
     private List<AbstractQueryBuilder> upload(final File photo)
-        throws ApiException, ClientException, IOException {
+        throws Exception {
         return new AttachmentWallPhoto(
             this.client,
             this.actor,

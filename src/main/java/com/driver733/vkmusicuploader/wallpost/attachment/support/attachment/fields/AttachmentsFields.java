@@ -23,9 +23,6 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields;
 
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -40,11 +37,9 @@ public interface AttachmentsFields {
     /**
      * Constructs attachment strings for the wall WallPostAlbum.
      * @return Attachment attachmentStrings.
-     * @throws ClientException VK API Client error.
-     * @throws ApiException VK API error.
-     * @throws IOException If properties fail to load.
+     * @throws Exception If properties fail to load.
      */
     List<String> attachmentsFields()
-        throws ApiException, ClientException, IOException;
+        throws Exception;
 
 }

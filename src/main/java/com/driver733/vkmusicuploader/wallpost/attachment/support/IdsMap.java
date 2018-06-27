@@ -61,13 +61,15 @@ public final class IdsMap {
     /**
      * Forms a map of with index-audio_id pairs from the audio queries.
      * @return Map.
-     * @throws IOException If queries` results cannot to be obtained.
+     * @throws Exception If queries` results cannot to be obtained.
      */
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-    public Map<Integer, String> idsMap() throws IOException {
+    public Map<Integer, String> idsMap() throws Exception {
         final List<AbstractQueryBuilder> queries;
         try {
-            queries = new QueriesFromAttachments(this.attachments).queries();
+            queries = new QueriesFromAttachments(
+                this.attachments
+            ).queries();
         } catch (final IOException ex) {
             throw new IOException("Failed to obtain queries` results", ex);
         }

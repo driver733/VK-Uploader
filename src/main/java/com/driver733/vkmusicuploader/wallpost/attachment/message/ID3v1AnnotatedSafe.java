@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.message.messagepart;
+package com.driver733.vkmusicuploader.wallpost.attachment.message;
 
 import com.jcabi.aspects.Immutable;
 import com.mpatric.mp3agic.ID3v1;
@@ -193,11 +193,7 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
      */
     private static boolean isPresent(final String str) {
         final boolean result;
-        if (str == null || str.isEmpty() || "-1".equals(str)) {
-            result = false;
-        } else {
-            result = true;
-        }
+        result = str != null && !str.isEmpty() && !"-1".equals(str);
         return result;
     }
 

@@ -23,6 +23,7 @@
  */
 package com.driver733.vkmusicuploader.post;
 
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
@@ -39,6 +40,7 @@ import org.junit.Test;
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  */
+@Immutable
 public final class UploadServersTest {
 
     /**

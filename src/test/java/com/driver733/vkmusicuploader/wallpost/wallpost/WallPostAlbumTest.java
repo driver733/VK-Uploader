@@ -27,13 +27,13 @@ import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientComplex;
 import com.driver733.vkmusicuploader.wallpost.wallpost.file.RecoverableFile;
+import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -52,8 +52,9 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle StringLiteralsConcatenationCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
- * @checkstyle MethodLength (50 lines)
+ * @checkstyle MethodLength (500 lines)
  */
+@Immutable
 public final class WallPostAlbumTest {
 
     /**
@@ -100,15 +101,17 @@ public final class WallPostAlbumTest {
      * Test properties.
      */
     private final Path properties =
-        Paths.get("src/test/resources/wallPostAlbumTest.properties");
+        Paths.get(
+            "src/test/resources/wallPostAlbumTest.properties"
+        );
 
+    @Test
     @SuppressWarnings({
         "PMD.ExcessiveMethodLength",
         "PMD.NonStaticInitializer",
         "PMD.AvoidDuplicateLiterals"
         })
-    @Test
-    public void test() throws IOException {
+    public void test() throws Exception {
         final RecoverableFile file = new RecoverableFile(
             Files.readAllBytes(this.properties),
             this.properties
@@ -127,8 +130,8 @@ public final class WallPostAlbumTest {
                                             + "\"hash\"      : \"hash123\","
                                             + "\"photo\"     : \"fnknjkasd\","
                                             + "\"server\"    : 123546"
-                                           + "}"
-                                   )
+                                            + "}"
+                                    )
                                 );
                                 put(
                                     "audio.uploadServer",
@@ -139,7 +142,7 @@ public final class WallPostAlbumTest {
                                             + "\"server\"   : 123546,"
                                             + "\"redirect\" : \"redirect.com\""
                                             + "}"
-                                   )
+                                    )
                                 );
                                 put(
                                     WallPostAlbumTest.AUDIO_SAVE_URL,
@@ -150,8 +153,8 @@ public final class WallPostAlbumTest {
                                             + "\"artist\"   : \"Clean Tears\","
                                             + "\"title\"    : \"Dragon\","
                                             + "\"url\"      : \"url1.com\""
-                                       + "}"
-                                   )
+                                            + "}"
+                                    )
                                 );
                                 put(
                                     WallPostAlbumTest.PHOTO_SAVE_URL,
@@ -162,27 +165,27 @@ public final class WallPostAlbumTest {
                                             + "\"owner_id\"    : 6785,"
                                             + "\"user_id\"     : 4356,"
                                             + "\"sizes\"       : ["
-                                                + "{"
-                                                    + "\"src\": \"src\","
-                                                    + "\"width\": 100,"
-                                                    + "\"height\": 100"
-                                                + "}"
+                                            + "{"
+                                            + "\"src\": \"src\","
+                                            + "\"width\": 100,"
+                                            + "\"height\": 100"
+                                            + "}"
                                             + "],"
-                                           + "\"photo_75\"    : \"url1.com\","
-                                           + "\"photo_130\"   : \"url1.com\","
-                                           + "\"photo_604\"   : \"url1.com\","
-                                           + "\"photo_807\"   : \"url1.com\","
-                                           + "\"photo_1280\"  : \"url1.com\","
-                                           + "\"photo_2560\"  : \"url1.com\","
-                                           + "\"photo_id\"    : 3456,"
-                                           + "\"width\"       : 500,"
-                                           + "\"height\"      : 500,"
-                                           + "\"date\"        : 1502919105,"
-                                           + "\"lat\"         : 56.3456,"
-                                           + "\"long\"        : 54.9645,"
-                                           + "\"access_key\"  : \"sjdkfk\""
-                                           + "}"
-                                   )
+                                            + "\"photo_75\"    : \"url1.com\","
+                                            + "\"photo_130\"   : \"url1.com\","
+                                            + "\"photo_604\"   : \"url1.com\","
+                                            + "\"photo_807\"   : \"url1.com\","
+                                            + "\"photo_1280\"  : \"url1.com\","
+                                            + "\"photo_2560\"  : \"url1.com\","
+                                            + "\"photo_id\"    : 3456,"
+                                            + "\"width\"       : 500,"
+                                            + "\"height\"      : 500,"
+                                            + "\"date\"        : 1502919105,"
+                                            + "\"lat\"         : 56.3456,"
+                                            + "\"long\"        : 54.9645,"
+                                            + "\"access_key\"  : \"sjdkfk\""
+                                            + "}"
+                                    )
                                 );
                                 put(
                                     WallPostAlbumTest.AUDIO_ADD_URL,
@@ -195,7 +198,7 @@ public final class WallPostAlbumTest {
                                     new TransportClientCached(
                                         "{"
                                             + "\"response\": { \"post_id\": 3 }"
-                                           + "}"
+                                            + "}"
                                     )
                                 );
                             }
@@ -217,14 +220,14 @@ public final class WallPostAlbumTest {
                                     put(
                                         WallPostAlbumTest.PHOTO_WALL_URL,
                                         new TransportClientCached(
-                                        "{"
-                                            + "\"response\" : {"
-                                            + "\"upload_url\" :"
+                                            "{"
+                                                + "\"response\" : {"
+                                                + "\"upload_url\" :"
                                                 + "\"photos.wallUploadServer\","
-                                            + "\"album_id\"   : 169819278,"
-                                            + "\"user_id\"    : 185014513"
-                                            + "}"
-                                          + "}"
+                                                + "\"album_id\"   : 169819278,"
+                                                + "\"user_id\"    : 185014513"
+                                                + "}"
+                                                + "}"
                                         )
                                     );
                                     put(
@@ -232,15 +235,15 @@ public final class WallPostAlbumTest {
                                         new TransportClientCached(
                                             "{"
                                                 + "\"response\": {"
-                                                    + "\"upload_url\" :"
-                                                    + "\"audio.uploadServer\""
-                                                    + "}"
+                                                + "\"upload_url\" :"
+                                                + "\"audio.uploadServer\""
+                                                + "}"
                                                 + "}"
                                         )
                                     );
                                 }
                             }
-                       )
+                        )
                     ),
                     new UserActor(
                         1, "1"

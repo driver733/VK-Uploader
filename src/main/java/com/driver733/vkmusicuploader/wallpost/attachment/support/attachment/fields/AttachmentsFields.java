@@ -45,6 +45,6 @@ public interface AttachmentsFields {
      * @throws IOException If properties fail to load.
      */
     List<String> attachmentsFields()
-        throws ApiException, ClientException, IOException;
+        throws Exception;
 
 }

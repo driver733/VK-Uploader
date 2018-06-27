@@ -42,6 +42,6 @@ public interface Queries {
      * @throws IOException If queries cannot to be obtained.
      */
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-    List<AbstractQueryBuilder> queries() throws IOException;
+    List<AbstractQueryBuilder> queries() throws Exception;
 
 }

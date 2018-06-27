@@ -26,6 +26,7 @@ package com.driver733.vkmusicuploader.wallpost.attachment.support;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.queries.safe.QueriesSafeCached;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
@@ -47,6 +48,7 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (20 lines)
  */
+@Immutable
 public final class QueryResultsBasicTest {
 
     @Test

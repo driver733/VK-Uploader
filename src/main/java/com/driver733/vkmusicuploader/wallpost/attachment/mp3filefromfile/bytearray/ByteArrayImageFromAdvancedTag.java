@@ -52,7 +52,7 @@ public final class ByteArrayImageFromAdvancedTag implements ByteArray {
     }
 
     @Override
-    public byte[] toByteArray() throws IOException {
+    public byte[] byteArray() throws IOException {
         return this.tag.construct().getAlbumImage();
     }
 

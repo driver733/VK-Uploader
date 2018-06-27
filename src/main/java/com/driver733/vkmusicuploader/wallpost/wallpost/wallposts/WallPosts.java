@@ -43,7 +43,7 @@ public interface WallPosts {
      * @return ExecuteBatchQueries that will send the wall postsQueries.
      * @throws IOException If an error occurs while forming the queries.
      */
-    List<ExecuteBatchQuery> postsQueries() throws IOException;
+    List<ExecuteBatchQuery> postsQueries() throws Exception;
 
     /**
      * Updates the properties.

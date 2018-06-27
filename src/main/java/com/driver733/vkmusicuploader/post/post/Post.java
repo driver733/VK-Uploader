@@ -39,6 +39,6 @@ public interface Post {
      * Constructs album postsQueries and executes them.
      * @throws IOException If no subdirectories with albums are found.
      */
-    void post() throws IOException;
+    void post() throws Exception;
 
 }

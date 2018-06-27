@@ -25,12 +25,12 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentFakeAudio;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArrays;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArraysWithProps;
 import com.driver733.vkmusicuploader.wallpost.wallpost.file.RecoverableFile;
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -47,6 +47,7 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  */
+@Immutable
 public final class WallPostWithAttachmentsTest {
 
     /**
@@ -61,7 +62,7 @@ public final class WallPostWithAttachmentsTest {
         Paths.get("src/test/resources/wallPostWithAttachmentsTest.properties");
 
     @Test
-    public void test() throws IOException {
+    public void test() throws Exception {
         final RecoverableFile props = new RecoverableFile(
             Files.readAllBytes(this.properties),
             this.properties
@@ -78,7 +79,7 @@ public final class WallPostWithAttachmentsTest {
                         "1"
                     )
                 ),
-                new AttachmentArrays(
+                new AttachmentArraysWithProps(
                     new UserActor(
                         0,
                         "1"
@@ -91,7 +92,8 @@ public final class WallPostWithAttachmentsTest {
                         1, 2
                     )
                 )
-            ).construct().build(),
+            ).construct()
+                .build(),
             Matchers.allOf(
                 Matchers.hasEntry("access_token", "1"),
                 Matchers.hasEntry("v", "5.63"),

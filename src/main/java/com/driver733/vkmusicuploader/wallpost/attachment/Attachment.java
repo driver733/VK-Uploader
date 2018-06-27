@@ -47,6 +47,6 @@ public interface Attachment {
      * @throws IOException If query fails to be constructed.
      */
     List<AbstractQueryBuilder> upload()
-        throws ApiException, ClientException, IOException;
+        throws Exception;
 
 }

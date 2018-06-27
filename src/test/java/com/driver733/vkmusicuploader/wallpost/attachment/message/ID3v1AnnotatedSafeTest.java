@@ -23,8 +23,8 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.message;
 
-import com.driver733.vkmusicuploader.wallpost.attachment.message.messagepart.ID3v1AnnotatedSafe;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.basictag.BasicTagFromMp3File;
+import com.jcabi.aspects.Immutable;
 import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
@@ -42,6 +42,7 @@ import org.junit.Test;
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  */
+@Immutable
 public final class ID3v1AnnotatedSafeTest {
 
     /**
@@ -59,50 +60,42 @@ public final class ID3v1AnnotatedSafeTest {
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void setTrack()
-        throws InvalidDataException, IOException, UnsupportedTagException {
+    public void setTrack() {
         this.tag.setTrack("");
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void setArtist()
-        throws InvalidDataException, IOException, UnsupportedTagException {
+    public void setArtist() {
         this.tag.setArtist("");
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void setTitle()
-        throws InvalidDataException, IOException, UnsupportedTagException {
+    public void setTitle() {
         this.tag.setTitle("");
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void setAlbum()
-        throws InvalidDataException, IOException, UnsupportedTagException {
+    public void setAlbum() {
         this.tag.setAlbum("");
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void setYear()
-        throws InvalidDataException, IOException, UnsupportedTagException {
+    public void setYear() {
         this.tag.setYear("");
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void setGenre()
-        throws InvalidDataException, IOException, UnsupportedTagException {
+    public void setGenre() {
         this.tag.setGenre(0);
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void setComment()
-        throws InvalidDataException, IOException, UnsupportedTagException {
+    public void setComment() {
         this.tag.setComment("");
     }
 
     @Test
-    public void valid()
-        throws InvalidDataException, IOException, UnsupportedTagException {
+    public void valid() {
         MatcherAssert.assertThat(
             this.tag.getAlbum(),
             Matchers.equalTo(

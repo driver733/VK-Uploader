@@ -159,7 +159,7 @@ public final class WallPostsAlbum implements WallPosts {
      * @return ExecuteBatchQuery.
      * @throws IOException If no audios are found.
      */
-    public List<ExecuteBatchQuery> postsQueries() throws IOException {
+    public List<ExecuteBatchQuery> postsQueries() throws Exception {
         final List<File> audios = this.audios();
         final List<ExecuteBatchQuery> queries = new ArrayList<>(
             audios.size()
@@ -249,7 +249,7 @@ public final class WallPostsAlbum implements WallPosts {
     private ExecuteBatchQuery postsBatch(
         final List<File> audios
     ) throws
-        IOException {
+        Exception {
         Logger.info(
             this,
             "Processing directory: '%s'...",

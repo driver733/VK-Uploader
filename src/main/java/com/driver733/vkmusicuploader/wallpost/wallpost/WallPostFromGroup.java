@@ -26,7 +26,6 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
-import java.io.IOException;
 
 /**
  * A {@link WallPost} that is posted
@@ -53,7 +52,7 @@ public final class WallPostFromGroup implements WallPost {
     }
 
     @Override
-    public WallPostQuery construct() throws IOException {
+    public WallPostQuery construct() throws Exception {
         return this.post.construct()
             .fromGroup(true);
     }

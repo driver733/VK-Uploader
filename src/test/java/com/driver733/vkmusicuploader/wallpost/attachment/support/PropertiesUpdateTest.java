@@ -33,7 +33,6 @@ import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.io.File;
-import java.io.IOException;
 import java.io.StringReader;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -62,7 +61,7 @@ public final class PropertiesUpdateTest {
      * AddedMediaId - AudioStatus.Added .
      */
     @Test
-    public void test() throws IOException {
+    public void test() throws Exception {
         final String fileName = "test.mp3";
         final File file = new File("src/test/resources/temp.properties");
         file.deleteOnExit();

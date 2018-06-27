@@ -25,8 +25,7 @@ package com.driver733.vkmusicuploader.wallpost.attachment;
 
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.objects.audio.Audio;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -46,10 +45,11 @@ import org.mockito.Mockito;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle LocalFinalVariableNameCheck (500 lines)
  */
+@Immutable
 public final class AttachmentAudioPropsTest {
 
     @Test
-    public void test() throws ApiException, ClientException, IOException {
+    public void test() throws IOException {
         final String fileName = "testName";
         final Audio test = Mockito.mock(Audio.class);
         final int mediaId = 123;

@@ -125,40 +125,40 @@ public final class AttachmentAudio implements Attachment {
      * Uploads the audio files.
      * @param upload Audio construct to upload.
      * @return AudioAddQuery that will add the uploaded audio to the group page.
-     * @throws ApiException VK API error.
-     * @throws ClientException VK API Client error.
-     * @throws IOException If an exception occurs
-     *  while loading/saving the properties.
      */
     private List<AbstractQueryBuilder> upload(
         final Upload<UploadAudioQuery, AudioUploadResponse> upload
-    ) throws ApiException, ClientException, IOException {
-        this.properties.load();
-        final String filename = upload.query()
-            .fileName();
-        final AudioUploadResponse response = upload.query()
-            .execute();
-        final Audio audio = this.client
-            .audio()
-            .save(
-                this.actor,
-                response.getServer(),
-                response.getAudio(),
-                response.getHash()
-            ).execute();
-        new AttachmentAudioProps(
-            audio,
-            filename,
-            this.properties
-        ).saveProps();
-        return new Array<>(
-            new AudioAddQuery(
-                this.client,
-                this.actor,
-                audio.getId(),
-                audio.getOwnerId()
-            ).groupId(this.group)
-        );
+    ) {
+        try {
+            this.properties.load();
+            final String filename = upload.query()
+                .fileName();
+            final AudioUploadResponse response = upload.query()
+                .execute();
+            final Audio audio = this.client
+                .audio()
+                .save(
+                    this.actor,
+                    response.getServer(),
+                    response.getAudio(),
+                    response.getHash()
+                ).execute();
+            new AttachmentAudioProps(
+                audio,
+                filename,
+                this.properties
+            ).saveProps();
+            return new Array<>(
+                new AudioAddQuery(
+                    this.client,
+                    this.actor,
+                    audio.getId(),
+                    audio.getOwnerId()
+                ).groupId(this.group)
+            );
+        } catch (final Exception ex) {
+            return null;
+        }
     }
 
 }

@@ -30,11 +30,8 @@ import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.photos.responses.WallUploadResponse;
 import com.vk.api.sdk.queries.upload.UploadPhotoWallQuery;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +70,7 @@ public final class AttachmentWallPhoto implements Attachment {
      * Ctor.
      * @param client VKAPIClient that is used for all VK API requests.
      * @param actor UserActor on behalf of which all requests will be sent.
-     * @param photo File that contains a photo. Typically an album toByteArray.
+     * @param photo File that contains a photo. Typically an album byteArray.
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
@@ -91,7 +88,7 @@ public final class AttachmentWallPhoto implements Attachment {
 
     @Override
     public List<AbstractQueryBuilder> upload()
-        throws ClientException, ApiException, IOException {
+        throws Exception {
         final List<AbstractQueryBuilder> result = new ArrayList<>(1);
         final WallUploadResponse response =
             this.photo.query()

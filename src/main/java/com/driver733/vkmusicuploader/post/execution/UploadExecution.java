@@ -43,6 +43,6 @@ public interface UploadExecution {
      *   }.
      *  @throws IOException If an exception occurs while executing queries.
      */
-    void execute() throws IOException;
+    void execute() throws Exception;
 
 }

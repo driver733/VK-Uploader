@@ -25,12 +25,12 @@ package com.driver733.vkmusicuploader.post;
 
 import com.driver733.vkmusicuploader.post.post.PostRootDir;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientComplex;
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
@@ -48,6 +48,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (50 lines)
  */
+@Immutable
 public final class PostRootDirTest {
 
     /**
@@ -97,7 +98,7 @@ public final class PostRootDirTest {
         "PMD.ProhibitPlainJunitAssertionsRule"
         })
     @Test
-    public void test() throws IOException {
+    public void test() throws Exception {
         new PostRootDir(
             new VkApiClient(
                 new TransportClientComplex(

@@ -25,7 +25,7 @@ package com.driver733.vkmusicuploader.wallpost.attachment.message;
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
-import java.io.IOException;
+import org.cactoos.Scalar;
 
 /**
  * Constructs a {@link com.driver733.vkmusicuploader.wallpost.wallpost.WallPost}
@@ -36,7 +36,7 @@ import java.io.IOException;
  * @since 0.1
  */
 @Immutable
-public final class MessageBasic implements Message {
+public final class MessageBasic implements Scalar<String> {
 
     /**
      * Parts of the message.
@@ -52,7 +52,7 @@ public final class MessageBasic implements Message {
     }
 
     @Override
-    public String construct() throws IOException {
+    public String value() {
         final StringBuilder builder = new StringBuilder();
         for (int index = 0; index < this.parts.size(); index += 1) {
             final String result = this.parts.get(index);

@@ -62,7 +62,7 @@ public final class FallbackByteArray implements Fallback<byte[]> {
         byte[] result = new byte[0];
         for (final ByteArray array : this.arrays) {
             try {
-                result = array.toByteArray();
+                result = array.byteArray();
                 break;
             } catch (final IOException ignored) {
                 Logger.debug(this, ignored.getMessage());

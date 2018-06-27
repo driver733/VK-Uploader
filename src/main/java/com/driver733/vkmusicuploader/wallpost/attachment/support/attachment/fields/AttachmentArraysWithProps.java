@@ -23,8 +23,11 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields;
 
+import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.Attachment;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.IdsMap;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.PropertiesUpdate;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.QueryResultsBasic;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.strings.AttachmentsFromResults;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.queries.QueriesFromAttachments;
@@ -48,12 +51,12 @@ import java.util.List;
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.2
  * @checkstyle ClassDataAbstractionCouplingCheck (20 lines)
  * @checkstyle ParameterNumberCheck (10 lines)
  */
 @Immutable
-public final class AttachmentArrays implements AttachmentsFields {
+public final class AttachmentArraysWithProps implements AttachmentsFields {
 
     /**
      * Group ID.
@@ -71,19 +74,27 @@ public final class AttachmentArrays implements AttachmentsFields {
     private final UserActor actor;
 
     /**
+     * Properties that contain the {@link AudioStatus} of audio files.
+     */
+    private final ImmutableProperties properties;
+
+    /**
      * Ctor.
      * @param actor UserActor on behalf of which all requests will be sent.
+     * @param properties Properties that contain the
      *  {@link AudioStatus} of audio files.
      * @param group Group ID.
      * @param attachments Attachments.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
-    public AttachmentArrays(
+    public AttachmentArraysWithProps(
         final UserActor actor,
+        final ImmutableProperties properties,
         final int group,
         final Attachment... attachments
     ) {
         this.actor = actor;
+        this.properties = properties;
         this.group = group;
         this.attachments = new Array<>(attachments);
     }
@@ -91,25 +102,29 @@ public final class AttachmentArrays implements AttachmentsFields {
     @Override
     public List<String> attachmentsFields()
         throws Exception {
+        this.properties.load();
         final List<AbstractQueryBuilder> queries = new QueriesFromAttachments(
             this.attachments
         ).queries();
+        final IdsMap ids =
+            new IdsMap(this.attachments);
         final JsonElement root =
             new VkApiClient(
                 new TransportClientExecuteBatchCached(
                     new QueryResultsBasic(
-                        new QueriesSafeCached(
-                            queries
-                        )
+                        new QueriesSafeCached(queries)
                     )
                 )
             ).execute()
                 .batch(
                     this.actor,
-                    new QueriesSafeNonCached(
-                        queries
-                    ).queries()
+                    new QueriesSafeNonCached(queries).queries()
                 ).execute();
+        new PropertiesUpdate(
+            this.properties,
+            ids.idsMap(),
+            root.getAsJsonArray()
+        ).save();
         try {
             return new AttachmentsFromResults(
                 root.getAsJsonArray(),
@@ -117,8 +132,7 @@ public final class AttachmentArrays implements AttachmentsFields {
             ).attachmentStrings();
         } catch (final IOException ex) {
             throw new IOException(
-                "Could not map query results to attachments",
-                ex
+                "Could not map idsMap queriesResults to attachments", ex
             );
         }
     }

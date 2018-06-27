@@ -35,10 +35,10 @@ import java.io.IOException;
 public interface ByteArray {
 
     /**
-     * Transforms toByteArray to byte array.
-     * @return Byte array with toByteArray.
+     * Transforms byteArray to byte array.
+     * @return Byte array with byteArray.
      * @throws IOException If the transformation to byte array fails.
      */
-    byte[] toByteArray() throws IOException;
+    byte[] byteArray() throws IOException;
 
 }

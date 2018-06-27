@@ -24,12 +24,12 @@
 package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentAddAudio;
+import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import org.hamcrest.MatcherAssert;
@@ -45,6 +45,7 @@ import org.junit.Test;
  * @todo #22 Write tests for the exceptions.
  * @checkstyle JavadocMethodCheck (500 lines)
  */
+@Immutable
 public final class IdsMapTest {
 
     /**
@@ -106,7 +107,7 @@ public final class IdsMapTest {
     }
 
     @Test
-    public void idsMap() throws IOException {
+    public void idsMap() throws Exception {
         final Map<Integer, String> expected = new HashMap<>();
         expected.put(0, "1");
         expected.put(1, "2");

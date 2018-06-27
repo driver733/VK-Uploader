@@ -25,6 +25,9 @@ package com.driver733.vkmusicuploader.post;
 
 // @checkstyle AvoidStaticImportCheck (30 lines)
 
+import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 import com.driver733.vkmusicuploader.post.posts.Posts;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
@@ -43,9 +46,6 @@ import java.nio.file.WatchService;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
 import java.util.Map;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 
 /**
  * Tracks the specified folder for changes
@@ -98,7 +98,7 @@ public final class WatchDirs implements Closeable {
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
         throw new UnsupportedOperationException("#close()");
     }
 
@@ -106,10 +106,14 @@ public final class WatchDirs implements Closeable {
      * Starts watching the directories for changes.
      * @throws IOException If a directory cannot be registered.
      */
-    public void start() throws IOException {
+    public void start() throws Exception {
         for (final File dir : this.dirs) {
-            this.posts.postFromDir(dir).post();
-            this.registerDirectory(dir.toPath());
+            this.posts
+                .postFromDir(dir)
+                .post();
+            this.registerDirectory(
+                dir.toPath()
+            );
         }
         this.processEvents();
     }
@@ -118,7 +122,7 @@ public final class WatchDirs implements Closeable {
      * Process all events for the keys that have new events.
      * @throws IOException If an error occurs while processing
      */
-    private void processEvents() throws IOException {
+    private void processEvents() throws Exception {
         while (true) {
             final WatchKey key;
             try {

@@ -52,7 +52,7 @@ public final class ByteArrayFromFile implements ByteArray {
     }
 
     @Override
-    public byte[] toByteArray() throws IOException {
+    public byte[] byteArray() throws IOException {
         return Files.readAllBytes(
             this.file.toPath()
         );

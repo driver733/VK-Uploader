@@ -26,12 +26,12 @@ package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytear
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advancedtag.AdvancedTagFromMp3File;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayFromFile;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayImageFromAdvancedTag;
+import com.jcabi.aspects.Immutable;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -47,6 +47,7 @@ import org.junit.Test;
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  */
+@Immutable
 public final class FallbackByteArrayTest {
 
     /**
@@ -81,7 +82,7 @@ public final class FallbackByteArrayTest {
     }
 
     @Test
-    public void file() throws IOException, URISyntaxException {
+    public void file() throws IOException {
         MatcherAssert.assertThat(
             new FallbackByteArray(
                 new ByteArrayFromFile(

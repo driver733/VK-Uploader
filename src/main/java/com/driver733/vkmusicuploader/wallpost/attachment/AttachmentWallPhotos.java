@@ -101,7 +101,7 @@ public final class AttachmentWallPhotos implements Attachment {
 
     @Override
     public List<AbstractQueryBuilder> upload()
-        throws ClientException, ApiException, IOException {
+        throws Exception {
         final List<AbstractQueryBuilder> list = new ArrayList<>(
             this.photos.size()
         );
@@ -133,7 +133,7 @@ public final class AttachmentWallPhotos implements Attachment {
      * @checkstyle LocalFinalVariableNameCheck (100 lines)
      */
     private List<AbstractQueryBuilder> upload(final File photo)
-        throws ApiException, ClientException, IOException {
+        throws Exception {
         return new AttachmentWallPhoto(
             this.client,
             this.actor,

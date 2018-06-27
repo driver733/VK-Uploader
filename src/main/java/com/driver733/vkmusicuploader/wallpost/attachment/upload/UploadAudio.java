@@ -29,7 +29,6 @@ import com.vk.api.sdk.objects.audio.responses.AudioUploadResponse;
 import com.vk.api.sdk.queries.upload.UploadAudioQuery;
 import com.vk.api.sdk.queries.upload.UploadQueryBuilder;
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Constructs a query for uploading an audio file.
@@ -73,8 +72,7 @@ public final class UploadAudio
     }
 
     @Override
-    public UploadQueryBuilder<UploadAudioQuery, AudioUploadResponse> query()
-        throws IOException {
+    public UploadQueryBuilder<UploadAudioQuery, AudioUploadResponse> query() {
         return this.client.upload().audio(this.url, this.audio);
     }
 

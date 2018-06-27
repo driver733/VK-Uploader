@@ -192,7 +192,7 @@ public final class PostRootDirTest {
             new File(
                 "src/test/resources/"
             ),
-            new UploadServers(
+            new UploadUrls(
                 new VkApiClient(
                     new TransportClientComplex(
                         new HashMap<String, TransportClient>() {

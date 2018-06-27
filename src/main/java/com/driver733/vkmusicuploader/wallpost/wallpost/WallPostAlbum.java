@@ -23,7 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
-import com.driver733.vkmusicuploader.post.UploadServers;
+import com.driver733.vkmusicuploader.post.UploadUrls;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentCachedAudio;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhoto;
@@ -86,7 +86,7 @@ public final class WallPostAlbum implements WallPost {
     /**
      * Upload servers that provide upload URLs for attachmentsFields.
      */
-    private final UploadServers servers;
+    private final UploadUrls servers;
 
     /**
      * Properties that contain the {@link AudioStatus} of audio files.
@@ -108,7 +108,7 @@ public final class WallPostAlbum implements WallPost {
         final VkApiClient client,
         final UserActor actor,
         final List<File> audios,
-        final UploadServers servers,
+        final UploadUrls servers,
         final ImmutableProperties properties,
         final int group
     ) {
@@ -158,9 +158,8 @@ public final class WallPostAlbum implements WallPost {
                                 this.group,
                                 new UploadWallPhoto(
                                     this.client,
-                                    this.servers.uploadUrl(
-                                        UploadServers.Type.WALL_PHOTO
-                                    ),
+                                    this.servers
+                                        .wallPhoto(),
                                     new FallbackByteArray(
                                         new ByteArrayImageFromAdvancedTag(
                                             new AdvancedTagVerifiedAlbumImage(
@@ -182,9 +181,7 @@ public final class WallPostAlbum implements WallPost {
                             new AttachmentCachedAudio(
                                 this.client,
                                 this.actor,
-                                this.servers.uploadUrl(
-                                    UploadServers.Type.AUDIO
-                                ),
+                                this.servers.audio(),
                                 this.properties,
                                 this.audios,
                                 this.group

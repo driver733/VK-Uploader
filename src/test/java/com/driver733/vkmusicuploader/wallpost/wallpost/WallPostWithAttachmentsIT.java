@@ -23,7 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
-import com.driver733.vkmusicuploader.post.UploadServers;
+import com.driver733.vkmusicuploader.post.UploadUrls;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallDocument;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArraysWithProps;
@@ -58,7 +58,7 @@ public final class WallPostWithAttachmentsIT extends AbstractEntrance {
             new FileOutputStream(props),
             ""
         );
-        final UploadServers servers = new UploadServers(
+        final UploadUrls servers = new UploadUrls(
             client(),
             actor(),
             groupId()
@@ -86,9 +86,7 @@ public final class WallPostWithAttachmentsIT extends AbstractEntrance {
                         actor(),
                         new UploadWallDocument(
                             client(),
-                            servers.uploadUrl(
-                                UploadServers.Type.WALL_DOC
-                            ),
+                            servers.wallDoc(),
                             new File(
                                 "src/test/resources/attachment.txt"
                             )

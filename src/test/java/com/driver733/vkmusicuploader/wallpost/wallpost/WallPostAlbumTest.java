@@ -23,7 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
-import com.driver733.vkmusicuploader.post.UploadServers;
+import com.driver733.vkmusicuploader.post.UploadUrls;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientComplex;
 import com.driver733.vkmusicuploader.wallpost.wallpost.file.RecoverableFile;
@@ -212,7 +212,7 @@ public final class WallPostAlbumTest {
                 new Array<>(
                     new File("src/test/resources/album/test.mp3")
                 ),
-                new UploadServers(
+                new UploadUrls(
                     new VkApiClient(
                         new TransportClientComplex(
                             new HashMap<String, TransportClient>() {

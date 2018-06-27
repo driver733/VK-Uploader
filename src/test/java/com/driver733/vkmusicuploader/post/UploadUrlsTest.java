@@ -26,6 +26,8 @@ package com.driver733.vkmusicuploader.post;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
+import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
@@ -33,7 +35,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test for {@link UploadServers}.
+ * Test for {@link UploadUrls}.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -41,7 +43,7 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  */
 @Immutable
-public final class UploadServersTest {
+public final class UploadUrlsTest {
 
     /**
      * Group ID.
@@ -49,33 +51,33 @@ public final class UploadServersTest {
     private static final int GROUP_ID = 161929264;
 
     @Test
-    public void audio() throws IOException {
+    public void audio() throws IOException, ClientException, ApiException {
         MatcherAssert.assertThat(
-            new UploadServers(
+            new UploadUrls(
                 new VkApiClient(
                     new TransportClientCached(
                         "{ \"upload_url\" : \"http://test.com/audio\" }"
                     )
                 ),
                 new UserActor(1, ""),
-                UploadServersTest.GROUP_ID
-            ).uploadUrl(UploadServers.Type.AUDIO),
+                UploadUrlsTest.GROUP_ID
+            ).audio(),
             Matchers.equalTo("http://test.com/audio")
         );
     }
 
     @Test
-    public void wallPhoto() throws IOException {
+    public void wallPhoto() throws IOException, ClientException, ApiException {
         MatcherAssert.assertThat(
-            new UploadServers(
+            new UploadUrls(
                 new VkApiClient(
                     new TransportClientCached(
                         "{ \"upload_url\" : \"http://test.com/wallPhoto\" }"
                     )
                 ),
                 new UserActor(1, ""),
-                UploadServersTest.GROUP_ID
-            ).uploadUrl(UploadServers.Type.WALL_PHOTO),
+                UploadUrlsTest.GROUP_ID
+            ).wallPhoto(),
             Matchers.equalTo("http://test.com/wallPhoto")
         );
     }

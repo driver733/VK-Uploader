@@ -23,7 +23,7 @@
  */
 package com.driver733.vkmusicuploader.post.posts;
 
-import com.driver733.vkmusicuploader.post.UploadServers;
+import com.driver733.vkmusicuploader.post.UploadUrls;
 import com.driver733.vkmusicuploader.post.post.Post;
 import com.driver733.vkmusicuploader.post.post.PostRootDir;
 import com.jcabi.aspects.Immutable;
@@ -60,7 +60,7 @@ public final class PostsBasic implements Posts {
     /**
      * Upload servers that provide upload URLs for attachmentsFields.
      */
-    private final UploadServers servers;
+    private final UploadUrls servers;
 
     /**
      * Ctor.
@@ -74,7 +74,7 @@ public final class PostsBasic implements Posts {
     public PostsBasic(
         final VkApiClient client,
         final UserActor actor,
-        final UploadServers servers,
+        final UploadUrls servers,
         final int group
     ) {
         this.client = client;

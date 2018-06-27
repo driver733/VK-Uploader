@@ -24,7 +24,7 @@
 
 package com.driver733.vkmusicuploader.post.post;
 
-import com.driver733.vkmusicuploader.post.UploadServers;
+import com.driver733.vkmusicuploader.post.UploadUrls;
 import com.driver733.vkmusicuploader.post.execution.UploadVerification;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPostsPhoto;
@@ -68,7 +68,7 @@ public final class PostRootDir implements Post {
     /**
      * Upload servers that provide upload URLs for attachmentsFields.
      */
-    private final UploadServers servers;
+    private final UploadUrls servers;
 
     /**
      * Ctor.
@@ -84,7 +84,7 @@ public final class PostRootDir implements Post {
         final VkApiClient client,
         final UserActor actor,
         final File dir,
-        final UploadServers servers,
+        final UploadUrls servers,
         final int group
     ) {
         this.client = client;

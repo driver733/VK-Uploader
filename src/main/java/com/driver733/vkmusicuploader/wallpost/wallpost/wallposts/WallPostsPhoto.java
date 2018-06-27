@@ -25,7 +25,7 @@ package com.driver733.vkmusicuploader.wallpost.wallpost.wallposts;
 
 import com.driver733.vkmusicuploader.media.photo.MediaPhotosBasic;
 import com.driver733.vkmusicuploader.media.photo.MediaPhotosNonProcessed;
-import com.driver733.vkmusicuploader.post.UploadServers;
+import com.driver733.vkmusicuploader.post.UploadUrls;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.WallPhotoStatus;
 import com.driver733.vkmusicuploader.wallpost.wallpost.WallPostPhotos;
@@ -102,7 +102,7 @@ public final class WallPostsPhoto implements WallPosts {
     /**
      * Upload servers that provide upload URLs for attachmentsFields.
      */
-    private final UploadServers servers;
+    private final UploadUrls servers;
 
     /**
      * Properties that contain the {@link WallPhotoStatus}es of photos.
@@ -125,7 +125,7 @@ public final class WallPostsPhoto implements WallPosts {
         final VkApiClient client,
         final UserActor actor,
         final File dir,
-        final UploadServers servers,
+        final UploadUrls servers,
         final ImmutableProperties properties,
         final int group
     ) {

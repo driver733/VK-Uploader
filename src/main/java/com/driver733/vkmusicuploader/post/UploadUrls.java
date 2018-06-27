@@ -29,7 +29,6 @@ import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import java.io.IOException;
 
 /**
  * Acquires upload servers for various files.
@@ -39,7 +38,7 @@ import java.io.IOException;
  * @since 0.1
  */
 @Immutable
-public final class UploadServers {
+public final class UploadUrls {
 
     /**
      * Group ID.
@@ -62,7 +61,7 @@ public final class UploadServers {
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param group Group ID.
      */
-    public UploadServers(
+    public UploadUrls(
         final VkApiClient client,
         final UserActor actor,
         final int group
@@ -73,60 +72,6 @@ public final class UploadServers {
     }
 
     /**
-     * Type of upload server. Usually corresponds to the Attachment type.
-     */
-    public enum Type {
-        /**
-         * Photo that will be added to a user or group wall.
-         */
-        WALL_PHOTO,
-
-        /**
-         * AUDIO.
-         */
-        AUDIO,
-
-        /**
-         * Document that will be uploaded to wall.
-         */
-        WALL_DOC,
-    }
-
-    /**
-     * Acquires an upload URL
-     * (or used a cached one if it is available).
-     * @param type Type of upload server.
-     * @return Upload URL.
-     * @throws IOException If unknown upload server requested.
-     */
-    public String uploadUrl(
-        final Type type
-    ) throws IOException {
-        final String result;
-        try {
-            switch (type) {
-                case AUDIO:
-                    result = this.audioUploadUrl();
-                    break;
-                case WALL_PHOTO:
-                    result = this.wallPhotoUploadUrl();
-                    break;
-                case WALL_DOC:
-                    result = this.wallDocUploadUrl();
-                    break;
-                default:
-                    throw new IOException("Unknown upload server requested");
-            }
-        } catch (final ApiException | ClientException ex) {
-            throw new IOException(
-                "Failed to get the requested upload URL from VK API",
-                ex
-            );
-        }
-        return result;
-    }
-
-    /**
      * Acquires an upload URL for audio files
      * (or used a cached one if it is available).
      * @return Upload URL for audio files.
@@ -134,7 +79,7 @@ public final class UploadServers {
      * @throws ApiException VK API error.
      */
     @Cacheable(forever = true)
-    private String audioUploadUrl() throws ClientException, ApiException {
+    public String audio() throws ClientException, ApiException {
         return this.client.audio()
             .getUploadServer(this.actor)
             .execute()
@@ -149,7 +94,7 @@ public final class UploadServers {
      * @throws ApiException VK API error.
      */
     @Cacheable(forever = true)
-    private String wallDocUploadUrl() throws ClientException, ApiException {
+    public String wallDoc() throws ClientException, ApiException {
         return this.client.docs()
             .getWallUploadServer(this.actor)
             .groupId(this.group)
@@ -165,7 +110,7 @@ public final class UploadServers {
      * @throws ApiException VK API error.
      */
     @Cacheable(forever = true)
-    private String wallPhotoUploadUrl() throws ClientException, ApiException {
+    public String wallPhoto() throws ClientException, ApiException {
         return this.client.photos()
             .getWallUploadServer(this.actor)
             .groupId(this.group)

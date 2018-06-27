@@ -23,7 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
-import com.driver733.vkmusicuploader.post.UploadServers;
+import com.driver733.vkmusicuploader.post.UploadUrls;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhoto;
 import com.driver733.vkmusicuploader.wallpost.attachment.message.MessageWithRandomQuote;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.RandomImage;
@@ -60,7 +60,7 @@ public final class WallPostAphorism implements WallPost {
     /**
      * Upload servers that provide upload URLs for attachmentsFields.
      */
-    private final UploadServers servers;
+    private final UploadUrls servers;
 
     /**
      * Group ID.
@@ -79,7 +79,7 @@ public final class WallPostAphorism implements WallPost {
     public WallPostAphorism(
         final VkApiClient client,
         final UserActor actor,
-        final UploadServers servers,
+        final UploadUrls servers,
         final int group
     ) {
         this.client = client;
@@ -107,9 +107,7 @@ public final class WallPostAphorism implements WallPost {
                                 this.group,
                                 new UploadWallPhoto(
                                     this.client,
-                                    this.servers.uploadUrl(
-                                        UploadServers.Type.WALL_PHOTO
-                                    ),
+                                    this.servers.wallPhoto(),
                                     new RandomImage()
                                 )
                             )

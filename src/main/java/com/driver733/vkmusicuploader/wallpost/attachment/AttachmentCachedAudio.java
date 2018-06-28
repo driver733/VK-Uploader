@@ -115,7 +115,7 @@ public final class AttachmentCachedAudio implements Attachment {
 
     @Override
     public List<AbstractQueryBuilder> upload()
-    throws Exception {
+        throws Exception {
         final List<AbstractQueryBuilder> list = new ArrayList<>(
             this.audios.size()
         );

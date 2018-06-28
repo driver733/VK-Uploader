@@ -24,7 +24,7 @@
 package com.driver733.vkmusicuploader.wallpost.attachment.message;
 
 import com.jcabi.aspects.Immutable;
-import java.io.IOException;
+import com.jcabi.http.request.FakeRequest;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -37,18 +37,33 @@ import org.junit.Test;
  * @since 0.2
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle AvoidDuplicateLiterals (200 lines)
+ * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
 @Immutable
 public final class MessageWithRandomQuoteTest {
 
     @Test
-    public void testQuote() throws IOException {
+    public void testQuote() throws Exception {
         MatcherAssert.assertThat(
-            "Quote text is empty",
-            new MessageWithRandomQuote()
-            .value(),
-            Matchers.not(
-                Matchers.isEmptyOrNullString()
+            "Quote text is does not match the answer",
+            new MessageWithRandomQuote(
+                new FakeRequest()
+                    .withBody(
+                        "{"
+                            + "\"quoteText\":\"Общественной жизни.\","
+                            + "\"quoteAuthor\":\"Лев Толстой\","
+                            + "\"senderName\":\"test\","
+                            + " \"senderLink\":\"test\","
+                            + "\"quoteLink\":\"http://forismatic.com/ru/711d/\""
+                            + "}"
+                    )
+            ).value(),
+            Matchers.equalTo(
+                String.format(
+                    "%s%n© %s",
+                    "Общественной жизни.",
+                    "Лев Толстой"
+                )
             )
         );
     }

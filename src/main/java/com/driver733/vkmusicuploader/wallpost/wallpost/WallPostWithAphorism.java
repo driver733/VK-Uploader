@@ -26,6 +26,7 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 import com.driver733.vkmusicuploader.post.UploadUrls;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhoto;
 import com.driver733.vkmusicuploader.wallpost.attachment.message.MessageWithRandomQuote;
+import com.driver733.vkmusicuploader.wallpost.attachment.message.RequestRandomQuote;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.RandomImage;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArrays;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallPhoto;
@@ -45,7 +46,7 @@ import com.vk.api.sdk.queries.wall.WallPostQuery;
  * @checkstyle ClassDataAbstractionCouplingCheck (2 lines)
  */
 @Immutable
-public final class WallPostAphorism implements WallPost {
+public final class WallPostWithAphorism implements WallPost {
 
     /**
      * VKAPIClient that is used for all VK API requests.
@@ -76,7 +77,7 @@ public final class WallPostAphorism implements WallPost {
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
-    public WallPostAphorism(
+    public WallPostWithAphorism(
         final VkApiClient client,
         final UserActor actor,
         final UploadUrls servers,
@@ -113,7 +114,10 @@ public final class WallPostAphorism implements WallPost {
                             )
                         )
                     ),
-                    new MessageWithRandomQuote()
+                    new MessageWithRandomQuote(
+                        new RequestRandomQuote()
+                            .value()
+                    )
                 )
             ),
             -this.group

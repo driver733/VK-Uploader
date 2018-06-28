@@ -24,7 +24,7 @@
 package com.driver733.vkmusicuploader.post;
 
 import com.driver733.vkmusicuploader.post.post.PostRootDir;
-import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientComplex;
+import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
@@ -101,7 +101,7 @@ public final class PostRootDirTest {
     public void test() throws Exception {
         new PostRootDir(
             new VkApiClient(
-                new TransportClientComplex(
+                new TransportClientFake(
                     new HashMap<String, TransportClient>() {
                         {
                             put(
@@ -194,7 +194,7 @@ public final class PostRootDirTest {
             ),
             new UploadUrls(
                 new VkApiClient(
-                    new TransportClientComplex(
+                    new TransportClientFake(
                         new HashMap<String, TransportClient>() {
                             {
                                 put(

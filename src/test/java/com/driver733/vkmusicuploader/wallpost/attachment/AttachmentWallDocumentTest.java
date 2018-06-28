@@ -58,6 +58,7 @@ public final class AttachmentWallDocumentTest {
     @Test
     public void test() throws Exception {
         Assert.assertThat(
+            "Query constructed incorrectly",
             new AttachmentWallDocument(
                 new VkApiClient(
                     new TransportClientFake()

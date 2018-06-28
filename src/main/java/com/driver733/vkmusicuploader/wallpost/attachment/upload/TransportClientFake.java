@@ -28,6 +28,7 @@ import com.vk.api.sdk.client.ClientResponse;
 import com.vk.api.sdk.client.TransportClient;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -38,7 +39,7 @@ import java.util.Map;
  * @since 0.1
  */
 @Immutable
-public final class TransportClientComplex implements TransportClient {
+public final class TransportClientFake implements TransportClient {
 
     /**
      * {@link TransportClient} for each API endpoint.
@@ -49,8 +50,15 @@ public final class TransportClientComplex implements TransportClient {
      * Ctor.
      * @param clients A {@link TransportClient} for each API endpoint.
      */
-    public TransportClientComplex(final Map<String, TransportClient> clients) {
+    public TransportClientFake(final Map<String, TransportClient> clients) {
         this.clients = clients;
+    }
+
+    /**
+     * Ctor. Empty.
+     */
+    public TransportClientFake() {
+        this.clients = new HashMap<>();
     }
 
     @Override

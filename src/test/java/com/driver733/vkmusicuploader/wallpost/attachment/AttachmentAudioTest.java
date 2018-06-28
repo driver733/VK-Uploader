@@ -24,7 +24,7 @@
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
-import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientComplex;
+import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadAudio;
 import com.driver733.vkmusicuploader.wallpost.wallpost.file.RecoverableFile;
 import com.jcabi.aspects.Immutable;
@@ -86,7 +86,7 @@ public final class AttachmentAudioTest {
         Assert.assertThat(
             new AttachmentAudio(
                 new VkApiClient(
-                    new TransportClientComplex(
+                    new TransportClientFake(
                         new HashMap<String, TransportClient>() {
                             {
                                 put(

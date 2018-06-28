@@ -25,7 +25,7 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.driver733.vkmusicuploader.post.UploadUrls;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
-import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientComplex;
+import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkmusicuploader.wallpost.wallpost.file.RecoverableFile;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
@@ -120,7 +120,7 @@ public final class WallPostAlbumTest {
             "Incorrect query map produced.",
             new WallPostAlbum(
                 new VkApiClient(
-                    new TransportClientComplex(
+                    new TransportClientFake(
                         new HashMap<String, TransportClient>() {
                             {
                                 put(
@@ -214,7 +214,7 @@ public final class WallPostAlbumTest {
                 ),
                 new UploadUrls(
                     new VkApiClient(
-                        new TransportClientComplex(
+                        new TransportClientFake(
                             new HashMap<String, TransportClient>() {
                                 {
                                     put(

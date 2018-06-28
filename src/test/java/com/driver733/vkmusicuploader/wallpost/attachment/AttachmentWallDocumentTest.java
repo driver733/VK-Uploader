@@ -23,83 +23,74 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
+import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
+import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallDocument;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientCached;
-import com.vk.api.sdk.httpclient.TransportClientHttp;
-import com.vk.api.sdk.queries.audio.AudioAddQuery;
-import org.hamcrest.MatcherAssert;
+import com.vk.api.sdk.queries.docs.DocsSaveQuery;
+import java.io.File;
 import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * An {@link Attachment} of an audio
- *  that will be added to a page audios (copied).
+ * Test for {@link AttachmentWallDocument}.
  *
- * @author Mikhail Yakushin (driver733@me.com)
+ * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
  * @version $Id$
- * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @since 0.2
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle AnonInnerLengthCheck (500 lines)
+ * @checkstyle StringLiteralsConcatenationCheck (500 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
+ * @checkstyle MethodLength (50 lines)
  */
 @Immutable
-public final class AttachmentAddAudioTest {
+public final class AttachmentWallDocumentTest {
 
-    /**
-     * Group ID.
-     */
-    private static final int GROUP_ID = 161929264;
-
+    @SuppressWarnings({
+        "PMD.NonStaticInitializer",
+        "PMD.AvoidDuplicateLiterals",
+        "PMD.ProhibitPlainJunitAssertionsRule"
+    })
     @Test
-    public void testBasic() {
-        MatcherAssert.assertThat(
-            new AttachmentAddAudio(
+    public void test() throws Exception {
+        Assert.assertThat(
+            new AttachmentWallDocument(
                 new VkApiClient(
-                    new TransportClientHttp()
+                    new TransportClientFake()
                 ),
                 new UserActor(
                     0,
-                    ""
+                    "1"
                 ),
-                1,
-                2,
-                AttachmentAddAudioTest.GROUP_ID
-            ).upload().get(0).build(),
-            Matchers.equalTo(
-                new AudioAddQuery(
+                new UploadWallDocument(
                     new VkApiClient(
-                        new TransportClientHttp()
+                        new TransportClientCached(
+                            "{"
+                                + "\"file\" : \"testingFile\""
+                                + "}"
+                        )
                     ),
-                    new UserActor(0, ""),
-                    2,
-                    1
-                ).groupId(
-                    AttachmentAddAudioTest.GROUP_ID
-                ).build()
-            )
-        );
-    }
-
-    @Test
-    public void cached() throws ClientException, ApiException {
-        MatcherAssert.assertThat(
-            new AttachmentAddAudio(
-                new VkApiClient(
-                    new TransportClientCached("{ \"response\" : 1 }")
-                ),
-                new UserActor(
-                    0,
-                    ""
-                ),
-                0,
-                0,
-                AttachmentAddAudioTest.GROUP_ID
-            ).upload().get(0).execute(),
+                    "testURL",
+                    new File("src/test/resources/album/test.mp3")
+                )
+            ).upload()
+                .get(0)
+                .build(),
             Matchers.equalTo(
-            1
+                new DocsSaveQuery(
+                    new VkApiClient(
+                        new TransportClientFake()
+                    ),
+                    new UserActor(
+                        0,
+                        "1"
+                    ),
+                    "testingFile"
+                ).build()
             )
         );
     }

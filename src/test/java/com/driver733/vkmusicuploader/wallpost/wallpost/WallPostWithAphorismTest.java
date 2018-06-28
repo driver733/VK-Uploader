@@ -24,46 +24,30 @@
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.driver733.vkmusicuploader.post.UploadUrls;
-import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
-import com.driver733.vkmusicuploader.wallpost.wallpost.file.RecoverableFile;
-import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
+import com.jcabi.matchers.RegexMatchers;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
-import org.cactoos.io.BytesOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test for {@link WallPostAlbum}.
+ * Test for {@link WallPostWithAphorism}.
  *
- * @author Mikhail Yakushin (driver733@me.com)
+ * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
  * @version $Id$
- * @since 0.1
+ * @since 0.2
  * @checkstyle AnonInnerLengthCheck (500 lines)
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle StringLiteralsConcatenationCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (500 lines)
  */
-@Immutable
-public final class WallPostAlbumTest extends AbstractVkUnitTest {
-
-    /**
-     * Test properties.
-     */
-    private final Path properties =
-        Paths.get(
-            "src/test/resources/wallPostAlbumTest.properties"
-        );
+public final class WallPostWithAphorismTest extends AbstractVkUnitTest {
 
     @Test
     @SuppressWarnings({
@@ -72,15 +56,9 @@ public final class WallPostAlbumTest extends AbstractVkUnitTest {
         "PMD.AvoidDuplicateLiterals"
         })
     public void test() throws Exception {
-        final RecoverableFile file = new RecoverableFile(
-            new BytesOf(
-                this.properties
-            ).asBytes(),
-            this.properties
-        );
         MatcherAssert.assertThat(
             "Incorrect query map produced.",
-            new WallPostAlbum(
+            new WallPostWithAphorism(
                 new VkApiClient(
                     new TransportClientFake(
                         new HashMap<String, TransportClient>() {
@@ -103,18 +81,6 @@ public final class WallPostAlbumTest extends AbstractVkUnitTest {
                                             + "\"audio\"    : \"fnknjkasd\","
                                             + "\"server\"   : 123546,"
                                             + "\"redirect\" : \"redirect.com\""
-                                            + "}"
-                                    )
-                                );
-                                put(
-                                    AbstractVkUnitTest.AUDIO_SAVE_URL,
-                                    new TransportClientCached(
-                                        "{"
-                                            + "\"id\"       : 123456,"
-                                            + "\"owner_id\" : 5674,"
-                                            + "\"artist\"   : \"Clean Tears\","
-                                            + "\"title\"    : \"Dragon\","
-                                            + "\"url\"      : \"url1.com\""
                                             + "}"
                                     )
                                 );
@@ -150,12 +116,6 @@ public final class WallPostAlbumTest extends AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.AUDIO_ADD_URL,
-                                    new TransportClientCached(
-                                        "{ \"response\" : 123456789 }"
-                                    )
-                                );
-                                put(
                                     AbstractVkUnitTest.EXECUTE_URL,
                                     new TransportClientCached(
                                         "{"
@@ -170,9 +130,6 @@ public final class WallPostAlbumTest extends AbstractVkUnitTest {
                 new UserActor(
                     1,
                     "1"
-                ),
-                new Array<>(
-                    new File("src/test/resources/album/test.mp3")
                 ),
                 new UploadUrls(
                     new VkApiClient(
@@ -192,17 +149,6 @@ public final class WallPostAlbumTest extends AbstractVkUnitTest {
                                                 + "}"
                                         )
                                     );
-                                    put(
-                                        AbstractVkUnitTest.AUDIO_UPLOAD_URL,
-                                        new TransportClientCached(
-                                            "{"
-                                                + "\"response\": {"
-                                                + "\"upload_url\" :"
-                                                + "\"audio.uploadServer\""
-                                                + "}"
-                                                + "}"
-                                        )
-                                    );
                                 }
                             }
                         )
@@ -212,28 +158,23 @@ public final class WallPostAlbumTest extends AbstractVkUnitTest {
                     ),
                     AbstractVkUnitTest.GROUP_ID
                 ),
-                new ImmutableProperties(
-                    this.properties.toFile()
-                ),
                 AbstractVkUnitTest.GROUP_ID
             ).construct()
                 .build(),
             Matchers.allOf(
                 Matchers.hasEntry("access_token", "1"),
                 Matchers.hasEntry("v", "5.63"),
-                Matchers.hasEntry(
-                    "attachments",
-                    "photo6785_123456,audio-161929264_123456789"
-                ),
                 Matchers.hasEntry("owner_id", "-161929264"),
                 Matchers.hasEntry("from_group", "1"),
                 Matchers.hasEntry(
-                    "message",
-                    "Album: Elegant Testing\nArtist: Test Man"
+                    "attachments",
+                    "photo6785_123456"
+                ),
+                Matchers.hasValue(
+                    RegexMatchers.containsPattern("[а-яА-Я]")
                 )
             )
         );
-        file.recover();
     }
 
 }

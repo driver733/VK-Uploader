@@ -54,7 +54,7 @@ public final class AttachmentWallDocumentTest {
         "PMD.NonStaticInitializer",
         "PMD.AvoidDuplicateLiterals",
         "PMD.ProhibitPlainJunitAssertionsRule"
-    })
+        })
     @Test
     public void test() throws Exception {
         Assert.assertThat(

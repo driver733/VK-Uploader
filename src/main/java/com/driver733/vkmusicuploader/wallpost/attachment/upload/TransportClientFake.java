@@ -58,7 +58,9 @@ public final class TransportClientFake implements TransportClient {
      * Ctor. Empty.
      */
     public TransportClientFake() {
-        this.clients = new HashMap<>();
+        this(
+            new HashMap<>()
+        );
     }
 
     @Override

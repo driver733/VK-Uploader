@@ -29,9 +29,8 @@ import com.google.gson.JsonObject;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.http.Request;
 import com.jcabi.http.Response;
-import com.jcabi.http.request.JdkRequest;
-import java.io.IOException;
 import org.cactoos.Scalar;
+import org.cactoos.scalar.Constant;
 
 /**
  * A message with a random quote
@@ -45,55 +44,36 @@ import org.cactoos.Scalar;
 public final class MessageWithRandomQuote implements Scalar<String> {
 
     /**
-     * Forismatic API version.
+     * Forismatic API HTTP request.
      */
-    private static final String VERSION = "1.0";
+    private final Scalar<Request> request;
 
     /**
-     * Base URL.
+     * Ctor.
+     * @param request Forismatic API HTTP request.
      */
-    private static final String BASE = "https://api.forismatic.com";
+    public MessageWithRandomQuote(final Scalar<Request> request) {
+        this.request = request;
+    }
 
     /**
-     * Request path.
+     * Ctor.
+     * @param request Forismatic API HTTP request.
      */
-    private static final String PATH = String.format(
-        "/api/%s/",
-        MessageWithRandomQuote.VERSION
-    );
+    public MessageWithRandomQuote(final Request request) {
+        this(
+            new Constant<>(
+                request
+            )
+        );
+    }
 
     @Override
-    public String value() throws IOException {
+    public String value() throws Exception {
         final String message;
-        final Response response = new JdkRequest(
-            MessageWithRandomQuote.BASE
-        ).uri()
-            .path(
-                MessageWithRandomQuote.PATH
-            )
-            .back()
-            .method(
-                Request.POST
-            )
-            .body()
-            .formParam(
-                "method",
-                "getQuote"
-            ).formParam(
-                "format",
-                "json"
-            ).formParam(
-                "lang",
-                "ru"
-            ).back()
-            .header(
-                "User-Agent",
-                "Mozilla/5.0 (Windows NT 6.1; WOW64)"
-            )
-            .fetch();
+        final Response response = this.request.value().fetch();
         final JsonObject json = new Gson().fromJson(
-            response
-                .body(),
+            response.body(),
             JsonElement.class
         ).getAsJsonObject();
         final String quote = json.get("quoteText")

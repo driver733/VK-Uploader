@@ -52,7 +52,7 @@ import java.util.List;
 
 /**
  * Creates a {@link WallPost} with the specified
- *  audios files and an album cover (from an audios file tag or
+ *  audio files and an album cover (from an audio file tag or
  *  cover.jpg).
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

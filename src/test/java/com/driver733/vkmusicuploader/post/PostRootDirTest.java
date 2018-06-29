@@ -25,6 +25,7 @@ package com.driver733.vkmusicuploader.post;
 
 import com.driver733.vkmusicuploader.post.post.PostRootDir;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
+import com.driver733.vkmusicuploader.wallpost.wallpost.AbstractVkUnitTest;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
@@ -49,47 +50,7 @@ import org.junit.Test;
  * @checkstyle MethodLength (50 lines)
  */
 @Immutable
-public final class PostRootDirTest {
-
-    /**
-     * Group ID.
-     */
-    private static final int GROUP_ID = 161929264;
-
-    /**
-     * VK API endpoint - photos.saveWallPhoto.
-     */
-    private static final String PHOTO_SAVE_URL =
-        "https://api.vk.com/method/photos.saveWallPhoto";
-    /**
-     * VK API endpoint - audios.save.
-     */
-    private static final String AUDIO_SAVE_URL =
-        "https://api.vk.com/method/audios.save";
-
-    /**
-     * VK API endpoint - photos.getWallUploadServer.
-     */
-    private static final String PHOTO_WALL_URL =
-        "https://api.vk.com/method/photos.getWallUploadServer";
-
-    /**
-     * VK API endpoint - audios.getUploadServer.
-     */
-    private static final String AUDIO_UPLOAD_URL =
-        "https://api.vk.com/method/audios.getUploadServer";
-
-    /**
-     * VK API endpoint - audios.add.
-     */
-    private static final String AUDIO_ADD_URL =
-        "https://api.vk.com/method/audios.add";
-
-    /**
-     * VK API endpoint - execute.
-     */
-    private static final String EXECUTE_URL =
-        "https://api.vk.com/method/execute";
+public final class PostRootDirTest extends AbstractVkUnitTest {
 
     @SuppressWarnings({
         "PMD.ExcessiveMethodLength",
@@ -115,18 +76,18 @@ public final class PostRootDirTest {
                                 )
                             );
                             put(
-                                "audios.uploadServer",
+                                "audio.uploadServer",
                                 new TransportClientCached(
                                     "{"
                                         + "\"hash\"     : \"hash123\","
-                                        + "\"audios\"    : \"fnknjkasd\","
+                                        + "\"audio\"    : \"fnknjkasd\","
                                         + "\"server\"   : 123546,"
                                         + "\"redirect\" : \"redirect.com\""
                                         + "}"
                                 )
                             );
                             put(
-                                PostRootDirTest.AUDIO_SAVE_URL,
+                                AbstractVkUnitTest.AUDIO_SAVE_URL,
                                 new TransportClientCached(
                                     "{"
                                         + "\"id\"       : 123456,"
@@ -138,7 +99,7 @@ public final class PostRootDirTest {
                                 )
                             );
                             put(
-                                PostRootDirTest.PHOTO_SAVE_URL,
+                                AbstractVkUnitTest.PHOTO_SAVE_URL,
                                 new TransportClientCached(
                                     "{"
                                         + "\"id\"          : 123456,"
@@ -169,13 +130,13 @@ public final class PostRootDirTest {
                                 )
                             );
                             put(
-                                PostRootDirTest.AUDIO_ADD_URL,
+                                AbstractVkUnitTest.AUDIO_ADD_URL,
                                 new TransportClientCached(
                                     "{ \"response\" : 123456789 }"
                                 )
                             );
                             put(
-                                PostRootDirTest.EXECUTE_URL,
+                                AbstractVkUnitTest.EXECUTE_URL,
                                 new TransportClientCached(
                                     "{"
                                         + "\"response\": { \"post_id\": 3 }"
@@ -198,7 +159,7 @@ public final class PostRootDirTest {
                         new HashMap<String, TransportClient>() {
                             {
                                 put(
-                                    PostRootDirTest.PHOTO_WALL_URL,
+                                    AbstractVkUnitTest.PHOTO_WALL_URL,
                                     new TransportClientCached(
                                         "{"
                                             + "\"response\" : {"
@@ -211,12 +172,12 @@ public final class PostRootDirTest {
                                     )
                                 );
                                 put(
-                                    PostRootDirTest.AUDIO_UPLOAD_URL,
+                                    AbstractVkUnitTest.AUDIO_UPLOAD_URL,
                                     new TransportClientCached(
                                         "{"
                                             + "\"response\": {"
                                             + "\"upload_url\" :"
-                                            + "\"audios.uploadServer\""
+                                            + "\"audio.uploadServer\""
                                             + "}"
                                             + "}"
                                     )
@@ -228,9 +189,9 @@ public final class PostRootDirTest {
                 new UserActor(
                     1, "1"
                 ),
-                PostRootDirTest.GROUP_ID
+                AbstractVkUnitTest.GROUP_ID
             ),
-            PostRootDirTest.GROUP_ID
+            AbstractVkUnitTest.GROUP_ID
         ).post();
         Assert.assertTrue(
             "The properties files differ",

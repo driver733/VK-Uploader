@@ -94,7 +94,7 @@ public final class WallPostWithAttachmentsTest extends AbstractVkUnitTest {
                 Matchers.hasEntry("v", "5.63"),
                 Matchers.hasEntry(
                     "attachments",
-                    "audios-161929264_1,audios-161929264_2"
+                    "audio-161929264_1,audio-161929264_2"
                 )
             )
         );

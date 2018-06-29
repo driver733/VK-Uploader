@@ -76,7 +76,7 @@ public final class IdsMap {
         int index = 0;
         final Map<Integer, String> ids = new HashMap<>();
         for (final AbstractQueryBuilder query : queries) {
-            if (query.getMethod().contains("audios.add")) {
+            if (query.getMethod().contains("audio.add")) {
                 ids.put(
                     index,
                     query.build().get("audio_id").toString()

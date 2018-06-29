@@ -150,7 +150,7 @@ public final class AttachmentsFromResultsTest {
                 AttachmentsFromResultsTest.GROUP_ID
             ).attachmentStrings(),
             Matchers.containsInAnyOrder(
-                "audios-161929264_123456789", "audios-161929264_987654321"
+                "audio-161929264_123456789", "audio-161929264_987654321"
             )
         );
     }

@@ -46,7 +46,7 @@ public final class QueryFakeAudioAdd
      * @param client A {@link VkApiClient} that is used for all VK API requests.
      */
     public QueryFakeAudioAdd(final VkApiClient client) {
-        super(client, "fake.audios.add", Integer.class);
+        super(client, "fake.audio.add", Integer.class);
     }
 
     @Override

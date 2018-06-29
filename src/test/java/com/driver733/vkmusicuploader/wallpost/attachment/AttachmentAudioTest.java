@@ -26,6 +26,7 @@ package com.driver733.vkmusicuploader.wallpost.attachment;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadAudio;
+import com.driver733.vkmusicuploader.wallpost.wallpost.AbstractVkUnitTest;
 import com.driver733.vkmusicuploader.wallpost.wallpost.file.RecoverableFile;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.TransportClient;
@@ -54,18 +55,7 @@ import org.junit.Test;
  * @checkstyle MethodLength (50 lines)
  */
 @Immutable
-public final class AttachmentAudioTest {
-
-    /**
-     * Group ID.
-     */
-    private static final int GROUP_ID = 161929264;
-
-    /**
-     * VK API endpoint - audios.save.
-     */
-    private static final String AUDIO_SAVE_URL =
-        "https://api.vk.com/method/audios.save";
+public final class AttachmentAudioTest extends AbstractVkUnitTest {
 
     @SuppressWarnings({
         "PMD.NonStaticInitializer",
@@ -90,18 +80,18 @@ public final class AttachmentAudioTest {
                         new HashMap<String, TransportClient>() {
                             {
                                 put(
-                                    "audios.uploadServer",
+                                    "audio.uploadServer",
                                     new TransportClientCached(
                                         "{"
                                             + "\"hash\"     : \"hash123\","
-                                            + "\"audios\"    : \"fnknjkasd\","
+                                            + "\"audio\"    : \"fnknjkasd\","
                                             + "\"server\"   : 123546,"
                                             + "\"redirect\" : \"redirect.com\""
                                             + "}"
                                     )
                                 );
                                 put(
-                                    AttachmentAudioTest.AUDIO_SAVE_URL,
+                                    AbstractVkUnitTest.AUDIO_SAVE_URL,
                                     new TransportClientCached(
                                         "{"
                                             + "\"id\"       : 1,"
@@ -123,19 +113,19 @@ public final class AttachmentAudioTest {
                 new ImmutableProperties(
                     props
                 ),
-                AttachmentAudioTest.GROUP_ID,
+                AbstractVkUnitTest.GROUP_ID,
                 new UploadAudio(
                     new VkApiClient(
                         new TransportClientCached(
                             "{"
                                 + "\"hash\"     : \"hash123\","
-                                + "\"audios\"    : \"fnknjkasd\","
+                                + "\"audio\"    : \"fnknjkasd\","
                                 + "\"server\"   : 123546,"
                                 + "\"redirect\" : \"redirect.com\""
                                 + "}"
                         )
                     ),
-                    "audios.uploadServer",
+                    "audio.uploadServer",
                     new File("src/test/resources/album/test.mp3")
                 )
             ).upload()
@@ -154,7 +144,7 @@ public final class AttachmentAudioTest {
                     ),
                     1,
                     2
-                ).groupId(AttachmentAudioTest.GROUP_ID)
+                ).groupId(AbstractVkUnitTest.GROUP_ID)
                     .build()
             )
         );

@@ -27,6 +27,7 @@ import com.jcabi.aspects.Immutable;
 import java.io.File;
 import org.cactoos.io.Directory;
 import org.cactoos.io.InputOf;
+import org.cactoos.io.LengthOf;
 import org.cactoos.io.OutputTo;
 import org.cactoos.io.TeeInput;
 import org.cactoos.io.Zip;
@@ -83,18 +84,20 @@ public final class ZippedDirectory {
             this.filename,
             ".zip"
         );
-        new TeeInput(
-            new InputOf(
-                new Zip(
-                    new Directory(
-                        this.dir
-                    )
-                ).stream()
-            ),
-            new OutputTo(
-                file
+        new LengthOf(
+            new TeeInput(
+                new InputOf(
+                    new Zip(
+                        new Directory(
+                            this.dir
+                        )
+                    ).stream()
+                ),
+                new OutputTo(
+                    file
+                )
             )
-        );
+        ).intValue();
         return file;
     }
 }

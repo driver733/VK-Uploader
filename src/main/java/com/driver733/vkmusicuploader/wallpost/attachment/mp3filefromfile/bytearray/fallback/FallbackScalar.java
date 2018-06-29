@@ -42,20 +42,24 @@ public final class FallbackScalar<T> implements Scalar<T> {
     /**
      * Byte array providers. Some or all might be faulty and raise an exception.
      */
-    private final Array<Scalar<T>> arrays;
+    private final Array<Scalar<T>> origin;
 
     /**
      * Ctor.
-     * @param arrays Byte array providers.
+     * @param origin Scalars.
      */
-    public FallbackScalar(final Scalar<T>... arrays) {
-        this.arrays = new Array<>(arrays);
+    public FallbackScalar(final Scalar<T>... origin) {
+        this.origin = new Array<>(origin);
     }
 
     @Override
     public T value() throws Exception {
-        for (final Scalar<T> array : this.arrays) {
-            return array.value();
+        for (final Scalar<T> scalar : this.origin) {
+            try {
+                return scalar.value();
+            } catch (final Exception ex) {
+                throw new IllegalStateException(ex);
+            }
         }
         throw new IOException("No valid Scalar found found.");
     }

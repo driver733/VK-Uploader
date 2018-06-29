@@ -25,7 +25,6 @@ package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytear
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
-import java.io.IOException;
 import org.cactoos.Bytes;
 
 /**
@@ -55,8 +54,12 @@ public final class FallbackBytes implements Bytes {
     @Override
     public byte[] asBytes() throws Exception {
         for (final Bytes array : this.arrays) {
-            return array.asBytes();
+            try {
+                return array.asBytes();
+            } catch (final Exception ex) {
+                throw new IllegalStateException(ex);
+            }
         }
-        throw new IOException("No valid byte[] found.");
+        throw new Exception("No valid byte[] found.");
     }
 }

@@ -87,7 +87,7 @@ public final class ZippedDirectory {
             new InputOf(
                 new Zip(
                     new Directory(
-                        dir
+                        this.dir
                     )
                 ).stream()
             ),

@@ -43,7 +43,7 @@ public abstract class AbstractVkUnitTest {
     protected static final String PHOTO_SAVE_URL =
         "https://api.vk.com/method/photos.saveWallPhoto";
     /**
-     * VK API endpoint - audio.save.
+     * VK API endpoint - audios.save.
      */
     protected static final String AUDIO_SAVE_URL =
         "https://api.vk.com/method/audio.save";
@@ -55,13 +55,13 @@ public abstract class AbstractVkUnitTest {
         "https://api.vk.com/method/photos.getWallUploadServer";
 
     /**
-     * VK API endpoint - audio.getUploadServer.
+     * VK API endpoint - audios.getUploadServer.
      */
     protected static final String AUDIO_UPLOAD_URL =
         "https://api.vk.com/method/audio.getUploadServer";
 
     /**
-     * VK API endpoint - audio.add.
+     * VK API endpoint - audios.add.
      */
     protected static final String AUDIO_ADD_URL =
         "https://api.vk.com/method/audio.add";

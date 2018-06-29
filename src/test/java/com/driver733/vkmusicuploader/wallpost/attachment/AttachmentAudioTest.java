@@ -26,6 +26,7 @@ package com.driver733.vkmusicuploader.wallpost.attachment;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadAudio;
+import com.driver733.vkmusicuploader.wallpost.wallpost.AbstractVkUnitTest;
 import com.driver733.vkmusicuploader.wallpost.wallpost.file.RecoverableFile;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.TransportClient;
@@ -54,18 +55,7 @@ import org.junit.Test;
  * @checkstyle MethodLength (50 lines)
  */
 @Immutable
-public final class AttachmentAudioTest {
-
-    /**
-     * Group ID.
-     */
-    private static final int GROUP_ID = 161929264;
-
-    /**
-     * VK API endpoint - audio.save.
-     */
-    private static final String AUDIO_SAVE_URL =
-        "https://api.vk.com/method/audio.save";
+public final class AttachmentAudioTest extends AbstractVkUnitTest {
 
     @SuppressWarnings({
         "PMD.NonStaticInitializer",
@@ -101,7 +91,7 @@ public final class AttachmentAudioTest {
                                     )
                                 );
                                 put(
-                                    AttachmentAudioTest.AUDIO_SAVE_URL,
+                                    AbstractVkUnitTest.AUDIO_SAVE_URL,
                                     new TransportClientCached(
                                         "{"
                                             + "\"id\"       : 1,"
@@ -123,7 +113,7 @@ public final class AttachmentAudioTest {
                 new ImmutableProperties(
                     props
                 ),
-                AttachmentAudioTest.GROUP_ID,
+                AbstractVkUnitTest.GROUP_ID,
                 new UploadAudio(
                     new VkApiClient(
                         new TransportClientCached(
@@ -154,7 +144,7 @@ public final class AttachmentAudioTest {
                     ),
                     1,
                     2
-                ).groupId(AttachmentAudioTest.GROUP_ID)
+                ).groupId(AbstractVkUnitTest.GROUP_ID)
                     .build()
             )
         );

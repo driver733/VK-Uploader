@@ -27,6 +27,7 @@ import com.jcabi.aspects.Immutable;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import org.cactoos.Bytes;
 
 /**
  * Transforms file to byte array.
@@ -36,7 +37,7 @@ import java.nio.file.Files;
  * @since 0.1
  */
 @Immutable
-public final class ByteArrayFromFile implements ByteArray {
+public final class ByteArrayFromFile implements Bytes {
 
     /**
      * A {@link File} with an image.
@@ -52,7 +53,7 @@ public final class ByteArrayFromFile implements ByteArray {
     }
 
     @Override
-    public byte[] byteArray() throws IOException {
+    public byte[] asBytes() throws IOException {
         return Files.readAllBytes(
             this.file.toPath()
         );

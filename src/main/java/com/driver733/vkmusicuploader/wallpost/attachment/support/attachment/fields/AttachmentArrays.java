@@ -73,7 +73,7 @@ public final class AttachmentArrays implements AttachmentsFields {
     /**
      * Ctor.
      * @param actor UserActor on behalf of which all requests will be sent.
-     *  {@link AudioStatus} of audio files.
+     *  {@link AudioStatus} of audios files.
      * @param group Group ID.
      * @param attachments Attachments.
      * @checkstyle ParameterNumberCheck (10 lines)

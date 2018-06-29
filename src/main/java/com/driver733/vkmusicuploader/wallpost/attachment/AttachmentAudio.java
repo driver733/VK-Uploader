@@ -74,7 +74,7 @@ public final class AttachmentAudio implements Attachment {
     private final Array<Upload<UploadAudioQuery, AudioUploadResponse>> audios;
 
     /**
-     * Properties that contain the {@link AudioStatus} of audio files.
+     * Properties that contain the {@link AudioStatus} of audios files.
      */
     private final ImmutableProperties properties;
 
@@ -86,7 +86,7 @@ public final class AttachmentAudio implements Attachment {
      * @param audios Audios files.
      * @param group Group ID.
      * @param properties Properties that contain the
-     *  {@link AudioStatus} of audio files.
+     *  {@link AudioStatus} of audios files.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
     public AttachmentAudio(
@@ -119,9 +119,10 @@ public final class AttachmentAudio implements Attachment {
     }
 
     /**
-     * Uploads the audio files.
+     * Uploads the audios files.
      * @param upload Audio construct to upload.
-     * @return AudioAddQuery that will add the uploaded audio to the group page.
+     * @return AudioAddQuery that will add the uploaded audios
+     *  to the group page.
      * @throws Exception If a query cannot be created.
      */
     private List<AbstractQueryBuilder> upload(

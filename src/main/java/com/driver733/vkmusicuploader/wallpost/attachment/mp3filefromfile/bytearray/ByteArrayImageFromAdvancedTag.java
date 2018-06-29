@@ -26,6 +26,7 @@ package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytear
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advancedtag.AdvancedTag;
 import com.jcabi.aspects.Immutable;
 import java.io.IOException;
+import org.cactoos.Bytes;
 
 /**
  * Acquires album cover in byte array
@@ -36,7 +37,7 @@ import java.io.IOException;
  * @since 0.1
  */
 @Immutable
-public final class ByteArrayImageFromAdvancedTag implements ByteArray {
+public final class ByteArrayImageFromAdvancedTag implements Bytes {
 
     /**
      * The {@link AdvancedTag} with tags.
@@ -52,7 +53,7 @@ public final class ByteArrayImageFromAdvancedTag implements ByteArray {
     }
 
     @Override
-    public byte[] byteArray() throws IOException {
+    public byte[] asBytes() throws IOException {
         return this.tag.construct().getAlbumImage();
     }
 

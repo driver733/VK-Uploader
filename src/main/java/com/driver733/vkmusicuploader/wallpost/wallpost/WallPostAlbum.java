@@ -34,7 +34,7 @@ import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advance
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.basictag.BasicTagFromMp3File;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayFromFile;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayImageFromAdvancedTag;
-import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.FallbackByteArray;
+import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.FallbackBytes;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArraysWithProps;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallPhoto;
@@ -89,7 +89,7 @@ public final class WallPostAlbum implements WallPost {
     private final UploadUrls servers;
 
     /**
-     * Properties that contain the {@link AudioStatus} of audio files.
+     * Properties that contain the {@link AudioStatus} of audios files.
      */
     private final ImmutableProperties properties;
     /**
@@ -100,7 +100,7 @@ public final class WallPostAlbum implements WallPost {
      * @param servers Upload servers
      *  that provide upload URLs for attachmentsFields.
      * @param properties Properties that contain the
-     *  {@link AudioStatus} of audio files.
+     *  {@link AudioStatus} of audios files.
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
@@ -160,7 +160,7 @@ public final class WallPostAlbum implements WallPost {
                                     this.client,
                                     this.servers
                                         .wallPhoto(),
-                                    new FallbackByteArray(
+                                    new FallbackBytes(
                                         new ByteArrayImageFromAdvancedTag(
                                             new AdvancedTagVerifiedAlbumImage(
                                                 new AdvancedTagFromMp3File(file)
@@ -175,13 +175,13 @@ public final class WallPostAlbum implements WallPost {
                                                 )
                                             )
                                         )
-                                    ).firstValid()
+                                    ).asBytes()
                                 )
                             ),
                             new AttachmentCachedAudio(
                                 this.client,
                                 this.actor,
-                                this.servers.audio(),
+                                this.servers.audios(),
                                 this.properties,
                                 this.audios,
                                 this.group

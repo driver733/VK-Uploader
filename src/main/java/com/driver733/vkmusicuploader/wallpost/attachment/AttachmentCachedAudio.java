@@ -43,7 +43,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Determines if audio has been already
+ * Determines if audios has been already
  *  uploaded and returns a fake a real
  *  query accordingly.
  *
@@ -77,12 +77,12 @@ public final class AttachmentCachedAudio implements Attachment {
     private final Array<File> audios;
 
     /**
-     * Audio upload URL for the audio files.
+     * Audio upload URL for the audios files.
      */
     private final String url;
 
     /**
-     * Properties that contain the {@link AudioStatus} of audio files.
+     * Properties that contain the {@link AudioStatus} of audios files.
      */
     private final ImmutableProperties properties;
 
@@ -90,9 +90,9 @@ public final class AttachmentCachedAudio implements Attachment {
      * Ctor.
      * @param client The {@link VkApiClient} for all requests.
      * @param actor UserActor on behalf of which all requests will be sent.
-     * @param url Audio upload URL for the audio files.
+     * @param url Audio upload URL for the audios files.
      * @param properties Properties that contain the
-     *  {@link AudioStatus} of audio files.
+     *  {@link AudioStatus} of audios files.
      * @param audios Audios files.
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (2 lines)
@@ -128,10 +128,11 @@ public final class AttachmentCachedAudio implements Attachment {
     }
 
     /**
-     * Forms a {@link AbstractQueryBuilder} for uploading an audio {@link File}.
+     * Forms a {@link AbstractQueryBuilder}
+     *  for uploading an audios {@link File}.
      * @param audio Audio {@link File} to upload.
      * @return A {@link List} with a single {@link AbstractQueryBuilder}
-     *  which uploads the audio.
+     *  which uploads the audios.
      * @throws ApiException VK API error.
      * @throws ClientException VK Client error.
      * @throws Exception If the {@link AudioStatus} is invalid.
@@ -229,7 +230,7 @@ public final class AttachmentCachedAudio implements Attachment {
                     );
                 result = Collections.singletonList(query);
             } else {
-                throw new IOException("Invalid audio status");
+                throw new IOException("Invalid audios status");
             }
         }
         return result;

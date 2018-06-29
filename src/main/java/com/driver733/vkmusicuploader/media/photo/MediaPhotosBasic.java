@@ -30,7 +30,7 @@ import java.io.File;
 import java.util.List;
 
 /**
- * Constructs a list of audio files
+ * Constructs a list of audios files
  *  in the specified folder.
  *
  * @author Mikhail Yakushin (driver733@me.com)

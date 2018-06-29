@@ -86,7 +86,7 @@ public final class WallPostWithAttachmentsIT extends AbstractEntrance {
                         actor(),
                         new UploadWallDocument(
                             client(),
-                            servers.wallDoc(),
+                            servers.docs(),
                             new File(
                                 "src/test/resources/attachment.txt"
                             )

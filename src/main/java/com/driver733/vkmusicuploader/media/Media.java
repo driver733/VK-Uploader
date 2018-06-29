@@ -29,7 +29,7 @@ import java.util.List;
 
 /**
  * Returns a {@link List}
- *  of audio files.
+ *  of audios files.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

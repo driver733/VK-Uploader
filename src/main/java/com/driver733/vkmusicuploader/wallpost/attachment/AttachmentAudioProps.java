@@ -31,7 +31,7 @@ import java.io.IOException;
 
 /**
  * Saves the result of a successful
- *  audio upload.
+ *  audios upload.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -42,7 +42,7 @@ import java.io.IOException;
 public final class AttachmentAudioProps {
 
     /**
-     * Properties that contain the {@link AudioStatus} of audio files.
+     * Properties that contain the {@link AudioStatus} of audios files.
      */
     private final ImmutableProperties properties;
 
@@ -52,15 +52,15 @@ public final class AttachmentAudioProps {
     private final String fileName;
 
     /**
-     * {@link Audio} with audio ID and owner ID.
+     * {@link Audio} with audios ID and owner ID.
      */
     private final Audio audio;
 
     /**
      * Ctor.
-     * @param audio The {@link Audio} with audio ID and owner ID.
+     * @param audio The {@link Audio} with audios ID and owner ID.
      * @param properties Properties that contain the
-     *  {@link AudioStatus} of audio files.
+     *  {@link AudioStatus} of audios files.
      * @param fileName The name of the file.
      * @checkstyle ParameterNameCheck (10 lines)
      */
@@ -75,7 +75,7 @@ public final class AttachmentAudioProps {
     }
 
     /**
-     * Uploads the audio files.
+     * Uploads the audios files.
      * @throws IOException If an exception occurs
      *  while loading/saving the properties.
      */

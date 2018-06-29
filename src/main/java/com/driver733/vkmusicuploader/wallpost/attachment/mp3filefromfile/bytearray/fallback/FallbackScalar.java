@@ -23,23 +23,46 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback;
 
+import com.jcabi.aspects.Immutable;
+import com.jcabi.immutable.Array;
+import com.jcabi.log.Logger;
 import java.io.IOException;
+import org.cactoos.Scalar;
 
 /**
- * Returns a first valid item.
+ * Finds the first valid scalar.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
- * @param <T> Return type.
  * @since 0.1
+ * @param <T> Type.
  */
-public interface Fallback<T> {
+@Immutable
+public final class FallbackScalar<T> implements Scalar<T> {
 
     /**
-     * Checks items for validation.
-     * @return First valid item
-     * @throws IOException If no valid items were found.
+     * Byte array providers. Some or all might be faulty and raise an exception.
      */
-    T firstValid() throws IOException;
+    private final Array<Scalar<T>> arrays;
+
+    /**
+     * Ctor.
+     * @param arrays Byte array providers.
+     */
+    public FallbackScalar(final Scalar<T>... arrays) {
+        this.arrays = new Array<>(arrays);
+    }
+
+    @Override
+    public T value() throws Exception {
+        for (final Scalar<T> array : this.arrays) {
+            try {
+                return array.value();
+            } catch (final IOException ex) {
+                Logger.debug(this, ex.getMessage());
+            }
+        }
+        throw new IOException("No valid Scalar found found.");
+    }
 
 }

@@ -36,7 +36,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * An {@link Attachment} of an audio
+ * An {@link Attachment} of an audios
  *  that will be added to a page audios (copied).
  *
  * @author Mikhail Yakushin (driver733@me.com)

@@ -74,7 +74,7 @@ public final class AttachmentArraysWithProps implements AttachmentsFields {
     private final UserActor actor;
 
     /**
-     * Properties that contain the {@link AudioStatus} of audio files.
+     * Properties that contain the {@link AudioStatus} of audios files.
      */
     private final ImmutableProperties properties;
 
@@ -82,7 +82,7 @@ public final class AttachmentArraysWithProps implements AttachmentsFields {
      * Ctor.
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param properties Properties that contain the
-     *  {@link AudioStatus} of audio files.
+     *  {@link AudioStatus} of audios files.
      * @param group Group ID.
      * @param attachments Attachments.
      * @checkstyle ParameterNumberCheck (10 lines)

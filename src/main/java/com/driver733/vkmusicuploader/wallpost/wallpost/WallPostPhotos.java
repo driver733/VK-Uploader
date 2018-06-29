@@ -74,7 +74,7 @@ public final class WallPostPhotos implements WallPost {
     private final UploadUrls servers;
 
     /**
-     * Properties that contain the {@link AudioStatus} of audio files.
+     * Properties that contain the {@link AudioStatus} of audios files.
      */
     private final ImmutableProperties properties;
     /**
@@ -85,7 +85,7 @@ public final class WallPostPhotos implements WallPost {
      * @param servers Upload servers
      *  that provide upload URLs for attachmentsFields.
      * @param properties Properties that contain the
-     *  {@link AudioStatus} of audio files.
+     *  {@link AudioStatus} of audios files.
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */

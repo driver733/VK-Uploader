@@ -32,7 +32,7 @@ import java.util.List;
 
 /**
  * Verifies that the {@link List}
- * of audio files is not empty.
+ * of audios files is not empty.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

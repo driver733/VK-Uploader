@@ -36,12 +36,13 @@ import com.jcabi.aspects.Immutable;
 public enum AudioStatus {
 
     /**
-     * Audio has been uploaded (and saved using audio.save() VK API method).
+     * Audio has been uploaded (and saved using audios.save() VK API method).
      */
     UPLOADED(0),
 
     /**
-     * Audio has been added to the group page using (audio.add() VK API method).
+     * Audio has been added to the group page using
+     *  (audios.add() VK API method).
      */
     ADDED(1),
 

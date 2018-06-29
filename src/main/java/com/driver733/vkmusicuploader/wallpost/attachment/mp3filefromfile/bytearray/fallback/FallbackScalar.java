@@ -25,7 +25,6 @@ package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytear
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
-import com.jcabi.log.Logger;
 import java.io.IOException;
 import org.cactoos.Scalar;
 
@@ -56,11 +55,7 @@ public final class FallbackScalar<T> implements Scalar<T> {
     @Override
     public T value() throws Exception {
         for (final Scalar<T> array : this.arrays) {
-            try {
-                return array.value();
-            } catch (final IOException ex) {
-                Logger.debug(this, ex.getMessage());
-            }
+            return array.value();
         }
         throw new IOException("No valid Scalar found found.");
     }

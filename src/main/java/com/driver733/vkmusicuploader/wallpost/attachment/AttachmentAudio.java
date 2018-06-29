@@ -121,7 +121,8 @@ public final class AttachmentAudio implements Attachment {
     /**
      * Uploads the audios files.
      * @param upload Audio construct to upload.
-     * @return AudioAddQuery that will add the uploaded audios to the group page.
+     * @return AudioAddQuery that will add the uploaded audios
+     *  to the group page.
      * @throws Exception If a query cannot be created.
      */
     private List<AbstractQueryBuilder> upload(

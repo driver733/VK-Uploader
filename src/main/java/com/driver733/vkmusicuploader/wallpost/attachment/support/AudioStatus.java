@@ -41,7 +41,8 @@ public enum AudioStatus {
     UPLOADED(0),
 
     /**
-     * Audio has been added to the group page using (audios.add() VK API method).
+     * Audio has been added to the group page using
+     *  (audios.add() VK API method).
      */
     ADDED(1),
 

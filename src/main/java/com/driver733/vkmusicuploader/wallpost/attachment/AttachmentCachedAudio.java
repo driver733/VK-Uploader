@@ -128,7 +128,8 @@ public final class AttachmentCachedAudio implements Attachment {
     }
 
     /**
-     * Forms a {@link AbstractQueryBuilder} for uploading an audios {@link File}.
+     * Forms a {@link AbstractQueryBuilder}
+     *  for uploading an audios {@link File}.
      * @param audio Audio {@link File} to upload.
      * @return A {@link List} with a single {@link AbstractQueryBuilder}
      *  which uploads the audios.

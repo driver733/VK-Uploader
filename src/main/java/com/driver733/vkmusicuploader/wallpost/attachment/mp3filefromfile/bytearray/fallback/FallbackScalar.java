@@ -35,6 +35,7 @@ import org.cactoos.Scalar;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
+ * @param <T> Type.
  */
 @Immutable
 public final class FallbackScalar<T> implements Scalar<T> {
@@ -54,7 +55,6 @@ public final class FallbackScalar<T> implements Scalar<T> {
 
     @Override
     public T value() throws Exception {
-        final T result;
         for (final Scalar<T> array : this.arrays) {
             try {
                 return array.value();

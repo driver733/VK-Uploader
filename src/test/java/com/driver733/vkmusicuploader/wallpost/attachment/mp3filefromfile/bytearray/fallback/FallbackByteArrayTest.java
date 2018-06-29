@@ -27,11 +27,8 @@ import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advance
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayFromFile;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayImageFromAdvancedTag;
 import com.jcabi.aspects.Immutable;
-import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
-import com.mpatric.mp3agic.UnsupportedTagException;
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -65,16 +62,16 @@ public final class FallbackByteArrayTest {
 
     @Test
     public void advancedTag()
-        throws InvalidDataException, IOException, UnsupportedTagException {
+        throws Exception {
         MatcherAssert.assertThat(
-            new FallbackByteArray(
+            new FallbackBytes(
                 new ByteArrayImageFromAdvancedTag(
                     new AdvancedTagFromMp3File(
                         new Mp3File(this.audio)
                     )
                 ),
                 new ByteArrayFromFile(this.audio)
-            ).firstValid(),
+            ).asBytes(),
             Matchers.equalTo(
                 Files.readAllBytes(this.path)
             )
@@ -82,14 +79,14 @@ public final class FallbackByteArrayTest {
     }
 
     @Test
-    public void file() throws IOException {
+    public void file() throws Exception {
         MatcherAssert.assertThat(
-            new FallbackByteArray(
+            new FallbackBytes(
                 new ByteArrayFromFile(
                     this.path.toFile()
                 ),
             new ByteArrayFromFile(this.audio)
-        ).firstValid(),
+        ).asBytes(),
             Matchers.equalTo(
                 Files.readAllBytes(this.path)
             )

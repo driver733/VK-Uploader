@@ -34,7 +34,7 @@ import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.advance
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.basictag.BasicTagFromMp3File;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayFromFile;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayImageFromAdvancedTag;
-import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.FallbackByteArray;
+import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.FallbackBytes;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArraysWithProps;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallPhoto;
@@ -160,7 +160,7 @@ public final class WallPostAlbum implements WallPost {
                                     this.client,
                                     this.servers
                                         .wallPhoto(),
-                                    new FallbackByteArray(
+                                    new FallbackBytes(
                                         new ByteArrayImageFromAdvancedTag(
                                             new AdvancedTagVerifiedAlbumImage(
                                                 new AdvancedTagFromMp3File(file)
@@ -175,7 +175,7 @@ public final class WallPostAlbum implements WallPost {
                                                 )
                                             )
                                         )
-                                    ).firstValid()
+                                    ).asBytes()
                                 )
                             ),
                             new AttachmentCachedAudio(

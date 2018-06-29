@@ -23,55 +23,45 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback;
 
-import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArray;
-import com.jcabi.aspects.Cacheable;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.jcabi.log.Logger;
 import java.io.IOException;
-import java.util.Arrays;
+import org.cactoos.Bytes;
 
 /**
  * Finds the first valid byte array.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.2
  */
 @Immutable
-public final class FallbackByteArray implements Fallback<byte[]> {
+public final class FallbackBytes implements Bytes {
 
     /**
      * Byte array providers. Some or all might be faulty and raise an exception.
      */
-    private final Array<ByteArray> arrays;
+    private final Array<Bytes> arrays;
 
     /**
      * Ctor.
      * @param arrays Byte array providers.
      */
-    public FallbackByteArray(final ByteArray... arrays) {
-        this.arrays = new Array<>(
-            Arrays.asList(arrays)
-        );
+    public FallbackBytes(final Bytes... arrays) {
+        this.arrays = new Array<>(arrays);
     }
 
     @Override
-    @Cacheable(forever = true)
-    public byte[] firstValid() throws IOException {
-        byte[] result = new byte[0];
-        for (final ByteArray array : this.arrays) {
+    public byte[] asBytes() throws Exception {
+        for (final Bytes array : this.arrays) {
             try {
-                result = array.byteArray();
-                break;
-            } catch (final IOException ignored) {
-                Logger.debug(this, ignored.getMessage());
+                return array.asBytes();
+            } catch (final IOException ex) {
+                Logger.debug(this, ex.getMessage());
             }
         }
-        if (result.length == 0) {
-            throw new IOException("No valid ByteArray found.");
-        }
-        return result;
+        throw new IOException("No valid byte[] found.");
     }
 
 }

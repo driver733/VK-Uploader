@@ -23,7 +23,7 @@
  */
 
 /**
- * Fallback tests.
+ * FallbackScalar tests.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

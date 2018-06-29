@@ -41,7 +41,7 @@ import org.cactoos.io.BytesOf;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo #16 Move Fallback handing to a new class.
+ * @todo #16 Move FallbackScalar handing to a new class.
  */
 @Immutable
 public final class UploadWallPhoto

@@ -23,7 +23,7 @@
  */
 
 /**
- * Classes for audio files processing.
+ * Classes for audios files processing.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$

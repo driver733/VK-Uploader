@@ -33,7 +33,7 @@ import java.util.List;
 // @checkstyle MemberNameCheck (50 lines)
 
 /**
- * An {@link Attachment} with audio added
+ * An {@link Attachment} with audios added
  *  to a page. (with the specified user ID).
  *
  * @author Mikhail Yakushin (driver733@me.com)

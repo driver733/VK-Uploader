@@ -62,10 +62,10 @@ public final class PostRootDirTest {
     private static final String PHOTO_SAVE_URL =
         "https://api.vk.com/method/photos.saveWallPhoto";
     /**
-     * VK API endpoint - audio.save.
+     * VK API endpoint - audios.save.
      */
     private static final String AUDIO_SAVE_URL =
-        "https://api.vk.com/method/audio.save";
+        "https://api.vk.com/method/audios.save";
 
     /**
      * VK API endpoint - photos.getWallUploadServer.
@@ -74,16 +74,16 @@ public final class PostRootDirTest {
         "https://api.vk.com/method/photos.getWallUploadServer";
 
     /**
-     * VK API endpoint - audio.getUploadServer.
+     * VK API endpoint - audios.getUploadServer.
      */
     private static final String AUDIO_UPLOAD_URL =
-        "https://api.vk.com/method/audio.getUploadServer";
+        "https://api.vk.com/method/audios.getUploadServer";
 
     /**
-     * VK API endpoint - audio.add.
+     * VK API endpoint - audios.add.
      */
     private static final String AUDIO_ADD_URL =
-        "https://api.vk.com/method/audio.add";
+        "https://api.vk.com/method/audios.add";
 
     /**
      * VK API endpoint - execute.
@@ -115,11 +115,11 @@ public final class PostRootDirTest {
                                 )
                             );
                             put(
-                                "audio.uploadServer",
+                                "audios.uploadServer",
                                 new TransportClientCached(
                                     "{"
                                         + "\"hash\"     : \"hash123\","
-                                        + "\"audio\"    : \"fnknjkasd\","
+                                        + "\"audios\"    : \"fnknjkasd\","
                                         + "\"server\"   : 123546,"
                                         + "\"redirect\" : \"redirect.com\""
                                         + "}"
@@ -216,7 +216,7 @@ public final class PostRootDirTest {
                                         "{"
                                             + "\"response\": {"
                                             + "\"upload_url\" :"
-                                            + "\"audio.uploadServer\""
+                                            + "\"audios.uploadServer\""
                                             + "}"
                                             + "}"
                                     )

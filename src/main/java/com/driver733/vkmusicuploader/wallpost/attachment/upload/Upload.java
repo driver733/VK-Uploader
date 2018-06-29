@@ -38,7 +38,7 @@ public interface Upload<T, R> {
 
     /**
      * Constructs a query for uploading something to Vk.
-     *  Such as a photo or audio.
+     *  Such as a photo or audios.
      * @return Constructed query.
      * @throws Exception If an exception occurs while constructing a query.
      */

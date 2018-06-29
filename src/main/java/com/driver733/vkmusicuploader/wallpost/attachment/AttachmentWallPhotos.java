@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Determines if audio has been already
+ * Determines if audios has been already
  *  uploaded and returns a fake a real
  *  query accordingly.
  *
@@ -72,7 +72,7 @@ public final class AttachmentWallPhotos implements Attachment {
     private final Array<File> photos;
 
     /**
-     * Audio upload URL for the audio files.
+     * Audio upload URL for the audios files.
      */
     private final String url;
 
@@ -80,7 +80,7 @@ public final class AttachmentWallPhotos implements Attachment {
      * Ctor.
      * @param client The {@link VkApiClient} for all requests.
      * @param actor UserActor on behalf of which all requests will be sent.
-     * @param url Audio upload URL for the audio files.
+     * @param url Audio upload URL for the audios files.
      * @param photos Audios files.
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (2 lines)

@@ -74,11 +74,11 @@ public final class WallPostWithAphorismTest extends AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    "audio.uploadServer",
+                                    "audios.uploadServer",
                                     new TransportClientCached(
                                         "{"
                                             + "\"hash\"     : \"hash123\","
-                                            + "\"audio\"    : \"fnknjkasd\","
+                                            + "\"audios\"    : \"fnknjkasd\","
                                             + "\"server\"   : 123546,"
                                             + "\"redirect\" : \"redirect.com\""
                                             + "}"

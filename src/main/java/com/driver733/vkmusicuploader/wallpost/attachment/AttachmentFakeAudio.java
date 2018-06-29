@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An {@link Attachment} with a fake audio query.
+ * An {@link Attachment} with a fake audios query.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -43,13 +43,13 @@ import java.util.List;
 public final class AttachmentFakeAudio implements Attachment {
 
     /**
-     * Query results (audio IDs).
+     * Query results (audios IDs).
      */
     private final List<Integer> results;
 
     /**
      * Ctor.
-     * @param results Query results (audio IDs).
+     * @param results Query results (audios IDs).
      */
     public AttachmentFakeAudio(final Integer... results) {
         this.results = new Array<>(results);

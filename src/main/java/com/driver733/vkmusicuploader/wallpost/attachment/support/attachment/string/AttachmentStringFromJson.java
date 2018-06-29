@@ -125,7 +125,7 @@ public final class AttachmentStringFromJson implements AttachmentString {
         /**
          * AUDIO.
          */
-        AUDIO("audio"),
+        AUDIO("audios"),
 
         /**
          * DOCUMENT.

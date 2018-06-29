@@ -52,7 +52,7 @@ public final class MediaPhotosNonProcessed implements Media {
     private final Media origin;
 
     /**
-     * Properties that contain the {@link AudioStatus}es of audio files.
+     * Properties that contain the {@link AudioStatus}es of audios files.
      */
     private final ImmutableProperties props;
 
@@ -60,7 +60,7 @@ public final class MediaPhotosNonProcessed implements Media {
      * Ctor.
      * @param origin Origin.
      * @param properties Properties that contain
-     *  the {@link AudioStatus}es of audio files.
+     *  the {@link AudioStatus}es of audios files.
      */
     public MediaPhotosNonProcessed(
         final Media origin,

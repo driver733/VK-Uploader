@@ -31,7 +31,7 @@ import com.vk.api.sdk.queries.upload.UploadQueryBuilder;
 import java.io.File;
 
 /**
- * Constructs a query for uploading an audio file.
+ * Constructs a query for uploading an audios file.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -47,7 +47,7 @@ public final class UploadAudio
     private final VkApiClient client;
 
     /**
-     * Upload URL for the audio.
+     * Upload URL for the audios.
      */
     private final String url;
 
@@ -60,7 +60,7 @@ public final class UploadAudio
      * Ctor.
      * @param client The {@link VkApiClient}
      *  that is used for all VK API requests.
-     * @param url Upload URL for the audio.
+     * @param url Upload URL for the audios.
      * @param audio Audio file to upload.
      */
     public UploadAudio(

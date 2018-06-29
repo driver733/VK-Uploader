@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Returns a {@link List} of audio
+ * Returns a {@link List} of audios
  * files that have not been processed
  * yet.
  *
@@ -51,7 +51,7 @@ public final class AudiosNonProcessed implements Media {
     private final Media origin;
 
     /**
-     * Properties that contain the {@link AudioStatus}es of audio files.
+     * Properties that contain the {@link AudioStatus}es of audios files.
      */
     private final ImmutableProperties props;
 
@@ -59,7 +59,7 @@ public final class AudiosNonProcessed implements Media {
      * Ctor.
      * @param origin Origin.
      * @param properties Properties that contain
-     *  the {@link AudioStatus}es of audio files.
+     *  the {@link AudioStatus}es of audios files.
      */
     public AudiosNonProcessed(
         final Media origin,

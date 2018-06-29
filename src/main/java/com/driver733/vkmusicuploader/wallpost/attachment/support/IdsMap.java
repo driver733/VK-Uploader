@@ -35,7 +35,7 @@ import java.util.Map;
 
 /**
  * Forms a map of with  index (queries) - audio_id pairs
- *  from the audio queries.
+ *  from the audios queries.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -59,7 +59,7 @@ public final class IdsMap {
     }
 
     /**
-     * Forms a map of with index-audio_id pairs from the audio queries.
+     * Forms a map of with index-audio_id pairs from the audios queries.
      * @return Map.
      * @throws Exception If queries` results cannot to be obtained.
      */
@@ -76,7 +76,7 @@ public final class IdsMap {
         int index = 0;
         final Map<Integer, String> ids = new HashMap<>();
         for (final AbstractQueryBuilder query : queries) {
-            if (query.getMethod().contains("audio.add")) {
+            if (query.getMethod().contains("audios.add")) {
                 ids.put(
                     index,
                     query.build().get("audio_id").toString()

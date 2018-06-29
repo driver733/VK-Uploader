@@ -96,11 +96,11 @@ public final class WallPostAlbumTest extends AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    "audio.uploadServer",
+                                    "audios.uploadServer",
                                     new TransportClientCached(
                                         "{"
                                             + "\"hash\"     : \"hash123\","
-                                            + "\"audio\"    : \"fnknjkasd\","
+                                            + "\"audios\"    : \"fnknjkasd\","
                                             + "\"server\"   : 123546,"
                                             + "\"redirect\" : \"redirect.com\""
                                             + "}"
@@ -198,7 +198,7 @@ public final class WallPostAlbumTest extends AbstractVkUnitTest {
                                             "{"
                                                 + "\"response\": {"
                                                 + "\"upload_url\" :"
-                                                + "\"audio.uploadServer\""
+                                                + "\"audios.uploadServer\""
                                                 + "}"
                                                 + "}"
                                         )
@@ -223,7 +223,7 @@ public final class WallPostAlbumTest extends AbstractVkUnitTest {
                 Matchers.hasEntry("v", "5.63"),
                 Matchers.hasEntry(
                     "attachments",
-                    "photo6785_123456,audio-161929264_123456789"
+                    "photo6785_123456,audios-161929264_123456789"
                 ),
                 Matchers.hasEntry("owner_id", "-161929264"),
                 Matchers.hasEntry("from_group", "1"),

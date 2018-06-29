@@ -62,10 +62,10 @@ public final class AttachmentAudioTest {
     private static final int GROUP_ID = 161929264;
 
     /**
-     * VK API endpoint - audio.save.
+     * VK API endpoint - audios.save.
      */
     private static final String AUDIO_SAVE_URL =
-        "https://api.vk.com/method/audio.save";
+        "https://api.vk.com/method/audios.save";
 
     @SuppressWarnings({
         "PMD.NonStaticInitializer",
@@ -90,11 +90,11 @@ public final class AttachmentAudioTest {
                         new HashMap<String, TransportClient>() {
                             {
                                 put(
-                                    "audio.uploadServer",
+                                    "audios.uploadServer",
                                     new TransportClientCached(
                                         "{"
                                             + "\"hash\"     : \"hash123\","
-                                            + "\"audio\"    : \"fnknjkasd\","
+                                            + "\"audios\"    : \"fnknjkasd\","
                                             + "\"server\"   : 123546,"
                                             + "\"redirect\" : \"redirect.com\""
                                             + "}"
@@ -129,13 +129,13 @@ public final class AttachmentAudioTest {
                         new TransportClientCached(
                             "{"
                                 + "\"hash\"     : \"hash123\","
-                                + "\"audio\"    : \"fnknjkasd\","
+                                + "\"audios\"    : \"fnknjkasd\","
                                 + "\"server\"   : 123546,"
                                 + "\"redirect\" : \"redirect.com\""
                                 + "}"
                         )
                     ),
-                    "audio.uploadServer",
+                    "audios.uploadServer",
                     new File("src/test/resources/album/test.mp3")
                 )
             ).upload()

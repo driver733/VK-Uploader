@@ -36,7 +36,7 @@ import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Records the audio files that have been
+ * Records the audios files that have been
  *  posted.
  *
  * @author Mikhail Yakushin (driver733@me.com)
@@ -47,12 +47,12 @@ import org.apache.commons.lang3.StringUtils;
 public final class PropertiesUpdate {
 
     /**
-     * Properties that contain the {@link AudioStatus} of audio files.
+     * Properties that contain the {@link AudioStatus} of audios files.
      */
     private final ImmutableProperties properties;
 
     /**
-     * A map of with index-audio_id pairs from the audio queries.
+     * A map of with index-audio_id pairs from the audios queries.
      */
     private final Map<Integer, String> ids;
 
@@ -66,8 +66,8 @@ public final class PropertiesUpdate {
     /**
     * Ctor.
     * @param properties Properties that contain
-    *  the {@link AudioStatus} of audio files.
-    * @param ids A map of with index-audio_id pairs from the audio queries.
+    *  the {@link AudioStatus} of audios files.
+    * @param ids A map of with index-audio_id pairs from the audios queries.
     * @param root A {@link JsonArray} that contains the
     *  {@link QueryResultsBasic}
     *  of the queries.

@@ -29,6 +29,7 @@ import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Acquires upload servers for various files.
@@ -72,14 +73,17 @@ public final class UploadUrls {
     }
 
     /**
-     * Acquires an upload URL for audio files
+     * Acquires an upload URL for audios files
      * (or used a cached one if it is available).
-     * @return Upload URL for audio files.
+     * @return Upload URL for audios files.
      * @throws ClientException VK client error.
      * @throws ApiException VK API error.
      */
-    @Cacheable(forever = true)
-    public String audio() throws ClientException, ApiException {
+    @Cacheable(
+        lifetime = 1,
+        unit = TimeUnit.MINUTES
+    )
+    public String audios() throws ClientException, ApiException {
         return this.client.audio()
             .getUploadServer(this.actor)
             .execute()
@@ -93,8 +97,8 @@ public final class UploadUrls {
      * @throws ClientException VK client error.
      * @throws ApiException VK API error.
      */
-    @Cacheable(forever = true)
-    public String wallDoc() throws ClientException, ApiException {
+    @Cacheable(lifetime = 1, unit = TimeUnit.MINUTES)
+    public String docs() throws ClientException, ApiException {
         return this.client.docs()
             .getWallUploadServer(this.actor)
             .groupId(this.group)
@@ -109,7 +113,10 @@ public final class UploadUrls {
      * @throws ClientException VK client error.
      * @throws ApiException VK API error.
      */
-    @Cacheable(forever = true)
+    @Cacheable(
+        lifetime = 1,
+        unit = TimeUnit.MINUTES
+    )
     public String wallPhoto() throws ClientException, ApiException {
         return this.client.photos()
             .getWallUploadServer(this.actor)

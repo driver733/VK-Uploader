@@ -42,11 +42,11 @@ public final class QueryFakeAudioAdd
     extends AbstractQueryBuilder<QueryFakeAudioAdd, Integer> {
 
     /**
-     * Fake audio.add query.
+     * Fake audios.add query.
      * @param client A {@link VkApiClient} that is used for all VK API requests.
      */
     public QueryFakeAudioAdd(final VkApiClient client) {
-        super(client, "fake.audio.add", Integer.class);
+        super(client, "fake.audios.add", Integer.class);
     }
 
     @Override

@@ -29,7 +29,6 @@ import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientCached;
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -51,23 +50,39 @@ public final class UploadUrlsTest {
     private static final int GROUP_ID = 161929264;
 
     @Test
-    public void audio() throws IOException, ClientException, ApiException {
+    public void audio() throws ClientException, ApiException {
         MatcherAssert.assertThat(
             new UploadUrls(
                 new VkApiClient(
                     new TransportClientCached(
-                        "{ \"upload_url\" : \"http://test.com/audio\" }"
+                        "{ \"upload_url\" : \"http://test.com/audios\" }"
                     )
                 ),
                 new UserActor(1, ""),
                 UploadUrlsTest.GROUP_ID
-            ).audio(),
-            Matchers.equalTo("http://test.com/audio")
+            ).audios(),
+            Matchers.equalTo("http://test.com/audios")
         );
     }
 
     @Test
-    public void wallPhoto() throws IOException, ClientException, ApiException {
+    public void docs() throws ClientException, ApiException {
+        MatcherAssert.assertThat(
+            new UploadUrls(
+                new VkApiClient(
+                    new TransportClientCached(
+                        "{ \"upload_url\" : \"http://test.com/docs\" }"
+                    )
+                ),
+                new UserActor(1, ""),
+                UploadUrlsTest.GROUP_ID
+            ).docs(),
+            Matchers.equalTo("http://test.com/docs")
+        );
+    }
+
+    @Test
+    public void wallPhoto() throws ClientException, ApiException {
         MatcherAssert.assertThat(
             new UploadUrls(
                 new VkApiClient(

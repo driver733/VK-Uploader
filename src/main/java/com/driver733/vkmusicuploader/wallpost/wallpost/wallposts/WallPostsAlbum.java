@@ -120,7 +120,7 @@ public final class WallPostsAlbum implements WallPosts {
     private final UploadUrls servers;
 
     /**
-     * Properties that contain the {@link AudioStatus}es of audio files.
+     * Properties that contain the {@link AudioStatus}es of audios files.
      */
     private final ImmutableProperties properties;
 
@@ -132,7 +132,7 @@ public final class WallPostsAlbum implements WallPosts {
      * @param servers Upload servers that provide upload URLs
      *  for attachmentsFields.
      * @param properties Properties that contain the
-     *  {@link AudioStatus}es of audio files.
+     *  {@link AudioStatus}es of audios files.
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
@@ -191,7 +191,7 @@ public final class WallPostsAlbum implements WallPosts {
         if (queries.isEmpty()) {
             Logger.debug(
                 this,
-                "No audio files to upload. Skipping..."
+                "No audios files to upload. Skipping..."
             );
         }
         return queries;
@@ -220,8 +220,8 @@ public final class WallPostsAlbum implements WallPosts {
     }
 
     /**
-     * Finds audio files that have not been posted yet.
-     * @return An array of audio {@link File}s.
+     * Finds audios files that have not been posted yet.
+     * @return An array of audios {@link File}s.
      * @throws IOException If a certain criteria of
      *  is not fulfilled.
      */

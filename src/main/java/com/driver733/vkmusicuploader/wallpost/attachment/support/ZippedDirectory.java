@@ -25,11 +25,11 @@ package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
 import com.jcabi.aspects.Immutable;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+import org.cactoos.io.Directory;
+import org.cactoos.io.InputOf;
+import org.cactoos.io.OutputTo;
+import org.cactoos.io.TeeInput;
+import org.cactoos.io.Zip;
 
 /**
  * Creates a zip file with files in the directory.
@@ -67,7 +67,7 @@ public final class ZippedDirectory {
     public ZippedDirectory(final File dir, final String filename) {
         this.dir = dir;
         this.filename = String.format(
-            "%s/%s.zip",
+            "%s/%s",
             dir.getParentFile().getAbsolutePath(),
             filename
         );
@@ -76,38 +76,25 @@ public final class ZippedDirectory {
     /**
      * Creates a zip file with files in the directory.
      * @return Created zip file.
-     * @throws IOException If zip file cannot be created.
-     * @checkstyle MagicNumberCheck (20 lines)
+     * @throws Exception If zip file cannot be created.
      */
-    @SuppressWarnings(
-        {"PMD.AvoidInstantiatingObjectsInLoops", "PMD.AssignmentInOperand"}
-    )
-    public File zip() throws IOException {
-        FileInputStream fis = null;
-        try (
-            FileOutputStream fos = new FileOutputStream(this.filename);
-            ZipOutputStream zos = new ZipOutputStream(fos)
-        ) {
-            final byte[] buffer = new byte[1024];
-            final File[] files = this.dir.listFiles();
-            assert files != null;
-            for (int iter = 0; iter < files.length; iter += 1) {
-                fis = new FileInputStream(files[iter]);
-                zos.putNextEntry(new ZipEntry(files[iter].getName()));
-                int length;
-                while ((length = fis.read(buffer)) > 0) {
-                    zos.write(buffer, 0, length);
-                }
-                zos.closeEntry();
-                fis.close();
-            }
-        } catch (final IOException ex) {
-            throw new IOException("Error creating zip file", ex);
-        } finally {
-            if (fis != null) {
-                fis.close();
-            }
-        }
-        return new File(this.filename);
+    public File zip() throws Exception {
+        final File file = File.createTempFile(
+            this.filename,
+            ".zip"
+        );
+        new TeeInput(
+            new InputOf(
+                new Zip(
+                    new Directory(
+                        dir
+                    )
+                ).stream()
+            ),
+            new OutputTo(
+                file
+            )
+        );
+        return file;
     }
 }

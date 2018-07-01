@@ -63,6 +63,9 @@ public final class AttachmentWallPhotosTest extends AbstractVkUnitTest {
         "PMD.AvoidDuplicateLiterals"
         })
     public void test() throws Exception {
+        new File(
+            "src/test/resources/photos/testPhotoAlbum/vkmu.properties"
+        ).deleteOnExit();
         final String dir = "src/test/resources/photos/testPhotoAlbum";
         final List<File> photos = new ListOf<>(
             new File(String.format("%s/1.jpg", dir)),
@@ -130,7 +133,7 @@ public final class AttachmentWallPhotosTest extends AbstractVkUnitTest {
                    .groupId(AbstractVkUnitTest.GROUP_ID)
                    .server(1)
                    .build()
-           )
+                )
            )
         );
     }

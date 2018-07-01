@@ -52,13 +52,13 @@ import org.junit.Test;
 @Immutable
 public final class PostRootDirTest extends AbstractVkUnitTest {
 
+    @Test
     @SuppressWarnings({
         "PMD.ExcessiveMethodLength",
         "PMD.NonStaticInitializer",
         "PMD.AvoidDuplicateLiterals",
         "PMD.ProhibitPlainJunitAssertionsRule"
         })
-    @Test
     public void test() throws Exception {
         new PostRootDir(
             new VkApiClient(

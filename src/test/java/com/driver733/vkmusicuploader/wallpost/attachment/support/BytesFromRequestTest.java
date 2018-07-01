@@ -23,33 +23,43 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
-import com.jcabi.aspects.Immutable;
+import com.jcabi.http.request.FakeRequest;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test for {@link RequestRandomImage}.
+ * Test for {@link BytesFromRequest}.
  *
  * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
  * @version $Id$
  * @since 0.2
  * @checkstyle JavadocMethodCheck (500 lines)
  */
-@Immutable
-public final class RandomImageIT {
+public final class BytesFromRequestTest {
+
+    /**
+     * Test HTTP request body.
+     */
+    private static final String REQ_BODY = "Test request body";
 
     @Test
-    public void randomImageTest() throws IOException {
+    public void testString() throws IOException {
         MatcherAssert.assertThat(
-            "Byte array received is empty.",
-            new BytesFromRequest(
-                new RequestRandomImage()
-                .value()
-            ).asBytes()
-                .length,
-            Matchers.greaterThan(0)
+            "Bytes received are invalid.",
+            new String(
+                new BytesFromRequest(
+                    new FakeRequest()
+                        .withBody(
+                            BytesFromRequestTest.REQ_BODY.getBytes()
+                        )
+                ).asBytes(),
+                "UTF-8"
+            ),
+            Matchers.equalTo(
+                BytesFromRequestTest.REQ_BODY
+            )
         );
     }
 

@@ -24,33 +24,69 @@
 package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
 import com.jcabi.aspects.Immutable;
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
+import com.jcabi.http.Request;
+import com.jcabi.http.request.JdkRequest;
+import org.cactoos.Scalar;
 
 /**
- * Test for {@link RequestRandomImage}.
+ * Fetches a random image from www.picsum.photos.
  *
  * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
  * @version $Id$
  * @since 0.2
- * @checkstyle JavadocMethodCheck (500 lines)
  */
 @Immutable
-public final class RandomImageIT {
+public final class RequestRandomImage implements Scalar<Request> {
 
-    @Test
-    public void randomImageTest() throws IOException {
-        MatcherAssert.assertThat(
-            "Byte array received is empty.",
-            new BytesFromRequest(
-                new RequestRandomImage()
-                .value()
-            ).asBytes()
-                .length,
-            Matchers.greaterThan(0)
-        );
+    /**
+     * Image width.
+     */
+    private static final int WIDTH = 600;
+
+    /**
+     * Image height.
+     */
+    private static final int HEIGHT = 400;
+
+    /**
+     * Base URL.
+     */
+    private static final String BASE = "https://picsum.photos";
+
+    /**
+     * Randon image URL path.
+     */
+    private static final String QUERY = "?random";
+
+    /**
+     * Request path.
+     */
+    private static final String PATH = String.format(
+        "/%d/%d/",
+        RequestRandomImage.WIDTH,
+        RequestRandomImage.HEIGHT
+    );
+
+    @Override
+    public Request value() {
+        return new JdkRequest(
+            RequestRandomImage.BASE
+        ).uri()
+            .path(
+                RequestRandomImage.PATH
+            )
+            .queryParam(
+                RequestRandomImage.QUERY,
+                ""
+            )
+            .back()
+            .method(
+                Request.GET
+            )
+            .header(
+                "User-Agent",
+                "Mozilla/5.0 (Windows NT 6.1; WOW64)"
+            );
     }
 
 }

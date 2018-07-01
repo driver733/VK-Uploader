@@ -27,7 +27,8 @@ import com.driver733.vkmusicuploader.post.UploadUrls;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhoto;
 import com.driver733.vkmusicuploader.wallpost.attachment.message.MessageWithRandomQuote;
 import com.driver733.vkmusicuploader.wallpost.attachment.message.RequestRandomQuote;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.RandomImage;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.BytesFromRequest;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.RequestRandomImage;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArrays;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallPhoto;
 import com.jcabi.aspects.Immutable;
@@ -109,7 +110,10 @@ public final class WallPostWithAphorism implements WallPost {
                                 new UploadWallPhoto(
                                     this.client,
                                     this.servers.wallPhoto(),
-                                    new RandomImage()
+                                    new BytesFromRequest(
+                                        new RequestRandomImage()
+                                            .value()
+                                    )
                                 )
                             )
                         )

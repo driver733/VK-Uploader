@@ -25,8 +25,6 @@ package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.http.Request;
-import com.jcabi.http.Response;
-import com.jcabi.http.request.JdkRequest;
 import java.io.IOException;
 import org.cactoos.Bytes;
 
@@ -38,59 +36,26 @@ import org.cactoos.Bytes;
  * @since 0.2
  */
 @Immutable
-public final class RandomImage implements Bytes {
+public final class BytesFromRequest implements Bytes {
 
     /**
-     * Image width.
+     * Picsum API request.
      */
-    private static final int WIDTH = 600;
+    private final Request request;
 
     /**
-     * Image height.
+     * Picsum API request.
+     * @param request Picsum API request.
      */
-    private static final int HEIGHT = 400;
-
-    /**
-     * Base URL.
-     */
-    private static final String BASE = "https://picsum.photos";
-
-    /**
-     * Randon image URL path.
-     */
-    private static final String QUERY = "?random";
-
-    /**
-     * Request path.
-     */
-    private static final String PATH = String.format(
-        "/%d/%d/",
-        RandomImage.WIDTH,
-        RandomImage.HEIGHT
-    );
+    public BytesFromRequest(final Request request) {
+        this.request = request;
+    }
 
     @Override
     public byte[] asBytes() throws IOException {
-        final Response response = new JdkRequest(
-            RandomImage.BASE
-        ).uri()
-            .path(
-                RandomImage.PATH
-            )
-            .queryParam(
-                RandomImage.QUERY,
-                ""
-            )
-            .back()
-            .method(
-                Request.GET
-            )
-            .header(
-                "User-Agent",
-                "Mozilla/5.0 (Windows NT 6.1; WOW64)"
-            )
-            .fetch();
-        return response.binary();
+        return this.request
+            .fetch()
+            .binary();
     }
 
 }

@@ -37,7 +37,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test for {@link FallbackByteArray}.
+ * Test for {@link FallbackBytes}.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -45,7 +45,7 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  */
 @Immutable
-public final class FallbackByteArrayTest {
+public final class FallbackBytesTest {
 
     /**
      * Path to test album cover image.

@@ -31,7 +31,7 @@ package com.driver733.vkmusicuploader.post.post;
  * @version $Id$
  * @since 0.1
  */
-public interface Post {
+public interface Postable {
 
     /**
      * Constructs album postsQueries and executes them.

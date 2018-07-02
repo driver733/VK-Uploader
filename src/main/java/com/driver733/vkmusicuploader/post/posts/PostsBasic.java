@@ -23,16 +23,14 @@
  */
 package com.driver733.vkmusicuploader.post.posts;
 
-import com.driver733.vkmusicuploader.post.UploadUrls;
-import com.driver733.vkmusicuploader.post.post.Post;
-import com.driver733.vkmusicuploader.post.post.PostRootDir;
+import com.driver733.vkmusicuploader.post.post.Postable;
+import com.driver733.vkmusicuploader.post.post.PostableRootDir;
+import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPosts;
 import com.jcabi.aspects.Immutable;
-import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.client.actors.UserActor;
 import java.io.File;
 
 /**
- * Creates {@link PostRootDir} from
+ * Creates {@link PostableRootDir} from
  *  the specified directory.
  *
  * @author Mikhail Yakushin (driver733@me.com)
@@ -43,54 +41,26 @@ import java.io.File;
 public final class PostsBasic implements Posts {
 
     /**
-     * Group ID.
+     * Wallposts.
      */
-    private final int group;
-
-    /**
-     * {@link VkApiClient} for all requests.
-     */
-    private final VkApiClient client;
-
-    /**
-     * UserActor on behalf of which all requests will be sent.
-     */
-    private final UserActor actor;
-
-    /**
-     * Upload servers that provide upload URLs for attachmentsFields.
-     */
-    private final UploadUrls servers;
+    private final WallPosts wallposts;
 
     /**
      * Ctor.
-     * @param client The {@link VkApiClient} for all requests.
-     * @param actor UserActor on behalf of which all requests will be sent.
-     * @param servers Upload servers that
-     *  provide upload URLs for attachmentsFields.
-     * @param group Group ID.
+     * @param wallposts Wallposts.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
     public PostsBasic(
-        final VkApiClient client,
-        final UserActor actor,
-        final UploadUrls servers,
-        final int group
+        final WallPosts wallposts
     ) {
-        this.client = client;
-        this.actor = actor;
-        this.servers = servers;
-        this.group = group;
+        this.wallposts = wallposts;
     }
 
     @Override
-    public Post postFromDir(final File dir) {
-        return new PostRootDir(
-            this.client,
-            this.actor,
+    public Postable postFromDir(final File dir) {
+        return new PostableRootDir(
             dir,
-            this.servers,
-            this.group
+            this.wallposts
         );
     }
 

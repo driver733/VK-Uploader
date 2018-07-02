@@ -24,13 +24,10 @@
 
 package com.driver733.vkmusicuploader.post.post;
 
-import com.driver733.vkmusicuploader.post.UploadUrls;
 import com.driver733.vkmusicuploader.post.execution.UploadVerification;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
-import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPostsPhotoAlbum;
+import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPosts;
 import com.jcabi.aspects.Immutable;
-import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.client.actors.UserActor;
 import java.io.File;
 import java.io.IOException;
 
@@ -43,12 +40,7 @@ import java.io.IOException;
  * @since 0.1
  */
 @Immutable
-public final class PostRootDir implements Post {
-
-    /**
-     * Group ID.
-     */
-    private final int group;
+public final class PostableRootDir implements Postable {
 
     /**
      * Root directory that contains directories with albums.
@@ -56,42 +48,22 @@ public final class PostRootDir implements Post {
     private final File directory;
 
     /**
-     * {@link VkApiClient} for all requests.
+     * WallPosts.
      */
-    private final VkApiClient client;
-
-    /**
-     * UserActor on behalf of which all requests will be sent.
-     */
-    private final UserActor actor;
-
-    /**
-     * Upload servers that provide upload URLs for attachmentsFields.
-     */
-    private final UploadUrls servers;
+    private final WallPosts wallposts;
 
     /**
      * Ctor.
-     * @param client The {@link VkApiClient} for all requests.
-     * @param actor UserActor on behalf of which all requests will be sent.
      * @param dir Root directory that contains directories with albums.
-     * @param servers Upload servers
-     *  that provide upload URLs for attachmentsFields.
-     * @param group Group ID.
+     * @param wallposts WallPosts.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
-    public PostRootDir(
-        final VkApiClient client,
-        final UserActor actor,
+    public PostableRootDir(
         final File dir,
-        final UploadUrls servers,
-        final int group
+        final WallPosts wallposts
     ) {
-        this.client = client;
         this.directory = dir;
-        this.actor = actor;
-        this.servers = servers;
-        this.group = group;
+        this.wallposts = wallposts;
     }
 
     @Override
@@ -124,14 +96,7 @@ public final class PostRootDir implements Post {
                 }
             }
             new UploadVerification(
-                new WallPostsPhotoAlbum(
-                    this.client,
-                    this.actor,
-                    dir,
-                    this.servers,
-                    props,
-                    this.group
-                )
+                this.wallposts
             ).execute();
         }
     }

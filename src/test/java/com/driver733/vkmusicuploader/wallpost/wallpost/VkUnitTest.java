@@ -29,8 +29,9 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
  * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
  * @version $Id$
  * @since 0.1
+ * @checkstyle FinalClassCheck (5 lines)
  */
-public abstract class AbstractVkUnitTest {
+public class VkUnitTest {
 
     /**
      * Group ID.
@@ -42,12 +43,12 @@ public abstract class AbstractVkUnitTest {
      */
     protected static final String PHOTO_SAVE_URL =
         "https://api.vk.com/method/photos.saveWallPhoto";
+
     /**
      * VK API endpoint - audios.save.
      */
     protected static final String AUDIO_SAVE_URL =
         "https://api.vk.com/method/audio.save";
-
     /**
      * VK API endpoint - photos.getWallUploadServer.
      */
@@ -73,9 +74,9 @@ public abstract class AbstractVkUnitTest {
         "https://api.vk.com/method/execute";
 
     /**
-     * Test method.
-     * @throws Exception If an error occurs during the test.
+     * Ctor.
      */
-    public abstract void test() throws Exception;
+    @SuppressWarnings("PMD.UncommentedEmptyConstructor")
+    protected VkUnitTest() { }
 
 }

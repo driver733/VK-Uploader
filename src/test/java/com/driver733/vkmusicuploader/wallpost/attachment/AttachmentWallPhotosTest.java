@@ -24,7 +24,7 @@
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
-import com.driver733.vkmusicuploader.wallpost.wallpost.AbstractVkUnitTest;
+import com.driver733.vkmusicuploader.wallpost.wallpost.VkUnitTest;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
@@ -54,7 +54,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (50 lines)
  */
-public final class AttachmentWallPhotosTest extends AbstractVkUnitTest {
+public final class AttachmentWallPhotosTest extends VkUnitTest {
 
     @Test
     @SuppressWarnings({
@@ -87,7 +87,7 @@ public final class AttachmentWallPhotosTest extends AbstractVkUnitTest {
                     new HashMap<String, TransportClient>() {
                         {
                             put(
-                                AbstractVkUnitTest.PHOTO_SAVE_URL,
+                                VkUnitTest.PHOTO_SAVE_URL,
                                 new TransportClientCached(
                                     "{"
                                         + " \"photo\"  : \"testPhoto\","
@@ -101,9 +101,9 @@ public final class AttachmentWallPhotosTest extends AbstractVkUnitTest {
                 )
             ),
             new UserActor(0, "1"),
-            AbstractVkUnitTest.PHOTO_SAVE_URL,
+            VkUnitTest.PHOTO_SAVE_URL,
             photos,
-            AbstractVkUnitTest.GROUP_ID
+            VkUnitTest.GROUP_ID
            ).upload();
         final ArrayList<Map<String, String>> list = new ArrayList<>(12);
         for (final AbstractQueryBuilder query : queries) {
@@ -130,7 +130,7 @@ public final class AttachmentWallPhotosTest extends AbstractVkUnitTest {
                    new UserActor(0, "1"),
                    "testPhoto"
                ).hash("testHash")
-                   .groupId(AbstractVkUnitTest.GROUP_ID)
+                   .groupId(VkUnitTest.GROUP_ID)
                    .server(1)
                    .build()
                 )

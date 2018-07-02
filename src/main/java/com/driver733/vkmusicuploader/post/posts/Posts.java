@@ -23,11 +23,11 @@
  */
 package com.driver733.vkmusicuploader.post.posts;
 
-import com.driver733.vkmusicuploader.post.post.Post;
+import com.driver733.vkmusicuploader.post.post.Postable;
 import java.io.File;
 
 /**
- * Constructs a {@link Post}
+ * Constructs a {@link Postable}
  *  using a provided directory.
  *
  * @author Mikhail Yakushin (driver733@me.com)
@@ -37,10 +37,11 @@ import java.io.File;
 public interface Posts {
 
     /**
-     * Constructs a {@link Post} with {@link File}s in the provided directory.
-     * @param dir With {@link File}s to be attached to the {@link Post}.
-     * @return Constructed {@link Post}.
+     * Constructs a {@link Postable} with {@link File}s
+     *  in the provided directory.
+     * @param dir With {@link File}s to be attached to the {@link Postable}.
+     * @return Constructed {@link Postable}.
      */
-    Post postFromDir(File dir);
+    Postable postFromDir(File dir);
 
 }

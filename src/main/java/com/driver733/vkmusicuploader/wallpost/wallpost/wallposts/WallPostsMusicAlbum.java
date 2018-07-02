@@ -55,7 +55,7 @@ import java.util.List;
  * @checkstyle ClassDataAbstractionCouplingCheck (2 lines)
  */
 @Immutable
-public final class WallPostsAlbum implements WallPosts {
+public final class WallPostsMusicAlbum implements WallPosts {
 
     /**
      * Maximum number of requests in each batch request.
@@ -83,16 +83,17 @@ public final class WallPostsAlbum implements WallPosts {
      * Audios in each batch request.
      */
     private static final int AUDIOS_IN_REQ =
-        WallPostsAlbum.BATCH_MAX_REQ
-            - 3 * (WallPostsAlbum.PHOTOS_IN_POST
-            + WallPostsAlbum.WALL_POST_REQ
+        WallPostsMusicAlbum.BATCH_MAX_REQ
+            - 3 * (WallPostsMusicAlbum.PHOTOS_IN_POST
+            + WallPostsMusicAlbum.WALL_POST_REQ
         );
 
     /**
-     * Audios in each Wall Post.
+     * Audios in each Wall Postable.
      */
     private static final int AUDIOS_IN_POST =
-        WallPostsAlbum.MAX_ATTACHMENTS - WallPostsAlbum.PHOTOS_IN_POST;
+        WallPostsMusicAlbum.MAX_ATTACHMENTS
+            - WallPostsMusicAlbum.PHOTOS_IN_POST;
 
     /**
      * Group ID.
@@ -136,7 +137,7 @@ public final class WallPostsAlbum implements WallPosts {
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
-    public WallPostsAlbum(
+    public WallPostsMusicAlbum(
         final VkApiClient client,
         final UserActor actor,
         final File dir,
@@ -172,10 +173,10 @@ public final class WallPostsAlbum implements WallPosts {
         );
         while (iter < audios.size()) {
             final int to;
-            if (audios.size() < iter + WallPostsAlbum.AUDIOS_IN_REQ) {
+            if (audios.size() < iter + WallPostsMusicAlbum.AUDIOS_IN_REQ) {
                 to = audios.size() - iter;
             } else {
-                to = iter + WallPostsAlbum.AUDIOS_IN_REQ;
+                to = iter + WallPostsMusicAlbum.AUDIOS_IN_REQ;
             }
             queries.add(
                 this.postsBatch(
@@ -185,7 +186,7 @@ public final class WallPostsAlbum implements WallPosts {
                     )
                 )
             );
-            iter += WallPostsAlbum.AUDIOS_IN_REQ;
+            iter += WallPostsMusicAlbum.AUDIOS_IN_REQ;
         }
         Collections.reverse(queries);
         if (queries.isEmpty()) {
@@ -261,10 +262,10 @@ public final class WallPostsAlbum implements WallPosts {
         int from = 0;
         while (from < audios.size()) {
             final int to;
-            if (audios.size() < from + WallPostsAlbum.AUDIOS_IN_POST) {
+            if (audios.size() < from + WallPostsMusicAlbum.AUDIOS_IN_POST) {
                 to = audios.size();
             } else {
-                to = from + WallPostsAlbum.AUDIOS_IN_POST;
+                to = from + WallPostsMusicAlbum.AUDIOS_IN_POST;
             }
             final WallPostQuery query;
             try {
@@ -288,7 +289,7 @@ public final class WallPostsAlbum implements WallPosts {
                 );
             }
             posts.add(query);
-            from += WallPostsAlbum.AUDIOS_IN_POST;
+            from += WallPostsMusicAlbum.AUDIOS_IN_POST;
         }
         Collections.reverse(posts);
         return new ExecuteBatchQuery(

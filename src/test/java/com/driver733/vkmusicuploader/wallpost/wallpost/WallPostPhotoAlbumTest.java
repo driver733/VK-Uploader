@@ -54,7 +54,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (500 lines)
  */
-public final class WallPostPhotoAlbumTest extends VkUnitTest {
+public final class WallPostPhotoAlbumTest extends AbstractVkUnitTest {
 
     @Test
     @SuppressWarnings({
@@ -90,7 +90,7 @@ public final class WallPostPhotoAlbumTest extends VkUnitTest {
                                     )
                                 );
                                 put(
-                                    VkUnitTest.PHOTO_SAVE_URL,
+                                    AbstractVkUnitTest.PHOTO_SAVE_URL,
                                     new TransportClientCached(
                                         "{"
                                             + "\"id\"          : 123456,"
@@ -121,7 +121,7 @@ public final class WallPostPhotoAlbumTest extends VkUnitTest {
                                     )
                                 );
                                 put(
-                                    VkUnitTest.EXECUTE_URL,
+                                    AbstractVkUnitTest.EXECUTE_URL,
                                     new TransportClientCached(
                                         "{"
                                             + "\"response\": { \"post_id\": 3 }"
@@ -143,7 +143,7 @@ public final class WallPostPhotoAlbumTest extends VkUnitTest {
                             new HashMap<String, TransportClient>() {
                                 {
                                     put(
-                                        VkUnitTest.PHOTO_WALL_URL,
+                                        AbstractVkUnitTest.PHOTO_WALL_URL,
                                         new TransportClientCached(
                                             "{"
                                                 + "\"response\" : {"
@@ -162,9 +162,9 @@ public final class WallPostPhotoAlbumTest extends VkUnitTest {
                     new UserActor(
                         1, "1"
                     ),
-                    VkUnitTest.GROUP_ID
+                    AbstractVkUnitTest.GROUP_ID
                 ),
-                VkUnitTest.GROUP_ID
+                AbstractVkUnitTest.GROUP_ID
             ).construct()
                 .build(),
             Matchers.allOf(

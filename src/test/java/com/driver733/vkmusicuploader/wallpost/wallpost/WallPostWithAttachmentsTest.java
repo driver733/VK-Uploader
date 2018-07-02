@@ -48,7 +48,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  */
 @Immutable
-public final class WallPostWithAttachmentsTest extends VkUnitTest {
+public final class WallPostWithAttachmentsTest extends AbstractVkUnitTest {
 
     /**
      * Test properties.
@@ -82,7 +82,7 @@ public final class WallPostWithAttachmentsTest extends VkUnitTest {
                     new ImmutableProperties(
                         this.properties.toFile()
                     ),
-                    VkUnitTest.GROUP_ID,
+                    AbstractVkUnitTest.GROUP_ID,
                     new AttachmentFakeAudio(
                         1, 2
                     )

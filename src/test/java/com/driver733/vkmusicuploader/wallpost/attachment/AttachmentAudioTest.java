@@ -26,7 +26,7 @@ package com.driver733.vkmusicuploader.wallpost.attachment;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadAudio;
-import com.driver733.vkmusicuploader.wallpost.wallpost.VkUnitTest;
+import com.driver733.vkmusicuploader.wallpost.wallpost.AbstractVkUnitTest;
 import com.driver733.vkmusicuploader.wallpost.wallpost.file.RecoverableFile;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.TransportClient;
@@ -55,7 +55,7 @@ import org.junit.Test;
  * @checkstyle MethodLength (50 lines)
  */
 @Immutable
-public final class AttachmentAudioTest extends VkUnitTest {
+public final class AttachmentAudioTest extends AbstractVkUnitTest {
 
     @SuppressWarnings({
         "PMD.NonStaticInitializer",
@@ -91,7 +91,7 @@ public final class AttachmentAudioTest extends VkUnitTest {
                                     )
                                 );
                                 put(
-                                    VkUnitTest.AUDIO_SAVE_URL,
+                                    AbstractVkUnitTest.AUDIO_SAVE_URL,
                                     new TransportClientCached(
                                         "{"
                                             + "\"id\"       : 1,"
@@ -113,7 +113,7 @@ public final class AttachmentAudioTest extends VkUnitTest {
                 new ImmutableProperties(
                     props
                 ),
-                VkUnitTest.GROUP_ID,
+                AbstractVkUnitTest.GROUP_ID,
                 new UploadAudio(
                     new VkApiClient(
                         new TransportClientCached(
@@ -144,7 +144,7 @@ public final class AttachmentAudioTest extends VkUnitTest {
                     ),
                     1,
                     2
-                ).groupId(VkUnitTest.GROUP_ID)
+                ).groupId(AbstractVkUnitTest.GROUP_ID)
                     .build()
             )
         );

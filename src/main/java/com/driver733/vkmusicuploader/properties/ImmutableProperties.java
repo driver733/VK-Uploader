@@ -71,6 +71,16 @@ public final class ImmutableProperties extends Properties {
     }
 
     /**
+     * Loads the properties.
+     * @return The current instance.
+     * @throws IOException If the properties construct cannot be loaded.
+     */
+    public ImmutableProperties loaded() throws IOException {
+        this.load();
+        return this;
+    }
+
+    /**
      * Loads the properties from the provided {@link File}.
      * @throws IOException If the properties construct cannot be loaded.
      */
@@ -123,6 +133,16 @@ public final class ImmutableProperties extends Properties {
      */
     public void store() throws IOException {
         this.store("");
+    }
+
+    /**
+     * Saves the properties using the provided {@link File}.
+     * @return The current instance.
+     * @throws IOException If the properties construct cannot be saved.
+     */
+    public ImmutableProperties stored() throws IOException {
+        this.store();
+        return this;
     }
 
     /**

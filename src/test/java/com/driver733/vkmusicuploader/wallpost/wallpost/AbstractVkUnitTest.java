@@ -31,7 +31,11 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
  * @since 0.1
  * @checkstyle FinalClassCheck (5 lines)
  */
-public class VkUnitTest {
+@SuppressWarnings({
+    "PMD.AbstractClassWithoutAbstractMethod",
+    "PMD.AbstractClassWithoutAnyMethod"
+    })
+public abstract class AbstractVkUnitTest {
 
     /**
      * Group ID.
@@ -72,11 +76,5 @@ public class VkUnitTest {
      */
     protected static final String EXECUTE_URL =
         "https://api.vk.com/method/execute";
-
-    /**
-     * Ctor.
-     */
-    @SuppressWarnings("PMD.UncommentedEmptyConstructor")
-    protected VkUnitTest() { }
 
 }

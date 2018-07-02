@@ -24,10 +24,9 @@
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.driver733.vkmusicuploader.post.UploadUrls;
-import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhotos;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArraysWithProps;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArrays;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.VkApiClient;
@@ -46,7 +45,7 @@ import java.util.List;
  * @checkstyle ClassDataAbstractionCouplingCheck (2 lines)
  */
 @Immutable
-public final class WallPostPhotos implements WallPost {
+public final class WallPostPhotoAlbum implements WallPost {
 
     /**
      * Group ID.
@@ -74,34 +73,27 @@ public final class WallPostPhotos implements WallPost {
     private final UploadUrls servers;
 
     /**
-     * Properties that contain the {@link AudioStatus} of audios files.
-     */
-    private final ImmutableProperties properties;
-    /**
      * Ctor.
      * @param client The {@link VkApiClient} for all requests.
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param photos Audio files.
      * @param servers Upload servers
      *  that provide upload URLs for attachmentsFields.
-     * @param properties Properties that contain the
      *  {@link AudioStatus} of audios files.
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
-    public WallPostPhotos(
+    public WallPostPhotoAlbum(
         final VkApiClient client,
         final UserActor actor,
         final List<File> photos,
         final UploadUrls servers,
-        final ImmutableProperties properties,
         final int group
     ) {
         this.client = client;
         this.photos = new Array<>(photos);
         this.actor = actor;
         this.servers = servers;
-        this.properties = properties;
         this.group = group;
     }
 
@@ -119,9 +111,8 @@ public final class WallPostPhotos implements WallPost {
                         this.client,
                         this.actor
                     ),
-                    new AttachmentArraysWithProps(
+                    new AttachmentArrays(
                         this.actor,
-                        this.properties,
                         this.group,
                         new AttachmentWallPhotos(
                             this.client,

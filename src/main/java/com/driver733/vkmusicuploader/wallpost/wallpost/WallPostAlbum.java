@@ -92,6 +92,7 @@ public final class WallPostAlbum implements WallPost {
      * Properties that contain the {@link AudioStatus} of audios files.
      */
     private final ImmutableProperties properties;
+
     /**
      * Ctor.
      * @param client The {@link VkApiClient} for all requests.

@@ -47,7 +47,7 @@ import com.vk.api.sdk.queries.wall.WallPostQuery;
  * @checkstyle ClassDataAbstractionCouplingCheck (2 lines)
  */
 @Immutable
-public final class WallPostWithAphorism implements WallPost {
+public final class WallPostWithRandomQuote implements WallPost {
 
     /**
      * VKAPIClient that is used for all VK API requests.
@@ -78,7 +78,7 @@ public final class WallPostWithAphorism implements WallPost {
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
-    public WallPostWithAphorism(
+    public WallPostWithRandomQuote(
         final VkApiClient client,
         final UserActor actor,
         final UploadUrls servers,

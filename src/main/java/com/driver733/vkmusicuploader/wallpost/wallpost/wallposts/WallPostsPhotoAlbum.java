@@ -28,7 +28,7 @@ import com.driver733.vkmusicuploader.media.photo.MediaPhotosNonProcessed;
 import com.driver733.vkmusicuploader.post.UploadUrls;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.WallPhotoStatus;
-import com.driver733.vkmusicuploader.wallpost.wallpost.WallPostPhotos;
+import com.driver733.vkmusicuploader.wallpost.wallpost.WallPostPhotoAlbum;
 import com.jcabi.aspects.Cacheable;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
@@ -54,7 +54,7 @@ import java.util.List;
  * @checkstyle ClassDataAbstractionCouplingCheck (2 lines)
  */
 @Immutable
-public final class WallPostsPhoto implements WallPosts {
+public final class WallPostsPhotoAlbum implements WallPosts {
 
     /**
      * Maximum number of requests in each batch request.
@@ -76,8 +76,8 @@ public final class WallPostsPhoto implements WallPosts {
      * Photos in each batch request.
      */
     private static final int PHOTOS_IN_REQ =
-        WallPostsPhoto.BATCH_MAX_REQ
-            - 3 * WallPostsPhoto.WALL_POST_REQ;
+        WallPostsPhotoAlbum.BATCH_MAX_REQ
+            - 3 * WallPostsPhotoAlbum.WALL_POST_REQ;
 
     /**
      * Group ID.
@@ -121,7 +121,7 @@ public final class WallPostsPhoto implements WallPosts {
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
-    public WallPostsPhoto(
+    public WallPostsPhotoAlbum(
         final VkApiClient client,
         final UserActor actor,
         final File dir,
@@ -154,17 +154,17 @@ public final class WallPostsPhoto implements WallPosts {
         );
         while (iter < photos.size()) {
             final int to;
-            if (photos.size() < iter + WallPostsPhoto.PHOTOS_IN_REQ) {
+            if (photos.size() < iter + WallPostsPhotoAlbum.PHOTOS_IN_REQ) {
                 to = photos.size() - iter;
             } else {
-                to = iter + WallPostsPhoto.PHOTOS_IN_REQ;
+                to = iter + WallPostsPhotoAlbum.PHOTOS_IN_REQ;
             }
             queries.add(
                 this.postsBatch(
                     photos.subList(iter, to)
                 )
             );
-            iter += WallPostsPhoto.PHOTOS_IN_REQ;
+            iter += WallPostsPhotoAlbum.PHOTOS_IN_REQ;
         }
         if (queries.isEmpty()) {
             Logger.debug(this, "No photos to upload. Skipping...");
@@ -224,14 +224,14 @@ public final class WallPostsPhoto implements WallPosts {
         int from = 0;
         while (from < photos.size()) {
             final int to;
-            if (photos.size() < from + WallPostsPhoto.PHOTOS_IN_POST) {
+            if (photos.size() < from + WallPostsPhotoAlbum.PHOTOS_IN_POST) {
                 to = photos.size();
             } else {
-                to = from + WallPostsPhoto.PHOTOS_IN_POST;
+                to = from + WallPostsPhotoAlbum.PHOTOS_IN_POST;
             }
             final WallPostQuery query;
             try {
-                query = new WallPostPhotos(
+                query = new WallPostPhotoAlbum(
                     this.client,
                     this.actor,
                     new Array<>(
@@ -241,7 +241,6 @@ public final class WallPostsPhoto implements WallPosts {
                         )
                     ),
                     this.servers,
-                    this.properties,
                     this.group
                 ).construct();
             } catch (final IOException ex) {
@@ -251,7 +250,7 @@ public final class WallPostsPhoto implements WallPosts {
                 );
             }
             posts.add(query);
-            from += WallPostsPhoto.PHOTOS_IN_POST;
+            from += WallPostsPhotoAlbum.PHOTOS_IN_POST;
         }
         return new ExecuteBatchQuery(
             this.client,

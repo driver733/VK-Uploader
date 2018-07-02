@@ -25,18 +25,25 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.driver733.vkmusicuploader.post.UploadUrls;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
-import com.jcabi.matchers.RegexMatchers;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test for {@link WallPostWithAphorism}.
+ * Test for {@link WallPostPhotoAlbum}.
  *
  * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
  * @version $Id$
@@ -47,7 +54,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (500 lines)
  */
-public final class WallPostWithAphorismTest extends AbstractVkUnitTest {
+public final class WallPostPhotoAlbumTest extends AbstractVkUnitTest {
 
     @Test
     @SuppressWarnings({
@@ -56,9 +63,18 @@ public final class WallPostWithAphorismTest extends AbstractVkUnitTest {
         "PMD.AvoidDuplicateLiterals"
         })
     public void test() throws Exception {
+        final List<File> photos = Files.walk(
+            Paths.get("src/test/resources/photos/testPhotoAlbum")
+        ).filter(
+            path -> path.toString().toLowerCase().endsWith(".jpg")
+        ).map(
+            Path::toFile
+        ).collect(
+            Collectors.toList()
+        );
         MatcherAssert.assertThat(
             "Incorrect query map produced.",
-            new WallPostWithAphorism(
+            new WallPostPhotoAlbum(
                 new VkApiClient(
                     new TransportClientFake(
                         new HashMap<String, TransportClient>() {
@@ -70,17 +86,6 @@ public final class WallPostWithAphorismTest extends AbstractVkUnitTest {
                                             + "\"hash\"      : \"hash123\","
                                             + "\"photo\"     : \"fnknjkasd\","
                                             + "\"server\"    : 123546"
-                                            + "}"
-                                    )
-                                );
-                                put(
-                                    "audio.uploadServer",
-                                    new TransportClientCached(
-                                        "{"
-                                            + "\"hash\"     : \"hash123\","
-                                            + "\"audio\"    : \"fnknjkasd\","
-                                            + "\"server\"   : 123546,"
-                                            + "\"redirect\" : \"redirect.com\""
                                             + "}"
                                     )
                                 );
@@ -125,12 +130,13 @@ public final class WallPostWithAphorismTest extends AbstractVkUnitTest {
                                 );
                             }
                         }
-                    )
+                        )
                 ),
                 new UserActor(
                     1,
                     "1"
                 ),
+                photos,
                 new UploadUrls(
                     new VkApiClient(
                         new TransportClientFake(
@@ -164,15 +170,18 @@ public final class WallPostWithAphorismTest extends AbstractVkUnitTest {
             Matchers.allOf(
                 Matchers.hasEntry("access_token", "1"),
                 Matchers.hasEntry("v", "5.63"),
-                Matchers.hasEntry("owner_id", "-161929264"),
-                Matchers.hasEntry("from_group", "1"),
                 Matchers.hasEntry(
                     "attachments",
-                    "photo6785_123456"
+                    StringUtils.join(
+                        Collections.nCopies(
+                            photos.size(),
+                            "photo6785_123456"
+                        ),
+                        ","
+                    )
                 ),
-                Matchers.hasValue(
-                    RegexMatchers.containsPattern("[а-яА-Я]")
-                )
+                Matchers.hasEntry("owner_id", "-161929264"),
+                Matchers.hasEntry("from_group", "1")
             )
         );
     }

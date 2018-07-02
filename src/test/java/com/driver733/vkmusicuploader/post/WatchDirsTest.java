@@ -194,17 +194,15 @@ public final class WatchDirsTest extends AbstractVkUnitTest {
                 }
             }
         ).start();
-        root.resolve("testPhotoAlbum")
+        final File temp = root.resolve("testPhotoAlbum")
             .resolve(".temp")
-            .toFile()
-            .deleteOnExit();
+            .toFile();
+        temp.deleteOnExit();
         Files.copy(
             root.resolve("testPhotoAlbum")
                 .resolve("1.jpg"),
             new FileOutputStream(
-                root.resolve("testPhotoAlbum")
-                    .resolve(".temp")
-                    .toFile()
+                temp
             )
         );
         posts.updateProperties();

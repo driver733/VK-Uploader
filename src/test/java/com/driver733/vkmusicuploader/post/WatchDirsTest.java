@@ -75,6 +75,7 @@ public final class WatchDirsTest extends AbstractVkUnitTest {
         final ImmutableProperties actual = new ImmutableProperties(
             props
         );
+        actual.store();
         final WallPosts posts = new WallPostsPhotoAlbum(
             new VkApiClient(
                 new TransportClientFake(
@@ -208,8 +209,7 @@ public final class WatchDirsTest extends AbstractVkUnitTest {
         posts.updateProperties();
         MatcherAssert.assertThat(
             "The properties files differ",
-            actual.stored()
-                .entrySet(),
+            actual.entrySet(),
             Matchers.equalTo(
                 new ImmutableProperties(
                     root.resolve("testPhotoAlbum")

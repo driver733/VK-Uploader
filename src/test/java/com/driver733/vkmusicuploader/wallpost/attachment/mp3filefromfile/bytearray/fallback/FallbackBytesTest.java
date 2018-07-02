@@ -61,34 +61,83 @@ public final class FallbackBytesTest {
     );
 
     @Test
-    public void advancedTag()
+    public void testAdvancedTag()
         throws Exception {
         MatcherAssert.assertThat(
             new FallbackBytes(
                 new ByteArrayImageFromAdvancedTag(
                     new AdvancedTagFromMp3File(
-                        new Mp3File(this.audio)
+                        new Mp3File(
+                            this.audio
+                        )
                     )
                 ),
-                new ByteArrayFromFile(this.audio)
+                new ByteArrayFromFile(
+                    this.audio
+                )
             ).asBytes(),
             Matchers.equalTo(
-                Files.readAllBytes(this.path)
+                Files.readAllBytes(
+                    this.path
+                )
             )
         );
     }
 
     @Test
-    public void file() throws Exception {
+    public void testFile() throws Exception {
         MatcherAssert.assertThat(
             new FallbackBytes(
                 new ByteArrayFromFile(
                     this.path.toFile()
                 ),
-            new ByteArrayFromFile(this.audio)
+            new ByteArrayFromFile(
+                this.audio
+            )
         ).asBytes(),
             Matchers.equalTo(
-                Files.readAllBytes(this.path)
+                Files.readAllBytes(
+                    this.path
+                )
+            )
+        );
+    }
+
+    @Test(expected = Exception.class)
+    public void testException() throws Exception {
+        MatcherAssert.assertThat(
+            new FallbackBytes(
+                new ByteArrayFromFile(
+                    this.path
+                        .resolve("invalid")
+                        .toFile()
+                )
+            ).asBytes(),
+            Matchers.equalTo(
+                Files.readAllBytes(
+                    this.path
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testValidAndException() throws Exception {
+        MatcherAssert.assertThat(
+            new FallbackBytes(
+                new ByteArrayFromFile(
+                    this.path
+                        .resolve("wrong")
+                        .toFile()
+                ),
+                new ByteArrayFromFile(
+                    this.path.toFile()
+                )
+            ).asBytes(),
+            Matchers.equalTo(
+                Files.readAllBytes(
+                    this.path
+                )
             )
         );
     }

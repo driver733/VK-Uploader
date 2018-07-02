@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
+import lombok.EqualsAndHashCode;
 
 /**
  * Immutable {@link Properties}.
@@ -40,7 +41,10 @@ import java.util.Properties;
  * @since 0.1
  */
 @Immutable
+@EqualsAndHashCode
 public final class ImmutableProperties extends Properties {
+
+    private static final long serialVersionUID = 42L;
 
     /**
      * Properties construct.
@@ -79,9 +83,13 @@ public final class ImmutableProperties extends Properties {
         try {
             super.load(fis);
         } catch (final IOException ex) {
-            throw new IOException("Failed to load properties", ex);
+            throw new IOException(
+                "Failed to load properties",
+                ex
+            );
+        } finally {
+            fis.close();
         }
-        fis.close();
     }
 
     /**
@@ -123,13 +131,21 @@ public final class ImmutableProperties extends Properties {
      * @throws IOException If the properties cannot be saved.
      */
     private void store(final String comment) throws IOException {
-        final FileOutputStream fos = new FileOutputStream(this.file);
-        try {
-            super.store(fos, comment);
+        try (
+            FileOutputStream fos = new FileOutputStream(
+                this.file
+            )
+        ) {
+            super.store(
+                fos,
+                comment
+            );
         } catch (final IOException ex) {
-            throw new IOException("Failed to store properties", ex);
+            throw new IOException(
+                "Failed to store properties",
+                ex
+            );
         }
-        fos.close();
     }
 
 }

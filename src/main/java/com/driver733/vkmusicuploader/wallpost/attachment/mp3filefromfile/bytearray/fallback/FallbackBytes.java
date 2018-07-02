@@ -25,6 +25,7 @@ package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytear
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
+import com.jcabi.log.Logger;
 import org.cactoos.Bytes;
 
 /**
@@ -33,6 +34,7 @@ import org.cactoos.Bytes;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.2
+ * @checkstyle IllegalCatchCheck (50 lines)
  */
 @Immutable
 public final class FallbackBytes implements Bytes {
@@ -52,12 +54,20 @@ public final class FallbackBytes implements Bytes {
     }
 
     @Override
+    @SuppressWarnings({
+        "PMD.AvoidThrowingRawExceptionTypes",
+        "PMD.AvoidCatchingGenericException"
+        })
     public byte[] asBytes() throws Exception {
         for (final Bytes array : this.arrays) {
             try {
                 return array.asBytes();
             } catch (final Exception ex) {
-                throw new IllegalStateException(ex);
+                Logger.debug(
+                    this,
+                    "Unable to read bytes from the provided Bytes object: %s",
+                    ex.toString()
+                );
             }
         }
         throw new Exception("No valid byte[] found.");

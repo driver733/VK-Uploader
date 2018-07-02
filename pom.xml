@@ -138,107 +138,88 @@
             <version>1.4</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
     <build>
-        <!--<pluginManagement>-->
-            <plugins>
-                <plugin>
-                    <groupId>com.qulice</groupId>
-                    <artifactId>qulice-maven-plugin</artifactId>
-                    <configuration>
-                        <license>tag:${basedir}/LICENSE.txt</license>
-                        <excludes>
-                            <exclude>checkstyle:/src/test/resources/.*</exclude>
+        <plugins>
+            <plugin>
+                <groupId>com.qulice</groupId>
+                <artifactId>qulice-maven-plugin</artifactId>
+                <configuration>
+                    <license>tag:${basedir}/LICENSE.txt</license>
+                    <excludes>
+                        <exclude>checkstyle:/src/test/resources/.*</exclude>
+                        <exclude>xml:/src/main/resources/.*</exclude>
+                        <exclude>duplicatefinder:.*</exclude>
+                        <exclude>cobertura:.*</exclude>
+                        <exclude>dependencies:.*</exclude>
 
-                            <exclude>checkstyle:/src/main/java/com.driver733.vkmusicuploader/Main.java</exclude>
-                            <exclude>pmd:/src/main/java/com.driver733.vkmusicuploader/Main.java</exclude>
-                            <exclude>findbugs:com.driver733.vkmusicuploader.Main</exclude>
-                            
-                            <exclude>checkstyle:/src/test/java/com.driver733.vkmusicuploader/SampleTest.java</exclude>
-                            <exclude>pmd:/src/test/java/com.driver733.vkmusicuploader/SampleTest.java</exclude>
-                            <exclude>findbugs:com.driver733.vkmusicuploader.wallpost.attachment.support.message.MessageTest.java</exclude>
-
-                            <exclude>findbugs:com.driver733.vkmusicuploader.wallpost.attachment.support.CachedExecuteBatchQueryClient</exclude>
-                            <exclude>findbugs:com.driver733.vkmusicuploader.properties.ImmutableProperties</exclude>
-
-                            <exclude>checkstyle:/src/main/java/com/driver733/vkmusicuploader/wallpost/attachment/support/CachedExecuteBatchQueryClient.java</exclude>
-                            <exclude>pmd:/src/main/java/com/driver733/vkmusicuploader/wallpost/attachment/support/CachedExecuteBatchQueryClient.java</exclude>
-                            <exclude>checkstyle:/src/main/java/com/driver733/vkmusicuploader/wallpost/attachment/support/ConnectionsSupervisor.java</exclude>
-                            <exclude>pmd:/src/main/java/com/driver733/vkmusicuploader/wallpost/attachment/support/ConnectionsSupervisor.java</exclude>
-
-
-                            <exclude>checkstyle:/src/main/java/com/driver733/vkmusicuploader/wallpost/attachment/mp3filefromfile/bytearray/fallback/FallbackScalar.java</exclude>
-                            <exclude>pmd:/src/main/java/com/driver733/vkmusicuploader/wallpost/attachment/mp3filefromfile/bytearray/fallback/FallbackScalar.java</exclude>
-                            <exclude>findbugs:com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.FallbackScalar</exclude>
-
-                            <exclude>checkstyle:/src/main/java/com/driver733/vkmusicuploader/wallpost/attachment/mp3filefromfile/bytearray/fallback/FallbackBytes.java</exclude>
-                            <exclude>pmd:/src/main/java/com/driver733/vkmusicuploader/wallpost/attachment/mp3filefromfile/bytearray/fallback/FallbackBytes.java</exclude>
-                            <exclude>findbugs:com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback.FallbackBytes</exclude>
-
-
-
-                            <exclude>xml:/src/main/resources/.*</exclude>
-                            <exclude>duplicatefinder:.*</exclude>
-                            <exclude>cobertura:.*</exclude>
-                            <exclude>dependencies:.*</exclude>
-                        </excludes>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>2.22.0</version>
-                    <executions>
-                        <execution>
-                            <id>integration-test</id>
-                            <goals>
-                                <goal>integration-test</goal>
-                            </goals>
-                            <phase>integration-test</phase>
-                        </execution>
-                        <execution>
-                            <id>verify</id>
-                            <goals>
-                                <goal>verify</goal>
-                            </goals>
-                            <phase>verify</phase>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.1</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>prepare-agent</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>report</id>
-                            <phase>prepare-package</phase>
-                            <goals>
-                                <goal>report</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.eluder.coveralls</groupId>
-                    <artifactId>coveralls-maven-plugin</artifactId>
-                    <version>4.3.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                    </configuration>
-                </plugin>
-            </plugins>
-        <!--</pluginManagement>-->
+                        <exclude>checkstyle:/src/main/java/com.driver733.vkmusicuploader/Main.java</exclude>
+                        <exclude>pmd:/src/main/java/com.driver733.vkmusicuploader/Main.java</exclude>
+                        <exclude>findbugs:com.driver733.vkmusicuploader.Main</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.0</version>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                        <phase>integration-test</phase>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                        <phase>verify</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>4.3.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
     <reporting>
         <plugins>

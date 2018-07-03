@@ -108,7 +108,8 @@ public final class AttachmentStringsFromJsonTest {
                 AttachmentStringsFromJsonTest.GROUP_ID
             ).attachmentStrings(),
             Matchers.containsInAnyOrder(
-                "audio111111_3000000", "audio2222222_2000000"
+                "audio111111_3000000",
+                "audio2222222_2000000"
             )
         );
     }

@@ -39,20 +39,33 @@ import org.junit.Test;
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
  * @since 0.1
- * @todo #17 Write tests for other conditions.
  * @checkstyle JavadocMethodCheck (500 lines)
  */
 @Immutable
 public final class BasicTagTest {
 
     @Test
-    public void valid()
+    public void testValid()
         throws InvalidDataException, IOException, UnsupportedTagException {
         MatcherAssert.assertThat(
             "Failed to get the tag from Mp3 file",
             new BasicTagFromMp3File(
                 new Mp3File(
                     new File("src/test/resources/album/test.mp3")
+                )
+            ).construct().getAlbum(),
+            Matchers.equalTo("Elegant Testing")
+        );
+    }
+
+    @Test(expected = IOException.class)
+    public void testException()
+        throws InvalidDataException, IOException, UnsupportedTagException {
+        MatcherAssert.assertThat(
+            "Failed to get the tag from Mp3 file",
+            new BasicTagFromMp3File(
+                new Mp3File(
+                    new File("src/test/resources/album/testMissingTest.mp3")
                 )
             ).construct().getAlbum(),
             Matchers.equalTo("Elegant Testing")

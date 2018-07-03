@@ -62,13 +62,13 @@ public final class BasicTagTest {
     public void testException()
         throws InvalidDataException, IOException, UnsupportedTagException {
         MatcherAssert.assertThat(
-            "Failed to get the tag from Mp3 file",
+            "Failed to get the tag from Mp3 file.",
             new BasicTagFromMp3File(
                 new Mp3File(
                     new File("src/test/resources/album/testMissingTest.mp3")
                 )
             ).construct().getAlbum(),
-            Matchers.equalTo("Elegant Testing")
+            Matchers.equalTo("Elegant Testing.")
         );
     }
 

@@ -116,7 +116,7 @@ public final class AttachmentStringsFromJsonTest {
     @Test(expected = IOException.class)
     public void testException() throws IOException {
         MatcherAssert.assertThat(
-            "Failed to form an attachment attachmentString from JsonArray",
+            "Failed to form an attachment attachmentString from JsonArray.",
             new AttachmentStringsFromJson(
                 new GsonBuilder()
                     .setPrettyPrinting()
@@ -125,26 +125,26 @@ public final class AttachmentStringsFromJsonTest {
                         "["
                             + "{"
                             + "\"ppowner_id\" : 111111,"
-                            + "\"iid\"        : 3000000,"
+                            + "\"iid\"        : 30000001,"
                             + "\"martist\"    : \"Test Artist2\","
                             + "\"dtitle\"     : \"Test Title2\","
                             + "\"furl\"       : \"http://test2.com\" "
                             + "},"
                             + "{"
                             + "\"downer_id\"  : 2222222,"
-                            + "\"fid\"        : 2000000,"
+                            + "\"fid\"        : 20000001,"
                             + "\"dartist\"    : \"Test Artist3\","
                             + "\"ftitle\"     : \"Test Title3\","
                             + "\"durl\"       : \"http://test3.com\" "
                             + "}"
                             + "]",
                         JsonArray.class
-                    ).getAsJsonArray(),
+                    )
+                    .getAsJsonArray(),
                 AttachmentStringsFromJsonTest.GROUP_ID
             ).attachmentStrings(),
             Matchers.containsInAnyOrder(
-                "audio111111_3000000",
-                "audio2222222_2000000"
+                "audio111111_30000001", "audio2222222_20000001"
             )
         );
     }

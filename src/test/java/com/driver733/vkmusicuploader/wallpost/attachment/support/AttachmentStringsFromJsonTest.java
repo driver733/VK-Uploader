@@ -116,7 +116,7 @@ public final class AttachmentStringsFromJsonTest {
     @Test(expected = IOException.class)
     public void testException() throws IOException {
         MatcherAssert.assertThat(
-            "Failed to form an attachment attachmentString from JsonArray",
+            "Failed to form an attachment attachmentString from JsonArray.",
             new AttachmentStringsFromJson(
                 new GsonBuilder()
                     .setPrettyPrinting()
@@ -139,7 +139,8 @@ public final class AttachmentStringsFromJsonTest {
                             + "}"
                             + "]",
                         JsonArray.class
-                    ).getAsJsonArray(),
+                    )
+                    .getAsJsonArray(),
                 AttachmentStringsFromJsonTest.GROUP_ID
             ).attachmentStrings(),
             Matchers.containsInAnyOrder(

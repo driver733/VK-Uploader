@@ -51,7 +51,7 @@ public final class AttachmentStringsFromJsonTest {
     private static final int GROUP_ID = 161929264;
 
     @Test
-    public void object() throws IOException {
+    public void testObject() throws IOException {
         MatcherAssert.assertThat(
             "Failed to form an attachment attachmentString from JsonObject",
             new AttachmentStringsFromJson(
@@ -78,7 +78,7 @@ public final class AttachmentStringsFromJsonTest {
     }
 
     @Test
-    public void array() throws IOException {
+    public void testArray() throws IOException {
         MatcherAssert.assertThat(
             "Failed to form an attachment attachmentString from JsonArray",
             new AttachmentStringsFromJson(
@@ -109,6 +109,42 @@ public final class AttachmentStringsFromJsonTest {
             ).attachmentStrings(),
             Matchers.containsInAnyOrder(
                 "audio111111_3000000", "audio2222222_2000000"
+            )
+        );
+    }
+
+    @Test(expected = IOException.class)
+    public void testException() throws IOException {
+        MatcherAssert.assertThat(
+            "Failed to form an attachment attachmentString from JsonArray",
+            new AttachmentStringsFromJson(
+                new GsonBuilder()
+                    .setPrettyPrinting()
+                    .create()
+                    .fromJson(
+                        "["
+                            + "{"
+                            + "\"ppowner_id\" : 111111,"
+                            + "\"iid\"        : 3000000,"
+                            + "\"martist\"    : \"Test Artist2\","
+                            + "\"dtitle\"     : \"Test Title2\","
+                            + "\"furl\"       : \"http://test2.com\" "
+                            + "},"
+                            + "{"
+                            + "\"downer_id\"  : 2222222,"
+                            + "\"fid\"        : 2000000,"
+                            + "\"dartist\"    : \"Test Artist3\","
+                            + "\"ftitle\"     : \"Test Title3\","
+                            + "\"durl\"       : \"http://test3.com\" "
+                            + "}"
+                            + "]",
+                        JsonArray.class
+                    ).getAsJsonArray(),
+                AttachmentStringsFromJsonTest.GROUP_ID
+            ).attachmentStrings(),
+            Matchers.containsInAnyOrder(
+                "audio111111_3000000",
+                "audio2222222_2000000"
             )
         );
     }

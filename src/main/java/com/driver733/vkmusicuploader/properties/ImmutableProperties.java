@@ -89,16 +89,12 @@ public final class ImmutableProperties extends Properties {
         if (!this.file.exists()) {
             throw new IOException("Specified properties file does not exist.");
         }
-        final FileInputStream fis = new FileInputStream(this.file);
-        try {
+        try (
+            FileInputStream fis = new FileInputStream(
+                this.file
+            )
+        ) {
             super.load(fis);
-        } catch (final IOException ex) {
-            throw new IOException(
-                "Failed to load properties",
-                ex
-            );
-        } finally {
-            fis.close();
         }
     }
 

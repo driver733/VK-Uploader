@@ -27,6 +27,8 @@ import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.jcabi.aspects.Immutable;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -42,6 +44,12 @@ import org.junit.Test;
 @Immutable
 public final class MediaVerifiedTest {
 
+    /**
+     * Test properties.
+     */
+    private static final Path PROPS =
+        Paths.get("src/test/resources/audiosTest.properties");
+
     @Test
     public void testAll() throws IOException {
         MatcherAssert.assertThat(
@@ -52,7 +60,7 @@ public final class MediaVerifiedTest {
                         new File("src/test/resources/album")
                     ),
                     new ImmutableProperties(
-                        new File("src/test/resources/audiosTest.properties")
+                        PROPS.toFile()
                     )
                 )
             ).files(),
@@ -72,7 +80,7 @@ public final class MediaVerifiedTest {
                         new File("src/test/")
                     ),
                     new ImmutableProperties(
-                        new File("src/test/resources/audiosTestr.properties")
+                        PROPS.toFile()
                     )
                 )
             ).files(),

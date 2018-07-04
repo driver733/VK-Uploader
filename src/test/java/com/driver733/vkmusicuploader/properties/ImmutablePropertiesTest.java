@@ -32,6 +32,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -76,7 +77,7 @@ public final class ImmutablePropertiesTest {
     }
 
     @Test(expected = IOException.class)
-    public void store() throws IOException {
+    public void testStore() throws IOException {
         final File file = new File("anyStream1-2");
         file.deleteOnExit();
         final ImmutableProperties props = new ImmutableProperties(
@@ -89,7 +90,7 @@ public final class ImmutablePropertiesTest {
     }
 
     @Test(expected = IOException.class)
-    public void storeInvalidFile() throws IOException, URISyntaxException {
+    public void testStoreInvalidFile() throws IOException, URISyntaxException {
         final ImmutableProperties props = new ImmutableProperties(
             new File(
                 new URI("file:///home/username/RomeoAndJuliet.pdf")
@@ -99,7 +100,7 @@ public final class ImmutablePropertiesTest {
     }
 
     @Test(expected = IOException.class)
-    public void load() throws IOException {
+    public void testLoadValid() throws IOException {
         final ImmutableProperties props = new ImmutableProperties(
             new File("anyFile2-1")
         );
@@ -109,13 +110,55 @@ public final class ImmutablePropertiesTest {
     }
 
     @Test(expected = IOException.class)
-    public void loadInvalidFile() throws IOException, URISyntaxException {
+    public void testLoadInvalidFile() throws IOException, URISyntaxException {
         final ImmutableProperties props = new ImmutableProperties(
             new File(
                 new URI("file:///home/username/RomeoAndJuliet.pdf")
             )
         );
         props.load();
+    }
+
+    @Test(expected = IOException.class)
+    public void testLoadUnsupportedMethod()
+        throws IOException, URISyntaxException {
+        final ImmutableProperties props = new ImmutableProperties(
+            new File(
+                new URI("file:///home/username/RomeoAndJuliet.pdf")
+            )
+        );
+        props.load(
+            new FileInputStream(
+                new File(
+                    new URI("file:///home/username/RomeoAndJuliet.pdf")
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testStored() throws IOException {
+        final ImmutableProperties expected = new ImmutableProperties(
+            new File(
+                "src/test/resources/audiosTest.properties"
+            )
+        );
+        expected.load();
+        final ImmutableProperties actual = expected.loaded();
+        MatcherAssert.assertThat(
+            "returned object does not match the original one",
+            actual,
+            Matchers.equalTo(
+                expected
+            )
+        );
+        MatcherAssert.assertThat(
+            "Properties have not been loaded",
+            actual.entrySet(),
+            Matchers.equalTo(
+                expected.entrySet()
+            )
+        );
     }
 
 }

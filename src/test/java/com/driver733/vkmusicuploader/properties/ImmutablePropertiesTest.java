@@ -51,7 +51,8 @@ import org.junit.Test;
 @SuppressWarnings(
     {
         "PMD.AvoidDuplicateLiterals",
-        "PMD.ProhibitPlainJunitAssertionsRule"
+        "PMD.ProhibitPlainJunitAssertionsRule",
+        "PMD.NonStaticInitializer"
     }
     )
 public final class ImmutablePropertiesTest {
@@ -121,23 +122,23 @@ public final class ImmutablePropertiesTest {
 
     @Test(expected = IOException.class)
     public void testLoadUnsupportedMethod()
-        throws IOException, URISyntaxException {
+        throws IOException {
         final ImmutableProperties props = new ImmutableProperties(
             new File(
-                new URI("file:///home/username/RomeoAndJuliet.pdf")
+                "audiosTest.properties"
             )
         );
         props.load(
             new FileInputStream(
                 new File(
-                    new URI("file:///home/username/RomeoAndJuliet.pdf")
+                    "src/test/resources/audiosTest.properties"
                 )
             )
         );
     }
 
     @Test
-    public void testStored() throws IOException {
+    public void testLoaded() throws IOException {
         final ImmutableProperties expected = new ImmutableProperties(
             new File(
                 "src/test/resources/audiosTest.properties"
@@ -157,6 +158,41 @@ public final class ImmutablePropertiesTest {
             actual.entrySet(),
             Matchers.equalTo(
                 expected.entrySet()
+            )
+        );
+    }
+
+    @Test
+    public void testStored() throws IOException {
+        final String key = "key";
+        final String value = "value";
+        final File props = new File(
+            "src/test/resources/testingProps.properties"
+        );
+        props.deleteOnExit();
+        final ImmutableProperties expected = new ImmutableProperties(
+            props
+        );
+        final ImmutableProperties actual = new ImmutableProperties(
+            props
+        ).stored();
+        actual.put(key, value);
+        MatcherAssert.assertThat(
+            "Returned object does not match the original one",
+            actual,
+            Matchers.equalTo(
+                expected
+            )
+        );
+        MatcherAssert.assertThat(
+            "Properties have not been stored",
+            actual.entrySet(),
+            Matchers.equalTo(
+                new HashMap<String, String>() {
+                    {
+                        put(key, value);
+                    }
+                }.entrySet()
             )
         );
     }

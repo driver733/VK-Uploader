@@ -72,12 +72,12 @@ public final class MediaVerifiedTest {
                         new File("src/test/")
                     ),
                     new ImmutableProperties(
-                        new File("src/test/resources/audiosTest.properties")
+                        new File("src/test/resources/audiosTestr.properties")
                     )
                 )
             ).files(),
             Matchers.containsInAnyOrder(
-                new File("src/test/resources/album/test.mp3")
+                new File("src/test/resources/album/testdd.mp3")
             )
         );
     }

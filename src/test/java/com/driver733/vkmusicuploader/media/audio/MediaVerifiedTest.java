@@ -32,7 +32,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test for {@link Audios}.
+ * Test for {@link MediaVerified}.
  *
  * @author Mikhail Yakushin (driver733@me.com)
  * @version $Id$
@@ -40,15 +40,36 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  */
 @Immutable
-public final class AudiosTest {
+public final class MediaVerifiedTest {
 
     @Test
-    public void all() throws IOException {
+    public void testAll() throws IOException {
         MatcherAssert.assertThat(
+            "Incorrect list produced.",
             new MediaVerified(
                 new AudiosNonProcessed(
                     new AudiosBasic(
                         new File("src/test/resources/album")
+                    ),
+                    new ImmutableProperties(
+                        new File("src/test/resources/audiosTest.properties")
+                    )
+                )
+            ).files(),
+            Matchers.containsInAnyOrder(
+                new File("src/test/resources/album/test.mp3")
+            )
+        );
+    }
+
+    @Test(expected = IOException.class)
+    public void testException() throws IOException {
+        MatcherAssert.assertThat(
+            "Exception should have been thrown.",
+            new MediaVerified(
+                new AudiosNonProcessed(
+                    new AudiosBasic(
+                        new File("src/test/")
                     ),
                     new ImmutableProperties(
                         new File("src/test/resources/audiosTest.properties")

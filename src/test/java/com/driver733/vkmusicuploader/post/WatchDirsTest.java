@@ -39,6 +39,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -182,6 +183,10 @@ public final class WatchDirsTest extends AbstractVkUnitTest {
             actual,
             AbstractVkUnitTest.GROUP_ID
         );
+        final File temp = root.resolve("testPhotoAlbum")
+            .resolve(".temp")
+            .toFile();
+        temp.deleteOnExit();
         new Thread(
             () -> {
                 try {
@@ -195,10 +200,7 @@ public final class WatchDirsTest extends AbstractVkUnitTest {
                 }
             }
         ).start();
-        final File temp = root.resolve("testPhotoAlbum")
-            .resolve(".temp")
-            .toFile();
-        temp.deleteOnExit();
+        TimeUnit.SECONDS.sleep(1);
         Files.copy(
             root.resolve("testPhotoAlbum")
                 .resolve("1.jpg"),
@@ -206,7 +208,9 @@ public final class WatchDirsTest extends AbstractVkUnitTest {
                 temp
             )
         );
+        TimeUnit.SECONDS.sleep(1);
         posts.updateProperties();
+        TimeUnit.SECONDS.sleep(1);
         MatcherAssert.assertThat(
             "The properties files differ",
             actual.entrySet(),

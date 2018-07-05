@@ -68,6 +68,7 @@ public final class WatchDirsTest extends AbstractVkUnitTest {
         "PMD.AvoidCatchingGenericException"
         })
     public void test() throws Exception {
+        final int delay = 5;
         final Path root = Paths.get("src/test/resources/photos");
         final File props = root.resolve("testPhotoAlbum")
             .resolve("vkmu.properties")
@@ -193,14 +194,15 @@ public final class WatchDirsTest extends AbstractVkUnitTest {
                     new WatchDirs(
                         new PostsBasic(
                             posts
-                        )
+                        ),
+                        root.toFile()
                     ).start();
                 } catch (final Exception ex) {
                     throw new IllegalStateException(ex);
                 }
             }
         ).start();
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(delay);
         Files.copy(
             root.resolve("testPhotoAlbum")
                 .resolve("1.jpg"),
@@ -208,9 +210,9 @@ public final class WatchDirsTest extends AbstractVkUnitTest {
                 temp
             )
         );
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(delay);
         posts.updateProperties();
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(delay);
         MatcherAssert.assertThat(
             "The properties files differ",
             actual.entrySet(),

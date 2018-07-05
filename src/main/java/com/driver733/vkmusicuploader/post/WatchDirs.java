@@ -29,7 +29,6 @@ import com.driver733.vkmusicuploader.post.posts.Posts;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import com.jcabi.log.Logger;
-import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -55,7 +54,7 @@ import java.util.Map;
  * @todo #11 Create a test class for the current class.
  */
 @Immutable
-public final class WatchDirs implements Closeable {
+public final class WatchDirs {
 
     /**
      * Directories to watch to changes.
@@ -95,11 +94,6 @@ public final class WatchDirs implements Closeable {
         this.watcher = FileSystems.getDefault().newWatchService();
     }
 
-    @Override
-    public void close() {
-        throw new UnsupportedOperationException("#close()");
-    }
-
     /**
      * Starts watching the directories for changes.
      * @throws Exception If a directory cannot be registered.
@@ -123,26 +117,9 @@ public final class WatchDirs implements Closeable {
     private void processEvents() throws Exception {
         while (true) {
             final WatchKey key;
-            try {
-                key = this.watcher.take();
-            } catch (final InterruptedException ex) {
-                throw new IOException(
-                    "Failed to get the signal for directory changes.", ex
-                );
-            }
+            key = this.watcher.take();
             final Path dir = this.keys.get(key);
-            if (dir == null) {
-                throw new IOException("WatchKey not recognized!");
-            }
             this.processSubevents(key, dir);
-            if (!key.reset()) {
-                if (this.keys.isEmpty()) {
-                    throw new IOException(
-                        "All subdirectories are inaccessible"
-                    );
-                }
-                this.keys.remove(key);
-            }
             this.posts
                 .postFromDir(
                     dir.toFile()
@@ -164,19 +141,16 @@ public final class WatchDirs implements Closeable {
             final Path child = dir.resolve(name);
             Logger.debug(
                 this,
-                "%s: %s%n", event.kind().name(), child
+                "%s: %s%n",
+                event.kind()
+                    .name(),
+                child
             );
-            if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
-                try {
-                    if (Files.isDirectory(child)) {
-                        this.processSubevents(child);
-                    }
-                } catch (final IOException ex) {
-                    throw new IOException(
-                        "Failed to register subdirectories.",
-                        ex
-                    );
-                }
+            if (
+                kind == StandardWatchEventKinds.ENTRY_CREATE
+                    && Files.isDirectory(child)
+                ) {
+                this.processSubevents(child);
             }
         }
     }
@@ -187,17 +161,13 @@ public final class WatchDirs implements Closeable {
      * @throws IOException If the directory cannot be registered.
      */
     private void registerDirectory(final Path dir) throws IOException {
-        try {
-            final WatchKey key = dir.register(
-                this.watcher,
-                StandardWatchEventKinds.ENTRY_CREATE,
-                StandardWatchEventKinds.ENTRY_DELETE,
-                StandardWatchEventKinds.ENTRY_MODIFY
-            );
-            this.keys.put(key, dir);
-        } catch (final IOException ex) {
-            throw new IOException("Failed to register directory", ex);
-        }
+        final WatchKey key = dir.register(
+            this.watcher,
+            StandardWatchEventKinds.ENTRY_CREATE,
+            StandardWatchEventKinds.ENTRY_DELETE,
+            StandardWatchEventKinds.ENTRY_MODIFY
+        );
+        this.keys.put(key, dir);
     }
 
     /**
@@ -208,22 +178,18 @@ public final class WatchDirs implements Closeable {
      * @checkstyle NonStaticMethodCheck (20 lines)
      */
     private void processSubevents(final Path root) throws IOException {
-        try {
-            Files.walkFileTree(
-                root,
-                new SimpleFileVisitor<Path>() {
-                    @Override
-                    public FileVisitResult preVisitDirectory(
-                        final Path subdir,
-                        final BasicFileAttributes attrs
-                    ) throws IOException {
-                        registerDirectory(subdir);
-                        return FileVisitResult.CONTINUE;
-                    }
-                });
-        } catch (final IOException ex) {
-            throw new IOException("Failed to register subdirectories", ex);
-        }
+        Files.walkFileTree(
+            root,
+            new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult preVisitDirectory(
+                    final Path subdir,
+                    final BasicFileAttributes attrs
+                ) throws IOException {
+                    registerDirectory(subdir);
+                    return FileVisitResult.CONTINUE;
+                }
+            });
     }
 
 }

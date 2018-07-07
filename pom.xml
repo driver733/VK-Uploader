@@ -218,7 +218,7 @@
                 <version>1.0.0</version>
                 <executions>
                     <execution>
-                        <phase>initialize</phase>
+                        <phase>verify</phase>
                         <goals>
                             <goal>read-project-properties</goal>
                         </goals>

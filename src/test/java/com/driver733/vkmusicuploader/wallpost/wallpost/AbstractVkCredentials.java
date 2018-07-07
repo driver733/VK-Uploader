@@ -24,8 +24,6 @@
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.jcabi.aspects.Immutable;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
 import java.io.File;
 import java.util.Properties;
 import org.cactoos.Scalar;
@@ -40,7 +38,11 @@ import org.cactoos.scalar.PropertiesOf;
  * @since 0.2
  */
 @Immutable
-public abstract class AbstractCredentials {
+@SuppressWarnings({
+    "PMD.AbstractClassWithoutAbstractMethod",
+    "PMD.AbstractClassWithoutAnyMethod"
+    })
+public abstract class AbstractVkCredentials {
 
     /**
      * Properties with credentials.
@@ -50,7 +52,7 @@ public abstract class AbstractCredentials {
     /**
      * Ctor.
      */
-    protected AbstractCredentials() {
+    protected AbstractVkCredentials() {
         this.props = new PropertiesOf(
             new InputOf(
                 new File(
@@ -61,14 +63,6 @@ public abstract class AbstractCredentials {
     }
 
     /**
-     * Test method.
-     * @throws Exception Properties exceptions.
-     * @throws ClientException If VK client error occurs.
-     * @throws ApiException If VK API error occurs.
-     */
-    public abstract void test() throws Exception;
-
-    /**
      * VK group ID.
      * @return Group ID.
      * @throws Exception If properties cannot be read.
@@ -77,7 +71,7 @@ public abstract class AbstractCredentials {
         return Integer.parseInt(
             String.valueOf(
                 this.props.value()
-                    .get("groupId")
+                    .get("vk.groupId")
             )
         );
     }
@@ -91,7 +85,7 @@ public abstract class AbstractCredentials {
         return Integer.parseInt(
             String.valueOf(
                 this.props.value()
-                    .get("userId")
+                    .get("vk.userId")
             )
         );
     }
@@ -104,7 +98,7 @@ public abstract class AbstractCredentials {
     protected final String token() throws Exception {
         return String.valueOf(
             this.props.value()
-                .get("token")
+                .get("vk.token")
         );
     }
 

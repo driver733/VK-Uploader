@@ -40,7 +40,7 @@ import org.cactoos.scalar.StickyScalar;
  */
 @Immutable
 @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-public abstract class AbstractEntrance extends AbstractCredentials {
+public abstract class AbstractEntrance extends AbstractVkCredentials {
 
     /**
      * Exit delay before next IT.

@@ -30,7 +30,7 @@ merge:
       - mvn install:install-file -Dfile=vk-java-sdk-547a05fa42.jar -DgroupId=com.github.driver733 -DartifactId=vk-java-sdk -Dversion=547a05fa42 -Dpackaging=jar
       # User ID, group ID and token params for integration tests
       # Build
-      - mvn clean verify -Dcredentials=/home/r/credentials.properties -Pqulice
+      - mvn clean verify jacoco:report coveralls:report -Dcredentials=/home/r/credentials.properties
       # Upload (if necessary) updated archive to dropbox
       - if [ "$(md5deep -r -x m2sumOld /root/.m2 | grep -v --ignore-case -e "driver733" -e "VKMusicUploader")" != "" ]; then tar -czvf m2.tar.gz /root/.m2 > /dev/null; ./dropbox_uploader.sh upload m2.tar.gz /m2.tar.gz; fi
 release:

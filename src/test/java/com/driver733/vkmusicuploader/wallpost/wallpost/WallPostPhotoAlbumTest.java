@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -23,13 +23,12 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
-import com.driver733.vkmusicuploader.post.UploadUrls;
+import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -45,8 +44,8 @@ import org.junit.Test;
 /**
  * Test for {@link WallPostPhotoAlbum}.
  *
- * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
- * @version $Id$
+ *
+ *
  * @since 0.2
  * @checkstyle AnonInnerLengthCheck (500 lines)
  * @checkstyle JavadocMethodCheck (500 lines)
@@ -63,12 +62,10 @@ public final class WallPostPhotoAlbumTest extends AbstractVkUnitTest {
         "PMD.AvoidDuplicateLiterals"
         })
     public void test() throws Exception {
-        final List<File> photos = Files.walk(
+        final List<Path> photos = Files.walk(
             Paths.get("src/test/resources/photos/testPhotoAlbum")
         ).filter(
             path -> path.toString().toLowerCase().endsWith(".jpg")
-        ).map(
-            Path::toFile
         ).collect(
             Collectors.toList()
         );
@@ -137,7 +134,7 @@ public final class WallPostPhotoAlbumTest extends AbstractVkUnitTest {
                     "1"
                 ),
                 photos,
-                new UploadUrls(
+                new UploadServers(
                     new VkApiClient(
                         new TransportClientFake(
                             new HashMap<String, TransportClient>() {

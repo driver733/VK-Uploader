@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -23,7 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
-import com.driver733.vkmusicuploader.post.UploadUrls;
+import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentCachedAudio;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhoto;
@@ -39,23 +39,23 @@ import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArraysWithProps;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallPhoto;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
  * Creates a {@link WallPost} with the specified
  *  audio files and an album cover (from an audio file tag or
  *  cover.jpg).
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  *
  * @checkstyle ClassDataAbstractionCouplingCheck (2 lines)
@@ -76,7 +76,7 @@ public final class WallPostAlbum implements WallPost {
     /**
      * Audio files.
      */
-    private final Array<File> audios;
+    private final List<Path> audios;
 
     /**
      * UserActor on behalf of which all requests will be sent.
@@ -86,7 +86,7 @@ public final class WallPostAlbum implements WallPost {
     /**
      * Upload servers that provide upload URLs for attachmentsFields.
      */
-    private final UploadUrls servers;
+    private final UploadServers servers;
 
     /**
      * Properties that contain the {@link AudioStatus} of audios files.
@@ -108,13 +108,13 @@ public final class WallPostAlbum implements WallPost {
     public WallPostAlbum(
         final VkApiClient client,
         final UserActor actor,
-        final List<File> audios,
-        final UploadUrls servers,
+        final List<Path> audios,
+        final UploadServers servers,
         final ImmutableProperties properties,
         final int group
     ) {
         this.client = client;
-        this.audios = new Array<>(audios);
+        this.audios = audios;
         this.actor = actor;
         this.servers = servers;
         this.properties = properties;
@@ -130,13 +130,15 @@ public final class WallPostAlbum implements WallPost {
     public WallPostQuery construct() throws Exception {
         final Mp3File file;
         try {
-            file = new Mp3File(this.audios.get(0));
+            file = new Mp3File(
+                this.audios.get(0)
+            );
         } catch (final UnsupportedTagException | InvalidDataException ex) {
             throw new IOException(
                 String.format(
                     "Failed to get Mp3File from File %s",
                     this.audios.get(0)
-                        .getAbsolutePath()
+                        .toAbsolutePath()
                 ),
                 ex
             );
@@ -168,11 +170,11 @@ public final class WallPostAlbum implements WallPost {
                                             )
                                         ),
                                         new ByteArrayFromFile(
-                                            new File(
+                                            Paths.get(
                                                 String.format(
                                                     "%s/cover.jpg",
                                                     this.audios.get(0)
-                                                        .getParentFile()
+                                                        .getParent()
                                                 )
                                             )
                                         )

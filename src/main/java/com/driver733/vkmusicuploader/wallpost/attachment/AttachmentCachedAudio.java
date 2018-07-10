@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -23,11 +23,11 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
+import com.driver733.vkmusicuploader.post.SuppressFBWarnings;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadAudio;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -37,6 +37,7 @@ import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.queries.audio.AudioAddQuery;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -47,13 +48,17 @@ import org.apache.commons.lang3.StringUtils;
  *  uploaded and returns a fake a real
  *  query accordingly.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @todo #6 Test this class.
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @Immutable
+@SuppressFBWarnings(
+    value = "NP_NULL_ON_SOME_PATH",
+    justification = "If path exists then NP will not occur."
+)
 public final class AttachmentCachedAudio implements Attachment {
 
     /**
@@ -74,7 +79,7 @@ public final class AttachmentCachedAudio implements Attachment {
     /**
      * Audios files.
      */
-    private final Array<File> audios;
+    private final List<Path> audios;
 
     /**
      * Audio upload URL for the audios files.
@@ -102,11 +107,11 @@ public final class AttachmentCachedAudio implements Attachment {
         final UserActor actor,
         final String url,
         final ImmutableProperties properties,
-        final List<File> audios,
+        final List<Path> audios,
         final int group
     ) {
         this.client = client;
-        this.audios = new Array<>(audios);
+        this.audios = audios;
         this.actor = actor;
         this.url = url;
         this.properties = properties;
@@ -119,7 +124,7 @@ public final class AttachmentCachedAudio implements Attachment {
         final List<AbstractQueryBuilder> list = new ArrayList<>(
             this.audios.size()
         );
-        for (final File audio : this.audios) {
+        for (final Path audio : this.audios) {
             list.addAll(
                 this.upload(audio)
             );
@@ -140,15 +145,15 @@ public final class AttachmentCachedAudio implements Attachment {
      * @checkstyle StringLiteralsConcatenationCheck (100 lines)
      * @checkstyle LocalFinalVariableNameCheck (100 lines)
      */
-    private List<AbstractQueryBuilder> upload(final File audio)
+    private List<AbstractQueryBuilder> upload(final Path audio)
         throws Exception {
         final List<AbstractQueryBuilder> result;
         if (
             this.properties.getProperty(
-            audio.getName()
+            audio.getFileName().toString()
         ) == null
             ) {
-            result = new AttachmentAudio(
+            result = new AttachmentAudioWithProps(
                 this.client,
                 this.actor,
                 this.properties,
@@ -161,7 +166,7 @@ public final class AttachmentCachedAudio implements Attachment {
                 ).upload();
         } else {
             final String value = this.properties.getProperty(
-                audio.getName()
+                audio.getFileName().toString()
             );
             final int status = Integer.parseInt(
                 value.substring(

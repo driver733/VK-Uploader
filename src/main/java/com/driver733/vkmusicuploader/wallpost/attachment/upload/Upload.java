@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -28,8 +28,8 @@ import com.vk.api.sdk.queries.upload.UploadQueryBuilder;
 /**
  * Constructs a query for uploading an file.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @param <T> Query type.
  * @param <R> Query return type.
  * @since 0.1

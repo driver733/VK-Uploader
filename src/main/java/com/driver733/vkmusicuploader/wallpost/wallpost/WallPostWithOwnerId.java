@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -30,8 +30,8 @@ import com.vk.api.sdk.queries.wall.WallPostQuery;
  * Specified where the {@link WallPost} will
  *  be posted.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  */
 @Immutable

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -36,8 +36,8 @@ import org.cactoos.scalar.Constant;
  * A message with a random quote
  *  from Forismatic API.
  *
- * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
- * @version $Id$
+ *
+ *
  * @since 0.2
  */
 @Immutable

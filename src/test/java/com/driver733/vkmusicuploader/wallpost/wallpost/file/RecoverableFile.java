@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -32,8 +32,8 @@ import java.util.Arrays;
 /**
  * Recovers file to its original state.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  */
 public final class RecoverableFile implements Recoverable<File> {

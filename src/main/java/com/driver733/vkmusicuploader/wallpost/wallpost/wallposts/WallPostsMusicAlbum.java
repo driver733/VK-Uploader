@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -23,9 +23,10 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost.wallposts;
 
-import com.driver733.vkmusicuploader.media.audio.AudiosBasic;
 import com.driver733.vkmusicuploader.media.audio.AudiosNonProcessed;
-import com.driver733.vkmusicuploader.post.UploadUrls;
+import com.driver733.vkmusicuploader.media.audio.MediaAudiosBasic;
+import com.driver733.vkmusicuploader.post.SuppressFBWarnings;
+import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.wallpost.WallPostAlbum;
@@ -39,6 +40,7 @@ import com.vk.api.sdk.queries.execute.ExecuteBatchQuery;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -48,13 +50,17 @@ import java.util.List;
  *  with albums found in the specified directory.
  *  Each wall post has up 9 audios.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  *
  * @checkstyle ClassDataAbstractionCouplingCheck (2 lines)
  */
 @Immutable
+@SuppressFBWarnings(
+    value = "NP_NULL_ON_SOME_PATH",
+    justification = "If path exists then NP will not occur."
+)
 public final class WallPostsMusicAlbum implements WallPosts {
 
     /**
@@ -113,12 +119,12 @@ public final class WallPostsMusicAlbum implements WallPosts {
     /**
      * Album dir.
      */
-    private final File dir;
+    private final Path dir;
 
     /**
      * Upload servers that provide upload URLs for attachmentsFields.
      */
-    private final UploadUrls servers;
+    private final UploadServers servers;
 
     /**
      * Properties that contain the {@link AudioStatus}es of audios files.
@@ -140,8 +146,8 @@ public final class WallPostsMusicAlbum implements WallPosts {
     public WallPostsMusicAlbum(
         final VkApiClient client,
         final UserActor actor,
-        final File dir,
-        final UploadUrls servers,
+        final Path dir,
+        final UploadServers servers,
         final ImmutableProperties properties,
         final int group
     ) {
@@ -161,7 +167,7 @@ public final class WallPostsMusicAlbum implements WallPosts {
      * @throws Exception If no audios are found.
      */
     public List<ExecuteBatchQuery> postsQueries() throws Exception {
-        final List<File> audios = this.audios();
+        final List<Path> audios = this.audios();
         final List<ExecuteBatchQuery> queries = new ArrayList<>(
             audios.size()
         );
@@ -169,7 +175,7 @@ public final class WallPostsMusicAlbum implements WallPosts {
         Logger.debug(
             this,
             "Analyzing directory '%s'...",
-            this.dir.getPath()
+            this.dir
         );
         while (iter < audios.size()) {
             final int to;
@@ -201,13 +207,14 @@ public final class WallPostsMusicAlbum implements WallPosts {
     @Override
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public void updateProperties() throws IOException {
-        final List<File> audios = this.audios();
-        for (final File audio : audios) {
+        final List<Path> audios = this.audios();
+        for (final Path audio : audios) {
             this.properties.setProperty(
-                audio.getName(),
+                audio.getFileName().toString(),
                 new StringBuilder(
                     this.properties.getProperty(
-                        audio.getName()
+                        audio
+                            .getFileName().toString()
                     )
                 ).replace(
                     0,
@@ -227,9 +234,9 @@ public final class WallPostsMusicAlbum implements WallPosts {
      *  is not fulfilled.
      */
     @Cacheable(forever = true)
-    private List<File> audios() throws IOException {
+    private List<Path> audios() throws IOException {
         return new AudiosNonProcessed(
-            new AudiosBasic(
+            new MediaAudiosBasic(
                 this.dir
             ),
             this.properties
@@ -248,13 +255,13 @@ public final class WallPostsMusicAlbum implements WallPosts {
         "PMD.OptimizableToArrayCall"
         })
     private ExecuteBatchQuery postsBatch(
-        final List<File> audios
+        final List<Path> audios
     ) throws
         Exception {
         Logger.info(
             this,
             "Processing directory: '%s'...",
-            this.dir.getPath()
+            this.dir
         );
         final List<WallPostQuery> posts = new ArrayList<>(
             audios.size()

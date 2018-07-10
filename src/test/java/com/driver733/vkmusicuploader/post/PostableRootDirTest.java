@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -44,8 +44,6 @@ import org.junit.Test;
 /**
  * Test for {@link PostableRootDir}.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
  * @since 0.2
  * @checkstyle AnonInnerLengthCheck (500 lines)
  * @checkstyle JavadocMethodCheck (500 lines)
@@ -132,9 +130,8 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 new UserActor(
                     1, ""
                 ),
-                root.resolve("testPhotoAlbum")
-                    .toFile(),
-                new UploadUrls(
+                root.resolve("testPhotoAlbum"),
+                new UploadServers(
                     new VkApiClient(
                         new TransportClientFake(
                             new HashMap<String, TransportClient>() {
@@ -302,9 +299,8 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 new UserActor(
                     1, ""
                 ),
-                root.resolve("album")
-                    .toFile(),
-                new UploadUrls(
+                root.resolve("album"),
+                new UploadServers(
                     new VkApiClient(
                         new TransportClientFake(
                             new HashMap<String, TransportClient>() {

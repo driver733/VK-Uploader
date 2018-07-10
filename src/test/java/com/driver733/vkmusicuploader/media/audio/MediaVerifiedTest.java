@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -25,7 +25,6 @@ package com.driver733.vkmusicuploader.media.audio;
 
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.jcabi.aspects.Immutable;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,8 +35,8 @@ import org.junit.Test;
 /**
  * Test for {@link MediaVerified}.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  */
@@ -56,16 +55,16 @@ public final class MediaVerifiedTest {
             "Incorrect list produced.",
             new MediaVerified(
                 new AudiosNonProcessed(
-                    new AudiosBasic(
-                        new File("src/test/resources/album")
+                    new MediaAudiosBasic(
+                        Paths.get("src/test/resources/album")
                     ),
                     new ImmutableProperties(
-                        PROPS.toFile()
+                        MediaVerifiedTest.PROPS.toFile()
                     )
                 )
             ).files(),
             Matchers.containsInAnyOrder(
-                new File("src/test/resources/album/test.mp3")
+                Paths.get("src/test/resources/album/test.mp3")
             )
         );
     }
@@ -76,16 +75,16 @@ public final class MediaVerifiedTest {
             "Exception should have been thrown.",
             new MediaVerified(
                 new AudiosNonProcessed(
-                    new AudiosBasic(
-                        new File("src/test/")
+                    new MediaAudiosBasic(
+                        Paths.get("src/test/")
                     ),
                     new ImmutableProperties(
-                        PROPS.toFile()
+                        MediaVerifiedTest.PROPS.toFile()
                     )
                 )
             ).files(),
             Matchers.containsInAnyOrder(
-                new File("src/test/resources/album/testdd.mp3")
+                Paths.get("src/test/resources/album/testdd.mp3")
             )
         );
     }

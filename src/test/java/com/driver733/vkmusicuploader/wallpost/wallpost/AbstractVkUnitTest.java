@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -26,8 +26,8 @@ package com.driver733.vkmusicuploader.wallpost.wallpost;
 /**
  * VK API endpoints.
  *
- * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @checkstyle FinalClassCheck (5 lines)
  */

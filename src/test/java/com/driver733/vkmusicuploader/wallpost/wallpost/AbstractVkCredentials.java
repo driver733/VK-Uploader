@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -33,8 +33,8 @@ import org.cactoos.scalar.PropertiesOf;
 /**
  * VK credentials for IT.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.2
  */
 @Immutable

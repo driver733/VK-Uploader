@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -34,12 +34,12 @@ import java.util.concurrent.TimeUnit;
 /**
  * Acquires upload servers for various files.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  */
 @Immutable
-public final class UploadUrls {
+public final class UploadServers {
 
     /**
      * Group ID.
@@ -62,7 +62,7 @@ public final class UploadUrls {
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param group Group ID.
      */
-    public UploadUrls(
+    public UploadServers(
         final VkApiClient client,
         final UserActor actor,
         final int group

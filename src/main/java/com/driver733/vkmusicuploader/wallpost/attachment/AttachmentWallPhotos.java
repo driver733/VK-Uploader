@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -26,7 +26,6 @@ package com.driver733.vkmusicuploader.wallpost.attachment;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallPhoto;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -34,6 +33,7 @@ import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,8 +42,8 @@ import java.util.List;
  *  uploaded and returns a fake a real
  *  query accordingly.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @todo #6 Test the class.
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
@@ -69,7 +69,7 @@ public final class AttachmentWallPhotos implements Attachment {
     /**
      * Audios files.
      */
-    private final Array<File> photos;
+    private final List<Path> photos;
 
     /**
      * Audio upload URL for the audios files.
@@ -89,11 +89,11 @@ public final class AttachmentWallPhotos implements Attachment {
         final VkApiClient client,
         final UserActor actor,
         final String url,
-        final List<File> photos,
+        final List<Path> photos,
         final int group
     ) {
         this.client = client;
-        this.photos = new Array<>(photos);
+        this.photos = photos;
         this.actor = actor;
         this.url = url;
         this.group = group;
@@ -105,7 +105,7 @@ public final class AttachmentWallPhotos implements Attachment {
         final List<AbstractQueryBuilder> list = new ArrayList<>(
             this.photos.size()
         );
-        for (final File photo : this.photos) {
+        for (final Path photo : this.photos) {
             final List<AbstractQueryBuilder> queries;
             try {
                 queries = this.upload(photo);
@@ -132,7 +132,7 @@ public final class AttachmentWallPhotos implements Attachment {
      * @checkstyle StringLiteralsConcatenationCheck (100 lines)
      * @checkstyle LocalFinalVariableNameCheck (100 lines)
      */
-    private List<AbstractQueryBuilder> upload(final File photo)
+    private List<AbstractQueryBuilder> upload(final Path photo)
         throws Exception {
         return new AttachmentWallPhoto(
             this.client,

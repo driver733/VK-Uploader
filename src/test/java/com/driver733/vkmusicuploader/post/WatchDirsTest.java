@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -47,8 +47,8 @@ import org.junit.Test;
 /**
  * Test for {@link WatchDirs}.
  *
- * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
- * @version $Id$
+ *
+ *
  * @since 0.2
  * @checkstyle AnonInnerLengthCheck (500 lines)
  * @checkstyle JavadocMethodCheck (500 lines)
@@ -140,9 +140,8 @@ public final class WatchDirsTest extends AbstractVkUnitTest {
                 1,
                 ""
             ),
-            root.resolve("testPhotoAlbum")
-                .toFile(),
-            new UploadUrls(
+            root.resolve("testPhotoAlbum"),
+            new UploadServers(
                 new VkApiClient(
                     new TransportClientFake(
                         new HashMap<String, TransportClient>() {

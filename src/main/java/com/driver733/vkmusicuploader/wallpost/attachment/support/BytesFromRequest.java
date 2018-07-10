@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -31,8 +31,8 @@ import org.cactoos.Bytes;
 /**
  * Fetches a random image from www.picsum.photos.
  *
- * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
- * @version $Id$
+ *
+ *
  * @since 0.2
  */
 @Immutable

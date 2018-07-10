@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -46,8 +46,8 @@ import java.util.List;
  *
  * Saves the results in specified {@link java.util.Properties}.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (20 lines)
  * @checkstyle ParameterNumberCheck (10 lines)

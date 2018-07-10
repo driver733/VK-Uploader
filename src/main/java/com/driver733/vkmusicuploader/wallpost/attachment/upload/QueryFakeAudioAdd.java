@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -32,8 +32,8 @@ import java.util.Collection;
 /**
  * A fake {@link com.vk.api.sdk.queries.audio.AudioAddQuery}.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @checkstyle ProtectedMethodInFinalClassCheck (500 lines)
  */

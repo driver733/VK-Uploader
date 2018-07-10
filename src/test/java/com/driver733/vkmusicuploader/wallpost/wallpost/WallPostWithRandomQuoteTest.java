@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -23,13 +23,16 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
-import com.driver733.vkmusicuploader.post.UploadUrls;
+import com.driver733.vkmusicuploader.post.UploadServers;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.BytesFromRequest;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
+import com.jcabi.http.request.FakeRequest;
 import com.jcabi.matchers.RegexMatchers;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
+import java.nio.file.Files;
 import java.util.HashMap;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -38,8 +41,8 @@ import org.junit.Test;
 /**
  * Test for {@link WallPostWithRandomQuote}.
  *
- * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
- * @version $Id$
+ *
+ *
  * @since 0.2
  * @checkstyle AnonInnerLengthCheck (500 lines)
  * @checkstyle JavadocMethodCheck (500 lines)
@@ -55,7 +58,52 @@ public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
         "PMD.NonStaticInitializer",
         "PMD.AvoidDuplicateLiterals"
         })
-    public void test() throws Exception {
+    public void testTextOnly() throws Exception {
+        MatcherAssert.assertThat(
+            "Incorrect query map produced.",
+            new WallPostWithRandomQuote(
+                new VkApiClient(
+                    new TransportClientFake(
+                        new HashMap<String, TransportClient>() {
+                            {
+                                put(
+                                    AbstractVkUnitTest.EXECUTE_URL,
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"response\": { \"post_id\": 3 }"
+                                            + "}"
+                                    )
+                                );
+                            }
+                        }
+                    )
+                ),
+                new UserActor(
+                    1,
+                    "1"
+                ),
+                AbstractVkUnitTest.GROUP_ID
+            ).construct()
+                .build(),
+            Matchers.allOf(
+                Matchers.hasEntry("access_token", "1"),
+                Matchers.hasEntry("v", "5.63"),
+                Matchers.hasEntry("owner_id", "-161929264"),
+                Matchers.hasEntry("from_group", "1"),
+                Matchers.hasValue(
+                    RegexMatchers.containsPattern("[а-яА-Я]")
+                )
+            )
+        );
+    }
+
+    @Test
+    @SuppressWarnings({
+        "PMD.ExcessiveMethodLength",
+        "PMD.NonStaticInitializer",
+        "PMD.AvoidDuplicateLiterals"
+        })
+    public void testWithPhoto() throws Exception {
         MatcherAssert.assertThat(
             "Incorrect query map produced.",
             new WallPostWithRandomQuote(
@@ -70,17 +118,6 @@ public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
                                             + "\"hash\"      : \"hash123\","
                                             + "\"photo\"     : \"fnknjkasd\","
                                             + "\"server\"    : 123546"
-                                            + "}"
-                                    )
-                                );
-                                put(
-                                    "audio.uploadServer",
-                                    new TransportClientCached(
-                                        "{"
-                                            + "\"hash\"     : \"hash123\","
-                                            + "\"audio\"    : \"fnknjkasd\","
-                                            + "\"server\"   : 123546,"
-                                            + "\"redirect\" : \"redirect.com\""
                                             + "}"
                                     )
                                 );
@@ -131,7 +168,7 @@ public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
                     1,
                     "1"
                 ),
-                new UploadUrls(
+                new UploadServers(
                     new VkApiClient(
                         new TransportClientFake(
                             new HashMap<String, TransportClient>() {
@@ -158,6 +195,18 @@ public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
                     ),
                     AbstractVkUnitTest.GROUP_ID
                 ),
+                Files.write(
+                    Files.createTempFile(
+                        "testPhoto",
+                        ".jpg"
+                    ),
+                    new BytesFromRequest(
+                        new FakeRequest()
+                            .withBody(
+                                "Test".getBytes()
+                            )
+                    ).asBytes()
+                ),
                 AbstractVkUnitTest.GROUP_ID
             ).construct()
                 .build(),
@@ -169,6 +218,313 @@ public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
                 Matchers.hasEntry(
                     "attachments",
                     "photo6785_123456"
+                ),
+                Matchers.hasValue(
+                    RegexMatchers.containsPattern("[а-яА-Я]")
+                )
+            )
+        );
+    }
+
+    @Test
+    @SuppressWarnings({
+        "PMD.ExcessiveMethodLength",
+        "PMD.NonStaticInitializer",
+        "PMD.AvoidDuplicateLiterals"
+        })
+    public void testWithAudio() throws Exception {
+        MatcherAssert.assertThat(
+            "Incorrect query map produced.",
+            new WallPostWithRandomQuote(
+                new VkApiClient(
+                    new TransportClientFake(
+                        new HashMap<String, TransportClient>() {
+                            {
+                                put(
+                                    "audio.uploadServer",
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"hash\"     : \"hash123\","
+                                            + "\"audio\"    : \"fnknjkasd\","
+                                            + "\"server\"   : 123546,"
+                                            + "\"redirect\" : \"redirect.com\""
+                                            + "}"
+                                    )
+                                );
+                                put(
+                                    AbstractVkUnitTest.AUDIO_SAVE_URL,
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"id\"       : 123456,"
+                                            + "\"owner_id\" : 5674,"
+                                            + "\"artist\"   : \"Clean Tears\","
+                                            + "\"title\"    : \"Dragon\","
+                                            + "\"url\"      : \"url1.com\""
+                                            + "}"
+                                    )
+                                );
+                                put(
+                                    AbstractVkUnitTest.AUDIO_ADD_URL,
+                                    new TransportClientCached(
+                                        "{ \"response\" : 123456789 }"
+                                    )
+                                );
+                                put(
+                                    AbstractVkUnitTest.EXECUTE_URL,
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"response\": { \"post_id\": 3 }"
+                                            + "}"
+                                    )
+                                );
+                            }
+                        }
+                    )
+                ),
+                new UserActor(
+                    1,
+                    "1"
+                ),
+                new UploadServers(
+                    new VkApiClient(
+                        new TransportClientFake(
+                            new HashMap<String, TransportClient>() {
+                                {
+                                    put(
+                                        AbstractVkUnitTest.AUDIO_UPLOAD_URL,
+                                        new TransportClientCached(
+                                            "{"
+                                                + "\"response\": {"
+                                                + "\"upload_url\" :"
+                                                + "\"audio.uploadServer\""
+                                                + "}"
+                                                + "}"
+                                        )
+                                    );
+                                    put(
+                                        AbstractVkUnitTest.AUDIO_UPLOAD_URL,
+                                        new TransportClientCached(
+                                            "{"
+                                                + "\"response\": {"
+                                                + "\"upload_url\" :"
+                                                + "\"audio.uploadServer\""
+                                                + "}"
+                                                + "}"
+                                        )
+                                    );
+                                }
+                            }
+                        )
+                    ),
+                    new UserActor(
+                        1, "1"
+                    ),
+                    AbstractVkUnitTest.GROUP_ID
+                ),
+                AbstractVkUnitTest.GROUP_ID,
+                Files.write(
+                    Files.createTempFile(
+                        "testAudio",
+                        ".mp3"
+                    ),
+                    new BytesFromRequest(
+                        new FakeRequest()
+                            .withBody(
+                                "Test".getBytes()
+                            )
+                    ).asBytes()
+                )
+            ).construct()
+                .build(),
+            Matchers.allOf(
+                Matchers.hasEntry("access_token", "1"),
+                Matchers.hasEntry("v", "5.63"),
+                Matchers.hasEntry("owner_id", "-161929264"),
+                Matchers.hasEntry("from_group", "1"),
+                Matchers.hasEntry(
+                    "attachments",
+                    "audio-161929264_123456789"
+                ),
+                Matchers.hasValue(
+                    RegexMatchers.containsPattern("[а-яА-Я]")
+                )
+            )
+        );
+    }
+
+    @Test
+    @SuppressWarnings({
+        "PMD.ExcessiveMethodLength",
+        "PMD.NonStaticInitializer",
+        "PMD.AvoidDuplicateLiterals"
+        })
+    public void testWithPhotoAndAudio() throws Exception {
+        MatcherAssert.assertThat(
+            "Incorrect query map produced.",
+            new WallPostWithRandomQuote(
+                new VkApiClient(
+                    new TransportClientFake(
+                        new HashMap<String, TransportClient>() {
+                            {
+                                put(
+                                    "photos.wallUploadServer",
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"hash\"      : \"hash123\","
+                                            + "\"photo\"     : \"fnknjkasd\","
+                                            + "\"server\"    : 123546"
+                                            + "}"
+                                    )
+                                );
+                                put(
+                                    "audio.uploadServer",
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"hash\"     : \"hash123\","
+                                            + "\"audio\"    : \"fnknjkasd\","
+                                            + "\"server\"   : 123546,"
+                                            + "\"redirect\" : \"redirect.com\""
+                                            + "}"
+                                    )
+                                );
+                                put(
+                                    AbstractVkUnitTest.AUDIO_ADD_URL,
+                                    new TransportClientCached(
+                                        "{ \"response\" : 123456789 }"
+                                    )
+                                );
+                                put(
+                                    AbstractVkUnitTest.AUDIO_SAVE_URL,
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"id\"       : 123456,"
+                                            + "\"owner_id\" : 5674,"
+                                            + "\"artist\"   : \"Clean Tears\","
+                                            + "\"title\"    : \"Dragon\","
+                                            + "\"url\"      : \"url1.com\""
+                                            + "}"
+                                    )
+                                );
+                                put(
+                                    AbstractVkUnitTest.PHOTO_SAVE_URL,
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"id\"          : 123456,"
+                                            + "\"album_id\"    : 5674,"
+                                            + "\"owner_id\"    : 6785,"
+                                            + "\"user_id\"     : 4356,"
+                                            + "\"sizes\"       : ["
+                                            + "{"
+                                            + "\"src\": \"src\","
+                                            + "\"width\": 100,"
+                                            + "\"height\": 100"
+                                            + "}"
+                                            + "],"
+                                            + "\"photo_75\"    : \"url1.com\","
+                                            + "\"photo_130\"   : \"url1.com\","
+                                            + "\"photo_604\"   : \"url1.com\","
+                                            + "\"photo_807\"   : \"url1.com\","
+                                            + "\"photo_1280\"  : \"url1.com\","
+                                            + "\"photo_2560\"  : \"url1.com\","
+                                            + "\"photo_id\"    : 3456,"
+                                            + "\"width\"       : 500,"
+                                            + "\"height\"      : 500,"
+                                            + "\"date\"        : 1502919105,"
+                                            + "\"lat\"         : 56.3456,"
+                                            + "\"long\"        : 54.9645,"
+                                            + "\"access_key\"  : \"sjdkfk\""
+                                            + "}"
+                                    )
+                                );
+                                put(
+                                    AbstractVkUnitTest.EXECUTE_URL,
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"response\": { \"post_id\": 3 }"
+                                            + "}"
+                                    )
+                                );
+                            }
+                        }
+                    )
+                ),
+                new UserActor(
+                    1,
+                    "1"
+                ),
+                new UploadServers(
+                    new VkApiClient(
+                        new TransportClientFake(
+                            new HashMap<String, TransportClient>() {
+                                {
+                                    put(
+                                        AbstractVkUnitTest.PHOTO_WALL_URL,
+                                        new TransportClientCached(
+                                            "{"
+                                                + "\"response\" : {"
+                                                + "\"upload_url\" :"
+                                                + "\"photos.wallUploadServer\","
+                                                + "\"album_id\"   : 169819278,"
+                                                + "\"user_id\"    : 185014513"
+                                                + "}"
+                                                + "}"
+                                        )
+                                    );
+                                    put(
+                                        AbstractVkUnitTest.AUDIO_UPLOAD_URL,
+                                        new TransportClientCached(
+                                            "{"
+                                                + "\"response\": {"
+                                                + "\"upload_url\" :"
+                                                + "\"audio.uploadServer\""
+                                                + "}"
+                                                + "}"
+                                        )
+                                    );
+                                }
+                            }
+                        )
+                    ),
+                    new UserActor(
+                        1, "1"
+                    ),
+                    AbstractVkUnitTest.GROUP_ID
+                ),
+                AbstractVkUnitTest.GROUP_ID,
+                Files.write(
+                    Files.createTempFile(
+                        "testPhoto2",
+                        ".jpg"
+                    ),
+                    new BytesFromRequest(
+                        new FakeRequest()
+                            .withBody(
+                                "Tessft".getBytes()
+                            )
+                    ).asBytes()
+                ),
+                Files.write(
+                    Files.createTempFile(
+                        "testAudio3",
+                        ".mp3"
+                    ),
+                    new BytesFromRequest(
+                        new FakeRequest()
+                            .withBody(
+                                "Testingd".getBytes()
+                            )
+                    ).asBytes()
+                )
+            ).construct()
+                .build(),
+            Matchers.allOf(
+                Matchers.hasEntry("access_token", "1"),
+                Matchers.hasEntry("v", "5.63"),
+                Matchers.hasEntry("owner_id", "-161929264"),
+                Matchers.hasEntry("from_group", "1"),
+                Matchers.hasEntry(
+                    "attachments",
+                    "photo6785_123456,audio-161929264_123456789"
                 ),
                 Matchers.hasValue(
                     RegexMatchers.containsPattern("[а-яА-Я]")

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -31,8 +31,8 @@ import org.cactoos.Scalar;
  * Constructs a {@link com.driver733.vkmusicuploader.wallpost.wallpost.WallPost}
  *  message by combining the specified strings.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  */
 @Immutable

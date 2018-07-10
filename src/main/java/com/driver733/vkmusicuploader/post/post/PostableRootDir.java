@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -35,8 +35,8 @@ import java.io.IOException;
  * Constructs {@link com.driver733.vkmusicuploader.post.posts.Posts}
  * from the specified director.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  */
 @Immutable

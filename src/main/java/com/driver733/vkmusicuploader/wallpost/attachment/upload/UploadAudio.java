@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -29,12 +29,13 @@ import com.vk.api.sdk.objects.audio.responses.AudioUploadResponse;
 import com.vk.api.sdk.queries.upload.UploadAudioQuery;
 import com.vk.api.sdk.queries.upload.UploadQueryBuilder;
 import java.io.File;
+import java.nio.file.Path;
 
 /**
  * Constructs a query for uploading an audios file.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  */
 @Immutable
@@ -71,9 +72,31 @@ public final class UploadAudio
         this.audio = audio;
     }
 
+    /**
+     * Ctor.
+     * @param client The {@link VkApiClient}
+     *  that is used for all VK API requests.
+     * @param url Upload URL for the audios.
+     * @param audio Audio file to upload.
+     */
+    public UploadAudio(
+        final VkApiClient client, final String url, final Path audio
+    ) {
+        this(
+            client,
+            url,
+            audio.toFile()
+        );
+    }
+
     @Override
     public UploadQueryBuilder<UploadAudioQuery, AudioUploadResponse> query() {
-        return this.client.upload().audio(this.url, this.audio);
+        return this.client
+            .upload()
+            .audio(
+                this.url,
+                this.audio
+            );
     }
 
 }

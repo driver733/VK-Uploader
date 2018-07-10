@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -24,8 +24,6 @@
 
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
-import com.driver733.vkmusicuploader.properties.ImmutableProperties;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.Upload;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadAudio;
 import com.jcabi.aspects.Immutable;
@@ -41,14 +39,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Upload the audios, caches the upload result
- *  in {@link java.util.Properties} and returns
+ * Upload the audios and returns
  *  {@link AudioAddQuery} for the uploaded
  *  audios.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
- * @since 0.1
+ *
+ *
+ * @since 0.2
  */
 @Immutable
 public final class AttachmentAudio implements Attachment {
@@ -74,31 +71,22 @@ public final class AttachmentAudio implements Attachment {
     private final Array<Upload<UploadAudioQuery, AudioUploadResponse>> audios;
 
     /**
-     * Properties that contain the {@link AudioStatus} of audios files.
-     */
-    private final ImmutableProperties properties;
-
-    /**
      * Ctor.
      * @param client The {@link VkApiClient}
      *  that is used for all VK API requests.
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param audios Audios files.
      * @param group Group ID.
-     * @param properties Properties that contain the
-     *  {@link AudioStatus} of audios files.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
     public AttachmentAudio(
         final VkApiClient client,
         final UserActor actor,
-        final ImmutableProperties properties,
         final int group,
         final UploadAudio... audios
     ) {
         this.client = client;
         this.actor = actor;
-        this.properties = properties;
         this.group = group;
         this.audios = new Array<>(audios);
     }
@@ -128,9 +116,6 @@ public final class AttachmentAudio implements Attachment {
     private List<AbstractQueryBuilder> upload(
         final Upload<UploadAudioQuery, AudioUploadResponse> upload
     ) throws Exception {
-        this.properties.load();
-        final String filename = upload.query()
-            .fileName();
         final AudioUploadResponse response = upload.query()
             .execute();
         final Audio audio = this.client
@@ -141,11 +126,6 @@ public final class AttachmentAudio implements Attachment {
                 response.getAudio(),
                 response.getHash()
             ).execute();
-        new AttachmentAudioProps(
-            audio,
-            filename,
-            this.properties
-        ).saveProps();
         return new Array<>(
             new AudioAddQuery(
                 this.client,

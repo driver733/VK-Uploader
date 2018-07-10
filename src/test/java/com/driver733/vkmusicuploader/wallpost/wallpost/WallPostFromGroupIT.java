@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -34,8 +34,8 @@ import org.junit.Test;
 /**
  * Class description.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.2
  * @checkstyle JavadocMethodCheck (500 lines)
  */

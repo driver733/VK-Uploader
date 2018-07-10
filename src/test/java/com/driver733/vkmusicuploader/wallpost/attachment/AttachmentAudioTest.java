@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -42,10 +42,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Test for {@link AttachmentAudio}.
+ * Test for {@link AttachmentAudioWithProps}.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle LocalFinalVariableNameCheck (500 lines)
@@ -74,7 +74,7 @@ public final class AttachmentAudioTest extends AbstractVkUnitTest {
             props.toPath()
         );
         Assert.assertThat(
-            new AttachmentAudio(
+            new AttachmentAudioWithProps(
                 new VkApiClient(
                     new TransportClientFake(
                         new HashMap<String, TransportClient>() {

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -38,8 +38,8 @@ import org.cactoos.io.BytesOf;
  * Constructs a query for uploading a photo
  *  to the wall.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @todo #16 Move FallbackScalar handing to a new class.
  */
@@ -110,6 +110,25 @@ public final class UploadWallPhoto
         final VkApiClient client,
         final String url,
         final File photo
+    ) {
+        this(
+            client,
+            url,
+            new BytesOf(photo)
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param client The {@link VkApiClient}
+     *  that is used for all VK API requests.
+     * @param url Wall Photo upload URL for the photo construct.
+     * @param photo Photo file.
+     */
+    public UploadWallPhoto(
+        final VkApiClient client,
+        final String url,
+        final Path photo
     ) {
         this(
             client,

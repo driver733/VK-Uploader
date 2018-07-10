@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -48,8 +48,8 @@ import java.util.Map;
  * Tracks the specified folder for changes
  *  and restarts the processing.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @todo #11 Create a test class for the current class.
  */

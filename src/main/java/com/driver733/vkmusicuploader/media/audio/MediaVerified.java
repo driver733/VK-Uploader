@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -25,17 +25,17 @@ package com.driver733.vkmusicuploader.media.audio;
 
 import com.driver733.vkmusicuploader.media.Media;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
+import org.cactoos.list.ListOf;
 
 /**
  * Verifies that the {@link List}
  * of audios files is not empty.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  */
 @Immutable
@@ -55,8 +55,10 @@ public final class MediaVerified implements Media {
     }
 
     @Override
-    public List<File> files() throws IOException {
-        final Array<File> audios = new Array<>(this.origin.files());
+    public List<Path> files() throws IOException {
+        final List<Path> audios = new ListOf<>(
+            this.origin.files()
+        );
         if (audios.isEmpty()) {
             throw new IOException("No media found");
         }

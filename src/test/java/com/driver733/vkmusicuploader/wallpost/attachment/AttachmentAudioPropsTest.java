@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -39,8 +39,8 @@ import org.mockito.Mockito;
 /**
  * Test for {@link AttachmentAudioProps}.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle LocalFinalVariableNameCheck (500 lines)

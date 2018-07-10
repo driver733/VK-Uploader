@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -25,16 +25,19 @@ package com.driver733.vkmusicuploader.media.photo;
 
 import com.driver733.vkmusicuploader.media.Media;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Collectors;
+import org.cactoos.list.ListOf;
 
 /**
  * Constructs a list of audios files
  *  in the specified folder.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.2
  */
 @Immutable
@@ -43,22 +46,27 @@ public final class MediaPhotosBasic implements Media {
     /**
      * Directory that contains files.
      */
-    private final File dir;
+    private final Path dir;
 
     /**
      * Ctor.
      * @param dir Directory that contains files.
      */
-    public MediaPhotosBasic(final File dir) {
+    public MediaPhotosBasic(final Path dir) {
         this.dir = dir;
     }
 
     // @checkstyle ParameterNameCheck (10 lines)
     @Override
-    public List<File> files() {
-        return new Array<>(
-            this.dir.listFiles(
-                (dirName, fileName) -> fileName.endsWith(".jpg")
+    public List<Path> files() throws IOException {
+        return new ListOf<>(
+            Files.list(
+                this.dir
+            ).filter(
+                file -> Files.isRegularFile(file)
+                    && file.getFileName().toString().endsWith(".jpg")
+            ).collect(
+                Collectors.toList()
             )
         );
     }

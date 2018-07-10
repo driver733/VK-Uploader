@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -39,8 +39,8 @@ import org.junit.Test;
 /**
  * Test for {@link IdsMap}.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @todo #22 Write tests for the exceptions.
  * @checkstyle JavadocMethodCheck (500 lines)

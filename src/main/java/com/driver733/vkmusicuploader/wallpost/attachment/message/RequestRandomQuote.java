@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -30,8 +30,8 @@ import org.cactoos.Scalar;
 /**
  * Request for Forismatic API fetching a random quote.
  *
- * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
- * @version $Id$
+ *
+ *
  * @since 0.2
  */
 public final class RequestRandomQuote implements Scalar<Request> {

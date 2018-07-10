@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -32,8 +32,8 @@ import org.junit.Test;
 /**
  * Test for {@link BytesFromRequest}.
  *
- * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
- * @version $Id$
+ *
+ *
  * @since 0.2
  * @checkstyle JavadocMethodCheck (500 lines)
  */

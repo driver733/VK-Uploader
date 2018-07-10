@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -28,7 +28,6 @@ import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearr
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayImageFromAdvancedTag;
 import com.jcabi.aspects.Immutable;
 import com.mpatric.mp3agic.Mp3File;
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -39,8 +38,8 @@ import org.junit.Test;
 /**
  * Test for {@link FallbackBytes}.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  */
@@ -56,7 +55,7 @@ public final class FallbackBytesTest {
     /**
      * Test mp3 file.
      */
-    private final File audio = new File(
+    private final Path audio = Paths.get(
         "src/test/resources/album/test.mp3"
     );
 
@@ -89,7 +88,7 @@ public final class FallbackBytesTest {
         MatcherAssert.assertThat(
             new FallbackBytes(
                 new ByteArrayFromFile(
-                    this.path.toFile()
+                    this.path
                 ),
             new ByteArrayFromFile(
                 this.audio
@@ -110,7 +109,6 @@ public final class FallbackBytesTest {
                 new ByteArrayFromFile(
                     this.path
                         .resolve("invalid")
-                        .toFile()
                 )
             ).asBytes(),
             Matchers.equalTo(
@@ -128,10 +126,9 @@ public final class FallbackBytesTest {
                 new ByteArrayFromFile(
                     this.path
                         .resolve("wrong")
-                        .toFile()
                 ),
                 new ByteArrayFromFile(
-                    this.path.toFile()
+                    this.path
                 )
             ).asBytes(),
             Matchers.equalTo(

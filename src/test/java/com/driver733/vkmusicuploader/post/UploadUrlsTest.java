@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -34,10 +34,10 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test for {@link UploadUrls}.
+ * Test for {@link UploadServers}.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  */
@@ -52,7 +52,7 @@ public final class UploadUrlsTest {
     @Test
     public void audio() throws ClientException, ApiException {
         MatcherAssert.assertThat(
-            new UploadUrls(
+            new UploadServers(
                 new VkApiClient(
                     new TransportClientCached(
                         "{ \"upload_url\" : \"http://test.com/audios\" }"
@@ -68,7 +68,7 @@ public final class UploadUrlsTest {
     @Test
     public void docs() throws ClientException, ApiException {
         MatcherAssert.assertThat(
-            new UploadUrls(
+            new UploadServers(
                 new VkApiClient(
                     new TransportClientCached(
                         "{ \"upload_url\" : \"http://test.com/docs\" }"
@@ -84,7 +84,7 @@ public final class UploadUrlsTest {
     @Test
     public void wallPhoto() throws ClientException, ApiException {
         MatcherAssert.assertThat(
-            new UploadUrls(
+            new UploadServers(
                 new VkApiClient(
                     new TransportClientCached(
                         "{ \"upload_url\" : \"http://test.com/wallPhoto\" }"

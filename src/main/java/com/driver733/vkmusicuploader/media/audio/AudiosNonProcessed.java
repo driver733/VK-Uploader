@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -24,12 +24,12 @@
 package com.driver733.vkmusicuploader.media.audio;
 
 import com.driver733.vkmusicuploader.media.Media;
+import com.driver733.vkmusicuploader.post.SuppressFBWarnings;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,11 +38,15 @@ import java.util.List;
  * files that have not been processed
  * yet.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  */
 @Immutable
+@SuppressFBWarnings(
+    value = "NP_NULL_ON_SOME_PATH",
+    justification = "If path exists then NP will not occur."
+    )
 public final class AudiosNonProcessed implements Media {
 
     /**
@@ -70,18 +74,25 @@ public final class AudiosNonProcessed implements Media {
     }
 
     @Override
-    public List<File> files() throws IOException {
+    public List<Path> files() throws IOException {
         this.props.load();
-        final Array<File> audios = new Array<>(this.origin.files());
-        final List<File> result = new ArrayList<>(audios.size());
-        for (final File file : audios) {
+        final List<Path> audios = this.origin.files();
+        final List<Path> result = new ArrayList<>(
+            audios.size()
+        );
+        for (final Path file : audios) {
             if (
-                !this.props.containsKey(file.getName())
+                !this.props.containsKey(
+                    file.getFileName().toString()
+                )
                     || !this.props
-                        .get(file.getName())
-                        .toString()
+                        .get(
+                            file.getFileName().toString()
+                        ).toString()
                         .substring(0, 1)
-                        .equals(AudioStatus.POSTED.toString())
+                        .equals(
+                            AudioStatus.POSTED.toString()
+                        )
                 ) {
                 result.add(file);
             }

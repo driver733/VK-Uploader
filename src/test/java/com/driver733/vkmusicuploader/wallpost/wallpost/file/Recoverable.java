@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -28,8 +28,8 @@ import java.io.IOException;
 /**
  * Recover to original state.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @param <T> Data objects of the specified type can be recovered.
  * @since 0.1
  */

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -24,38 +24,38 @@
 package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray;
 
 import com.jcabi.aspects.Immutable;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import org.cactoos.Bytes;
 
 /**
  * Transforms file to byte array.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  */
 @Immutable
 public final class ByteArrayFromFile implements Bytes {
 
     /**
-     * A {@link File} with an image.
+     * A {@link Path} with an image.
      */
-    private final File file;
+    private final Path file;
 
     /**
      * Ctor.
-     * @param file A {@link File} with an image.
+     * @param file A {@link Path} with an image.
      */
-    public ByteArrayFromFile(final File file) {
+    public ByteArrayFromFile(final Path file) {
         this.file = file;
     }
 
     @Override
     public byte[] asBytes() throws IOException {
         return Files.readAllBytes(
-            this.file.toPath()
+            this.file
         );
     }
 

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -32,6 +32,8 @@ import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.queries.photos.PhotosSaveWallPhotoQuery;
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -45,8 +47,8 @@ import org.junit.Test;
 /**
  * Test for {@link AttachmentWallPhotos}.
  *
- * @author Mikhail Yakushin (yakushin@terpmail.umd.edu)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle AnonInnerLengthCheck (500 lines)
@@ -67,19 +69,19 @@ public final class AttachmentWallPhotosTest extends AbstractVkUnitTest {
             "src/test/resources/photos/testPhotoAlbum/vkmu.properties"
         ).deleteOnExit();
         final String dir = "src/test/resources/photos/testPhotoAlbum";
-        final List<File> photos = new ListOf<>(
-            new File(String.format("%s/1.jpg", dir)),
-            new File(String.format("%s/2.jpg", dir)),
-            new File(String.format("%s/3.jpg", dir)),
-            new File(String.format("%s/4.jpg", dir)),
-            new File(String.format("%s/5.jpg", dir)),
-            new File(String.format("%s/6.jpg", dir)),
-            new File(String.format("%s/7.jpg", dir)),
-            new File(String.format("%s/8.jpg", dir)),
-            new File(String.format("%s/9.jpg", dir)),
-            new File(String.format("%s/10.jpg", dir)),
-            new File(String.format("%s/11.jpg", dir)),
-            new File(String.format("%s/12.jpg", dir))
+        final List<Path> photos = new ListOf<>(
+            Paths.get(String.format("%s/1.jpg", dir)),
+            Paths.get(String.format("%s/2.jpg", dir)),
+            Paths.get(String.format("%s/3.jpg", dir)),
+            Paths.get(String.format("%s/4.jpg", dir)),
+            Paths.get(String.format("%s/5.jpg", dir)),
+            Paths.get(String.format("%s/6.jpg", dir)),
+            Paths.get(String.format("%s/7.jpg", dir)),
+            Paths.get(String.format("%s/8.jpg", dir)),
+            Paths.get(String.format("%s/9.jpg", dir)),
+            Paths.get(String.format("%s/10.jpg", dir)),
+            Paths.get(String.format("%s/11.jpg", dir)),
+            Paths.get(String.format("%s/12.jpg", dir))
         );
         final List<AbstractQueryBuilder> queries = new AttachmentWallPhotos(
             new VkApiClient(

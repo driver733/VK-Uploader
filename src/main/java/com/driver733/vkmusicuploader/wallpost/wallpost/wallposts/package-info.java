@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -25,8 +25,8 @@
 /**
  * Constructs {@link WallPost}s.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost.wallposts;

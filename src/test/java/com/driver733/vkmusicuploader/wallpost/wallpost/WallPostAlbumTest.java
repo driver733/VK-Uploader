@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -23,19 +23,18 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
-import com.driver733.vkmusicuploader.post.UploadUrls;
+import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkmusicuploader.wallpost.wallpost.file.RecoverableFile;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
-import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.cactoos.io.BytesOf;
 import org.hamcrest.MatcherAssert;
@@ -45,8 +44,8 @@ import org.junit.Test;
 /**
  * Test for {@link WallPostAlbum}.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @checkstyle AnonInnerLengthCheck (500 lines)
  * @checkstyle JavadocMethodCheck (500 lines)
@@ -171,10 +170,14 @@ public final class WallPostAlbumTest extends AbstractVkUnitTest {
                     1,
                     "1"
                 ),
-                new Array<>(
-                    new File("src/test/resources/album/test.mp3")
-                ),
-                new UploadUrls(
+                new ArrayList<Path>(1) {
+                    {
+                        add(
+                            Paths.get("src/test/resources/album/test.mp3")
+                        );
+                    }
+                },
+                new UploadServers(
                     new VkApiClient(
                         new TransportClientFake(
                             new HashMap<String, TransportClient>() {

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -23,7 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
-import com.driver733.vkmusicuploader.post.UploadUrls;
+import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallDocument;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArraysWithProps;
@@ -41,8 +41,8 @@ import org.junit.Test;
 /**
  * {@link WallPostWithAttachments} IT.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.2
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
@@ -58,7 +58,7 @@ public final class WallPostWithAttachmentsIT extends AbstractEntrance {
             new FileOutputStream(props),
             ""
         );
-        final UploadUrls servers = new UploadUrls(
+        final UploadServers servers = new UploadServers(
             client(),
             actor(),
             groupId()

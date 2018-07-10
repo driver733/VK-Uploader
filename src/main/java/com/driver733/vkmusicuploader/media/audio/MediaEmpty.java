@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -24,43 +24,22 @@
 package com.driver733.vkmusicuploader.media.audio;
 
 import com.driver733.vkmusicuploader.media.Media;
-import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
-import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
+import org.cactoos.list.ListOf;
 
 /**
- * Constructs a list of audios files
- *  in the specified folder.
+ * Media Empty.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
- * @since 0.1
+ *
+ *
+ * @since 0.2
  */
-@Immutable
-public final class AudiosBasic implements Media {
+public final class MediaEmpty implements Media {
 
-    /**
-     * Directory that contains audios files.
-     */
-    private final File dir;
-
-    /**
-     * Ctor.
-     * @param dir Directory that contains audios files.
-     */
-    public AudiosBasic(final File dir) {
-        this.dir = dir;
-    }
-
-    // @checkstyle ParameterNameCheck (10 lines)
     @Override
-    public List<File> files() {
-        return new Array<>(
-            this.dir.listFiles(
-                (dirName, fileName) -> fileName.endsWith(".mp3")
-            )
-        );
+    public List<Path> files() {
+        return new ListOf<>();
     }
 
 }

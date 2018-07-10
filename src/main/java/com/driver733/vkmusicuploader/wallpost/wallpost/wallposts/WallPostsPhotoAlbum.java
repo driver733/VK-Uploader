@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -25,13 +25,13 @@ package com.driver733.vkmusicuploader.wallpost.wallpost.wallposts;
 
 import com.driver733.vkmusicuploader.media.photo.MediaPhotosBasic;
 import com.driver733.vkmusicuploader.media.photo.MediaPhotosNonProcessed;
-import com.driver733.vkmusicuploader.post.UploadUrls;
+import com.driver733.vkmusicuploader.post.SuppressFBWarnings;
+import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.WallPhotoStatus;
 import com.driver733.vkmusicuploader.wallpost.wallpost.WallPostPhotoAlbum;
 import com.jcabi.aspects.Cacheable;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.jcabi.log.Logger;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -39,21 +39,27 @@ import com.vk.api.sdk.queries.execute.ExecuteBatchQuery;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import org.cactoos.list.ListOf;
 
 /**
  * Creates {@link com.driver733.vkmusicuploader.wallpost.wallpost.WallPost}s
  *  with photos found in the specified directory.
  *  Each wall post has up to 10 photos.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.2
  *
- * @checkstyle ClassDataAbstractionCouplingCheck (2 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (20 lines)
  */
 @Immutable
+@SuppressFBWarnings(
+    value = "NP_NULL_ON_SOME_PATH",
+    justification = "If path exists then NP will not occur."
+)
 public final class WallPostsPhotoAlbum implements WallPosts {
 
     /**
@@ -97,12 +103,12 @@ public final class WallPostsPhotoAlbum implements WallPosts {
     /**
      * Album dir.
      */
-    private final File dir;
+    private final Path dir;
 
     /**
      * Upload servers that provide upload URLs for attachmentsFields.
      */
-    private final UploadUrls servers;
+    private final UploadServers servers;
 
     /**
      * Properties that contain the {@link WallPhotoStatus}es of photos.
@@ -124,8 +130,8 @@ public final class WallPostsPhotoAlbum implements WallPosts {
     public WallPostsPhotoAlbum(
         final VkApiClient client,
         final UserActor actor,
-        final File dir,
-        final UploadUrls servers,
+        final Path dir,
+        final UploadServers servers,
         final ImmutableProperties properties,
         final int group
     ) {
@@ -145,12 +151,13 @@ public final class WallPostsPhotoAlbum implements WallPosts {
      * @throws Exception If no photos are found.
      */
     public List<ExecuteBatchQuery> postsQueries() throws Exception {
-        final List<File> photos = this.photos();
+        final List<Path> photos = this.photos();
         final List<ExecuteBatchQuery> queries = new ArrayList<>(photos.size());
         int iter = 0;
         Logger.debug(
             this,
-            "Analyzing directory '%s'...", this.dir.getPath()
+            "Analyzing directory '%s'...",
+            this.dir
         );
         while (iter < photos.size()) {
             final int to;
@@ -161,7 +168,10 @@ public final class WallPostsPhotoAlbum implements WallPosts {
             }
             queries.add(
                 this.postsBatch(
-                    photos.subList(iter, to)
+                    photos.subList(
+                        iter,
+                        to
+                    )
                 )
             );
             iter += WallPostsPhotoAlbum.PHOTOS_IN_REQ;
@@ -175,10 +185,10 @@ public final class WallPostsPhotoAlbum implements WallPosts {
     @Override
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public void updateProperties() throws IOException {
-        final List<File> photos = this.photos();
-        for (final File photo : photos) {
+        final List<Path> photos = this.photos();
+        for (final Path photo : photos) {
             this.properties.setProperty(
-                photo.getName(),
+                photo.getFileName().toString(),
                 WallPhotoStatus.POSTED.toString()
             );
         }
@@ -192,7 +202,7 @@ public final class WallPostsPhotoAlbum implements WallPosts {
      *  is not fulfilled.
      */
     @Cacheable(forever = true)
-    private List<File> photos() throws IOException {
+    private List<Path> photos() throws IOException {
         return new MediaPhotosNonProcessed(
             new MediaPhotosBasic(
                 this.dir
@@ -212,11 +222,12 @@ public final class WallPostsPhotoAlbum implements WallPosts {
     @SuppressWarnings({"PMD.AvoidInstantiatingObjectsInLoops",
         "PMD.OptimizableToArrayCall"
         })
-    private ExecuteBatchQuery postsBatch(final List<File> photos) throws
+    private ExecuteBatchQuery postsBatch(final List<Path> photos) throws
         Exception {
         Logger.info(
             this,
-            "Processing directory: '%s'...", this.dir.getPath()
+            "Processing directory: '%s'...",
+            this.dir
         );
         final List<WallPostQuery> posts = new ArrayList<>(
             photos.size()
@@ -234,7 +245,7 @@ public final class WallPostsPhotoAlbum implements WallPosts {
                 query = new WallPostPhotoAlbum(
                     this.client,
                     this.actor,
-                    new Array<>(
+                    new ListOf<>(
                         photos.subList(
                             from,
                             to

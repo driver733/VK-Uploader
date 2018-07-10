@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -33,8 +33,8 @@ import java.io.IOException;
  * Saves the result of a successful
  *  audios upload.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @checkstyle MemberNameCheck (50 lines)
  */

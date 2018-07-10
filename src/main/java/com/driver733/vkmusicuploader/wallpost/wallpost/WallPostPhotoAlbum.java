@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -23,28 +23,32 @@
  */
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
-import com.driver733.vkmusicuploader.post.UploadUrls;
+import com.driver733.vkmusicuploader.post.SuppressFBWarnings;
+import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhotos;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArrays;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.queries.wall.WallPostQuery;
-import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
  * Creates a {@link WallPost} with the specified
  *  photos.
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.2
  *
  * @checkstyle ClassDataAbstractionCouplingCheck (2 lines)
  */
 @Immutable
+@SuppressFBWarnings(
+    value = "NP_NULL_ON_SOME_PATH",
+    justification = "If path exists then NP will not occur."
+)
 public final class WallPostPhotoAlbum implements WallPost {
 
     /**
@@ -60,7 +64,7 @@ public final class WallPostPhotoAlbum implements WallPost {
     /**
      * Photos files.
      */
-    private final Array<File> photos;
+    private final List<Path> photos;
 
     /**
      * UserActor on behalf of which all requests will be sent.
@@ -70,7 +74,7 @@ public final class WallPostPhotoAlbum implements WallPost {
     /**
      * Upload servers that provide upload URLs for attachmentsFields.
      */
-    private final UploadUrls servers;
+    private final UploadServers servers;
 
     /**
      * Ctor.
@@ -86,12 +90,12 @@ public final class WallPostPhotoAlbum implements WallPost {
     public WallPostPhotoAlbum(
         final VkApiClient client,
         final UserActor actor,
-        final List<File> photos,
-        final UploadUrls servers,
+        final List<Path> photos,
+        final UploadServers servers,
         final int group
     ) {
         this.client = client;
-        this.photos = new Array<>(photos);
+        this.photos = photos;
         this.actor = actor;
         this.servers = servers;
         this.group = group;

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -24,26 +24,31 @@
 package com.driver733.vkmusicuploader.media.photo;
 
 import com.driver733.vkmusicuploader.media.Media;
+import com.driver733.vkmusicuploader.post.SuppressFBWarnings;
 import com.driver733.vkmusicuploader.properties.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.WallPhotoStatus;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import org.cactoos.list.ListOf;
 
 /**
  * Returns a {@link List} of files
  * that have not been processed
  * yet.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.2
  */
 @Immutable
+@SuppressFBWarnings(
+    value = "NP_NULL_ON_SOME_PATH",
+    justification = "If path exists then NP will not occur."
+)
 public final class MediaPhotosNonProcessed implements Media {
 
     /**
@@ -71,19 +76,23 @@ public final class MediaPhotosNonProcessed implements Media {
     }
 
     @Override
-    public List<File> files() throws IOException {
+    public List<Path> files() throws IOException {
         this.props.load();
-        final Array<File> photos = new Array<>(
+        final List<Path> photos = new ListOf<>(
             this.origin.files()
         );
-        final List<File> result = new ArrayList<>(
+        final List<Path> result = new ArrayList<>(
             photos.size()
         );
-        for (final File file : photos) {
+        for (final Path file : photos) {
             if (
-                !this.props.containsKey(file.getName())
+                !this.props.containsKey(
+                    file.getFileName().toString()
+                )
                     || !this.props
-                    .get(file.getName())
+                    .get(
+                        file.getFileName().toString()
+                    )
                     .toString()
                     .substring(0, 1)
                     .equals(

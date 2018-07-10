@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2018 Mikhail Yakushin
@@ -38,8 +38,8 @@ import org.junit.Test;
 /**
  * {@link QueriesSafeNonCached} test class.
  *
- * @author Mikhail Yakushin (driver733@me.com)
- * @version $Id$
+ *
+ *
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle JavadocMethodCheck (500 lines)

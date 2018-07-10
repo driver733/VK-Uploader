@@ -32,7 +32,7 @@
         <dependency>
             <groupId>com.github.driver733</groupId>
             <artifactId>vk-java-sdk</artifactId>
-            <version>8f0787b2ea</version>
+            <version>1741c9e583</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -163,7 +163,6 @@
                     <excludes>
                         <exclude>checkstyle:/src/test/resources/.*</exclude>
                         <exclude>xml:/src/main/resources/.*</exclude>
-                        <exclude>duplicatefinder:.*</exclude>
                         <exclude>cobertura:.*</exclude>
                         <exclude>dependencies:.*</exclude>
 

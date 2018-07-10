@@ -29,6 +29,7 @@ import com.driver733.vkmusicuploader.media.audio.MediaAudiosBasic;
 import com.driver733.vkmusicuploader.media.audio.MediaEmpty;
 import com.driver733.vkmusicuploader.media.photo.MediaPhotosBasic;
 import com.driver733.vkmusicuploader.post.UploadServers;
+import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkmusicuploader.wallpost.wallpost.WallPostWithRandomQuote;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
@@ -38,6 +39,7 @@ import com.vk.api.sdk.queries.wall.WallPostQuery;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Creates {@link com.driver733.vkmusicuploader.wallpost.wallpost.WallPost}s
@@ -116,8 +118,6 @@ public final class WallPostsRandomQuote implements WallPosts {
      * Ctor.
      * @param client The {@link VkApiClient} for all requests.
      * @param actor UserActor on behalf of which all requests will be sent.
-     * @param servers Upload servers that provide upload URLs
-     *  for attachmentsFields.
      * @param group Group ID.
      * @param count Number of posts to create.
      * @checkstyle ParameterNumberCheck (200 lines)
@@ -125,15 +125,23 @@ public final class WallPostsRandomQuote implements WallPosts {
     public WallPostsRandomQuote(
         final VkApiClient client,
         final UserActor actor,
-        final UploadServers servers,
         final int group,
         final int count
     ) {
         this.client = client;
         this.actor = actor;
+        this.servers = new UploadServers(
+            new VkApiClient(
+                new TransportClientFake()
+            ),
+            new UserActor(
+                0,
+                ""
+            ),
+            0
+        );
         this.photos = new MediaEmpty();
         this.audios = new MediaEmpty();
-        this.servers = servers;
         this.group = group;
         this.count = count;
     }
@@ -165,6 +173,35 @@ public final class WallPostsRandomQuote implements WallPosts {
             photos
         );
         this.audios = new MediaEmpty();
+    }
+
+    /**
+     * Ctor.
+     * @param client The {@link VkApiClient} for all requests.
+     * @param actor UserActor on behalf of which all requests will be sent.
+     * @param servers Upload servers that provide upload URLs
+     *  for attachmentsFields.
+     * @param group Group ID.
+     * @param count Number of posts to create.
+     * @param audios Directory with audios.
+     */
+    public WallPostsRandomQuote(
+        final VkApiClient client,
+        final UserActor actor,
+        final UploadServers servers,
+        final int group,
+        final Path audios,
+        final int count
+    ) {
+        this.client = client;
+        this.actor = actor;
+        this.servers = servers;
+        this.group = group;
+        this.count = count;
+        this.photos = new MediaEmpty();
+        this.audios = new MediaAudiosBasic(
+            audios
+        );
     }
 
     /**
@@ -297,7 +334,7 @@ public final class WallPostsRandomQuote implements WallPosts {
         final int cost,
         final WallPostWithRandomQuote wallpost
     ) throws Exception {
-        int left = this.count * cost;
+        int left = this.count;
         final List<ExecuteBatchQuery> result = new ArrayList<>(
             (int) Math.ceil(
                 (double) this.count / WallPostsRandomQuote.BATCH_MAX_REQ * cost
@@ -309,15 +346,17 @@ public final class WallPostsRandomQuote implements WallPosts {
             );
             for (
                 int iter = 0;
-                iter < WallPostsRandomQuote.BATCH_MAX_REQ;
+                iter < this.count;
                 iter += 1
             ) {
                 queries.add(
                     wallpost.construct()
                 );
+                TimeUnit.SECONDS.sleep(2);
             }
             result.add(
-                this.client.execute().batch(
+                new ExecuteBatchQuery(
+                    this.client,
                     this.actor,
                     queries.toArray(
                         new WallPostQuery[0]

@@ -80,7 +80,7 @@ public final class MediaRandom implements MediaSingle {
             ThreadLocalRandom.current()
                 .nextInt(
                     0,
-                    files.size() + 1
+                    files.size()
                 )
         );
     }

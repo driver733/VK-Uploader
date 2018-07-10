@@ -94,4 +94,9 @@ public final class TransportClientFake implements TransportClient {
     public boolean isCached() {
         return true;
     }
+
+    @Override
+    public boolean isTest() {
+        return true;
+    }
 }

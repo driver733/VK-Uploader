@@ -42,10 +42,7 @@ import java.util.List;
  *  uploaded and returns a fake a real
  *  query accordingly.
  *
- *
- *
  * @since 0.1
- * @todo #6 Test the class.
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @Immutable

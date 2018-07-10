@@ -48,10 +48,7 @@ import java.util.Map;
  * Tracks the specified folder for changes
  *  and restarts the processing.
  *
- *
- *
  * @since 0.1
- * @todo #11 Create a test class for the current class.
  */
 @Immutable
 public final class WatchDirs {

@@ -38,10 +38,7 @@ import org.cactoos.io.BytesOf;
  * Constructs a query for uploading a photo
  *  to the wall.
  *
- *
- *
  * @since 0.1
- * @todo #16 Move FallbackScalar handing to a new class.
  */
 @Immutable
 public final class UploadWallPhoto

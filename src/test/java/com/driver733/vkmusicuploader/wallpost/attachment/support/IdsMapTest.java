@@ -39,10 +39,7 @@ import org.junit.Test;
 /**
  * Test for {@link IdsMap}.
  *
- *
- *
  * @since 0.1
- * @todo #22 Write tests for the exceptions.
  * @checkstyle JavadocMethodCheck (500 lines)
  */
 @Immutable

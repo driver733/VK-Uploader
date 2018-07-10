@@ -48,10 +48,7 @@ import org.apache.commons.lang3.StringUtils;
  *  uploaded and returns a fake a real
  *  query accordingly.
  *
- *
- *
  * @since 0.1
- * @todo #6 Test this class.
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @Immutable

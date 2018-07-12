@@ -9,7 +9,6 @@
 
 [![codebeat badge](https://codebeat.co/badges/483007e8-a73d-4bfd-80a1-52586ba3a615)](https://codebeat.co/projects/github-com-driver733-vkmusicuploader-master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/65288c94deac4a36bf03a80604cf1c04)](https://www.codacy.com/app/driver733/VKMusicUploader?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=driver733/VKMusicUploader&amp;utm_campaign=Badge_Grade)
-[![Known Vulnerabilities](https://snyk.io/test/github/driver733/VKMusicUploader/badge.svg)](https://snyk.io/test/github/driver733/VKMusicUploader)
 
 [![PDD status](http://www.0pdd.com/svg?name=driver733/VKMusicUploader)](http://www.0pdd.com/p?name=driver733/VKMusicUploader)
 

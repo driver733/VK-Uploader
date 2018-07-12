@@ -48,7 +48,7 @@ public final class RandomMediaFromDirectoryTest {
      * Test path.
      */
     private static final Path ROOT = Paths.get(
-        "src/test/resources/random/testPhotoAlbum/"
+        "src/test/resources/randomDir/"
     );
 
     @Test
@@ -61,27 +61,27 @@ public final class RandomMediaFromDirectoryTest {
             Matchers.anyOf(
                 Matchers.equalTo(
                     RandomMediaFromDirectoryTest.ROOT
-                        .resolve("1.jpg")
+                        .resolve("1.properties")
                 ),
                 Matchers.equalTo(
                     RandomMediaFromDirectoryTest.ROOT
-                        .resolve("2.jpg")
+                        .resolve("2.properties")
                 ),
                 Matchers.equalTo(
                     RandomMediaFromDirectoryTest.ROOT
-                        .resolve("3.jpg")
+                        .resolve("3.properties")
                 ),
                 Matchers.equalTo(
                     RandomMediaFromDirectoryTest.ROOT
-                        .resolve("4.jpg")
+                        .resolve("4.properties")
                 ),
                 Matchers.equalTo(
                     RandomMediaFromDirectoryTest.ROOT
-                        .resolve("5.jpg")
+                        .resolve("5.properties")
                 ),
                 Matchers.equalTo(
                     RandomMediaFromDirectoryTest.ROOT
-                        .resolve("expected.properties")
+                        .resolve("6.properties")
                 )
             )
         );
@@ -96,17 +96,17 @@ public final class RandomMediaFromDirectoryTest {
             ).files(),
                 Matchers.containsInAnyOrder(
                     RandomMediaFromDirectoryTest.ROOT
-                        .resolve("1.jpg"),
+                        .resolve("1.properties"),
                     RandomMediaFromDirectoryTest.ROOT
-                        .resolve("2.jpg"),
+                        .resolve("2.properties"),
                     RandomMediaFromDirectoryTest.ROOT
-                        .resolve("3.jpg"),
+                        .resolve("3.properties"),
                     RandomMediaFromDirectoryTest.ROOT
-                        .resolve("4.jpg"),
+                        .resolve("4.properties"),
                     RandomMediaFromDirectoryTest.ROOT
-                        .resolve("5.jpg"),
+                        .resolve("5.properties"),
                     RandomMediaFromDirectoryTest.ROOT
-                        .resolve("expected.properties")
+                        .resolve("6.properties")
                 )
         );
     }

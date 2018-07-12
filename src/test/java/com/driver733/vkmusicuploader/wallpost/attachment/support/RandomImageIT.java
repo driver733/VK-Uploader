@@ -32,8 +32,6 @@ import org.junit.Test;
 /**
  * Test for {@link RequestRandomImage}.
  *
- *
- *
  * @since 0.2
  * @checkstyle JavadocMethodCheck (500 lines)
  */

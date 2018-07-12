@@ -29,7 +29,6 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.cactoos.list.ListOf;
 
 /**
  * Returns a random file from a directory.
@@ -58,13 +57,13 @@ public final class RandomMediaFromDirectory implements Media, MediaSingle {
         ).filter(
             file -> Files.isRegularFile(file)
         ).collect(
-                Collectors.collectingAndThen(
-                    Collectors.toList(),
-                    list -> {
-                        Collections.shuffle(list);
-                        return list;
-                    }
-                )
+            Collectors.collectingAndThen(
+                Collectors.toList(),
+                list -> {
+                    Collections.shuffle(list);
+                    return list;
+                }
+            )
         );
     }
 

@@ -75,7 +75,6 @@ public final class AudiosNonProcessed implements Media {
 
     @Override
     public List<Path> files() throws IOException {
-        this.props.load();
         final List<Path> audios = this.origin.files();
         final List<Path> result = new ArrayList<>(
             audios.size()

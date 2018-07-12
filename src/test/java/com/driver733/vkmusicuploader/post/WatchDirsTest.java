@@ -194,7 +194,7 @@ public final class WatchDirsTest extends AbstractVkUnitTest {
                         new PostsBasic(
                             posts
                         ),
-                        root.toFile()
+                        root
                     ).start();
                 } catch (final Exception ex) {
                     throw new IllegalStateException(ex);

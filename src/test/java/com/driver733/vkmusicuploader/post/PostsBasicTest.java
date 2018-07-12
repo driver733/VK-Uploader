@@ -67,6 +67,9 @@ public final class PostsBasicTest extends AbstractVkUnitTest {
             .resolve("vkmu.properties")
             .toFile()
             .deleteOnExit();
+        root.resolve("vkmu.properties")
+            .toFile()
+            .deleteOnExit();
         new PostsBasic(
             new WallPostsPhotoAlbum(
                 new VkApiClient(
@@ -176,7 +179,7 @@ public final class PostsBasicTest extends AbstractVkUnitTest {
                 AbstractVkUnitTest.GROUP_ID
             )
         ).postFromDir(
-            root.toFile()
+            root
         ).post();
         MatcherAssert.assertThat(
             "The properties files differ",
@@ -346,7 +349,7 @@ public final class PostsBasicTest extends AbstractVkUnitTest {
                 AbstractVkUnitTest.GROUP_ID
             )
             ).postFromDir(
-                root.toFile()
+                root
         );
         MatcherAssert.assertThat(
             "The properties files differ",

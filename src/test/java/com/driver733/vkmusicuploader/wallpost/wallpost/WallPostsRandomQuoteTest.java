@@ -100,7 +100,10 @@ public final class WallPostsRandomQuoteTest {
             ),
             AbstractVkUnitTest.GROUP_ID,
             WallPostsRandomQuoteTest.N_WALLPOSTS
-        ).postsQueries().get(0).build().get("code");
+        ).postsQueries()
+            .get(0)
+            .build()
+            .get("code");
         MatcherAssert.assertThat(
             "Constructed query does not match the expected one.",
             new JsonPattern(

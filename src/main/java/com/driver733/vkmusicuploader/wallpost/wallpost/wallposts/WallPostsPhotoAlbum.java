@@ -187,12 +187,12 @@ public final class WallPostsPhotoAlbum implements WallPosts {
     public void updateProperties() throws IOException {
         final List<Path> photos = this.photos();
         for (final Path photo : photos) {
-            this.properties.setProperty(
-                photo.getFileName().toString(),
+            this.properties.setPropertyAndStore(
+                photo.getFileName()
+                    .toString(),
                 WallPhotoStatus.POSTED.toString()
             );
         }
-        this.properties.store();
     }
 
     /**

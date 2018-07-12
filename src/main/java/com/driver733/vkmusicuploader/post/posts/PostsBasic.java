@@ -27,7 +27,7 @@ import com.driver733.vkmusicuploader.post.post.Postable;
 import com.driver733.vkmusicuploader.post.post.PostableRootDir;
 import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPosts;
 import com.jcabi.aspects.Immutable;
-import java.io.File;
+import java.nio.file.Path;
 
 /**
  * Creates {@link PostableRootDir} from
@@ -57,7 +57,7 @@ public final class PostsBasic implements Posts {
     }
 
     @Override
-    public Postable postFromDir(final File dir) {
+    public Postable postFromDir(final Path dir) {
         return new PostableRootDir(
             dir,
             this.wallposts

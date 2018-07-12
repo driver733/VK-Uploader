@@ -27,9 +27,7 @@ package com.driver733.vkmusicuploader.post;
 
 import com.driver733.vkmusicuploader.post.posts.Posts;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.jcabi.log.Logger;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
@@ -42,7 +40,9 @@ import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import org.cactoos.list.ListOf;
 
 /**
  * Tracks the specified folder for changes
@@ -56,7 +56,7 @@ public final class WatchDirs {
     /**
      * Directories to watch to changes.
      */
-    private final Array<File> dirs;
+    private final List<Path> dirs;
 
     /**
      * The {@link Posts} that handle the
@@ -83,10 +83,12 @@ public final class WatchDirs {
      */
     public WatchDirs(
         final Posts posts,
-        final File... dirs
+        final Path... dirs
     ) throws IOException {
         this.posts = posts;
-        this.dirs = new Array<>(dirs);
+        this.dirs = new ListOf<>(
+            dirs
+        );
         this.keys = new HashMap<>();
         this.watcher = FileSystems.getDefault().newWatchService();
     }
@@ -96,12 +98,12 @@ public final class WatchDirs {
      * @throws Exception If a directory cannot be registered.
      */
     public void start() throws Exception {
-        for (final File dir : this.dirs) {
+        for (final Path dir : this.dirs) {
             this.posts
                 .postFromDir(dir)
                 .post();
             this.registerDirectory(
-                dir.toPath()
+                dir
             );
         }
         this.processEvents();
@@ -119,7 +121,7 @@ public final class WatchDirs {
             this.processSubevents(key, dir);
             this.posts
                 .postFromDir(
-                    dir.toFile()
+                    dir
                 ).post();
         }
     }

@@ -41,8 +41,6 @@ import org.junit.Test;
 /**
  * Test for {@link WallPostWithAttachments}.
  *
- *
- *
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
@@ -59,7 +57,9 @@ public final class WallPostWithAttachmentsTest extends AbstractVkUnitTest {
     @Test
     public void test() throws Exception {
         final RecoverableFile props = new RecoverableFile(
-            Files.readAllBytes(this.properties),
+            Files.readAllBytes(
+                this.properties
+            ),
             this.properties
         );
         MatcherAssert.assertThat(
@@ -81,7 +81,7 @@ public final class WallPostWithAttachmentsTest extends AbstractVkUnitTest {
                     ),
                     new ImmutableProperties(
                         this.properties.toFile()
-                    ),
+                    ).loaded(),
                     AbstractVkUnitTest.GROUP_ID,
                     new AttachmentFakeAudio(
                         1, 2

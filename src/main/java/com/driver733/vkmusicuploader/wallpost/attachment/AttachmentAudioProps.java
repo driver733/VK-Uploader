@@ -81,7 +81,6 @@ public final class AttachmentAudioProps {
      */
     public void saveProps()
         throws IOException {
-        this.properties.load();
         this.properties.setPropertyAndStore(
             this.fileName,
             String.format(

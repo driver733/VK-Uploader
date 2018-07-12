@@ -39,8 +39,6 @@ import java.util.List;
  * An {@link Attachment} with a photo uploaded
  *  to the wall.
  *
- *
- *
  * @since 0.1
  */
 @Immutable
@@ -102,7 +100,9 @@ public final class AttachmentWallPhoto implements Attachment {
                     response.getServer()
                 ).hash(
                     response.getHash()
-                ).groupId(this.group)
+                ).groupId(
+                    this.group
+            )
         );
         return result;
     }

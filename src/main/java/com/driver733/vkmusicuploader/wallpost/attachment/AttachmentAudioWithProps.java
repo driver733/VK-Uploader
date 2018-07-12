@@ -128,7 +128,6 @@ public final class AttachmentAudioWithProps implements Attachment {
     private List<AbstractQueryBuilder> upload(
         final Upload<UploadAudioQuery, AudioUploadResponse> upload
     ) throws Exception {
-        this.properties.load();
         final String filename = upload.query()
             .fileName();
         final AudioUploadResponse response = upload.query()

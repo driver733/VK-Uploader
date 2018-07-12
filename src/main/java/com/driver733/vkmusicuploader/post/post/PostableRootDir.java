@@ -30,22 +30,25 @@ import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPosts;
 import com.jcabi.aspects.Immutable;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.stream.Stream;
 
 /**
  * Constructs {@link com.driver733.vkmusicuploader.post.posts.Posts}
  * from the specified director.
  *
- *
- *
  * @since 0.1
  */
 @Immutable
+@SuppressWarnings("PMD.NonStaticInitializer")
 public final class PostableRootDir implements Postable {
 
     /**
      * Root directory that contains directories with albums.
      */
-    private final File directory;
+    private final Path directory;
 
     /**
      * WallPosts.
@@ -59,7 +62,7 @@ public final class PostableRootDir implements Postable {
      * @checkstyle ParameterNumberCheck (10 lines)
      */
     public PostableRootDir(
-        final File dir,
+        final Path dir,
         final WallPosts wallposts
     ) {
         this.directory = dir;
@@ -67,38 +70,49 @@ public final class PostableRootDir implements Postable {
     }
 
     @Override
+    // @checkstyle RequireThisCheck (50 lines)
     @SuppressWarnings({"PMD.AvoidInstantiatingObjectsInLoops",
         "PMD.ExceptionAsFlowControl",
         "PMD.PreserveStackTrace"})
     public void post() throws Exception {
-        final File[] dirs = this.directory.listFiles(File::isDirectory);
-        if (dirs == null) {
-            throw new IOException(
-                "Invalid directory specified (No subdirectories found)."
-            );
-        }
-        for (final File dir : dirs) {
-            final ImmutableProperties props = new ImmutableProperties(
-                new File(
+        Stream.concat(
+            Files.list(
+                this.directory
+            ),
+            new ArrayList<Path>(1) {
+                {
+                    add(directory);
+                }
+            }.stream()
+        ).filter(
+            file -> Files.isDirectory(file)
+        ).forEach(
+            path -> {
+                final File file = new File(
                     String.format(
                         "%s/vkmu.properties",
-                        dir.getAbsolutePath()
+                        path.toAbsolutePath()
                     )
-                )
-            );
-            try {
-                props.load();
-            } catch (final IOException ex) {
+                );
+                final ImmutableProperties props = new ImmutableProperties(
+                    file
+                );
                 try {
-                    props.store();
-                } catch (final IOException exx) {
-                    throw new IOException("Failed to init props", exx);
+                    if (file.exists()) {
+                        props.load();
+                    } else {
+                        props.store();
+                    }
+                } catch (final IOException ex) {
+                    throw new IllegalStateException(
+                        "Failed to init properties"
+                    );
                 }
             }
-            new UploadVerification(
-                this.wallposts
-            ).execute();
-        }
+            );
+        new UploadVerification(
+            this.wallposts
+        ).execute();
     }
 
 }

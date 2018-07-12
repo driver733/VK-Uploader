@@ -87,7 +87,12 @@ public final class ImmutableProperties extends Properties {
     @SuppressWarnings("PMD.AvoidSynchronizedAtMethodLevel")
     public synchronized void load() throws IOException {
         if (!this.file.exists()) {
-            throw new IOException("Specified properties file does not exist.");
+            throw new IOException(
+                String.format(
+                    "Specified properties file %s does not exist.",
+                    this.file.getAbsolutePath()
+                )
+            );
         }
         try (
             FileInputStream fis = new FileInputStream(

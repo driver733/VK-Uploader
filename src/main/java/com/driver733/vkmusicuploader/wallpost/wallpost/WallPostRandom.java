@@ -24,12 +24,11 @@
 package com.driver733.vkmusicuploader.wallpost.wallpost;
 
 import com.driver733.vkmusicuploader.post.UploadServers;
-import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentAudio;
+import com.driver733.vkmusicuploader.properties.ImmutableProperties;
+import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentAudioWithProps;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentWallPhoto;
-import com.driver733.vkmusicuploader.wallpost.attachment.message.MessageWithRandomQuote;
-import com.driver733.vkmusicuploader.wallpost.attachment.message.RequestRandomQuote;
 import com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayFromFile;
-import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArrays;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.fields.AttachmentArraysWithProps;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadAudio;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadWallPhoto;
 import com.jcabi.aspects.Immutable;
@@ -43,12 +42,12 @@ import org.cactoos.scalar.Constant;
 /**
  * A Wallpost with a random quote.
  *
- * @since 0.2
+ * @since 0.4
  * @checkstyle ClassDataAbstractionCouplingCheck (5 lines)
  */
 @Immutable
 @SuppressWarnings("PMD.OnlyOneConstructorShouldDoInitialization")
-public final class WallPostWithRandomQuote implements WallPost {
+public final class WallPostRandom implements WallPost {
 
     /**
      * Resulted query.
@@ -62,7 +61,7 @@ public final class WallPostWithRandomQuote implements WallPost {
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (500 lines)
      */
-    public WallPostWithRandomQuote(
+    public WallPostRandom(
         final VkApiClient client,
         final UserActor actor,
         final int group
@@ -71,18 +70,61 @@ public final class WallPostWithRandomQuote implements WallPost {
             new Constant<>(
                 () -> new WallPostWithOwnerId(
                     new WallPostFromGroup(
-                        new WallPostWithMessage(
+                        new WallPostBase(
+                            client,
+                            actor
+                        )
+                    ),
+                    -group
+                ).construct()
+            );
+    }
+
+    /**
+     * Ctor.
+     * @param client VKAPIClient that is used for all VK API requests.
+     * @param actor UserActor on behalf of which all requests will be sent.
+     * @param servers Upload servers that provide upload URLs
+     *  for attachmentsFields.
+     * @param group Group ID.
+     * @param properties For caching results.
+     * @param photo WallPost photo.
+     */
+    public WallPostRandom(
+        final VkApiClient client,
+        final UserActor actor,
+        final UploadServers servers,
+        final Path photo,
+        final ImmutableProperties properties,
+        final int group
+    ) {
+        this.query =
+            new Constant<>(
+                () -> new WallPostWithOwnerId(
+                    new WallPostFromGroup(
+                        new WallPostWithAttachments(
                             new WallPostBase(
                                 client,
                                 actor
                             ),
-                            new MessageWithRandomQuote(
-                                new RequestRandomQuote()
-                                    .value()
+                            new AttachmentArraysWithProps(
+                                actor,
+                                properties,
+                                group,
+                                new AttachmentWallPhoto(
+                                    client,
+                                    actor,
+                                    group,
+                                    new UploadWallPhoto(
+                                        client,
+                                        servers.wallPhoto(),
+                                        photo
+                                    )
+                                )
                             )
                         )
                     ),
-                        -group
+                    -group
                 ).construct()
             );
     }
@@ -94,161 +136,105 @@ public final class WallPostWithRandomQuote implements WallPost {
      * @param servers Upload servers that provide upload URLs
      *  for attachmentsFields.
      * @param group Group ID.
-     * @param photo WallPost photo.
+     * @param properties For caching results.
+     * @param audio WallPost audio.
      */
-    public WallPostWithRandomQuote(
+    public WallPostRandom(
         final VkApiClient client,
         final UserActor actor,
         final UploadServers servers,
-        final Path photo,
-        final int group
+        final int group,
+        final ImmutableProperties properties,
+        final Path audio
     ) {
         this.query =
             new Constant<>(
                 () -> new WallPostWithOwnerId(
                     new WallPostFromGroup(
-                        new WallPostWithMessage(
-                            new WallPostWithAttachments(
-                                new WallPostBase(
+                        new WallPostWithAttachments(
+                            new WallPostBase(
+                                client,
+                                actor
+                            ),
+                            new AttachmentArraysWithProps(
+                                actor,
+                                properties,
+                                group,
+                                new AttachmentAudioWithProps(
                                     client,
-                                    actor
-                                ),
-                                new AttachmentArrays(
+                                    actor,
+                                    properties,
+                                    group,
+                                    new UploadAudio(
+                                        client,
+                                        servers.audios(),
+                                        audio
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    -group
+                ).construct()
+            );
+    }
+
+    /**
+     * Ctor.
+     * @param client VKAPIClient that is used for all VK API requests.
+     * @param actor UserActor on behalf of which all requests will be sent.
+     * @param servers Upload servers that provide upload URLs
+     *  for attachmentsFields.
+     * @param group Group ID.
+     * @param properties For caching results.
+     * @param photo WallPost photo.
+     * @param audio WallPost audio.
+     */
+    public WallPostRandom(
+        final VkApiClient client,
+        final UserActor actor,
+        final UploadServers servers,
+        final int group,
+        final ImmutableProperties properties,
+        final Path photo,
+        final Path audio
+    ) {
+        this.query =
+            new Constant<>(
+                () -> new WallPostWithOwnerId(
+                    new WallPostFromGroup(
+                        new WallPostWithAttachments(
+                            new WallPostBase(
+                                client,
+                                actor
+                            ),
+                            new AttachmentArraysWithProps(
+                                actor,
+                                properties,
+                                group,
+                                new AttachmentWallPhoto(
+                                    client,
                                     actor,
                                     group,
-                                    new AttachmentWallPhoto(
+                                    new UploadWallPhoto(
                                         client,
-                                        actor,
-                                        group,
-                                        new UploadWallPhoto(
-                                            client,
-                                            servers.wallPhoto(),
+                                        servers.wallPhoto(),
+                                        new ByteArrayFromFile(
                                             photo
                                         )
                                     )
-                                )
-                            ),
-                            new MessageWithRandomQuote(
-                                new RequestRandomQuote()
-                                    .value()
-                            )
-                        )
-                    ),
-                    -group
-                ).construct()
-            );
-    }
-
-    /**
-     * Ctor.
-     * @param client VKAPIClient that is used for all VK API requests.
-     * @param actor UserActor on behalf of which all requests will be sent.
-     * @param servers Upload servers that provide upload URLs
-     *  for attachmentsFields.
-     * @param group Group ID.
-     * @param audio WallPost audio.
-     */
-    public WallPostWithRandomQuote(
-        final VkApiClient client,
-        final UserActor actor,
-        final UploadServers servers,
-        final int group,
-        final Path audio
-    ) {
-        this.query =
-            new Constant<>(
-                () -> new WallPostWithOwnerId(
-                    new WallPostFromGroup(
-                        new WallPostWithMessage(
-                            new WallPostWithAttachments(
-                                new WallPostBase(
-                                    client,
-                                    actor
                                 ),
-                                new AttachmentArrays(
+                                new AttachmentAudioWithProps(
+                                    client,
                                     actor,
+                                    properties,
                                     group,
-                                    new AttachmentAudio(
+                                    new UploadAudio(
                                         client,
-                                        actor,
-                                        group,
-                                        new UploadAudio(
-                                            client,
-                                            servers.audios(),
-                                            audio
-                                        )
+                                        servers.audios(),
+                                        audio
                                     )
                                 )
-                            ),
-                            new MessageWithRandomQuote(
-                                new RequestRandomQuote()
-                                    .value()
-                            )
-                        )
-                    ),
-                    -group
-                ).construct()
-            );
-    }
-
-    /**
-     * Ctor.
-     * @param client VKAPIClient that is used for all VK API requests.
-     * @param actor UserActor on behalf of which all requests will be sent.
-     * @param servers Upload servers that provide upload URLs
-     *  for attachmentsFields.
-     * @param group Group ID.
-     * @param photo WallPost photo.
-     * @param audio WallPost audio.
-     */
-    public WallPostWithRandomQuote(
-        final VkApiClient client,
-        final UserActor actor,
-        final UploadServers servers,
-        final int group,
-        final Path photo,
-        final Path audio
-    ) {
-        this.query =
-            new Constant<>(
-                () -> new WallPostWithOwnerId(
-                    new WallPostFromGroup(
-                        new WallPostWithMessage(
-                            new WallPostWithAttachments(
-                                new WallPostBase(
-                                    client,
-                                    actor
-                                ),
-                                new AttachmentArrays(
-                                    actor,
-                                    group,
-                                    new AttachmentWallPhoto(
-                                        client,
-                                        actor,
-                                        group,
-                                        new UploadWallPhoto(
-                                            client,
-                                            servers.wallPhoto(),
-                                            new ByteArrayFromFile(
-                                                photo
-                                            )
-                                        )
-                                    ),
-                                    new AttachmentAudio(
-                                        client,
-                                        actor,
-                                        group,
-                                        new UploadAudio(
-                                            client,
-                                            servers.audios(),
-                                            audio
-                                        )
-                                    )
-                                )
-                            ),
-                            new MessageWithRandomQuote(
-                                new RequestRandomQuote()
-                                    .value()
                             )
                         )
                     ),

@@ -77,7 +77,6 @@ public final class MediaPhotosNonProcessed implements Media {
 
     @Override
     public List<Path> files() throws IOException {
-        this.props.load();
         final List<Path> photos = new ListOf<>(
             this.origin.files()
         );

@@ -60,7 +60,7 @@ public final class MediaVerifiedTest {
                     ),
                     new ImmutableProperties(
                         MediaVerifiedTest.PROPS.toFile()
-                    )
+                    ).loaded()
                 )
             ).files(),
             Matchers.containsInAnyOrder(

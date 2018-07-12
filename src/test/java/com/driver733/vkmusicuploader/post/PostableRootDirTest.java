@@ -29,6 +29,7 @@ import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientF
 import com.driver733.vkmusicuploader.wallpost.wallpost.AbstractVkUnitTest;
 import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPostsMusicAlbum;
 import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPostsPhotoAlbum;
+import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPostsRandom;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
@@ -45,11 +46,11 @@ import org.junit.Test;
  * Test for {@link PostableRootDir}.
  *
  * @since 0.2
- * @checkstyle AnonInnerLengthCheck (500 lines)
- * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle StringLiteralsConcatenationCheck (500 lines)
- * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
- * @checkstyle MethodLength (500 lines)
+ * @checkstyle AnonInnerLengthCheck (2000 lines)
+ * @checkstyle JavadocMethodCheck (2000 lines)
+ * @checkstyle StringLiteralsConcatenationCheck (2000 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (2000 lines)
+ * @checkstyle MethodLength (2000 lines)
  */
 @Immutable
 public final class PostableRootDirTest extends AbstractVkUnitTest {
@@ -68,7 +69,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
             .toFile()
             .deleteOnExit();
         new PostableRootDir(
-            root.toFile(),
+            root,
             new WallPostsPhotoAlbum(
                 new VkApiClient(
                     new TransportClientFake(
@@ -203,12 +204,11 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         })
     public void testMusicAlbum() throws Exception {
         final Path root = Paths.get("src/test/resources/music/");
-        root.resolve("album")
-            .resolve("vkmu.properties")
+        root.resolve("vkmu.properties")
             .toFile()
             .deleteOnExit();
         new PostableRootDir(
-            root.toFile(),
+            root,
             new WallPostsMusicAlbum(
                 new VkApiClient(
                     new TransportClientFake(
@@ -359,6 +359,448 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                         .resolve("expected.properties")
                         .toFile()
                 ).entrySet()
+            )
+        );
+    }
+
+    @Test
+    @SuppressWarnings({
+        "PMD.ExcessiveMethodLength",
+        "PMD.NonStaticInitializer",
+        "PMD.AvoidDuplicateLiterals",
+        "PMD.ProhibitPlainJunitAssertionsRule"
+        })
+    public void testRandomPhoto() throws Exception {
+        final Path root = Paths.get("src/test/resources/random/");
+        root.resolve("testPhotoAlbum")
+            .resolve("vkmu.properties")
+            .toFile()
+            .deleteOnExit();
+        new PostableRootDir(
+            root,
+            new WallPostsRandom(
+                new VkApiClient(
+                    new TransportClientFake(
+                        new HashMap<String, TransportClient>() {
+                            {
+                                put(
+                                    "photos.wallUploadServer",
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"hash\"      : \"hash123\","
+                                            + "\"photo\"     : \"fnknjkasd\","
+                                            + "\"server\"    : 123546"
+                                            + "}"
+                                    )
+                                );
+                                put(
+                                    AbstractVkUnitTest.PHOTO_SAVE_URL,
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"id\"          : 12345,"
+                                            + "\"album_id\"    : 5674,"
+                                            + "\"owner_id\"    : 6785,"
+                                            + "\"user_id\"     : 4356,"
+                                            + "\"sizes\"       : ["
+                                            + "{"
+                                            + "\"src\": \"src\","
+                                            + "\"width\": 100,"
+                                            + "\"height\": 100"
+                                            + "}"
+                                            + "],"
+                                            + "\"photo_75\"    : \"url1.com\","
+                                            + "\"photo_130\"   : \"url1.com\","
+                                            + "\"photo_604\"   : \"url1.com\","
+                                            + "\"photo_807\"   : \"url1.com\","
+                                            + "\"photo_1280\"  : \"url1.com\","
+                                            + "\"photo_2560\"  : \"url1.com\","
+                                            + "\"photo_id\"    : 3456,"
+                                            + "\"width\"       : 500,"
+                                            + "\"height\"      : 500,"
+                                            + "\"date\"        : 1502919105,"
+                                            + "\"lat\"         : 56.3456,"
+                                            + "\"long\"        : 54.9645,"
+                                            + "\"access_key\"  : \"sjdkfk\""
+                                            + "}"
+                                    )
+                                );
+                                put(
+                                    AbstractVkUnitTest.EXECUTE_URL,
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"response\": { \"post_id\": 7 }"
+                                            + "}"
+                                    )
+                                );
+                            }
+                        }
+                    )
+                ),
+                new UserActor(
+                    1,
+                    ""
+                ),
+                new UploadServers(
+                    new VkApiClient(
+                        new TransportClientFake(
+                            new HashMap<String, TransportClient>() {
+                                {
+                                    put(
+                                        AbstractVkUnitTest.PHOTO_WALL_URL,
+                                        new TransportClientCached(
+                                            "{"
+                                                + "\"response\" : {"
+                                                + "\"upload_url\" :"
+                                                + "\"photos.wallUploadServer\","
+                                                + "\"album_id\"   : 169819278,"
+                                                + "\"user_id\"    : 185014513"
+                                                + "}"
+                                                + "}"
+                                        )
+                                    );
+                                }
+                            }
+                        )
+                    ),
+                    new UserActor(
+                        1, "1"
+                    ),
+                    AbstractVkUnitTest.GROUP_ID
+                ),
+                new ImmutableProperties(
+                    root.resolve("testPhotoAlbum")
+                        .resolve("vkmu.properties")
+                        .toFile()
+                ),
+                AbstractVkUnitTest.GROUP_ID,
+                root.resolve("testPhotoAlbum")
+            )
+        ).post();
+        MatcherAssert.assertThat(
+            "The properties files differ",
+            new ImmutableProperties(
+                root.resolve("testPhotoAlbum")
+                    .resolve("vkmu.properties")
+                    .toFile()
+            ).loaded(),
+            Matchers.anyOf(
+                Matchers.hasEntry(
+                    "1.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "2.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "3.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "4.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "5.jpg", "1"
+                )
+            )
+        );
+    }
+
+    @Test
+    @SuppressWarnings({
+        "PMD.ExcessiveMethodLength",
+        "PMD.NonStaticInitializer",
+        "PMD.AvoidDuplicateLiterals",
+        "PMD.ProhibitPlainJunitAssertionsRule"
+        })
+    public void testRandomAudio() throws Exception {
+        final Path root = Paths.get("src/test/resources/random/");
+        root.resolve("musicAlbum")
+            .resolve("vkmu.properties")
+            .toFile()
+            .deleteOnExit();
+        new PostableRootDir(
+            root,
+            new WallPostsRandom(
+                new VkApiClient(
+                    new TransportClientFake(
+                        new HashMap<String, TransportClient>() {
+                            {
+                                put(
+                                    "audio.uploadServer",
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"hash\"     : \"hash1234\","
+                                            + "\"audio\"    : \"fnknjkasd\","
+                                            + "\"server\"   : 123546,"
+                                            + "\"redirect\" : \"redirect.com\""
+                                            + "}"
+                                    )
+                                );
+                                put(
+                                    AbstractVkUnitTest.AUDIO_SAVE_URL,
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"id\"       : 123456,"
+                                            + "\"owner_id\" : 5674,"
+                                            + "\"artist\"   : \"Clean Tears\","
+                                            + "\"title\"    : \"Dragon\","
+                                            + "\"url\"      : \"url1.com\""
+                                            + "}"
+                                    )
+                                );
+                                put(
+                                    AbstractVkUnitTest.AUDIO_ADD_URL,
+                                    new TransportClientCached(
+                                        "{ \"response\" : 123456789 }"
+                                    )
+                                );
+                                put(
+                                    AbstractVkUnitTest.EXECUTE_URL,
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"response\": { \"post_id\": 7 }"
+                                            + "}"
+                                    )
+                                );
+                            }
+                        }
+                    )
+                ),
+                new UserActor(
+                    1,
+                    ""
+                ),
+                new UploadServers(
+                    new VkApiClient(
+                        new TransportClientFake(
+                            new HashMap<String, TransportClient>() {
+                                {
+                                    put(
+                                        AbstractVkUnitTest.AUDIO_UPLOAD_URL,
+                                        new TransportClientCached(
+                                            "{"
+                                                + "\"response\": {"
+                                                + "\"upload_url\" :"
+                                                + "\"audio.uploadServer\""
+                                                + "}"
+                                                + "}"
+                                        )
+                                    );
+                                }
+                            }
+                        )
+                    ),
+                    new UserActor(
+                        1, "1"
+                    ),
+                    AbstractVkUnitTest.GROUP_ID
+                ),
+                new ImmutableProperties(
+                    root.resolve("musicAlbum")
+                        .resolve("vkmu.properties")
+                        .toFile()
+                ),
+                root.resolve("musicAlbum"),
+                AbstractVkUnitTest.GROUP_ID
+            )
+        ).post();
+        MatcherAssert.assertThat(
+            "The properties files differ",
+            new ImmutableProperties(
+                root.resolve("musicAlbum")
+                    .resolve("vkmu.properties")
+                    .toFile()
+            ).loaded(),
+            Matchers.anyOf(
+                Matchers.hasEntry(
+                    "test.mp3", "2_123456789"
+                ),
+                Matchers.hasEntry(
+                    "testMissingTags.mp3", "2_123456789"
+                )
+            )
+        );
+    }
+
+    @Test
+    @SuppressWarnings({
+        "PMD.ExcessiveMethodLength",
+        "PMD.NonStaticInitializer",
+        "PMD.AvoidDuplicateLiterals",
+        "PMD.ProhibitPlainJunitAssertionsRule"
+        })
+    public void testRandomAudioAndPhoto() throws Exception {
+        final Path root = Paths.get("src/test/resources/random/");
+        root.resolve("vkmu.properties")
+            .toFile()
+            .deleteOnExit();
+        new PostableRootDir(
+            root,
+            new WallPostsRandom(
+                new VkApiClient(
+                    new TransportClientFake(
+                        new HashMap<String, TransportClient>() {
+                            {
+                                put(
+                                    "photos.wallUploadServer",
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"hash\"      : \"hash123\","
+                                            + "\"photo\"     : \"fnknjkasd\","
+                                            + "\"server\"    : 123546"
+                                            + "}"
+                                    )
+                                );
+                                put(
+                                    "audio.uploadServer",
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"hash\"     : \"hash1234\","
+                                            + "\"audio\"    : \"fnknjkasd\","
+                                            + "\"server\"   : 123546,"
+                                            + "\"redirect\" : \"redirect.com\""
+                                            + "}"
+                                    )
+                                );
+                                put(
+                                    AbstractVkUnitTest.AUDIO_SAVE_URL,
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"id\"       : 123456789,"
+                                            + "\"owner_id\" : 5674,"
+                                            + "\"artist\"   : \"Clean Tears\","
+                                            + "\"title\"    : \"Dragon\","
+                                            + "\"url\"      : \"url1.com\""
+                                            + "}"
+                                    )
+                                );
+                                put(
+                                    AbstractVkUnitTest.PHOTO_SAVE_URL,
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"id\"          : 12345,"
+                                            + "\"album_id\"    : 5674,"
+                                            + "\"owner_id\"    : 6785,"
+                                            + "\"user_id\"     : 4356,"
+                                            + "\"sizes\"       : ["
+                                            + "{"
+                                            + "\"src\": \"src\","
+                                            + "\"width\": 100,"
+                                            + "\"height\": 100"
+                                            + "}"
+                                            + "],"
+                                            + "\"photo_75\"    : \"url1.com\","
+                                            + "\"photo_130\"   : \"url1.com\","
+                                            + "\"photo_604\"   : \"url1.com\","
+                                            + "\"photo_807\"   : \"url1.com\","
+                                            + "\"photo_1280\"  : \"url1.com\","
+                                            + "\"photo_2560\"  : \"url1.com\","
+                                            + "\"photo_id\"    : 3456,"
+                                            + "\"width\"       : 500,"
+                                            + "\"height\"      : 500,"
+                                            + "\"date\"        : 1502919105,"
+                                            + "\"lat\"         : 56.3456,"
+                                            + "\"long\"        : 54.9645,"
+                                            + "\"access_key\"  : \"sjdkfk\""
+                                            + "}"
+                                    )
+                                );
+                                put(
+                                    AbstractVkUnitTest.AUDIO_ADD_URL,
+                                    new TransportClientCached(
+                                        "{ \"response\" : 123456789 }"
+                                    )
+                                );
+                                put(
+                                    AbstractVkUnitTest.EXECUTE_URL,
+                                    new TransportClientCached(
+                                        "{"
+                                            + "\"response\": { \"post_id\": 7 }"
+                                            + "}"
+                                    )
+                                );
+                            }
+                        }
+                    )
+                ),
+                new UserActor(
+                    1,
+                    ""
+                ),
+                new UploadServers(
+                    new VkApiClient(
+                        new TransportClientFake(
+                            new HashMap<String, TransportClient>() {
+                                {
+                                    put(
+                                        AbstractVkUnitTest.PHOTO_WALL_URL,
+                                        new TransportClientCached(
+                                            "{"
+                                                + "\"response\" : {"
+                                                + "\"upload_url\" :"
+                                                + "\"photos.wallUploadServer\","
+                                                + "\"album_id\"   : 169819278,"
+                                                + "\"user_id\"    : 185014513"
+                                                + "}"
+                                                + "}"
+                                        )
+                                    );
+                                    put(
+                                        AbstractVkUnitTest.AUDIO_UPLOAD_URL,
+                                        new TransportClientCached(
+                                            "{"
+                                                + "\"response\": {"
+                                                + "\"upload_url\" :"
+                                                + "\"audio.uploadServer\""
+                                                + "}"
+                                                + "}"
+                                        )
+                                    );
+                                }
+                            }
+                        )
+                    ),
+                    new UserActor(
+                        1,
+                        "1"
+                    ),
+                    AbstractVkUnitTest.GROUP_ID
+                ),
+                new ImmutableProperties(
+                    root.resolve("vkmu.properties")
+                        .toFile()
+                ),
+                AbstractVkUnitTest.GROUP_ID,
+                root.resolve("testPhotoAlbum"),
+                root.resolve("musicAlbum")
+            )
+        ).post();
+        MatcherAssert.assertThat(
+            "The properties files differ",
+            new ImmutableProperties(
+                root.resolve("vkmu.properties")
+                    .toFile()
+            ).loaded(),
+            Matchers.anyOf(
+                Matchers.hasEntry(
+                    "1.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "2.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "3.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "4.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "5.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "test.mp3", "2_123456789"
+                ),
+                Matchers.hasEntry(
+                    "testMissingTags.mp3", "2_123456789"
+                )
             )
         );
     }

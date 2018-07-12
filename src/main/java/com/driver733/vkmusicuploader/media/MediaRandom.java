@@ -26,14 +26,14 @@ package com.driver733.vkmusicuploader.media;
 import com.driver733.vkmusicuploader.post.SuppressFBWarnings;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 /**
  * Random file.
- *
- *
  *
  * @since 0.2
  */
@@ -41,7 +41,7 @@ import java.util.concurrent.ThreadLocalRandom;
     value = "DMI_RANDOM_USED_ONLY_ONCE",
     justification = "This is done on purpose."
 )
-public final class MediaRandom implements MediaSingle {
+public final class MediaRandom implements Media, MediaSingle {
 
     /**
      * Origin.
@@ -49,18 +49,46 @@ public final class MediaRandom implements MediaSingle {
     private final Media origin;
 
     /**
+     * Random seed.
+     */
+    private final long seed;
+
+    /**
+     * Ctor.
+     * @param origin Origin.
+     * @param seed Random seed.
+     */
+    public MediaRandom(
+        final Media origin,
+        final long seed
+    ) {
+        this.origin = origin;
+        this.seed = seed;
+    }
+
+    /**
      * Ctor.
      * @param origin Origin.
      */
-    public MediaRandom(final Media origin) {
-        this.origin = origin;
+    public MediaRandom(
+        final Media origin
+    ) {
+        this(
+            origin,
+            new Random()
+                .nextLong()
+        );
     }
 
     /**
      * Origin.
      * @param files Files.
+     * @param seed Random seed.
      */
-    public MediaRandom(final Path... files) {
+    public MediaRandom(
+        final long seed,
+        final Path... files
+    ) {
         this(
             new Media() {
                 @Override
@@ -69,20 +97,49 @@ public final class MediaRandom implements MediaSingle {
                         files
                     );
                 }
-            }
+            },
+            seed
+        );
+    }
+
+    /**
+     * Origin.
+     * @param files Files.
+     */
+    public MediaRandom(
+        final Path... files
+    ) {
+        this(
+            new Media() {
+                @Override
+                public List<Path> files() {
+                    return Arrays.asList(
+                        files
+                    );
+                }
+            },
+            new Random()
+                .nextLong()
         );
     }
 
     @Override
     public Path file() throws IOException {
-        final List<Path> files = this.origin.files();
-        return files.get(
-            ThreadLocalRandom.current()
-                .nextInt(
-                    0,
-                    files.size()
-                )
+        return this.files().get(0);
+    }
+
+    @Override
+    public List<Path> files() throws IOException {
+        final List<Path> result = new ArrayList<>(
+            this.origin.files()
         );
+        Collections.shuffle(
+            result,
+            new Random(
+                this.seed
+            )
+        );
+        return result;
     }
 
 }

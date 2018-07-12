@@ -65,21 +65,6 @@ public final class WallPostsRandomQuote implements WallPosts {
     private static final int BATCH_MAX_REQ = 25;
 
     /**
-     * The "cost" of a wall.post request.
-     */
-    private static final int WALL_POST_REQ = 1;
-
-    /**
-     * Photo in a request.
-     */
-    private static final int PHOTOS_IN_POST = 1;
-
-    /**
-     * Audio in a request.
-     */
-    private static final int AUDIOS_IN_POST = 1;
-
-    /**
      * Group ID.
      */
     private final int group;
@@ -244,73 +229,90 @@ public final class WallPostsRandomQuote implements WallPosts {
      * @throws Exception If no photos are found.
      */
     public List<ExecuteBatchQuery> postsQueries() throws Exception {
-        final List<ExecuteBatchQuery> result;
-        if (
-            this.photos.files().isEmpty()
-                && this.audios.files().isEmpty()
+        int left = this.count;
+        final List<ExecuteBatchQuery> result =
+            new ArrayList<>(
+                left
+            );
+        int num;
+        while (left > 0) {
+            if (left > WallPostsRandomQuote.BATCH_MAX_REQ) {
+                num = WallPostsRandomQuote.BATCH_MAX_REQ;
+            } else {
+                num = left;
+            }
+            if (
+                this.photos.files().isEmpty()
+                    && this.audios.files().isEmpty()
+                ) {
+                result.add(
+                    this.posts(
+                        num,
+                        new WallPostWithRandomQuote(
+                            this.client,
+                            this.actor,
+                            this.group
+                        )
+                    )
+                );
+            } else if (
+                this.audios
+                    .files()
+                    .isEmpty()
             ) {
-            result = this.posts(
-                WallPostsRandomQuote.WALL_POST_REQ,
-                new WallPostWithRandomQuote(
-                    this.client,
-                    this.actor,
-                    this.group
-                )
-            );
-        } else if (
-            this.audios
-                .files()
-                .isEmpty()
-        ) {
-            result = this.posts(
-                WallPostsRandomQuote.WALL_POST_REQ
-                    + WallPostsRandomQuote.PHOTOS_IN_POST,
-                new WallPostWithRandomQuote(
-                    this.client,
-                    this.actor,
-                    this.servers,
-                    new MediaRandom(
-                        this.photos
-                    ).file(),
-                    this.group
-                )
-            );
-        } else if (
-            this.photos
-                .files()
-                .isEmpty()
-        ) {
-            result = this.posts(
-                WallPostsRandomQuote.WALL_POST_REQ
-                    + WallPostsRandomQuote.AUDIOS_IN_POST,
-                new WallPostWithRandomQuote(
-                    this.client,
-                    this.actor,
-                    this.servers,
-                    this.group,
-                    new MediaRandom(
-                        this.audios
-                    ).file()
-                )
-            );
-        } else {
-            result = this.posts(
-                WallPostsRandomQuote.WALL_POST_REQ
-                    + WallPostsRandomQuote.PHOTOS_IN_POST
-                    + WallPostsRandomQuote.AUDIOS_IN_POST,
-                new WallPostWithRandomQuote(
-                    this.client,
-                    this.actor,
-                    this.servers,
-                    this.group,
-                    new MediaRandom(
-                        this.photos
-                    ).file(),
-                    new MediaRandom(
-                        this.audios
-                    ).file()
-                )
-            );
+                result.add(
+                    this.posts(
+                        num,
+                        new WallPostWithRandomQuote(
+                            this.client,
+                            this.actor,
+                            this.servers,
+                            new MediaRandom(
+                                this.photos
+                            ).file(),
+                            this.group
+                        )
+                    )
+                );
+            } else if (
+                this.photos
+                    .files()
+                    .isEmpty()
+            ) {
+                result.add(
+                    this.posts(
+                        num,
+                        new WallPostWithRandomQuote(
+                            this.client,
+                            this.actor,
+                            this.servers,
+                            this.group,
+                            new MediaRandom(
+                                this.audios
+                            ).file()
+                        )
+                    )
+                );
+            } else {
+                result.add(
+                    this.posts(
+                        num,
+                        new WallPostWithRandomQuote(
+                            this.client,
+                            this.actor,
+                            this.servers,
+                            this.group,
+                            new MediaRandom(
+                                this.photos
+                            ).file(),
+                            new MediaRandom(
+                                this.audios
+                            ).file()
+                        )
+                    )
+                );
+            }
+            left -= num;
         }
         return result;
     }
@@ -324,48 +326,32 @@ public final class WallPostsRandomQuote implements WallPosts {
 
     /**
      * Creates a Batch Query.
-     * @param cost VK API calls for each wall post.
      * @param wallpost Wallpost to post.
+     * @param num Number of posts to create.
      * @return Batch queries.
      * @throws Exception If an error occurs while constructing queries.
      */
     @SuppressWarnings("PMD.OptimizableToArrayCall")
-    private List<ExecuteBatchQuery> posts(
-        final int cost,
+    private ExecuteBatchQuery posts(
+        final int num,
         final WallPostWithRandomQuote wallpost
     ) throws Exception {
-        int left = this.count;
-        final List<ExecuteBatchQuery> result = new ArrayList<>(
-            (int) Math.ceil(
-                (double) this.count / WallPostsRandomQuote.BATCH_MAX_REQ * cost
+        final List<WallPostQuery> queries = new ArrayList<>(
+            WallPostsRandomQuote.BATCH_MAX_REQ
+        );
+        for (int iter = 0; iter < num; iter += 1) {
+            queries.add(
+                wallpost.construct()
+            );
+            TimeUnit.SECONDS.sleep(2);
+        }
+        return new ExecuteBatchQuery(
+            this.client,
+            this.actor,
+            queries.toArray(
+                new WallPostQuery[0]
             )
         );
-        while (left > 0) {
-            final List<WallPostQuery> queries = new ArrayList<>(
-                WallPostsRandomQuote.BATCH_MAX_REQ
-            );
-            for (
-                int iter = 0;
-                iter < this.count;
-                iter += 1
-            ) {
-                queries.add(
-                    wallpost.construct()
-                );
-                TimeUnit.SECONDS.sleep(2);
-            }
-            result.add(
-                new ExecuteBatchQuery(
-                    this.client,
-                    this.actor,
-                    queries.toArray(
-                        new WallPostQuery[0]
-                    )
-                )
-            );
-            left -= queries.size();
-        }
-        return result;
     }
 
 }

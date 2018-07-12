@@ -25,6 +25,7 @@ package com.driver733.vkmusicuploader.post.posts;
 
 import com.driver733.vkmusicuploader.post.post.Postable;
 import java.io.File;
+import java.nio.file.Path;
 
 /**
  * Constructs a {@link Postable}
@@ -42,6 +43,6 @@ public interface Posts {
      * @param dir With {@link File}s to be attached to the {@link Postable}.
      * @return Constructed {@link Postable}.
      */
-    Postable postFromDir(File dir);
+    Postable postFromDir(Path dir);
 
 }

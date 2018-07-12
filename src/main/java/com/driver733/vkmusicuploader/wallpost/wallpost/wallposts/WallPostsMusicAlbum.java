@@ -209,7 +209,7 @@ public final class WallPostsMusicAlbum implements WallPosts {
     public void updateProperties() throws IOException {
         final List<Path> audios = this.audios();
         for (final Path audio : audios) {
-            this.properties.setProperty(
+            this.properties.setPropertyAndStore(
                 audio.getFileName().toString(),
                 new StringBuilder(
                     this.properties.getProperty(
@@ -224,7 +224,6 @@ public final class WallPostsMusicAlbum implements WallPosts {
                 ).toString()
             );
         }
-        this.properties.store();
     }
 
     /**

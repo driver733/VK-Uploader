@@ -35,13 +35,13 @@ import com.driver733.vkmusicuploader.wallpost.attachment.support.queries.safe.Qu
 import com.driver733.vkmusicuploader.wallpost.attachment.support.queries.safe.QueriesSafeNonCached;
 import com.google.gson.JsonElement;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientExecuteBatchCached;
 import java.io.IOException;
 import java.util.List;
+import org.cactoos.list.ListOf;
 
 /**
  * Returns attachment strings from
@@ -66,7 +66,7 @@ public final class AttachmentArraysWithProps implements AttachmentsFields {
     /**
      * Array of attachmentsFields.
      */
-    private final Array<Attachment> attachments;
+    private final List<Attachment> attachments;
 
     /**
      * UserActor on behalf of which all requests will be sent.
@@ -96,29 +96,36 @@ public final class AttachmentArraysWithProps implements AttachmentsFields {
         this.actor = actor;
         this.properties = properties;
         this.group = group;
-        this.attachments = new Array<>(attachments);
+        this.attachments = new ListOf<>(
+            attachments
+        );
     }
 
     @Override
     public List<String> attachmentsFields()
         throws Exception {
-        this.properties.load();
         final List<AbstractQueryBuilder> queries = new QueriesFromAttachments(
             this.attachments
         ).queries();
         final IdsMap ids =
-            new IdsMap(this.attachments);
+            new IdsMap(
+                this.attachments
+            );
         final JsonElement root =
             new VkApiClient(
                 new TransportClientExecuteBatchCached(
                     new QueryResultsBasic(
-                        new QueriesSafeCached(queries)
+                        new QueriesSafeCached(
+                            queries
+                        )
                     )
                 )
             ).execute()
                 .batch(
                     this.actor,
-                    new QueriesSafeNonCached(queries).queries()
+                    new QueriesSafeNonCached(
+                        queries
+                    ).queries()
                 ).execute();
         new PropertiesUpdate(
             this.properties,

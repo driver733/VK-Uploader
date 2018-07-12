@@ -26,20 +26,20 @@ package com.driver733.vkmusicuploader.media;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import org.cactoos.list.ListOf;
 
 /**
  * Returns a random file from a directory.
  *
- * @since 0.2
+ * @since 0.3
  */
-public final class RandomMediaFromDirectory implements Media {
+public final class RandomMediaFromDirectory implements Media, MediaSingle {
 
     /**
-     * Path to dir with files.
+     * Path to directory with files.
      */
     private final Path directory;
 
@@ -53,24 +53,23 @@ public final class RandomMediaFromDirectory implements Media {
 
     @Override
     public List<Path> files() throws IOException {
-        final List<Path> files = Files.list(
+        return Files.list(
             this.directory
         ).filter(
-            file -> Files.isRegularFile(file) && file.endsWith(".jpg")
+            file -> Files.isRegularFile(file)
         ).collect(
-            Collectors.toCollection(
-                ListOf<Path>::new
-            )
-        );
-        return new ListOf<>(
-            files.get(
-                ThreadLocalRandom.current()
-                    .nextInt(
-                        0,
-                        files.size() + 1
-                    )
-            )
+                Collectors.collectingAndThen(
+                    Collectors.toList(),
+                    list -> {
+                        Collections.shuffle(list);
+                        return list;
+                    }
+                )
         );
     }
 
+    @Override
+    public Path file() throws IOException {
+        return this.files().get(0);
+    }
 }

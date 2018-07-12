@@ -44,8 +44,6 @@ import org.junit.Test;
 /**
  * Test for {@link WallPostAlbum}.
  *
- *
- *
  * @since 0.1
  * @checkstyle AnonInnerLengthCheck (500 lines)
  * @checkstyle JavadocMethodCheck (500 lines)

@@ -44,6 +44,7 @@ import org.cactoos.scalar.Constant;
  *
  * @since 0.4
  * @checkstyle ClassDataAbstractionCouplingCheck (5 lines)
+ * @checkstyle ParameterNumberCheck (500 lines)
  */
 @Immutable
 @SuppressWarnings("PMD.OnlyOneConstructorShouldDoInitialization")
@@ -53,32 +54,6 @@ public final class WallPostRandom implements WallPost {
      * Resulted query.
      */
     private final Scalar<WallPost> query;
-
-    /**
-     * Ctor.
-     * @param client VKAPIClient that is used for all VK API requests.
-     * @param actor UserActor on behalf of which all requests will be sent.
-     * @param group Group ID.
-     * @checkstyle ParameterNumberCheck (500 lines)
-     */
-    public WallPostRandom(
-        final VkApiClient client,
-        final UserActor actor,
-        final int group
-    ) {
-        this.query =
-            new Constant<>(
-                () -> new WallPostWithOwnerId(
-                    new WallPostFromGroup(
-                        new WallPostBase(
-                            client,
-                            actor
-                        )
-                    ),
-                    -group
-                ).construct()
-            );
-    }
 
     /**
      * Ctor.

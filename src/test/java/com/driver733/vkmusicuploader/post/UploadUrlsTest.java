@@ -44,11 +44,6 @@ import org.junit.Test;
 @Immutable
 public final class UploadUrlsTest {
 
-    /**
-     * Group ID.
-     */
-    private static final int GROUP_ID = 161929264;
-
     @Test
     public void audio() throws ClientException, ApiException {
         MatcherAssert.assertThat(
@@ -59,7 +54,7 @@ public final class UploadUrlsTest {
                     )
                 ),
                 new UserActor(1, ""),
-                UploadUrlsTest.GROUP_ID
+                1
             ).audios(),
             Matchers.equalTo("http://test.com/audios")
         );
@@ -75,7 +70,7 @@ public final class UploadUrlsTest {
                     )
                 ),
                 new UserActor(1, ""),
-                UploadUrlsTest.GROUP_ID
+                1
             ).docs(),
             Matchers.equalTo("http://test.com/docs")
         );
@@ -91,7 +86,7 @@ public final class UploadUrlsTest {
                     )
                 ),
                 new UserActor(1, ""),
-                UploadUrlsTest.GROUP_ID
+                1
             ).wallPhoto(),
             Matchers.equalTo("http://test.com/wallPhoto")
         );

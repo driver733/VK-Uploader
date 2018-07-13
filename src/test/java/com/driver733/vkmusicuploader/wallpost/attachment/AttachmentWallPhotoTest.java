@@ -48,11 +48,6 @@ import org.junit.Test;
 @Immutable
 public final class AttachmentWallPhotoTest {
 
-    /**
-     * Group ID.
-     */
-    private static final int GROUP_ID = 161929264;
-
     @Test
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     public void test() throws Exception {
@@ -62,7 +57,7 @@ public final class AttachmentWallPhotoTest {
                     new TransportClientCached("1")
                 ),
                 new UserActor(0, ""),
-                AttachmentWallPhotoTest.GROUP_ID,
+                1,
                 new UploadWallPhoto(
                     new VkApiClient(
                         new TransportClientCached(
@@ -97,7 +92,7 @@ public final class AttachmentWallPhotoTest {
                     new UserActor(0, ""),
                     "testPhoto"
                 ).hash("testHash")
-                    .groupId(AttachmentWallPhotoTest.GROUP_ID)
+                    .groupId(1)
                     .server(1)
                     .build()
             )

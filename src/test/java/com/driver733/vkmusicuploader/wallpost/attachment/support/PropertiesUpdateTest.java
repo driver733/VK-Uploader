@@ -52,11 +52,6 @@ import org.junit.Test;
 public final class PropertiesUpdateTest {
 
     /**
-     * Group ID.
-     */
-    private static final int GROUP_ID = 161929264;
-
-    /**
      * UploadedMediaId - AudioStatus.Uploaded .
      * AddedMediaId - AudioStatus.Added .
      */
@@ -89,7 +84,7 @@ public final class PropertiesUpdateTest {
                         new UserActor(0, ""),
                         ownerId,
                         uploadedMediaId,
-                        PropertiesUpdateTest.GROUP_ID
+                        1
                     )
                 )
             ).idsMap(),

@@ -46,11 +46,6 @@ import org.junit.Test;
 public final class IdsMapTest {
 
     /**
-     * Group ID.
-     */
-    private static final int GROUP_ID = 161929264;
-
-    /**
      * Constant.
      */
     private static final String TOKEN1 = "TOKEN1";
@@ -83,7 +78,7 @@ public final class IdsMapTest {
                     ),
                     0,
                     1,
-                    IdsMapTest.GROUP_ID
+                    1
                 ),
                 new AttachmentAddAudio(
                     new VkApiClient(
@@ -97,7 +92,7 @@ public final class IdsMapTest {
                     ),
                     0,
                     2,
-                    IdsMapTest.GROUP_ID
+                    1
                 )
             )
         );

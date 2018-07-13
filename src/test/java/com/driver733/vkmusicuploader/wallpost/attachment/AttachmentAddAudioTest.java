@@ -48,11 +48,6 @@ import org.junit.Test;
 @Immutable
 public final class AttachmentAddAudioTest {
 
-    /**
-     * Group ID.
-     */
-    private static final int GROUP_ID = 161929264;
-
     @Test
     public void testBasic() {
         MatcherAssert.assertThat(
@@ -66,7 +61,7 @@ public final class AttachmentAddAudioTest {
                 ),
                 1,
                 2,
-                AttachmentAddAudioTest.GROUP_ID
+                1
             ).upload().get(0).build(),
             Matchers.equalTo(
                 new AudioAddQuery(
@@ -77,7 +72,7 @@ public final class AttachmentAddAudioTest {
                     2,
                     1
                 ).groupId(
-                    AttachmentAddAudioTest.GROUP_ID
+                    1
                 ).build()
             )
         );
@@ -96,7 +91,7 @@ public final class AttachmentAddAudioTest {
                 ),
                 0,
                 0,
-                AttachmentAddAudioTest.GROUP_ID
+                1
             ).upload().get(0).execute(),
             Matchers.equalTo(
             1

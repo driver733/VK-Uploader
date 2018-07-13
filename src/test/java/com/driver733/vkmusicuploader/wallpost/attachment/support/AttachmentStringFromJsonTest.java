@@ -44,11 +44,6 @@ import org.junit.Test;
 @Immutable
 public final class AttachmentStringFromJsonTest {
 
-    /**
-     * Group ID.
-     */
-    private static final int GROUP_ID = 161929264;
-
     @Test
     public void test() throws IOException {
         MatcherAssert.assertThat(
@@ -67,7 +62,7 @@ public final class AttachmentStringFromJsonTest {
                             + "}",
                         JsonObject.class
                     ).getAsJsonObject(),
-                AttachmentStringFromJsonTest.GROUP_ID
+                1
             ).attachmentString(),
             Matchers.equalTo(
                 "audio1111111_1000000"

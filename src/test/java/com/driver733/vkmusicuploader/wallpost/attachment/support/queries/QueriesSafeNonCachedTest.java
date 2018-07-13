@@ -38,19 +38,12 @@ import org.junit.Test;
 /**
  * {@link QueriesSafeNonCached} test class.
  *
- *
- *
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle JavadocMethodCheck (500 lines)
  */
 @Immutable
 public final class QueriesSafeNonCachedTest {
-
-    /**
-     * Group ID.
-     */
-    private static final int GROUP_ID = 161929264;
 
     /**
      * Constant.
@@ -83,7 +76,7 @@ public final class QueriesSafeNonCachedTest {
                             ),
                             0,
                             1,
-                            QueriesSafeNonCachedTest.GROUP_ID
+                            1
                         ),
                         new AttachmentAddAudio(
                             new VkApiClient(
@@ -97,7 +90,7 @@ public final class QueriesSafeNonCachedTest {
                             ),
                             0,
                             2,
-                            QueriesSafeNonCachedTest.GROUP_ID
+                            1
                         )
                     )
                 ).queries()
@@ -113,7 +106,7 @@ public final class QueriesSafeNonCachedTest {
                         ),
                         0,
                         1,
-                        QueriesSafeNonCachedTest.GROUP_ID
+                        1
                     ).upload().get(0).build()
                 )
         );

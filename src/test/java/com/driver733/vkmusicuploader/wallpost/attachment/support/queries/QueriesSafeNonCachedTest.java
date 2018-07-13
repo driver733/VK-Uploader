@@ -36,7 +36,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * {@link QueriesSafeNonCached} test class.
+ * The {@link QueriesSafeNonCached} test class.
  *
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)

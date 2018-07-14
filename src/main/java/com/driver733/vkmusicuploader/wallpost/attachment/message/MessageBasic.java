@@ -23,12 +23,13 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.message;
 
+import com.driver733.vkmusicuploader.wallpost.WallPost;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.immutable.Array;
 import org.cactoos.Scalar;
 
 /**
- * Constructs a {@link com.driver733.vkmusicuploader.wallpost.wallpost.WallPost}
+ * Constructs a {@link WallPost}
  *  message by combining the specified strings.
  *
  *

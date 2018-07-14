@@ -23,9 +23,9 @@
  */
 package com.driver733.vkmusicuploader.post.posts;
 
-import com.driver733.vkmusicuploader.post.post.Postable;
-import com.driver733.vkmusicuploader.post.post.PostableRootDir;
-import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPosts;
+import com.driver733.vkmusicuploader.post.Postable;
+import com.driver733.vkmusicuploader.post.PostableRootDir;
+import com.driver733.vkmusicuploader.wallpost.wallposts.WallPosts;
 import com.jcabi.aspects.Immutable;
 import java.nio.file.Path;
 

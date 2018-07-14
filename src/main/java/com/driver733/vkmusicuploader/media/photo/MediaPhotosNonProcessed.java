@@ -25,7 +25,7 @@ package com.driver733.vkmusicuploader.media.photo;
 
 import com.driver733.vkmusicuploader.media.Media;
 import com.driver733.vkmusicuploader.post.SuppressFBWarnings;
-import com.driver733.vkmusicuploader.properties.ImmutableProperties;
+import com.driver733.vkmusicuploader.wallpost.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.WallPhotoStatus;
 import com.jcabi.aspects.Immutable;

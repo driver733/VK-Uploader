@@ -23,7 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
-import com.driver733.vkmusicuploader.wallpost.attachment.support.attachment.strings.AttachmentStringsFromJson;
+import com.driver733.vkmusicuploader.wallpost.attachment.support.strings.AttachmentStringsFromJson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

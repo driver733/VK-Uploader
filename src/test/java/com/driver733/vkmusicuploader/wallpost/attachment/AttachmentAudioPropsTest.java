@@ -23,7 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
-import com.driver733.vkmusicuploader.properties.ImmutableProperties;
+import com.driver733.vkmusicuploader.wallpost.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.objects.audio.Audio;

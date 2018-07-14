@@ -23,7 +23,7 @@
  */
 package com.driver733.vkmusicuploader.wallpost.attachment.support;
 
-import com.driver733.vkmusicuploader.properties.ImmutableProperties;
+import com.driver733.vkmusicuploader.wallpost.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentAddAudio;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;

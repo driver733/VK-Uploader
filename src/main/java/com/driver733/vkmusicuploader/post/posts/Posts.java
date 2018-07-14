@@ -23,7 +23,7 @@
  */
 package com.driver733.vkmusicuploader.post.posts;
 
-import com.driver733.vkmusicuploader.post.post.Postable;
+import com.driver733.vkmusicuploader.post.Postable;
 import java.io.File;
 import java.nio.file.Path;
 

@@ -24,7 +24,7 @@
 package com.driver733.vkmusicuploader.wallpost.attachment;
 
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
-import com.driver733.vkmusicuploader.wallpost.wallpost.AbstractVkUnitTest;
+import com.driver733.vkmusicuploader.wallpost.support.AbstractVkUnitTest;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;

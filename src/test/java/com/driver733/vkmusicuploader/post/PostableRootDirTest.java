@@ -23,13 +23,12 @@
  */
 package com.driver733.vkmusicuploader.post;
 
-import com.driver733.vkmusicuploader.post.post.PostableRootDir;
-import com.driver733.vkmusicuploader.properties.ImmutableProperties;
+import com.driver733.vkmusicuploader.wallpost.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.TransportClientFake;
-import com.driver733.vkmusicuploader.wallpost.wallpost.AbstractVkUnitTest;
-import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPostsMusicAlbum;
-import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPostsPhotoAlbum;
-import com.driver733.vkmusicuploader.wallpost.wallpost.wallposts.WallPostsRandom;
+import com.driver733.vkmusicuploader.wallpost.support.AbstractVkUnitTest;
+import com.driver733.vkmusicuploader.wallpost.wallposts.WallPostsMusicAlbum;
+import com.driver733.vkmusicuploader.wallpost.wallposts.WallPostsPhotoAlbum;
+import com.driver733.vkmusicuploader.wallpost.wallposts.WallPostsRandom;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;

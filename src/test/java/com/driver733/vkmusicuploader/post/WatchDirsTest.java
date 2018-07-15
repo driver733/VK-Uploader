@@ -39,7 +39,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -214,14 +216,51 @@ public final class WatchDirsTest extends AbstractVkUnitTest {
         TimeUnit.SECONDS.sleep(delay);
         MatcherAssert.assertThat(
             "The properties files differ",
-            actual.entrySet(),
-            Matchers.equalTo(
-                new ImmutableProperties(
-                    root.resolve("testPhotoAlbum")
-                        .resolve("expected.properties")
-                        .toFile()
-                ).loaded()
-                    .entrySet()
+            actual.entrySet()
+            .stream()
+            .collect(
+                Collectors.toMap(
+                    Map.Entry::getKey,
+                    Map.Entry::getValue
+                )
+            ),
+            Matchers.allOf(
+                Matchers.hasEntry(
+                    "1.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "2.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "3.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "4.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "5.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "6.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "7.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "8.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "9.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "10.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "11.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "12.jpg", "1"
+                )
             )
         );
     }

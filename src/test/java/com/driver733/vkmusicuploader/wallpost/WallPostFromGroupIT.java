@@ -33,9 +33,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Class description.
- *
- *
+ * IT for {@link WallPostFromGroup}.
  *
  * @since 0.2
  * @checkstyle JavadocMethodCheck (500 lines)

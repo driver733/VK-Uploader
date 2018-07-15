@@ -42,7 +42,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test for {@link WallPostAlbum}.
+ * Test for {@link WallPostMusicAlbum}.
  *
  * @since 0.1
  * @checkstyle AnonInnerLengthCheck (500 lines)
@@ -52,7 +52,7 @@ import org.junit.Test;
  * @checkstyle MethodLength (500 lines)
  */
 @Immutable
-public final class WallPostAlbumTest extends AbstractVkUnitTest {
+public final class WallPostMusicAlbumTest extends AbstractVkUnitTest {
 
     /**
      * Test properties.
@@ -77,7 +77,7 @@ public final class WallPostAlbumTest extends AbstractVkUnitTest {
         );
         MatcherAssert.assertThat(
             "Incorrect query map produced.",
-            new WallPostAlbum(
+            new WallPostMusicAlbum(
                 new VkApiClient(
                     new TransportClientFake(
                         new HashMap<String, TransportClient>() {

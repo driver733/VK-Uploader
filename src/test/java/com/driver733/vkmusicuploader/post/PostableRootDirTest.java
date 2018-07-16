@@ -65,6 +65,9 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         })
     public void testPhotoAlbum() throws Exception {
         final Path root = Paths.get("src/test/resources/photos/");
+        root.resolve("vkmu.properties")
+            .toFile()
+            .deleteOnExit();
         root.resolve("testPhotoAlbum")
             .resolve("vkmu.properties")
             .toFile()

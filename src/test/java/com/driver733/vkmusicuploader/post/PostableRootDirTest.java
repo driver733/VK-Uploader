@@ -38,6 +38,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -182,6 +183,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 AbstractVkUnitTest.GROUP_ID
             )
         ).post();
+        TimeUnit.SECONDS.sleep(2);
         MatcherAssert.assertThat(
             "The properties files differ",
             new ImmutableProperties(
@@ -389,6 +391,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 AbstractVkUnitTest.GROUP_ID
             )
         ).post();
+        TimeUnit.SECONDS.sleep(2);
         MatcherAssert.assertThat(
             "The properties files differ",
             new ImmutableProperties(

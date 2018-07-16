@@ -28,9 +28,7 @@ import com.jcabi.aspects.Immutable;
 /**
  * Audio status for caching purposes.
  *
- *
- *
- * @since
+ * @since 0.2
  */
 @Immutable
 public enum AudioStatus {

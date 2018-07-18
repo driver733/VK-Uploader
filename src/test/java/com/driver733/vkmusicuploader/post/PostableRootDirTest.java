@@ -37,6 +37,9 @@ import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -62,6 +65,9 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         })
     public void testPhotoAlbum() throws Exception {
         final Path root = Paths.get("src/test/resources/photos/");
+        root.resolve("vkmu.properties")
+            .toFile()
+            .deleteOnExit();
         root.resolve("testPhotoAlbum")
             .resolve("vkmu.properties")
             .toFile()
@@ -191,19 +197,59 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 AbstractVkUnitTest.GROUP_ID
             )
         ).post();
+        TimeUnit.SECONDS.sleep(1);
         MatcherAssert.assertThat(
             "The properties files differ",
             new ImmutableProperties(
                 root.resolve("testPhotoAlbum")
                     .resolve("vkmu.properties")
                     .toFile()
-            ).entrySet(),
-            Matchers.equalTo(
-                new ImmutableProperties(
-                    root.resolve("testPhotoAlbum")
-                        .resolve("expected.properties")
-                        .toFile()
-                ).entrySet()
+            ).loaded()
+                .entrySet()
+                .stream()
+                .collect(
+                    Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue
+                    )
+                ),
+            Matchers.allOf(
+                Matchers.hasEntry(
+                    "1.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "2.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "3.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "4.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "5.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "6.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "7.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "8.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "9.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "10.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "11.jpg", "1"
+                ),
+                Matchers.hasEntry(
+                    "12.jpg", "1"
+                )
             )
         );
     }
@@ -380,19 +426,25 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 AbstractVkUnitTest.GROUP_ID
             )
         ).post();
+        TimeUnit.SECONDS.sleep(1);
         MatcherAssert.assertThat(
             "The properties files differ",
             new ImmutableProperties(
                 root.resolve("album")
                     .resolve("vkmu.properties")
                     .toFile()
-            ).entrySet(),
-            Matchers.equalTo(
-                new ImmutableProperties(
-                    root.resolve("album")
-                        .resolve("expected.properties")
-                        .toFile()
-                ).entrySet()
+            ).loaded()
+                .entrySet()
+                .stream()
+                .collect(
+                    Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue
+                    )
+                ),
+            Matchers.allOf(
+                Matchers.hasEntry("test.mp3", "2_123456789"),
+                Matchers.hasEntry("testMissingTags.mp3", "2_123456789")
             )
         );
     }

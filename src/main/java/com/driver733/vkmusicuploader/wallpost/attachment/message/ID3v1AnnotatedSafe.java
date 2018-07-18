@@ -151,13 +151,4 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
         return this.tag.toBytes();
     }
 
-    /**
-     * Checks if the tag exists.
-     * @param str Tag.
-     * @return Tag if it exists. Empty attachmentString otherwise.
-     */
-    private static String isPresent(final String str) {
-      
-    }
-
 }

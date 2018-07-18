@@ -29,7 +29,7 @@ and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.h
 
 ### [WallPost](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPost.java)
 This interface is implemented by the classes which construct (decorate) VK WallPosts.
-For example the [WallPostBasic](https://github.com/VKCOM/vk-java-sdk/blob/master/sdk/src/main/java/com/vk/api/sdk/client/VkApiClient.java) class is a fundamental implementation of that interface, as
+For example the [WallPostBase](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPostBase.java) class is a fundamental implementation of that interface, as
 it encapsulates a [VK API client](https://github.com/VKCOM/vk-java-sdk/blob/master/sdk/src/main/java/com/vk/api/sdk/client/VkApiClient.java) instance and a [UserActor](https://github.com/VKCOM/vk-java-sdk/blob/master/sdk/src/main/java/com/vk/api/sdk/client/actors/UserActor.java) instance.
 
 Other implementations of this interface, such as [WallPostWithMessage](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPostWithMessage.java) or [WallPostWithAttachments](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPostWithAttachments.java)
@@ -38,7 +38,7 @@ add content to a wall post (text and attachments, accordingly).
 Also, there are some convenient implementations of that interface, such as [WallPostMusicAlbum](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPostMusicAlbum.java) or [WallPostPhotoAlbum](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPostPhotoAlbum.java),
 which create a [WallPost](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPost.java) with audio (music album and a album artwork) or image (photo album) content.
 
-A full list of classes implementing this interface can be found in the package [wallpost](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPost.java).
+A full list of classes implementing this interface can be found in the package [wallpost](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost).
 
 In addition, the examples, which showcase how to utilize this interface and its implementations can be found in corresponding [test package](https://github.com/driver733/VKMusicUploader/tree/master/src/test/java/com/driver733/vkmusicuploader/wallpost).
 
@@ -46,9 +46,9 @@ In addition, the examples, which showcase how to utilize this interface and its 
 This interface is implemented by the classes which generate a series of [WallPost](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPost.java)s and combine them into a list of [ExecuteBatchQueries](https://github.com/VKCOM/vk-java-sdk/blob/master/sdk/src/main/java/com/vk/api/sdk/queries/execute/ExecuteBatchQuery.java).
 After the queries are executed, the `updateProperties` method shall be called in order to cache the queries` results. (usually with properties files).
 
-### [Posts](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/post/Postable.java)
+### [Posts](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/post/posts/Posts.java)
 This interface is implemented by classes which create [WallPosts](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/wallposts/WallPosts.java).
-For example, the [PostableRootDir]() class creates [WallPosts](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/wallposts/WallPosts.java) from the provided directory.
+For example, the [PostableRootDir](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/post/PostableRootDir.java) class creates [WallPosts](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/wallposts/WallPosts.java) from the provided directory.
 
 ### [Postable](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/post/Postable.java)
 This interface serves as an entry point to the [WallPosts](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/wallposts/WallPosts.java). The classes which implement this interface

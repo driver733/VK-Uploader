@@ -33,7 +33,6 @@ import com.driver733.vkmusicuploader.wallpost.WallPostMusicAlbum;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.jcabi.aspects.Cacheable;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.jcabi.log.Logger;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -45,6 +44,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.cactoos.list.ListOf;
 
 /**
  * Creates {@link WallPost}s
@@ -279,7 +279,7 @@ public final class WallPostsMusicAlbum implements WallPosts {
                 query = new WallPostMusicAlbum(
                     this.client,
                     this.actor,
-                    new Array<>(
+                    new ListOf<>(
                         audios.subList(
                             from,
                             to

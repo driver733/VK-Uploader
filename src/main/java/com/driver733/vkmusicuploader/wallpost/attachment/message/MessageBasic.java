@@ -25,8 +25,9 @@ package com.driver733.vkmusicuploader.wallpost.attachment.message;
 
 import com.driver733.vkmusicuploader.wallpost.WallPost;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
+import java.util.List;
 import org.cactoos.Scalar;
+import org.cactoos.list.ListOf;
 
 /**
  * Constructs a {@link WallPost}
@@ -42,14 +43,14 @@ public final class MessageBasic implements Scalar<String> {
     /**
      * Parts of the message.
      */
-    private final Array<String> parts;
+    private final List<String> parts;
 
     /**
      * Ctor.
      * @param parts Parts of the message.
      */
     public MessageBasic(final String... parts) {
-        this.parts = new Array<>(parts);
+        this.parts = new ListOf<>(parts);
     }
 
     @Override

@@ -29,7 +29,6 @@ import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.Upload;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadAudio;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -39,6 +38,7 @@ import com.vk.api.sdk.queries.audio.AudioAddQuery;
 import com.vk.api.sdk.queries.upload.UploadAudioQuery;
 import java.util.ArrayList;
 import java.util.List;
+import org.cactoos.list.ListOf;
 
 /**
  * Upload the audios, caches the upload result
@@ -71,7 +71,7 @@ public final class AttachmentAudioWithProps implements Attachment {
     /**
      * Audios files.
      */
-    private final Array<Upload<UploadAudioQuery, AudioUploadResponse>> audios;
+    private final List<Upload<UploadAudioQuery, AudioUploadResponse>> audios;
 
     /**
      * Properties that contain the {@link AudioStatus} of audios files.
@@ -100,7 +100,7 @@ public final class AttachmentAudioWithProps implements Attachment {
         this.actor = actor;
         this.properties = properties;
         this.group = group;
-        this.audios = new Array<>(audios);
+        this.audios = new ListOf<>(audios);
     }
 
     @Override
@@ -145,7 +145,7 @@ public final class AttachmentAudioWithProps implements Attachment {
             filename,
             this.properties
         ).saveProps();
-        return new Array<>(
+        return new ListOf<>(
             new AudioAddQuery(
                 this.client,
                 this.actor,

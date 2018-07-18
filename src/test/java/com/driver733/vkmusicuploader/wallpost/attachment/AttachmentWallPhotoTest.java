@@ -38,12 +38,9 @@ import org.junit.Test;
 /**
  * Test for {@link AttachmentWallPhoto}.
  *
- *
- *
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (20 lines)
- * @checkstyle StringLiteralsConcatenationCheck (500 lines)
  */
 @Immutable
 public final class AttachmentWallPhotoTest {
@@ -61,11 +58,14 @@ public final class AttachmentWallPhotoTest {
                 new UploadWallPhoto(
                     new VkApiClient(
                         new TransportClientCached(
-                        "{"
-                            + " \"photo\" : \"testPhoto\","
-                            + " \"server\" : 1,"
-                            + " \"hash\" : \"testHash\""
-                                + " }"
+                            String.join(
+                                "",
+                                "{",
+                                    "\"photo\" : \"testPhoto\",",
+                                    "\"server\" : 1,",
+                                    "\"hash\" : \"testHash\"",
+                                    "}"
+                            )
                         )
                     ),
                     "",
@@ -82,11 +82,14 @@ public final class AttachmentWallPhotoTest {
                 new PhotosSaveWallPhotoQuery(
                     new VkApiClient(
                         new TransportClientCached(
-                            "{"
-                                + " \"photo\" : \"testPhoto\","
-                                + " \"server\" : 1,"
-                                + " \"hash\" : \"testHash\""
-                                + " }"
+                            String.join(
+                                "",
+                                "{",
+                                    "\"photo\" : \"testPhoto\",",
+                                    "\"server\" : 1,",
+                                    "\"hash\" : \"testHash\"",
+                                    "}"
+                            )
                         )
                     ),
                     new UserActor(0, ""),

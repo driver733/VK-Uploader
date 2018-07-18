@@ -20,43 +20,51 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ *
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.upload;
 
-import com.jcabi.aspects.Immutable;
-import com.vk.api.sdk.client.AbstractQueryBuilder;
-import com.vk.api.sdk.client.VkApiClient;
-import java.util.Collection;
-import org.cactoos.list.ListOf;
+package com.driver733.vkmusicuploader.wallpost.attachment.message;
+
+import org.cactoos.Scalar;
 
 /**
- * A fake {@link com.vk.api.sdk.queries.audio.AudioAddQuery}.
- *
- *
+ * The tag that can be safely used.
  *
  * @since 0.1
- * @checkstyle ProtectedMethodInFinalClassCheck (500 lines)
  */
-@Immutable
-public final class QueryFakeAudioAdd
-    extends AbstractQueryBuilder<QueryFakeAudioAdd, Integer> {
+public final class TagSafe implements Scalar<String> {
 
     /**
-     * Fake audios.add query.
-     * @param client A {@link VkApiClient} that is used for all VK API requests.
+     * Tag value.
      */
-    public QueryFakeAudioAdd(final VkApiClient client) {
-        super(client, "fake.audio.add", Integer.class);
+    private final String value;
+
+    /**
+     * Ctor.
+     * @param value Tag value.
+     */
+    public TagSafe(final String value) {
+        this.value = value;
     }
 
-    @Override
-    protected QueryFakeAudioAdd getThis() {
-        return this;
-    }
-
-    @Override
-    protected Collection<String> essentialKeys() {
-        return new ListOf<>();
+    /**
+     * Verifies the tag.
+     * @return The original tag value or
+     *  an empty string if the tag does not pass validation.
+     */
+    public String value() {
+        final String result;
+        if (
+            this.value == null
+                || this.value.isEmpty()
+                || "-1".equalsIgnoreCase(this.value)
+                || "Unknown".equalsIgnoreCase(this.value)
+            ) {
+            result = this.value;
+        } else {
+            result = "";
+        }
+        return result;
     }
 
 }

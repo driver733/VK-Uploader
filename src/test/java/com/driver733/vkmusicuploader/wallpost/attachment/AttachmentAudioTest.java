@@ -50,7 +50,6 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle LocalFinalVariableNameCheck (500 lines)
  * @checkstyle AnonInnerLengthCheck (500 lines)
- * @checkstyle StringLiteralsConcatenationCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (50 lines)
  */
@@ -82,24 +81,30 @@ public final class AttachmentAudioTest extends AbstractVkUnitTest {
                                 put(
                                     "audio.uploadServer",
                                     new TransportClientCached(
-                                        "{"
-                                            + "\"hash\"     : \"hash123\","
-                                            + "\"audio\"    : \"fnknjkasd\","
-                                            + "\"server\"   : 123546,"
-                                            + "\"redirect\" : \"redirect.com\""
-                                            + "}"
+                                        String.join(
+                                            "",
+                                            "{",
+                                                "\"hash\"     : \"hash123\",",
+                                                "\"audio\"    : \"fnknjkasd\",",
+                                                "\"server\"   : 123546,",
+                                                "\"redirect\" : \"redire.com\"",
+                                                "}"
+                                        )
                                     )
                                 );
                                 put(
                                     AbstractVkUnitTest.AUDIO_SAVE_URL,
                                     new TransportClientCached(
-                                        "{"
-                                            + "\"id\"       : 1,"
-                                            + "\"owner_id\" : 2,"
-                                            + "\"artist\"   : \"Clean Tears\","
-                                            + "\"title\"    : \"Dragon\","
-                                            + "\"url\"      : \"url1.com\""
-                                            + "}"
+                                        String.join(
+                                            "",
+                                            "{",
+                                                "\"id\"       : 1,",
+                                                "\"owner_id\" : 2,",
+                                                "\"artist\"   : \"Clean Tea\",",
+                                                "\"title\"    : \"Dragon\",",
+                                                "\"url\"      : \"url1.com\"",
+                                                "}"
+                                        )
                                     )
                                 );
                             }
@@ -117,12 +122,15 @@ public final class AttachmentAudioTest extends AbstractVkUnitTest {
                 new UploadAudio(
                     new VkApiClient(
                         new TransportClientCached(
-                            "{"
-                                + "\"hash\"     : \"hash123\","
-                                + "\"audio\"    : \"fnknjkasd\","
-                                + "\"server\"   : 123546,"
-                                + "\"redirect\" : \"redirect.com\""
-                                + "}"
+                            String.join(
+                                "",
+                                "{",
+                                    "\"hash\"     : \"hash123\",",
+                                    "\"audio\"    : \"fnknjkasd\",",
+                                    "\"server\"   : 123546,",
+                                    "\"redirect\" : \"redirect.com\"",
+                                    "}"
+                            )
                         )
                     ),
                     "audio.uploadServer",

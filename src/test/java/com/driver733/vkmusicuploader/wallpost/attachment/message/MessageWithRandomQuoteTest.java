@@ -32,12 +32,9 @@ import org.junit.Test;
 /**
  * Test for {@link MessageWithRandomQuote}.
  *
- *
- *
  * @since 0.2
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle AvoidDuplicateLiterals (200 lines)
- * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
 @Immutable
 public final class MessageWithRandomQuoteTest {
@@ -49,13 +46,16 @@ public final class MessageWithRandomQuoteTest {
             new MessageWithRandomQuote(
                 new FakeRequest()
                     .withBody(
-                        "{"
-                            + "\"quoteText\":\"Общественной жизни.\","
-                            + "\"quoteAuthor\":\"Лев Толстой\","
-                            + "\"senderName\":\"test\","
-                            + " \"senderLink\":\"test\","
-                            + "\"quoteLink\":\"http://forismatic.com/ru/711d/\""
-                            + "}"
+                        String.join(
+                            "",
+                            "{",
+                            "\"quoteText\":\"Общественной жизни.\",",
+                            "\"quoteAuthor\":\"Лев Толстой\",",
+                            "\"senderName\":\"test\",",
+                            "\"senderLink\":\"test\",",
+                            "\"quoteLink\":\"http://forismatic.com/ru/711d/\"",
+                            "}"
+                        )
                     )
             ).value(),
             Matchers.equalTo(

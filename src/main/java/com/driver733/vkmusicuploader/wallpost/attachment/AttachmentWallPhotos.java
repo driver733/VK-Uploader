@@ -125,9 +125,6 @@ public final class AttachmentWallPhotos implements Attachment {
      * @throws ApiException VK API error.
      * @throws ClientException VK Client error.
      * @throws Exception If the {@link AudioStatus} is invalid
-     * @checkstyle LocalFinalVariableNameCheck (20 lines)
-     * @checkstyle StringLiteralsConcatenationCheck (100 lines)
-     * @checkstyle LocalFinalVariableNameCheck (100 lines)
      */
     private List<AbstractQueryBuilder> upload(final Path photo)
         throws Exception {

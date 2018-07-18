@@ -28,7 +28,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.QueryResults;
@@ -36,6 +35,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import org.cactoos.list.ListOf;
 
 /**
  * Combines the responses of cached
@@ -84,7 +84,7 @@ public final class QueryResultsBasic implements QueryResults {
                 );
             }
         }
-        return new Array<>(results);
+        return new ListOf<>(results);
     }
 
     @Override

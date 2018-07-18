@@ -47,7 +47,6 @@ import org.junit.Test;
  * @since 0.1
  * @checkstyle AnonInnerLengthCheck (1000 lines)
  * @checkstyle JavadocMethodCheck (1000 lines)
- * @checkstyle StringLiteralsConcatenationCheck (1000 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (1000 lines)
  * @checkstyle MethodLength (1000 lines)
  */
@@ -86,9 +85,12 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
                             put(
                                 AbstractVkUnitTest.EXECUTE_URL,
                                 new TransportClientCached(
-                                    "{"
-                                        + "\"response\": { \"post_id\": 9 }"
-                                        + "}"
+                                    String.join(
+                                        "",
+                                        "{",
+                                        "\"response\": { \"post_id\": 9 }",
+                                        "}"
+                                    )
                                 )
                             );
                         }
@@ -141,50 +143,59 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
                             put(
                                 "photos.wallUploadServer",
                                 new TransportClientCached(
-                                    "{"
-                                        + "\"hash\"      : \"hash1236\","
-                                        + "\"photo\"     : \"fnknjkasd\","
-                                        + "\"server\"    : 1235464"
-                                        + "}"
+                                    String.join(
+                                        "",
+                                        "{",
+                                        "\"hash\"      : \"hash1236\",",
+                                        "\"photo\"     : \"fnknjkasd\",",
+                                        "\"server\"    : 1235464",
+                                        "}"
+                                    )
                                 )
                             );
                             put(
                                 AbstractVkUnitTest.PHOTO_SAVE_URL,
                                 new TransportClientCached(
-                                    "{"
-                                        + "\"id\"          : 123456,"
-                                        + "\"album_id\"    : 5674,"
-                                        + "\"owner_id\"    : 6785,"
-                                        + "\"user_id\"     : 4356,"
-                                        + "\"sizes\"       : ["
-                                        + "{"
-                                        + "\"src\": \"src\","
-                                        + "\"width\": 100,"
-                                        + "\"height\": 100"
-                                        + "}"
-                                        + "],"
-                                        + "\"photo_75\"    : \"url12.com\","
-                                        + "\"photo_130\"   : \"url13.com\","
-                                        + "\"photo_604\"   : \"url31.com\","
-                                        + "\"photo_807\"   : \"url15.com\","
-                                        + "\"photo_1280\"  : \"url1e.com\","
-                                        + "\"photo_2560\"  : \"url1d.com\","
-                                        + "\"photo_id\"    : 3456,"
-                                        + "\"width\"       : 500,"
-                                        + "\"height\"      : 500,"
-                                        + "\"date\"        : 1502919105,"
-                                        + "\"lat\"         : 56.3456,"
-                                        + "\"long\"        : 54.9645,"
-                                        + "\"access_key\"  : \"sjdkfk\""
-                                        + "}"
+                                    String.join(
+                                        "",
+                                        "{",
+                                        "\"id\"          : 123456,",
+                                        "\"album_id\"    : 5674,",
+                                        "\"owner_id\"    : 6785,",
+                                        "\"user_id\"     : 4356,",
+                                        "\"sizes\"       : [",
+                                        "{",
+                                        "\"src\": \"src\",",
+                                        "\"width\": 100,",
+                                        "\"height\": 100",
+                                        "}",
+                                        "],",
+                                        "\"photo_75\"    : \"url12.com\",",
+                                        "\"photo_130\"   : \"url13.com\",",
+                                        "\"photo_604\"   : \"url31.com\",",
+                                        "\"photo_807\"   : \"url15.com\",",
+                                        "\"photo_1280\"  : \"url1e.com\",",
+                                        "\"photo_2560\"  : \"url1d.com\",",
+                                        "\"photo_id\"    : 3456,",
+                                        "\"width\"       : 500,",
+                                        "\"height\"      : 500,",
+                                        "\"date\"        : 1502919105,",
+                                        "\"lat\"         : 56.3456,",
+                                        "\"long\"        : 54.9645,",
+                                        "\"access_key\"  : \"sjdkfk\"",
+                                        "}"
+                                    )
                                 )
                             );
                             put(
                                 AbstractVkUnitTest.EXECUTE_URL,
                                 new TransportClientCached(
-                                    "{"
-                                        + "\"response\": { \"post_id\": 4 }"
-                                        + "}"
+                                    String.join(
+                                        "",
+                                        "{",
+                                        "\"response\": { \"post_id\": 4 }",
+                                        "}"
+                                    )
                                 )
                             );
                         }
@@ -203,14 +214,17 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
                                 put(
                                     AbstractVkUnitTest.PHOTO_WALL_URL,
                                     new TransportClientCached(
-                                        "{"
-                                            + "\"response\" : {"
-                                            + "\"upload_url\" :"
-                                            + "\"photos.wallUploadServer\","
-                                            + "\"album_id\"   : 169819278,"
-                                            + "\"user_id\"    : 185014513"
-                                            + "}"
-                                            + "}"
+                                        String.join(
+                                            "",
+                                            "{",
+                                            "\"response\" : {",
+                                            "\"upload_url\" :",
+                                            "\"photos.wallUploadServer\",",
+                                            "\"album_id\"   : 169819278,",
+                                            "\"user_id\"    : 185014513",
+                                            "}",
+                                            "}"
+                                        )
                                     )
                                 );
                             }
@@ -266,24 +280,30 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
                             put(
                                 "audio.uploadServer",
                                 new TransportClientCached(
-                                    "{"
-                                        + "\"hash\"     : \"hash123\","
-                                        + "\"audio\"    : \"fnknjkasd\","
-                                        + "\"server\"   : 123546,"
-                                        + "\"redirect\" : \"redirect.com\""
-                                        + "}"
+                                    String.join(
+                                        "",
+                                        "{",
+                                        "\"hash\"     : \"hash123\",",
+                                        "\"audio\"    : \"fnknjkasd\",",
+                                        "\"server\"   : 123546,",
+                                        "\"redirect\" : \"redirect.com\"",
+                                        "}"
+                                    )
                                 )
                             );
                             put(
                                 AbstractVkUnitTest.AUDIO_SAVE_URL,
                                 new TransportClientCached(
-                                    "{"
-                                        + "\"id\"       : 123456,"
-                                        + "\"owner_id\" : 5674,"
-                                        + "\"artist\"   : \"Clean Tears\","
-                                        + "\"title\"    : \"Dragon\","
-                                        + "\"url\"      : \"url1.com\""
-                                        + "}"
+                                    String.join(
+                                        "",
+                                        "{",
+                                        "\"id\"       : 123456,",
+                                        "\"owner_id\" : 5674,",
+                                        "\"artist\"   : \"Clean Tears\",",
+                                        "\"title\"    : \"Dragon\",",
+                                        "\"url\"      : \"url1.com\"",
+                                        "}"
+                                    )
                                 )
                             );
                             put(
@@ -295,9 +315,12 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
                             put(
                                 AbstractVkUnitTest.EXECUTE_URL,
                                 new TransportClientCached(
-                                    "{"
-                                        + "\"response\": { \"post_id\": 4 }"
-                                        + "}"
+                                    String.join(
+                                        "",
+                                        "{",
+                                        "\"response\": { \"post_id\": 4 }",
+                                        "}"
+                                    )
                                 )
                             );
                         }
@@ -316,12 +339,15 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
                                 put(
                                     AbstractVkUnitTest.AUDIO_UPLOAD_URL,
                                     new TransportClientCached(
-                                        "{"
-                                            + "\"response\": {"
-                                            + "\"upload_url\" :"
-                                            + "\"audio.uploadServer\""
-                                            + "}"
-                                            + "}"
+                                        String.join(
+                                            "",
+                                            "{",
+                                            "\"response\": {",
+                                            "\"upload_url\" :",
+                                            "\"audio.uploadServer\"",
+                                            "}",
+                                            "}"
+                                        )
                                     )
                                 );
                             }
@@ -377,65 +403,77 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
                             put(
                                 "photos.wallUploadServer",
                                 new TransportClientCached(
-                                    "{"
-                                        + "\"hash\"      : \"hash123\","
-                                        + "\"photo\"     : \"fnknjkasd\","
-                                        + "\"server\"    : 123546"
-                                        + "}"
+                                    String.join(
+                                        "",
+                                        "{",
+                                        "\"hash\"      : \"hash123\",",
+                                        "\"photo\"     : \"fnknjkasd\",",
+                                        "\"server\"    : 123546",
+                                        "}"
+                                    )
                                 )
                             );
                             put(
                                 "audio.uploadServer",
                                 new TransportClientCached(
-                                    "{"
-                                        + "\"hash\"     : \"hash123\","
-                                        + "\"audio\"    : \"fnknjkasd\","
-                                        + "\"server\"   : 123546,"
-                                        + "\"redirect\" : \"redirect.com\""
-                                        + "}"
+                                    String.join(
+                                        "",
+                                        "{",
+                                        "\"hash\"     : \"hash123\",",
+                                        "\"audio\"    : \"fnknjkasd\",",
+                                        "\"server\"   : 123546,",
+                                        "\"redirect\" : \"redirect.com\"",
+                                        "}"
+                                    )
                                 )
                             );
                             put(
                                 AbstractVkUnitTest.AUDIO_SAVE_URL,
                                 new TransportClientCached(
-                                    "{"
-                                        + "\"id\"       : 123456,"
-                                        + "\"owner_id\" : 5674,"
-                                        + "\"artist\"   : \"Clean Tears\","
-                                        + "\"title\"    : \"Dragon\","
-                                        + "\"url\"      : \"url1.com\""
-                                        + "}"
+                                    String.join(
+                                        "",
+                                        "{",
+                                        "\"id\"       : 123456,",
+                                        "\"owner_id\" : 5674,",
+                                        "\"artist\"   : \"Clean Tears\",",
+                                        "\"title\"    : \"Dragon\",",
+                                        "\"url\"      : \"url1.com\"",
+                                        "}"
+                                    )
                                 )
                             );
                             put(
                                 AbstractVkUnitTest.PHOTO_SAVE_URL,
                                 new TransportClientCached(
-                                    "{"
-                                        + "\"id\"          : 123456,"
-                                        + "\"album_id\"    : 5674,"
-                                        + "\"owner_id\"    : 6785,"
-                                        + "\"user_id\"     : 4356,"
-                                        + "\"sizes\"       : ["
-                                        + "{"
-                                        + "\"src\": \"src\","
-                                        + "\"width\": 100,"
-                                        + "\"height\": 100"
-                                        + "}"
-                                        + "],"
-                                        + "\"photo_75\"    : \"url1.com\","
-                                        + "\"photo_130\"   : \"url1.com\","
-                                        + "\"photo_604\"   : \"url1.com\","
-                                        + "\"photo_807\"   : \"url1.com\","
-                                        + "\"photo_1280\"  : \"url1.com\","
-                                        + "\"photo_2560\"  : \"url1.com\","
-                                        + "\"photo_id\"    : 3456,"
-                                        + "\"width\"       : 500,"
-                                        + "\"height\"      : 500,"
-                                        + "\"date\"        : 1502919105,"
-                                        + "\"lat\"         : 56.3456,"
-                                        + "\"long\"        : 54.9645,"
-                                        + "\"access_key\"  : \"sjdkfk\""
-                                        + "}"
+                                    String.join(
+                                        "",
+                                        "{",
+                                        "\"id\"          : 123456,",
+                                        "\"album_id\"    : 5674,",
+                                        "\"owner_id\"    : 6785,",
+                                        "\"user_id\"     : 4356,",
+                                        "\"sizes\"       : [",
+                                        "{",
+                                        "\"src\": \"src\",",
+                                        "\"width\": 100,",
+                                        "\"height\": 100",
+                                        "}",
+                                        "],",
+                                        "\"photo_75\"    : \"url1.com\",",
+                                        "\"photo_130\"   : \"url1.com\",",
+                                        "\"photo_604\"   : \"url1.com\",",
+                                        "\"photo_807\"   : \"url1.com\",",
+                                        "\"photo_1280\"  : \"url1.com\",",
+                                        "\"photo_2560\"  : \"url1.com\",",
+                                        "\"photo_id\"    : 3456,",
+                                        "\"width\"       : 500,",
+                                        "\"height\"      : 500,",
+                                        "\"date\"        : 1502919105,",
+                                        "\"lat\"         : 56.3456,",
+                                        "\"long\"        : 54.9645,",
+                                        "\"access_key\"  : \"sjdkfk\"",
+                                        "}"
+                                    )
                                 )
                             );
                             put(
@@ -447,9 +485,12 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
                             put(
                                 AbstractVkUnitTest.EXECUTE_URL,
                                 new TransportClientCached(
-                                    "{"
-                                        + "\"response\": { \"post_id\": 4 }"
-                                        + "}"
+                                    String.join(
+                                        "",
+                                        "{",
+                                        "\"response\": { \"post_id\": 4 }",
+                                        "}"
+                                    )
                                 )
                             );
                         }
@@ -468,25 +509,31 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
                                 put(
                                     AbstractVkUnitTest.PHOTO_WALL_URL,
                                     new TransportClientCached(
-                                        "{"
-                                            + "\"response\" : {"
-                                            + "\"upload_url\" :"
-                                            + "\"photos.wallUploadServer\","
-                                            + "\"album_id\"   : 169819278,"
-                                            + "\"user_id\"    : 185014513"
-                                            + "}"
-                                            + "}"
+                                        String.join(
+                                            "",
+                                            "{",
+                                            "\"response\" : {",
+                                            "\"upload_url\" :",
+                                            "\"photos.wallUploadServer\",",
+                                            "\"album_id\"   : 169819278,",
+                                            "\"user_id\"    : 185014513",
+                                            "}",
+                                            "}"
+                                        )
                                     )
                                 );
                                 put(
                                     AbstractVkUnitTest.AUDIO_UPLOAD_URL,
                                     new TransportClientCached(
-                                        "{"
-                                            + "\"response\": {"
-                                            + "\"upload_url\" :"
-                                            + "\"audio.uploadServer\""
-                                            + "}"
-                                            + "}"
+                                        String.join(
+                                            "",
+                                            "{",
+                                            "\"response\": {",
+                                            "\"upload_url\" :",
+                                            "\"audio.uploadServer\"",
+                                            "}",
+                                            "}"
+                                        )
                                     )
                                 );
                             }

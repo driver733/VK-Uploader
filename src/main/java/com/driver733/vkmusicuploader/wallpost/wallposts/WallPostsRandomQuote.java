@@ -140,7 +140,7 @@ public final class WallPostsRandomQuote implements WallPosts {
      *  for attachmentsFields.
      * @param group Group ID.
      * @param count Number of posts to create.
-     * @param photos Directory with photos.
+     * @param photos DirectoryEntrance with photos.
      */
     public WallPostsRandomQuote(
         final VkApiClient client,
@@ -169,7 +169,7 @@ public final class WallPostsRandomQuote implements WallPosts {
      *  for attachmentsFields.
      * @param group Group ID.
      * @param count Number of posts to create.
-     * @param audios Directory with audios.
+     * @param audios DirectoryEntrance with audios.
      */
     public WallPostsRandomQuote(
         final VkApiClient client,
@@ -198,8 +198,8 @@ public final class WallPostsRandomQuote implements WallPosts {
      *  for attachmentsFields.
      * @param group Group ID.
      * @param count Number of posts to create.
-     * @param photos Directory with photos.
-     * @param audios Directory with audios.
+     * @param photos DirectoryEntrance with photos.
+     * @param audios DirectoryEntrance with audios.
      */
     public WallPostsRandomQuote(
         final VkApiClient client,

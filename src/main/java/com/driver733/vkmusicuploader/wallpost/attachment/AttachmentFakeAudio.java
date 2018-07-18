@@ -25,12 +25,12 @@ package com.driver733.vkmusicuploader.wallpost.attachment;
 
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.QueryFakeAudioAdd;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.util.ArrayList;
 import java.util.List;
+import org.cactoos.list.ListOf;
 
 /**
  * An {@link Attachment} with a fake audios query.
@@ -52,7 +52,7 @@ public final class AttachmentFakeAudio implements Attachment {
      * @param results Query results (audios IDs).
      */
     public AttachmentFakeAudio(final Integer... results) {
-        this.results = new Array<>(results);
+        this.results = new ListOf<>(results);
     }
 
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
@@ -77,7 +77,7 @@ public final class AttachmentFakeAudio implements Attachment {
                 )
             );
         }
-        return new Array<>(out);
+        return new ListOf<>(out);
     }
 
 }

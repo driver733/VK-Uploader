@@ -24,9 +24,10 @@
 package com.driver733.vkmusicuploader.wallpost.attachment.mp3filefromfile.bytearray.fallback;
 
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.jcabi.log.Logger;
+import java.util.List;
 import org.cactoos.Bytes;
+import org.cactoos.list.ListOf;
 
 /**
  * Finds the first valid byte array.
@@ -42,7 +43,7 @@ public final class FallbackBytes implements Bytes {
     /**
      * Byte array providers. Some or all might be faulty and raise an exception.
      */
-    private final Array<Bytes> arrays;
+    private final List<Bytes> arrays;
 
     /**
      * Ctor.
@@ -50,7 +51,7 @@ public final class FallbackBytes implements Bytes {
      * @param arrays Byte array providers.
      */
     public FallbackBytes(final Bytes... arrays) {
-        this.arrays = new Array<>(arrays);
+        this.arrays = new ListOf<>(arrays);
     }
 
     @Override

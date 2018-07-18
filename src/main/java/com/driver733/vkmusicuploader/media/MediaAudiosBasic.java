@@ -43,13 +43,13 @@ import org.cactoos.list.ListOf;
 public final class MediaAudiosBasic implements Media {
 
     /**
-     * DirectoryEntrance that contains audios files.
+     * WatchDirs that contains audios files.
      */
     private final Path dir;
 
     /**
      * Ctor.
-     * @param dir DirectoryEntrance that contains audios files.
+     * @param dir WatchDirs that contains audios files.
      */
     public MediaAudiosBasic(final Path dir) {
         this.dir = dir;

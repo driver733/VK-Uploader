@@ -20,7 +20,6 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- *
  */
 
 package com.driver733.vkmusicuploader.wallpost.attachment.message;
@@ -35,32 +34,32 @@ import org.cactoos.Scalar;
 public final class TagSafe implements Scalar<String> {
 
     /**
-     * Tag value.
+     * Tag origin.
      */
-    private final String value;
+    private final String origin;
 
     /**
      * Ctor.
-     * @param value Tag value.
+     * @param origin Tag origin.
      */
-    public TagSafe(final String value) {
-        this.value = value;
+    public TagSafe(final String origin) {
+        this.origin = origin;
     }
 
     /**
      * Verifies the tag.
-     * @return The original tag value or
+     * @return The original tag origin or
      *  an empty string if the tag does not pass validation.
      */
     public String value() {
         final String result;
         if (
-            this.value == null
-                || this.value.isEmpty()
-                || "-1".equalsIgnoreCase(this.value)
-                || "Unknown".equalsIgnoreCase(this.value)
+            this.origin == null
+                || this.origin.isEmpty()
+                || "-1".equalsIgnoreCase(this.origin)
+                || "Unknown".equalsIgnoreCase(this.origin)
             ) {
-            result = this.value;
+            result = this.origin;
         } else {
             result = "";
         }

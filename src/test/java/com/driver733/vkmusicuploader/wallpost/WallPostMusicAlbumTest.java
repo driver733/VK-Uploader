@@ -106,6 +106,7 @@ public final class WallPostMusicAlbumTest extends AbstractVkUnitTest {
                                             "\"redirect\" : \"redirect.com\"",
                                             "}"
                                         )
+                                    )
                                 );
                                 put(
                                     AUDIO_SAVE_URL,

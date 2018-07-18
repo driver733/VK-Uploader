@@ -766,6 +766,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                                     "audio.uploadServer",
                                     new TransportClientCached(
                                         String.join(
+                                            "",
                                             "{",
                                             "\"hash\"     : \"hash1234\",",
                                             "\"audio\"    : \"fnknjkasd\",",

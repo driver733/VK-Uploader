@@ -102,7 +102,7 @@ public final class WallPostPhotoAlbum implements WallPost {
     }
 
     /**
-     * Constructs a WallPostQuery for a wall WallPostAlbum.
+     * Constructs a WallPostQuery for a wall WallPostMusicAlbum.
      * @return WallPostQuery.
      * @throws Exception If an exception occurs
      *  while constructing the {@link WallPost}.

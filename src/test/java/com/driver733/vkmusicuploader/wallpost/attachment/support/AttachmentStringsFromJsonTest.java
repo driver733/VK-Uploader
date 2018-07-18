@@ -122,6 +122,7 @@ public final class AttachmentStringsFromJsonTest {
                     .create()
                     .fromJson(
                         String.join(
+                            "",
                             "[",
                             "{",
                             "\"ppowner_id\" : 111111,",

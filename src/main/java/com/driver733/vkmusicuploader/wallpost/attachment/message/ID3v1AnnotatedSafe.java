@@ -60,7 +60,8 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
     @Override
     public String getTrack() {
         return new TagSafe(
-            this.tag.getTrack()
+            this.tag.getTrack(),
+            "Track"
         ).value();
     }
 
@@ -72,7 +73,8 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
     @Override
     public String getArtist() {
         return new TagSafe(
-            this.tag.getArtist()
+            this.tag.getArtist(),
+            "Artist"
         ).value();
     }
 
@@ -84,7 +86,8 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
     @Override
     public String getTitle() {
         return new TagSafe(
-            this.tag.getTitle()
+            this.tag.getTitle(),
+            "Title"
         ).value();
     }
 
@@ -96,7 +99,8 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
     @Override
     public String getAlbum() {
         return new TagSafe(
-            this.tag.getAlbum()
+            this.tag.getAlbum(),
+            "Album"
         ).value();
     }
 
@@ -108,7 +112,8 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
     @Override
     public String getYear() {
         return new TagSafe(
-            this.tag.getYear()
+            this.tag.getYear(),
+            "Year"
         ).value();
     }
 
@@ -130,14 +135,16 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
     @Override
     public String getGenreDescription() {
         return new TagSafe(
-            this.tag.getGenreDescription()
+            this.tag.getGenreDescription(),
+            "Genre Description"
         ).value();
     }
 
     @Override
     public String getComment() {
         return new TagSafe(
-            this.tag.getComment()
+            this.tag.getComment(),
+            "Comment"
         ).value();
     }
 

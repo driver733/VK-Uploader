@@ -24,6 +24,7 @@
 
 package com.driver733.vkmusicuploader.wallpost.attachment.message;
 
+import com.jcabi.aspects.Immutable;
 import org.cactoos.Scalar;
 
 /**
@@ -31,19 +32,27 @@ import org.cactoos.Scalar;
  *
  * @since 0.1
  */
+@Immutable
 public final class TagSafe implements Scalar<String> {
 
     /**
      * Tag origin.
      */
-    private final String origin;
+    private final String tag;
+
+    /**
+     * Tag title.
+     */
+    private final String title;
 
     /**
      * Ctor.
-     * @param origin Tag origin.
+     * @param tag Tag value.
+     * @param title Tag title.
      */
-    public TagSafe(final String origin) {
-        this.origin = origin;
+    public TagSafe(final String tag, final String title) {
+        this.tag = tag;
+        this.title = title;
     }
 
     /**
@@ -54,14 +63,18 @@ public final class TagSafe implements Scalar<String> {
     public String value() {
         final String result;
         if (
-            this.origin == null
-                || this.origin.isEmpty()
-                || "-1".equalsIgnoreCase(this.origin)
-                || "Unknown".equalsIgnoreCase(this.origin)
+            this.tag == null
+                || this.tag.isEmpty()
+                || "-1".equalsIgnoreCase(this.tag)
+                || "unknown".equalsIgnoreCase(this.tag)
             ) {
-            result = this.origin;
-        } else {
             result = "";
+        } else {
+            result = String.format(
+                "%s: %s",
+                this.title,
+                this.tag
+            );
         }
         return result;
     }

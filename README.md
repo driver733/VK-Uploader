@@ -62,18 +62,18 @@ and acts upon them (creates [WallPosts](https://github.com/driver733/VKMusicUplo
 ## Maven
 
 1. Qulice  (static analysis check)
-    * `mvn clean test -Dcredentials="Path to the credentials file" qulice:check`
+    * `mvn clean test -Dcredentials="Path to the credentials.properties" qulice:check`
 2. Unit tests
-    * `mvn clean test -Dcredentials="Path to the credentials file"`
+    * `mvn clean test -Dcredentials="Path to the credentials.properties"`
 3. Integration Tests
-    * `mvn clean verify -Dcredentials="Path to the credentials file"`
+    * `mvn clean verify -Dcredentials="Path to the credentials.properties"`
 4. Full Pre-push validation
-    * `mvn clean verify -Dcredentials="Path to the credentials file" qulice:check`
+    * `mvn clean verify -Dcredentials="Path to the credentials.properties" qulice:check`
 5. Create test coverage report (located in `VKMusicUploader/target/site`)
     * `mvn clean test jacoco:report`
 
 
-## Configuration file (`.properties`)
+## Configuration file (`credentials.properties`)
 
 ```
 vk.userId="VK USER ID"   # VK.com Group Admin User ID

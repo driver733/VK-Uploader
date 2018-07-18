@@ -109,5 +109,5 @@ buildNumber.properties
 .idea/
 VKMusicUploader.iml
 /LICENSE_qulice.txt
-/src/main/java/com/driver733/vkmusicuploader/Main.java
+/com/driver733/vkuploader/Main.java
 /credentials.properties

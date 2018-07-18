@@ -1,62 +1,67 @@
-# VKMusicUploader
+# VKUploader
 [![EO principles respected here](http://www.elegantobjects.org/badge.svg)](http://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/cactoos)](http://www.rultor.com/p/yegor256/cactoos)
 [![We recommend IntelliJ IDEA](http://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
-[![Build Status](https://travis-ci.org/driver733/VKMusicUploader.svg?branch=master)](https://travis-ci.org/driver733/VKMusicUploader)
-[![Coverage Status](https://coveralls.io/repos/github/driver733/VKMusicUploader/badge.svg?branch=master)](https://coveralls.io/github/driver733/VKMusicUploader?branch=master)
-[![](https://tokei.rs/b1/github/driver733/VKMusicUploader)](https://github.com/driver733/VKMusicUploader)
+[![Build Status](https://travis-ci.org/driver733/VKUploader.svg?branch=master)](https://travis-ci.org/driver733/VKUploader)
+[![Coverage Status](https://coveralls.io/repos/github/driver733/VKUploader/badge.svg?branch=master)](https://coveralls.io/github/driver733/VKUploader?branch=master)
+[![](https://tokei.rs/b1/github/driver733/VKUploader)](https://github.com/driver733/VKUploader)
 
-[![codebeat badge](https://codebeat.co/badges/483007e8-a73d-4bfd-80a1-52586ba3a615)](https://codebeat.co/projects/github-com-driver733-vkmusicuploader-master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/65288c94deac4a36bf03a80604cf1c04)](https://www.codacy.com/app/driver733/VKMusicUploader?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=driver733/VKMusicUploader&amp;utm_campaign=Badge_Grade)
+[![codebeat badge](https://codebeat.co/badges/483007e8-a73d-4bfd-80a1-52586ba3a615)](https://codebeat.co/projects/github-com-driver733-VKUploader-master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/65288c94deac4a36bf03a80604cf1c04)](https://www.codacy.com/app/driver733/VKUploader?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=driver733/VKUploader&amp;utm_campaign=Badge_Grade)
 
-[![PDD status](http://www.0pdd.com/svg?name=driver733/VKMusicUploader)](http://www.0pdd.com/p?name=driver733/VKMusicUploader)
+[![PDD status](http://www.0pdd.com/svg?name=driver733/VKUploader)](http://www.0pdd.com/p?name=driver733/VKUploader)
 
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/driver733/VKMusicUploader/blob/master/LICENSE.txt)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/driver733/VKUploader/blob/master/LICENSE.txt)
 
-**VKMusicUploader** is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
+**VKUploader** is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
 and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html)
-[VK (Вконтакте)](vk.com) group management utility. It relies on four fundamental principles:
+[VK (Вконтакте)](vk.com) group management utility. It is based on [EO](https://www.elegantobjects.org) principles:
 
- 1. [not a single](https://github.com/driver733/VKMusicUploader/search?l=Java&q=null) `null` ([why NULL is bad?](http://www.yegor256.com/2014/05/13/why-null-is-bad.html))
+ 1. [No](https://github.com/driver733/VKUploader/search?l=Java&q=null) `null` usage ([why NULL is bad?](http://www.yegor256.com/2014/05/13/why-null-is-bad.html))
  2. No static methods ([why they are bad?](http://www.yegor256.com/2014/05/05/oop-alternative-to-utility-classes.html))
-    * [not a single](https://github.com/driver733/VKMusicUploader/search?q=%22public+static%22&unscoped_q=%22public+static%22) `public` `static` method
-    * [not a single](https://github.com/driver733/VKMusicUploader/search?q=%22private+static%22&unscoped_q=%22public+static%22) `private` `static` method
- 3. [not a single](https://github.com/driver733/VKMusicUploader/search?l=Java&q=%22%40Immutable%22) mutable class ([why they are bad?](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html))
- 4. [not a single](https://github.com/driver733/VKMusicUploader/search?q=instanceof&unscoped_q=instanceof) `instanceof` keyword, type casting, or reflection ([why?](http://www.yegor256.com/2015/04/02/class-casting-is-anti-pattern.html))
+    * [No](https://github.com/driver733/VKUploader/search?q=%22public+static%22&unscoped_q=%22public+static%22) `public` `static` methods
+    * [No](https://github.com/driver733/VKUploader/search?q=%22private+static%22&unscoped_q=%22public+static%22) `private` `static` methods
+ 3. [No](https://github.com/driver733/VKUploader/search?l=Java&q=%22%40Immutable%22) mutable classes ([why they are bad?](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html))
+ 4. [No](https://github.com/driver733/VKUploader/search?q=instanceof&unscoped_q=instanceof) `instanceof` keyword usage, type casting, or reflection ([why?](http://www.yegor256.com/2015/04/02/class-casting-is-anti-pattern.html))
+ 5. No code in constructors ([why?](http://www.yegor256.com/2015/05/07/ctors-must-be-code-free.html))
+ 6. No [getters](https://github.com/driver733/VKUploader/search?l=Java&q=%22get%22) and [setters](https://github.com/driver733/VKUploader/search?l=Java&q=%22set%22) ([why?](http://www.yegor256.com/2014/09/16/getters-and-setters-are-evil.html))
+ 7. [No](https://github.com/driver733/VKUploader/search?l=Java&q=%22implements%22) public methods without contract (interface) ([why?](https://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html#2-he-works-by-contracts))
+ 8. [No](https://github.com/driver733/VKUploader/search?l=Java&q=%22assertThat%22) statements in test methods except assertThat ([why?](http://www.yegor256.com/2017/05/17/single-statement-unit-tests.html))
+ 9. [No](https://github.com/driver733/VKUploader/search?q=%22extends%22&unscoped_q=%22extends%22) implementation inheritance ([why?](http://www.yegor256.com/2017/01/31/decorating-envelopes.html) and [why?](http://www.yegor256.com/2016/09/13/inheritance-is-procedural.html))
 
 ## Core Entities (Interfaces)
 
-### [WallPost](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPost.java)
+### [WallPost](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/WallPost.java)
 This interface is implemented by the classes which construct (decorate) VK WallPosts.
-For example the [WallPostBase](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPostBase.java) class is a fundamental implementation of that interface, as
+For example the [WallPostBase](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/WallPostBase.java) class is a fundamental implementation of that interface, as
 it encapsulates a [VK API client](https://github.com/VKCOM/vk-java-sdk/blob/master/sdk/src/main/java/com/vk/api/sdk/client/VkApiClient.java) instance and a [UserActor](https://github.com/VKCOM/vk-java-sdk/blob/master/sdk/src/main/java/com/vk/api/sdk/client/actors/UserActor.java) instance.
 
-Other implementations of this interface, such as [WallPostWithMessage](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPostWithMessage.java) or [WallPostWithAttachments](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPostWithAttachments.java)
+Other implementations of this interface, such as [WallPostWithMessage](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/WallPostWithMessage.java) or [WallPostWithAttachments](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/WallPostWithAttachments.java)
 add content to a wall post (text and attachments, accordingly).
 
-Also, there are some convenient implementations of that interface, such as [WallPostMusicAlbum](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPostMusicAlbum.java) or [WallPostPhotoAlbum](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPostPhotoAlbum.java),
-which create a [WallPost](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPost.java) with audio (music album and a album artwork) or image (photo album) content.
+Also, there are some convenient implementations of that interface, such as [WallPostMusicAlbum](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/WallPostMusicAlbum.java) or [WallPostPhotoAlbum](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/WallPostPhotoAlbum.java),
+which create a [WallPost](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/WallPost.java) with audio (music album and a album artwork) or image (photo album) content.
 
-A full list of classes implementing this interface can be found in the package [wallpost](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost).
+A full list of classes implementing this interface can be found in the package [wallpost](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost).
 
-In addition, the examples, which showcase how to utilize this interface and its implementations can be found in corresponding [test package](https://github.com/driver733/VKMusicUploader/tree/master/src/test/java/com/driver733/vkmusicuploader/wallpost).
+In addition, the examples, which showcase how to utilize this interface and its implementations can be found in corresponding [test package](https://github.com/driver733/VKUploader/tree/master/src/test/java/com/driver733/vkuploader/wallpost).
 
-### [WallPosts](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/wallposts/WallPosts.java)
-This interface is implemented by the classes which generate a series of [WallPost](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/WallPost.java)s and combine them into a list of [ExecuteBatchQueries](https://github.com/VKCOM/vk-java-sdk/blob/master/sdk/src/main/java/com/vk/api/sdk/queries/execute/ExecuteBatchQuery.java).
+### [WallPosts](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/wallposts/WallPosts.java)
+This interface is implemented by the classes which generate a series of [WallPost](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/WallPost.java)s and combine them into a list of [ExecuteBatchQueries](https://github.com/VKCOM/vk-java-sdk/blob/master/sdk/src/main/java/com/vk/api/sdk/queries/execute/ExecuteBatchQuery.java).
 After the queries are executed, the `updateProperties` method shall be called in order to cache the queries` results. (usually with properties files).
 
-### [Posts](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/post/posts/Posts.java)
-This interface is implemented by classes which create [WallPosts](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/wallposts/WallPosts.java).
-For example, the [PostableRootDir](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/post/PostableRootDir.java) class creates [WallPosts](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/wallposts/WallPosts.java) from the provided directory.
+### [Posts](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/post/posts/Posts.java)
+This interface is implemented by classes which create [WallPosts](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/wallposts/WallPosts.java).
+For example, the [PostableRootDir](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/post/PostableRootDir.java) class creates [WallPosts](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/wallposts/WallPosts.java) from the provided directory.
 
-### [Postable](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/post/Postable.java)
-This interface serves as an entry point to the [WallPosts](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/wallposts/WallPosts.java). The classes which implement this interface
-create [WallPosts](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/wallposts/WallPosts.java) using a [Posts]() instance and then post (execute the generated queries) them.
+### [Postable](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/post/Postable.java)
+This interface serves as an entry point to the [WallPosts](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/wallposts/WallPosts.java). The classes which implement this interface
+create [WallPosts](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/wallposts/WallPosts.java) using a [Posts]() instance and then post (execute the generated queries) them.
 
-### [Application](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/post/Application.java)
+### [Application](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/post/Application.java)
 Entrance starting point. The [DirectoryEntrance]() class, for instance, tracks the provided folder for changes
-and acts upon them (creates [WallPosts](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/wallposts/WallPosts.java) and executes them).
+and acts upon them (creates [WallPosts](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/wallposts/WallPosts.java) and executes them).
 
 
 ## Maven
@@ -69,7 +74,7 @@ and acts upon them (creates [WallPosts](https://github.com/driver733/VKMusicUplo
     * `mvn clean verify -Dcredentials="Path to the credentials.properties"`
 4. Full Pre-push validation
     * `mvn clean verify -Dcredentials="Path to the credentials.properties" qulice:check`
-5. Create test coverage report (located in `VKMusicUploader/target/site`)
+5. Create test coverage report (located in `VKUploader/target/site`)
     * `mvn clean test jacoco:report`
 
 
@@ -104,4 +109,4 @@ explains why it's done this way.
 ## Got questions?
 
 If you have questions or general suggestions, don't hesitate to submit
-a new [Github issue](https://github.com/driver733/VKMusicUploader/issues/new).
+a new [Github issue](https://github.com/driver733/VKUploader/issues/new).

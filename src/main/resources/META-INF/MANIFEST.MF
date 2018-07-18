@@ -1,2 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: com.driver733.vkmusicuploader.Main
+Main-Class: com.driver733.vkuploader.Main

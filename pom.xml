@@ -168,7 +168,7 @@
 
                         <exclude>checkstyle:/src/main/java/com.driver733.vkmusicuploader/Main.java</exclude>
                         <exclude>pmd:/src/main/java/com.driver733.vkmusicuploader/Main.java</exclude>
-                        <exclude>findbugs:com.driver733.vkmusicuploader.Main</exclude>
+                        <exclude>findbugs:com.driver733.vkuploader.Main</exclude>
                     </excludes>
                 </configuration>
             </plugin>

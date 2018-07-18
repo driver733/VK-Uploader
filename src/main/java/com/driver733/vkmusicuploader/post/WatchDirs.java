@@ -51,7 +51,7 @@ import org.cactoos.list.ListOf;
  * @since 0.1
  */
 @Immutable
-public final class DirectoryEntrance implements Application {
+public final class WatchDirs implements Application {
 
     /**
      * Directories to watch to changes.
@@ -81,7 +81,7 @@ public final class DirectoryEntrance implements Application {
      * @param dirs Directories to watch for changes.
      * @throws IOException If a {@link WatchService} cannot be created.
      */
-    public DirectoryEntrance(
+    public WatchDirs(
         final Posts posts,
         final Path... dirs
     ) throws IOException {
@@ -156,7 +156,7 @@ public final class DirectoryEntrance implements Application {
 
     /**
      * Starts watching the directory for changes.
-     * @param dir DirectoryEntrance to watch.
+     * @param dir WatchDirs to watch.
      * @throws IOException If the directory cannot be registered.
      */
     private void registerDirectory(final Path dir) throws IOException {

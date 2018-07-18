@@ -59,8 +59,8 @@ For example, the [PostableRootDir](https://github.com/driver733/VKUploader/blob/
 This interface serves as an entry point to the [WallPosts](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/wallposts/WallPosts.java). The classes which implement this interface
 create [WallPosts](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/wallposts/WallPosts.java) using a [Posts]() instance and then post (execute the generated queries) them.
 
-### [Application](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/post/Application.java)
-Entrance starting point. The [DirectoryEntrance]() class, for instance, tracks the provided folder for changes
+### [Entrance](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/post/Entrance.java)
+Application starting point. The [EntranceDirectory](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/post/EntranceDirectory.java) class, for instance, tracks the provided folder for changes
 and acts upon them (creates [WallPosts](https://github.com/driver733/VKUploader/blob/master/src/main/java/com/driver733/vkuploader/wallpost/wallposts/WallPosts.java) and executes them).
 
 

@@ -47,12 +47,9 @@ import org.junit.Test;
 /**
  * Test for {@link AttachmentWallPhotos}.
  *
- *
- *
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle AnonInnerLengthCheck (500 lines)
- * @checkstyle StringLiteralsConcatenationCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (50 lines)
  */
@@ -91,11 +88,14 @@ public final class AttachmentWallPhotosTest extends AbstractVkUnitTest {
                             put(
                                 AbstractVkUnitTest.PHOTO_SAVE_URL,
                                 new TransportClientCached(
-                                    "{"
-                                        + " \"photo\"  : \"testPhoto\","
-                                        + " \"server\" : 1,"
-                                        + " \"hash\"   : \"testHash\""
-                                        + " }"
+                                    String.join(
+                                        "",
+                                        "{",
+                                        " \"photo\"  : \"testPhoto\",",
+                                        " \"server\" : 1,",
+                                        " \"hash\"   : \"testHash\"",
+                                        " }"
+                                    )
                                 )
                             );
                         }
@@ -122,11 +122,14 @@ public final class AttachmentWallPhotosTest extends AbstractVkUnitTest {
                 new PhotosSaveWallPhotoQuery(
                     new VkApiClient(
                         new TransportClientCached(
-                            "{"
-                                + " \"photo\"  : \"testPhoto\","
-                                + " \"server\" : 1,"
-                                + " \"hash\"   : \"testHash\""
-                                + " }"
+                            String.join(
+                                "",
+                                "{",
+                                " \"photo\"  : \"testPhoto\",",
+                                " \"server\" : 1,",
+                                " \"hash\"   : \"testHash\"",
+                                " }"
+                            )
                         )
                    ),
                    new UserActor(0, "1"),

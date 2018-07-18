@@ -27,10 +27,10 @@ import com.driver733.vkmusicuploader.wallpost.attachment.support.QueryResultsBas
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.cactoos.list.ListOf;
 
 /**
  * Maps queries queriesResults to Attachment attachmentStrings.
@@ -78,7 +78,7 @@ public final class AttachmentsFromResults implements AttachmentStrings {
                     .attachmentStrings()
             );
         }
-        return new Array<>(list);
+        return new ListOf<>(list);
     }
 
 }

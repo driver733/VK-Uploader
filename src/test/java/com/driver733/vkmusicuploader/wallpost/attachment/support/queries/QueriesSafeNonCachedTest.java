@@ -26,11 +26,11 @@ package com.driver733.vkmusicuploader.wallpost.attachment.support.queries;
 import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentAddAudio;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.queries.safe.QueriesSafeNonCached;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
+import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -65,7 +65,7 @@ public final class QueriesSafeNonCachedTest {
         MatcherAssert.assertThat(
             new QueriesSafeNonCached(
                 new QueriesFromAttachments(
-                    new Array<>(
+                    new ListOf<>(
                         new AttachmentAddAudio(
                             new VkApiClient(
                                 new TransportClientHttp()

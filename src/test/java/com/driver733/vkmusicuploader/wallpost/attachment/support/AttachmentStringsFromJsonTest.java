@@ -36,11 +36,8 @@ import org.junit.Test;
 /**
  * Test for {@link AttachmentStringsFromJson}.
  *
- *
- *
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
 @Immutable
 public final class AttachmentStringsFromJsonTest {
@@ -54,13 +51,16 @@ public final class AttachmentStringsFromJsonTest {
                     .setPrettyPrinting()
                     .create()
                     .fromJson(
-                        "{"
-                            + "\"owner_id\"  : 1111111,"
-                            + "\"id\"        : 1000000,"
-                            + "\"artist\"    : \"Test Artist1\","
-                            + "\"title\"     : \"Test Title1\","
-                            + "\"url\"       : \"http://test1.com\" "
-                            + "}",
+                        String.join(
+                            "",
+                            "{",
+                            "\"owner_id\"  : 1111111,",
+                            "\"id\"        : 1000000,",
+                            "\"artist\"    : \"Test Artist1\",",
+                            "\"title\"     : \"Test Title1\",",
+                            "\"url\"       : \"http://test1.com\"",
+                            "}"
+                        ),
                         JsonObject.class
                     )
                     .getAsJsonObject(),
@@ -81,22 +81,25 @@ public final class AttachmentStringsFromJsonTest {
                     .setPrettyPrinting()
                     .create()
                     .fromJson(
-                        "["
-                            + "{"
-                            + "\"owner_id\"  : 111111,"
-                            + "\"id\"        : 3000000,"
-                            + "\"artist\"    : \"Test Artist2\","
-                            + "\"title\"     : \"Test Title2\","
-                            + "\"url\"       : \"http://test2.com\" "
-                            + "},"
-                            + "{"
-                            + "\"owner_id\"  : 2222222,"
-                            + "\"id\"        : 2000000,"
-                            + "\"artist\"    : \"Test Artist3\","
-                            + "\"title\"     : \"Test Title3\","
-                            + "\"url\"       : \"http://test3.com\" "
-                            + "}"
-                            + "]",
+                        String.join(
+                            "",
+                            "[",
+                            "{",
+                            "\"owner_id\"  : 111111,",
+                            "\"id\"        : 3000000,",
+                            "\"artist\"    : \"Test Artist2\",",
+                            "\"title\"     : \"Test Title2\",",
+                            "\"url\"       : \"http://test2.com\" ",
+                            "},",
+                            "{",
+                            "\"owner_id\"  : 2222222,",
+                            "\"id\"        : 2000000,",
+                            "\"artist\"    : \"Test Artist3\",",
+                            "\"title\"     : \"Test Title3\",",
+                            "\"url\"       : \"http://test3.com\" ",
+                            "}",
+                            "]"
+                        ),
                         JsonArray.class
                     )
                     .getAsJsonArray(),
@@ -118,22 +121,24 @@ public final class AttachmentStringsFromJsonTest {
                     .setPrettyPrinting()
                     .create()
                     .fromJson(
-                        "["
-                            + "{"
-                            + "\"ppowner_id\" : 111111,"
-                            + "\"iid\"        : 30000001,"
-                            + "\"martist\"    : \"Test Artist2\","
-                            + "\"dtitle\"     : \"Test Title2\","
-                            + "\"furl\"       : \"http://test2.com\" "
-                            + "},"
-                            + "{"
-                            + "\"downer_id\"  : 2222222,"
-                            + "\"fid\"        : 20000001,"
-                            + "\"dartist\"    : \"Test Artist3\","
-                            + "\"ftitle\"     : \"Test Title3\","
-                            + "\"durl\"       : \"http://test3.com\" "
-                            + "}"
-                            + "]",
+                        String.join(
+                            "[",
+                            "{",
+                            "\"ppowner_id\" : 111111,",
+                            "\"iid\"        : 30000001,",
+                            "\"martist\"    : \"Test Artist2\",",
+                            "\"dtitle\"     : \"Test Title2\",",
+                            "\"furl\"       : \"http://test2.com\"",
+                            "},",
+                            "{",
+                            "\"downer_id\"  : 2222222,",
+                            "\"fid\"        : 20000001,",
+                            "\"dartist\"    : \"Test Artist3\",",
+                            "\"ftitle\"     : \"Test Title3\",",
+                            "\"durl\"       : \"http://test3.com\"",
+                            "}",
+                            "]"
+                        ),
                         JsonArray.class
                     ).getAsJsonArray(),
                 1

@@ -39,8 +39,6 @@ import org.apache.commons.lang3.StringUtils;
  * Records the audios files that have been
  *  posted.
  *
- *
- *
  * @since 0.1
  */
 @Immutable
@@ -100,12 +98,12 @@ public final class PropertiesUpdate {
         }
     }
 
-    // @checkstyle StringLiteralsConcatenationCheck (50 lines)
     /**
      * Finds the key for the provided index.
      * @param index For which to find the key.
      * @return The {@link Map}`s key.
      * @throws IOException If key is not found.
+     * @checkstyle StringLiteralsConcatenationCheck (50 lines)
      */
     private Object key(final int index) throws IOException {
         for (final Map.Entry<Object, Object> entry
@@ -115,7 +113,11 @@ public final class PropertiesUpdate {
                 Objects.equals(
                     this.ids.get(index),
                     value.substring(
-                        StringUtils.ordinalIndexOf(value, "_", 2) + 1
+                        StringUtils.ordinalIndexOf(
+                            value,
+                            "_",
+                            2
+                        ) + 1
                     )
                 )
                 ) {
@@ -132,7 +134,9 @@ public final class PropertiesUpdate {
      *  attachmentStrings with corresponding indexes.
      */
     private Map<Integer, String> resStrings() {
-        final List<Integer> integers = new ArrayList<>(this.ids.keySet());
+        final List<Integer> integers = new ArrayList<>(
+            this.ids.keySet()
+        );
         final Map<Integer, String> results = new HashMap<>();
         int index = 0;
         for (final JsonElement element : this.root) {

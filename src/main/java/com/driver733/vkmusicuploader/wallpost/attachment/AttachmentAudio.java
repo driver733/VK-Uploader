@@ -27,7 +27,6 @@ package com.driver733.vkmusicuploader.wallpost.attachment;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.Upload;
 import com.driver733.vkmusicuploader.wallpost.attachment.upload.UploadAudio;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -37,6 +36,7 @@ import com.vk.api.sdk.queries.audio.AudioAddQuery;
 import com.vk.api.sdk.queries.upload.UploadAudioQuery;
 import java.util.ArrayList;
 import java.util.List;
+import org.cactoos.list.ListOf;
 
 /**
  * Upload the audios and returns
@@ -68,7 +68,7 @@ public final class AttachmentAudio implements Attachment {
     /**
      * Audios files.
      */
-    private final Array<Upload<UploadAudioQuery, AudioUploadResponse>> audios;
+    private final List<Upload<UploadAudioQuery, AudioUploadResponse>> audios;
 
     /**
      * Ctor.
@@ -88,7 +88,7 @@ public final class AttachmentAudio implements Attachment {
         this.client = client;
         this.actor = actor;
         this.group = group;
-        this.audios = new Array<>(audios);
+        this.audios = new ListOf<>(audios);
     }
 
     @Override
@@ -126,7 +126,7 @@ public final class AttachmentAudio implements Attachment {
                 response.getAudio(),
                 response.getHash()
             ).execute();
-        return new Array<>(
+        return new ListOf<>(
             new AudioAddQuery(
                 this.client,
                 this.actor,

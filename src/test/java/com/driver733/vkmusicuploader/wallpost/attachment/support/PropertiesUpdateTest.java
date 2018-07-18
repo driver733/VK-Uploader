@@ -28,12 +28,12 @@ import com.driver733.vkmusicuploader.wallpost.attachment.AttachmentAddAudio;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.io.File;
 import java.io.StringReader;
+import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -76,7 +76,7 @@ public final class PropertiesUpdateTest {
         new PropertiesUpdate(
             props,
             new IdsMap(
-                new Array<>(
+                new ListOf<>(
                     new AttachmentAddAudio(
                         new VkApiClient(
                             new TransportClientCached("")

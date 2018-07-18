@@ -38,12 +38,9 @@ import org.junit.Test;
 /**
  * Test for {@link AttachmentWallDocument}.
  *
- *
- *
  * @since 0.2
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle AnonInnerLengthCheck (500 lines)
- * @checkstyle StringLiteralsConcatenationCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (50 lines)
  */
@@ -70,9 +67,12 @@ public final class AttachmentWallDocumentTest {
                 new UploadWallDocument(
                     new VkApiClient(
                         new TransportClientCached(
-                            "{"
-                                + "\"file\" : \"testingFile\""
-                                + "}"
+                            String.join(
+                                "",
+                                "{",
+                                    "\"file\" : \"testingFile\"",
+                                    "}"
+                            )
                         )
                     ),
                     "testURL",

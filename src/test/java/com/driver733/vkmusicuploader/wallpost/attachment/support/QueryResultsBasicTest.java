@@ -27,7 +27,6 @@ import com.driver733.vkmusicuploader.wallpost.attachment.support.queries.safe.Qu
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.httpclient.TransportClientCached;
@@ -35,6 +34,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.Collection;
 import java.util.Collections;
+import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -56,7 +56,7 @@ public final class QueryResultsBasicTest {
         MatcherAssert.assertThat(
             new QueryResultsBasic(
                 new QueriesSafeCached(
-                    new Array<>(
+                    new ListOf<>(
                         new AbstractQueryBuilder(
                             new VkApiClient(
                                 new TransportClientCached(

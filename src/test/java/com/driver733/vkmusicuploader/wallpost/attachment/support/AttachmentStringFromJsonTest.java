@@ -35,11 +35,8 @@ import org.junit.Test;
 /**
  * Test for {@link AttachmentStringFromJson}.
  *
- *
- *
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
 @Immutable
 public final class AttachmentStringFromJsonTest {
@@ -53,13 +50,16 @@ public final class AttachmentStringFromJsonTest {
                     .setPrettyPrinting()
                     .create()
                     .fromJson(
-                        "{"
-                            + "\"owner_id\"  : 1111111,"
-                            + "\"id\"        : 1000000,"
-                            + "\"artist\"    : \"Test Artist1\","
-                            + "\"title\"     : \"Test Title1\","
-                            + "\"url\"       : \"http://test1.com\" "
-                            + "}",
+                        String.join(
+                            "",
+                            "{",
+                                "\"owner_id\"  : 1111111,",
+                                "\"id\"        : 1000000,",
+                                "\"artist\"    : \"Test Artist1\",",
+                                "\"title\"     : \"Test Title1\",",
+                                "\"url\"       : \"http://test1.com\"",
+                                "}"
+                        ),
                         JsonObject.class
                     ).getAsJsonObject(),
                 1

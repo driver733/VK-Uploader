@@ -21,42 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.driver733.vkmusicuploader.wallpost.attachment.upload;
-
-import com.jcabi.aspects.Immutable;
-import com.vk.api.sdk.client.AbstractQueryBuilder;
-import com.vk.api.sdk.client.VkApiClient;
-import java.util.Collection;
-import org.cactoos.list.ListOf;
+package com.driver733.vkmusicuploader.post;
 
 /**
- * A fake {@link com.vk.api.sdk.queries.audio.AudioAddQuery}.
+ * Application starting point.
  *
- *
- *
- * @since 0.1
- * @checkstyle ProtectedMethodInFinalClassCheck (500 lines)
+ * @since 0.4
  */
-@Immutable
-public final class QueryFakeAudioAdd
-    extends AbstractQueryBuilder<QueryFakeAudioAdd, Integer> {
+public interface Application {
 
     /**
-     * Fake audios.add query.
-     * @param client A {@link VkApiClient} that is used for all VK API requests.
+     * Starts the application.
+     * @throws Exception If an error occurs
+     *  during execution.
      */
-    public QueryFakeAudioAdd(final VkApiClient client) {
-        super(client, "fake.audio.add", Integer.class);
-    }
-
-    @Override
-    protected QueryFakeAudioAdd getThis() {
-        return this;
-    }
-
-    @Override
-    protected Collection<String> essentialKeys() {
-        return new ListOf<>();
-    }
-
+    void start() throws Exception;
 }

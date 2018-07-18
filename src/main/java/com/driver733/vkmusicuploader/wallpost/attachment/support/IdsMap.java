@@ -26,12 +26,12 @@ package com.driver733.vkmusicuploader.wallpost.attachment.support;
 import com.driver733.vkmusicuploader.wallpost.attachment.Attachment;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.queries.QueriesFromAttachments;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.cactoos.list.ListOf;
 
 /**
  * Forms a map of with  index (queries) - audio_id pairs
@@ -48,14 +48,14 @@ public final class IdsMap {
      * {@link Attachment} array.
      */
     @Immutable.Array
-    private final Array<Attachment> attachments;
+    private final List<Attachment> attachments;
 
     /**
      * Ctor.
      * @param attachments An {@link Attachment} array.
      */
     public IdsMap(final List<Attachment> attachments) {
-        this.attachments = new Array<>(attachments);
+        this.attachments = new ListOf<>(attachments);
     }
 
     /**

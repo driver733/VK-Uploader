@@ -32,13 +32,13 @@ import com.driver733.vkmusicuploader.wallpost.attachment.support.queries.safe.Qu
 import com.driver733.vkmusicuploader.wallpost.attachment.support.strings.AttachmentsFromResults;
 import com.google.gson.JsonElement;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientExecuteBatchCached;
 import java.io.IOException;
 import java.util.List;
+import org.cactoos.list.ListOf;
 
 /**
  * Returns attachment strings from
@@ -63,7 +63,7 @@ public final class AttachmentArrays implements AttachmentsFields {
     /**
      * Array of attachmentsFields.
      */
-    private final Array<Attachment> attachments;
+    private final List<Attachment> attachments;
 
     /**
      * UserActor on behalf of which all requests will be sent.
@@ -85,7 +85,7 @@ public final class AttachmentArrays implements AttachmentsFields {
     ) {
         this.actor = actor;
         this.group = group;
-        this.attachments = new Array<>(attachments);
+        this.attachments = new ListOf<>(attachments);
     }
 
     @Override

@@ -48,13 +48,13 @@ import org.cactoos.io.InputOf;
 public final class Zipped {
 
     /**
-     * Directory or a file to zip.
+     * DirectoryEntrance or a file to zip.
      */
     private final Path directory;
 
     /**
      * Ctor.
-     * @param directory Directory or a file to zip.
+     * @param directory DirectoryEntrance or a file to zip.
      */
     public Zipped(final Path directory) {
         this.directory = directory;

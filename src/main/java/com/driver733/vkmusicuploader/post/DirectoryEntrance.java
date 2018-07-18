@@ -46,12 +46,12 @@ import org.cactoos.list.ListOf;
 
 /**
  * Tracks the specified folder for changes
- *  and restarts the processing.
+ *  and acts upon them.
  *
  * @since 0.1
  */
 @Immutable
-public final class WatchDirs {
+public final class DirectoryEntrance implements Application {
 
     /**
      * Directories to watch to changes.
@@ -81,7 +81,7 @@ public final class WatchDirs {
      * @param dirs Directories to watch for changes.
      * @throws IOException If a {@link WatchService} cannot be created.
      */
-    public WatchDirs(
+    public DirectoryEntrance(
         final Posts posts,
         final Path... dirs
     ) throws IOException {
@@ -156,7 +156,7 @@ public final class WatchDirs {
 
     /**
      * Starts watching the directory for changes.
-     * @param dir Directory to watch.
+     * @param dir DirectoryEntrance to watch.
      * @throws IOException If the directory cannot be registered.
      */
     private void registerDirectory(final Path dir) throws IOException {

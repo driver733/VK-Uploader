@@ -26,7 +26,6 @@ package com.driver733.vkmusicuploader.post.execution;
 import com.driver733.vkmusicuploader.wallpost.wallposts.WallPosts;
 import com.google.gson.JsonElement;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.immutable.Array;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
@@ -35,6 +34,7 @@ import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.queries.execute.ExecuteBatchQuery;
 import java.io.IOException;
 import java.util.List;
+import org.cactoos.list.ListOf;
 import org.junit.Test;
 
 /**
@@ -164,7 +164,7 @@ public final class UploadExecTest {
 
         @Override
         public List<ExecuteBatchQuery> postsQueries() {
-            return new Array<>(
+            return new ListOf<>(
                 new ExecuteBatchQueryFakeApiEx()
             );
         }
@@ -181,7 +181,7 @@ public final class UploadExecTest {
 
         @Override
         public List<ExecuteBatchQuery> postsQueries() {
-            return new Array<>(
+            return new ListOf<>(
                 new ExecuteBatchQueryFakeClientEx()
             );
         }
@@ -198,7 +198,7 @@ public final class UploadExecTest {
 
         @Override
         public List<ExecuteBatchQuery> postsQueries() {
-            return new Array<>(
+            return new ListOf<>(
                 new ExecuteBatchQueryFake()
             );
         }
@@ -214,7 +214,7 @@ public final class UploadExecTest {
 
         @Override
         public List<ExecuteBatchQuery> postsQueries() {
-            return new Array<>(
+            return new ListOf<>(
                 new ExecuteBatchQueryFake()
             );
         }

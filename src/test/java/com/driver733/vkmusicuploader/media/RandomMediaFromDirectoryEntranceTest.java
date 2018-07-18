@@ -36,12 +36,11 @@ import org.junit.Test;
  * @since 0.1
  * @checkstyle AnonInnerLengthCheck (500 lines
  * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle StringLiteralsConcatenationCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class RandomMediaFromDirectoryTest {
+public final class RandomMediaFromDirectoryEntranceTest {
 
     /**
      * Test path.
@@ -55,31 +54,31 @@ public final class RandomMediaFromDirectoryTest {
         MatcherAssert.assertThat(
             "Returned paths do not match the expected ones.",
             new RandomMediaFromDirectory(
-                RandomMediaFromDirectoryTest.ROOT
+                RandomMediaFromDirectoryEntranceTest.ROOT
             ).file(),
             Matchers.anyOf(
                 Matchers.equalTo(
-                    RandomMediaFromDirectoryTest.ROOT
+                    RandomMediaFromDirectoryEntranceTest.ROOT
                         .resolve("1.properties")
                 ),
                 Matchers.equalTo(
-                    RandomMediaFromDirectoryTest.ROOT
+                    RandomMediaFromDirectoryEntranceTest.ROOT
                         .resolve("2.properties")
                 ),
                 Matchers.equalTo(
-                    RandomMediaFromDirectoryTest.ROOT
+                    RandomMediaFromDirectoryEntranceTest.ROOT
                         .resolve("3.properties")
                 ),
                 Matchers.equalTo(
-                    RandomMediaFromDirectoryTest.ROOT
+                    RandomMediaFromDirectoryEntranceTest.ROOT
                         .resolve("4.properties")
                 ),
                 Matchers.equalTo(
-                    RandomMediaFromDirectoryTest.ROOT
+                    RandomMediaFromDirectoryEntranceTest.ROOT
                         .resolve("5.properties")
                 ),
                 Matchers.equalTo(
-                    RandomMediaFromDirectoryTest.ROOT
+                    RandomMediaFromDirectoryEntranceTest.ROOT
                         .resolve("6.properties")
                 )
             )
@@ -91,20 +90,20 @@ public final class RandomMediaFromDirectoryTest {
         MatcherAssert.assertThat(
             "Returned path does not match the expected one.",
             new RandomMediaFromDirectory(
-                RandomMediaFromDirectoryTest.ROOT
+                RandomMediaFromDirectoryEntranceTest.ROOT
             ).files(),
                 Matchers.containsInAnyOrder(
-                    RandomMediaFromDirectoryTest.ROOT
+                    RandomMediaFromDirectoryEntranceTest.ROOT
                         .resolve("1.properties"),
-                    RandomMediaFromDirectoryTest.ROOT
+                    RandomMediaFromDirectoryEntranceTest.ROOT
                         .resolve("2.properties"),
-                    RandomMediaFromDirectoryTest.ROOT
+                    RandomMediaFromDirectoryEntranceTest.ROOT
                         .resolve("3.properties"),
-                    RandomMediaFromDirectoryTest.ROOT
+                    RandomMediaFromDirectoryEntranceTest.ROOT
                         .resolve("4.properties"),
-                    RandomMediaFromDirectoryTest.ROOT
+                    RandomMediaFromDirectoryEntranceTest.ROOT
                         .resolve("5.properties"),
-                    RandomMediaFromDirectoryTest.ROOT
+                    RandomMediaFromDirectoryEntranceTest.ROOT
                         .resolve("6.properties")
                 )
         );

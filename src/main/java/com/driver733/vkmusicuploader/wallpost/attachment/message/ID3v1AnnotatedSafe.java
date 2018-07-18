@@ -59,14 +59,9 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
 
     @Override
     public String getTrack() {
-        final String result;
-        final String value = this.tag.getTrack();
-        if (ID3v1AnnotatedSafe.isPresent(value)) {
-            result = String.format("Track: %s", value);
-        } else {
-            result = "";
-        }
-        return result;
+        return new TagSafe(
+            this.tag.getTrack()
+        ).value();
     }
 
     @Override
@@ -76,14 +71,9 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
 
     @Override
     public String getArtist() {
-        final String result;
-        final String value = this.tag.getArtist();
-        if (ID3v1AnnotatedSafe.isPresent(value)) {
-            result = String.format("Artist: %s", value);
-        } else {
-            result = "";
-        }
-        return result;
+        return new TagSafe(
+            this.tag.getArtist()
+        ).value();
     }
 
     @Override
@@ -93,14 +83,9 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
 
     @Override
     public String getTitle() {
-        final String result;
-        final String value = this.tag.getTitle();
-        if (ID3v1AnnotatedSafe.isPresent(value)) {
-            result = String.format("Title: %s", value);
-        } else {
-            result = "";
-        }
-        return result;
+        return new TagSafe(
+            this.tag.getTitle()
+        ).value();
     }
 
     @Override
@@ -110,14 +95,9 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
 
     @Override
     public String getAlbum() {
-        final String result;
-        final String value = this.tag.getAlbum();
-        if (ID3v1AnnotatedSafe.isPresent(value)) {
-            result = String.format("Album: %s", value);
-        } else {
-            result = "";
-        }
-        return result;
+        return new TagSafe(
+            this.tag.getAlbum()
+        ).value();
     }
 
     @Override
@@ -127,14 +107,9 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
 
     @Override
     public String getYear() {
-        final String result;
-        final String value = this.tag.getYear();
-        if (ID3v1AnnotatedSafe.isPresent(value)) {
-            result = String.format("Year: %s", value);
-        } else {
-            result = "";
-        }
-        return result;
+        return new TagSafe(
+            this.tag.getYear()
+        ).value();
     }
 
     @Override
@@ -154,26 +129,16 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
 
     @Override
     public String getGenreDescription() {
-        final String result;
-        final String value = this.tag.getGenreDescription();
-        if (ID3v1AnnotatedSafe.isPresent(value) && !"Unknown".equals(value)) {
-            result = String.format("Genre Description: %s", value);
-        } else {
-            result = "";
-        }
-        return result;
+        return new TagSafe(
+            this.tag.getGenreDescription()
+        ).value();
     }
 
     @Override
     public String getComment() {
-        final String result;
-        final String value = this.tag.getComment();
-        if (ID3v1AnnotatedSafe.isPresent(value)) {
-            result = String.format("Comment: %s", value);
-        } else {
-            result = "";
-        }
-        return result;
+        return new TagSafe(
+            this.tag.getComment()
+        ).value();
     }
 
     @Override
@@ -191,10 +156,8 @@ public final class ID3v1AnnotatedSafe implements ID3v1 {
      * @param str Tag.
      * @return Tag if it exists. Empty attachmentString otherwise.
      */
-    private static boolean isPresent(final String str) {
-        final boolean result;
-        result = str != null && !str.isEmpty() && !"-1".equals(str);
-        return result;
+    private static String isPresent(final String str) {
+      
     }
 
 }

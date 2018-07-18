@@ -60,7 +60,7 @@ import java.util.List;
  * @checkstyle ClassDataAbstractionCouplingCheck (2 lines)
  */
 @Immutable
-public final class WallPostAlbum implements WallPost {
+public final class WallPostMusicAlbum implements WallPost {
 
     /**
      * Group ID.
@@ -104,7 +104,7 @@ public final class WallPostAlbum implements WallPost {
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
-    public WallPostAlbum(
+    public WallPostMusicAlbum(
         final VkApiClient client,
         final UserActor actor,
         final List<Path> audios,
@@ -121,7 +121,7 @@ public final class WallPostAlbum implements WallPost {
     }
 
     /**
-     * Constructs a WallPostQuery for a wall WallPostAlbum.
+     * Constructs a WallPostQuery for a wall WallPostMusicAlbum.
      * @return WallPostQuery.
      * @throws Exception If an exception occurs
      *  while constructing the {@link WallPost}.

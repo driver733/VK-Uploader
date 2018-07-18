@@ -29,7 +29,7 @@ import com.driver733.vkmusicuploader.post.SuppressFBWarnings;
 import com.driver733.vkmusicuploader.post.UploadServers;
 import com.driver733.vkmusicuploader.wallpost.ImmutableProperties;
 import com.driver733.vkmusicuploader.wallpost.WallPost;
-import com.driver733.vkmusicuploader.wallpost.WallPostAlbum;
+import com.driver733.vkmusicuploader.wallpost.WallPostMusicAlbum;
 import com.driver733.vkmusicuploader.wallpost.attachment.support.AudioStatus;
 import com.jcabi.aspects.Cacheable;
 import com.jcabi.aspects.Immutable;
@@ -276,7 +276,7 @@ public final class WallPostsMusicAlbum implements WallPosts {
             }
             final WallPostQuery query;
             try {
-                query = new WallPostAlbum(
+                query = new WallPostMusicAlbum(
                     this.client,
                     this.actor,
                     new ListOf<>(

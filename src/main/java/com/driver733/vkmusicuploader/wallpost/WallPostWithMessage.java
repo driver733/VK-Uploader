@@ -44,14 +44,14 @@ public final class WallPostWithMessage implements WallPost {
     private final WallPost post;
 
     /**
-     * Wall WallPostAlbum text.
+     * Wall WallPostMusicAlbum text.
      */
     private final Scalar<String> message;
 
     /**
      * Ctor.
      * @param post Origin.
-     * @param message Wall WallPostAlbum text.
+     * @param message Wall WallPostMusicAlbum text.
      */
     public WallPostWithMessage(
         final WallPost post,
@@ -64,7 +64,7 @@ public final class WallPostWithMessage implements WallPost {
     /**
      * Ctor.
      * @param post Origin.
-     * @param message Wall WallPostAlbum text.
+     * @param message Wall WallPostMusicAlbum text.
      */
     public WallPostWithMessage(
         final WallPost post,

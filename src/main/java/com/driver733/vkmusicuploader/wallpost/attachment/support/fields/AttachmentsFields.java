@@ -35,7 +35,7 @@ import java.util.List;
 public interface AttachmentsFields {
 
     /**
-     * Constructs attachment strings for the wall WallPostAlbum.
+     * Constructs attachment strings for the wall WallPostMusicAlbum.
      * @return Attachment attachmentStrings.
      * @throws Exception If properties fail to load.
      */

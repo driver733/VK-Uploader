@@ -47,7 +47,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test for {@link DirectoryEntrance}.
+ * Test for {@link EntranceDirectory}.
  *
  * @since 0.2
  * @checkstyle AnonInnerLengthCheck (500 lines)
@@ -56,7 +56,7 @@ import org.junit.Test;
  * @checkstyle MethodLength (500 lines)
  * @checkstyle IllegalCatchCheck (500 lines)
  */
-public final class DirectoryEntranceTest extends AbstractVkUnitTest {
+public final class EntranceDirectoryTest extends AbstractVkUnitTest {
 
     @Test
     @SuppressWarnings({
@@ -204,7 +204,7 @@ public final class DirectoryEntranceTest extends AbstractVkUnitTest {
         new Thread(
             () -> {
                 try {
-                    new DirectoryEntrance(
+                    new EntranceDirectory(
                         new PostsBasic(
                             posts
                         ),

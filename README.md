@@ -55,7 +55,7 @@ This interface serves as an entry point to the [WallPosts](https://github.com/dr
 create [WallPosts](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/wallposts/WallPosts.java) using a [Posts]() instance and then post (execute the generated queries) them.
 
 ### [Application](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/post/Application.java)
-Application starting point. The [DirectoryEntrance]() class, for instance, tracks the provided folder for changes
+Entrance starting point. The [DirectoryEntrance]() class, for instance, tracks the provided folder for changes
 and acts upon them (creates [WallPosts](https://github.com/driver733/VKMusicUploader/blob/master/src/main/java/com/driver733/vkmusicuploader/wallpost/wallposts/WallPosts.java) and executes them).
 
 

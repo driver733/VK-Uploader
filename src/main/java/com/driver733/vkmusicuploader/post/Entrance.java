@@ -28,7 +28,7 @@ package com.driver733.vkmusicuploader.post;
  *
  * @since 0.4
  */
-public interface Application {
+public interface Entrance {
 
     /**
      * Starts the application.

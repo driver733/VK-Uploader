@@ -119,7 +119,7 @@ public final class WallPostsRandom implements WallPosts {
      *  for attachmentsFields.
      * @param group Group ID.
      * @param properties For caching results.
-     * @param photos WatchDirs with photos.
+     * @param photos DirectoryEntrance with photos.
      */
     public WallPostsRandom(
         final VkApiClient client,
@@ -151,7 +151,7 @@ public final class WallPostsRandom implements WallPosts {
      *  for attachmentsFields.
      * @param group Group ID.
      * @param properties For caching results.
-     * @param audios WatchDirs with nonProcessedAudios.
+     * @param audios DirectoryEntrance with nonProcessedAudios.
      */
     public WallPostsRandom(
         final VkApiClient client,
@@ -183,8 +183,8 @@ public final class WallPostsRandom implements WallPosts {
      *  for attachmentsFields.
      * @param group Group ID.
      * @param properties For caching results.
-     * @param photos WatchDirs with photos.
-     * @param audios WatchDirs with nonProcessedAudios.
+     * @param photos DirectoryEntrance with photos.
+     * @param audios DirectoryEntrance with nonProcessedAudios.
      */
     public WallPostsRandom(
         final VkApiClient client,

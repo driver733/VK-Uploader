@@ -44,13 +44,13 @@ import org.cactoos.list.ListOf;
 public final class MediaPhotosBasic implements Media {
 
     /**
-     * WatchDirs that contains files.
+     * DirectoryEntrance that contains files.
      */
     private final Path dir;
 
     /**
      * Ctor.
-     * @param dir WatchDirs that contains files.
+     * @param dir DirectoryEntrance that contains files.
      */
     public MediaPhotosBasic(final Path dir) {
         this.dir = dir;

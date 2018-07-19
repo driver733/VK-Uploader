@@ -7,8 +7,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/driver733/VKUploader/badge.svg?branch=master)](https://coveralls.io/github/driver733/VKUploader?branch=master)
 [![](https://tokei.rs/b1/github/driver733/VKUploader)](https://github.com/driver733/VKUploader)
 
-[![codebeat badge](https://codebeat.co/badges/483007e8-a73d-4bfd-80a1-52586ba3a615)](https://codebeat.co/projects/github-com-driver733-VKUploader-master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/65288c94deac4a36bf03a80604cf1c04)](https://www.codacy.com/app/driver733/VKUploader?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=driver733/VKUploader&amp;utm_campaign=Badge_Grade)
+[![Code Climate (badge)](https://api.codeclimate.com/v1/badges/4bb9b9966d40e4b10c8d/maintainability)](https://codeclimate.com/github/driver733/VKUploader/maintainability)
+[![codebeat (badge)](https://codebeat.co/badges/483007e8-a73d-4bfd-80a1-52586ba3a615)](https://codebeat.co/projects/github-com-driver733-VKUploader-master)
+[![Codacy (badge)](https://api.codacy.com/project/badge/Grade/65288c94deac4a36bf03a80604cf1c04)](https://www.codacy.com/app/driver733/VKUploader?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=driver733/VKUploader&amp;utm_campaign=Badge_Grade)
 
 [![PDD status](http://www.0pdd.com/svg?name=driver733/VKUploader)](http://www.0pdd.com/p?name=driver733/VKUploader)
 

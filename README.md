@@ -78,9 +78,11 @@ and acts upon them (creates [WallPosts](https://github.com/driver733/VKUploader/
     * `mvn clean test jacoco:report`
 
 
-## Configuration file (`credentials.properties`)
+## Configuration file
 
 ```
+# credentials.properties
+
 vk.userId="VK USER ID"   # VK.com Group Admin User ID
 vk.groupId="VK GROUP ID" # VK.com Group ID
 vk.token="VK AUTH TOKEN" # VK.com auththorization token received using "Authorization Code Flow")

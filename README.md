@@ -4,6 +4,7 @@
 [![We recommend IntelliJ IDEA](http://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
 [![Build Status](https://travis-ci.org/driver733/VKUploader.svg?branch=master)](https://travis-ci.org/driver733/VKUploader)
+
 [![Coverage Status](https://coveralls.io/repos/github/driver733/VKUploader/badge.svg?branch=master)](https://coveralls.io/github/driver733/VKUploader?branch=master)
 [![](https://tokei.rs/b1/github/driver733/VKUploader)](https://github.com/driver733/VKUploader)
 

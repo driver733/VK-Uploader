@@ -54,7 +54,7 @@ import org.junit.Test;
  * @checkstyle MethodLength (50 lines)
  */
 @Immutable
-public final class AttachmentAudioTest extends AbstractVkUnitTest {
+public final class AttachmentAudioTest implements AbstractVkUnitTest {
 
     @SuppressWarnings({
         "PMD.NonStaticInitializer",

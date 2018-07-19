@@ -51,7 +51,7 @@ import org.junit.Test;
  * @checkstyle MethodLength (500 lines)
  */
 @Immutable
-public final class WallPostMusicAlbumTest extends AbstractVkUnitTest {
+public final class WallPostMusicAlbumTest implements AbstractVkUnitTest {
 
     /**
      * Test properties.

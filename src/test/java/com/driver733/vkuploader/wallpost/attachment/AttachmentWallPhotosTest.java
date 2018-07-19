@@ -53,7 +53,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (50 lines)
  */
-public final class AttachmentWallPhotosTest extends AbstractVkUnitTest {
+public final class AttachmentWallPhotosTest implements AbstractVkUnitTest {
 
     @Test
     @SuppressWarnings({

@@ -56,7 +56,7 @@ import org.junit.Test;
     "PMD.NonStaticInitializer",
     "PMD.AvoidDuplicateLiterals"
     })
-public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
+public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
 
     /**
      * Number of Wallposts to make.

@@ -46,7 +46,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  */
 @Immutable
-public final class WallPostWithAttachmentsTest extends AbstractVkUnitTest {
+public final class WallPostWithAttachmentsTest implements AbstractVkUnitTest {
 
     /**
      * Test properties.

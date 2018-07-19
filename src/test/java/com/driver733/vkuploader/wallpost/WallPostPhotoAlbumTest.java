@@ -51,7 +51,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (500 lines)
  */
-public final class WallPostPhotoAlbumTest extends AbstractVkUnitTest {
+public final class WallPostPhotoAlbumTest implements AbstractVkUnitTest {
 
     @Test
     @SuppressWarnings({

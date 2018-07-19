@@ -27,6 +27,7 @@ import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
+import java.util.concurrent.TimeUnit;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.StickyScalar;
 
@@ -100,7 +101,9 @@ public abstract class AbstractEntrance extends AbstractVkCredentials {
      * @checkstyle MagicNumberCheck (5 lines)
      */
     protected final void exit() throws InterruptedException {
-        Thread.sleep(this.delay * 1000);
+        TimeUnit.SECONDS.sleep(
+            this.delay
+        );
     }
 
 }

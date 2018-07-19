@@ -46,7 +46,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (500 lines)
  */
-public final class WallPostRandomTest extends AbstractVkUnitTest {
+public final class WallPostRandomTest implements AbstractVkUnitTest {
 
     /**
      * Root directory.

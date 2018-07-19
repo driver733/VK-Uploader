@@ -56,7 +56,7 @@ import org.junit.Test;
  * @checkstyle MethodLength (500 lines)
  * @checkstyle IllegalCatchCheck (500 lines)
  */
-public final class EntranceDirectoryTest extends AbstractVkUnitTest {
+public final class EntranceDirectoryTest implements AbstractVkUnitTest {
 
     @Test
     @SuppressWarnings({

@@ -26,15 +26,15 @@ package com.driver733.vkuploader.wallpost.attachment.support;
 import com.jcabi.aspects.Immutable;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import org.cactoos.io.BytesOf;
 import org.cactoos.io.InputOf;
+import org.cactoos.scalar.IoCheckedScalar;
 
 /**
  * Creates a zip file with files in the directory.

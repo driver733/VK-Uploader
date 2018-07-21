@@ -50,7 +50,7 @@ import org.junit.Test;
  * @checkstyle MethodLength (500 lines)
  */
 @Immutable
-public final class WallPostWithRandomQuoteTest implements AbstractVkUnitTest {
+public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
 
     @Test
     @SuppressWarnings({

@@ -31,46 +31,46 @@ package com.driver733.vkuploader.wallpost.support;
  * @since 0.1
  * @checkstyle FinalClassCheck (5 lines)
  */
-public interface AbstractVkUnitTest {
+public abstract class AbstractVkUnitTest {
 
     /**
      * Group ID.
      */
-    int GROUP_ID = 161929264;
+    protected static final int GROUP_ID = 161929264;
 
     /**
      * VK API endpoint - photos.saveWallPhoto.
      */
-    String PHOTO_SAVE_URL =
+    protected static final String PHOTO_SAVE_URL =
         "https://api.vk.com/method/photos.saveWallPhoto";
 
     /**
      * VK API endpoint - audios.save.
      */
-    String AUDIO_SAVE_URL =
+    protected static final String AUDIO_SAVE_URL =
         "https://api.vk.com/method/audio.save";
     /**
      * VK API endpoint - photos.getWallUploadServer.
      */
-    String PHOTO_WALL_URL =
+    protected static final String PHOTO_WALL_URL =
         "https://api.vk.com/method/photos.getWallUploadServer";
 
     /**
      * VK API endpoint - audios.getUploadServer.
      */
-    String AUDIO_UPLOAD_URL =
+    protected static final String AUDIO_UPLOAD_URL =
         "https://api.vk.com/method/audio.getUploadServer";
 
     /**
      * VK API endpoint - audios.add.
      */
-    String AUDIO_ADD_URL =
+    protected static final String AUDIO_ADD_URL =
         "https://api.vk.com/method/audio.add";
 
     /**
      * VK API endpoint - execute.
      */
-    String EXECUTE_URL =
+    protected static final String EXECUTE_URL =
         "https://api.vk.com/method/execute";
 
 }

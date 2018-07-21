@@ -33,7 +33,7 @@ merge:
 #      - USER=`cat $PROPS | grep "vk.user"  | cut -d'=' -f2`
 #      - GROUP=`cat $PROPS | grep "vk.group" | cut -d'=' -f2`
 #      - TOKEN=`cat $PROPS | grep "vk.token" | cut -d'=' -f2`
-      - mvn clean verify jacoco:report coveralls:report clean verify -Dvk.userId=`cat $PROPS | grep "vk.user"  | cut -d'=' -f2` -Dvk.groupId=`cat $PROPS | grep "vk.group" | cut -d'=' -f2` -Dvk.token=`cat $PROPS | grep "vk.token" | cut -d'=' -f2` -Dcoveralls.repo.token=`cat $PROPS | grep "coveralls.repo.token" | cut -d'=' -f2`
+      - mvn clean verify jacoco:report coveralls:report clean verify -Dvk.userId=`cat $PROPS | grep "vk.user"  | cut -d'=' -f2` -Dvk.groupId=`cat $PROPS | grep "vk.group" | cut -d'=' -f2` -Dvk.token=`cat $PROPS | grep "vk.token" | cut -d'=' -f2`
       # Upload (if necessary) the updated .m2 archive to Dropbox
       - if [ "$(md5deep -r -x m2sumOld /root/.m2 | grep -v --ignore-case -e "driver733" -e "VKMusicUploader")" != "" ]; then tar -czvf m2.tar.gz /root/.m2 > /dev/null; ./dropbox_uploader.sh upload m2.tar.gz /m2.tar.gz; fi
 release:

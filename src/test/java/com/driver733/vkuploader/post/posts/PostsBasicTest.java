@@ -26,7 +26,7 @@ package com.driver733.vkuploader.post.posts;
 import com.driver733.vkuploader.post.UploadServers;
 import com.driver733.vkuploader.wallpost.ImmutableProperties;
 import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
-import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
+import com.driver733.vkuploader.wallpost.support.VkTest;
 import com.driver733.vkuploader.wallpost.wallposts.WallPostsMusicAlbum;
 import com.driver733.vkuploader.wallpost.wallposts.WallPostsPhotoAlbum;
 import com.vk.api.sdk.client.TransportClient;
@@ -52,7 +52,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (500 lines)
  */
-public final class PostsBasicTest implements AbstractVkUnitTest {
+public final class PostsBasicTest implements VkTest {
 
     @Test
     @SuppressWarnings({
@@ -90,7 +90,7 @@ public final class PostsBasicTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.PHOTO_SAVE_URL,
+                                    VkTest.PHOTO_SAVE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -124,7 +124,7 @@ public final class PostsBasicTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.EXECUTE_URL,
+                                    VkTest.EXECUTE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -148,7 +148,7 @@ public final class PostsBasicTest implements AbstractVkUnitTest {
                             new HashMap<String, TransportClient>() {
                                 {
                                     put(
-                                        AbstractVkUnitTest.PHOTO_WALL_URL,
+                                        VkTest.PHOTO_WALL_URL,
                                         new TransportClientCached(
                                             String.join(
                                                 "",
@@ -164,7 +164,7 @@ public final class PostsBasicTest implements AbstractVkUnitTest {
                                         )
                                     );
                                     put(
-                                        AbstractVkUnitTest.AUDIO_UPLOAD_URL,
+                                        VkTest.AUDIO_UPLOAD_URL,
                                         new TransportClientCached(
                                             String.join(
                                                 "",
@@ -184,14 +184,14 @@ public final class PostsBasicTest implements AbstractVkUnitTest {
                     new UserActor(
                         1, "1"
                     ),
-                    AbstractVkUnitTest.GROUP_ID
+                    VkTest.GROUP_ID
                 ),
                 new ImmutableProperties(
                     root.resolve("testPhotoAlbum")
                         .resolve("vkmu.properties")
                         .toFile()
                 ),
-                AbstractVkUnitTest.GROUP_ID
+                VkTest.GROUP_ID
             )
         ).postFromDir(
             root
@@ -300,7 +300,7 @@ public final class PostsBasicTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.AUDIO_SAVE_URL,
+                                    VkTest.AUDIO_SAVE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -315,7 +315,7 @@ public final class PostsBasicTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.PHOTO_SAVE_URL,
+                                    VkTest.PHOTO_SAVE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -349,13 +349,13 @@ public final class PostsBasicTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.AUDIO_ADD_URL,
+                                    VkTest.AUDIO_ADD_URL,
                                     new TransportClientCached(
                                         "{ \"response\" : 123456789 }"
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.EXECUTE_URL,
+                                    VkTest.EXECUTE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -379,7 +379,7 @@ public final class PostsBasicTest implements AbstractVkUnitTest {
                             new HashMap<String, TransportClient>() {
                                 {
                                     put(
-                                        AbstractVkUnitTest.PHOTO_WALL_URL,
+                                        VkTest.PHOTO_WALL_URL,
                                         new TransportClientCached(
                                             String.join(
                                                 "",
@@ -395,7 +395,7 @@ public final class PostsBasicTest implements AbstractVkUnitTest {
                                         )
                                     );
                                     put(
-                                        AbstractVkUnitTest.AUDIO_UPLOAD_URL,
+                                        VkTest.AUDIO_UPLOAD_URL,
                                         new TransportClientCached(
                                             String.join(
                                                 "",
@@ -415,14 +415,14 @@ public final class PostsBasicTest implements AbstractVkUnitTest {
                     new UserActor(
                         1, "1"
                     ),
-                    AbstractVkUnitTest.GROUP_ID
+                    VkTest.GROUP_ID
                 ),
                 new ImmutableProperties(
                     root.resolve("album")
                         .resolve("vkmu.properties")
                         .toFile()
                 ),
-                AbstractVkUnitTest.GROUP_ID
+                VkTest.GROUP_ID
             )
             ).postFromDir(
                 root

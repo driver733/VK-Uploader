@@ -166,8 +166,8 @@
                         <exclude>cobertura:.*</exclude>
                         <exclude>dependencies:.*</exclude>
 
-                        <exclude>checkstyle:/src/main/java/com.driver733.vkmusicuploader/Main.java</exclude>
-                        <exclude>pmd:/src/main/java/com.driver733.vkmusicuploader/Main.java</exclude>
+                        <exclude>checkstyle:/src/main/java/com.driver733.vkuploader/Main.java</exclude>
+                        <exclude>pmd:/src/main/java/com.driver733.vkuploader/Main.java</exclude>
                         <exclude>findbugs:com.driver733.vkuploader.Main</exclude>
                     </excludes>
                 </configuration>

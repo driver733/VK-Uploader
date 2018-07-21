@@ -25,8 +25,8 @@ package com.driver733.vkuploader.wallpost;
 
 import com.driver733.vkuploader.wallpost.attachment.AttachmentFakeAudio;
 import com.driver733.vkuploader.wallpost.attachment.support.fields.AttachmentArraysWithProps;
-import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
 import com.driver733.vkuploader.wallpost.support.RecoverableFile;
+import com.driver733.vkuploader.wallpost.support.VkTest;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -46,7 +46,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  */
 @Immutable
-public final class WallPostWithAttachmentsTest implements AbstractVkUnitTest {
+public final class WallPostWithAttachmentsTest implements VkTest {
 
     /**
      * Test properties.

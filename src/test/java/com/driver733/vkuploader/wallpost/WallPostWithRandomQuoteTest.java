@@ -26,7 +26,7 @@ package com.driver733.vkuploader.wallpost;
 import com.driver733.vkuploader.post.UploadServers;
 import com.driver733.vkuploader.wallpost.attachment.support.BytesFromRequest;
 import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
-import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
+import com.driver733.vkuploader.wallpost.support.VkTest;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.http.request.FakeRequest;
 import com.jcabi.matchers.RegexMatchers;
@@ -50,7 +50,7 @@ import org.junit.Test;
  * @checkstyle MethodLength (500 lines)
  */
 @Immutable
-public final class WallPostWithRandomQuoteTest implements AbstractVkUnitTest {
+public final class WallPostWithRandomQuoteTest implements VkTest {
 
     @Test
     @SuppressWarnings({

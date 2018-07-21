@@ -26,26 +26,24 @@ package com.driver733.vkuploader.wallpost.attachment.support;
 import com.jcabi.aspects.Immutable;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import org.cactoos.io.BytesOf;
 import org.cactoos.io.InputOf;
+import org.cactoos.scalar.IoCheckedScalar;
 
 /**
  * Creates a zip file with files in the directory.
- *
- *
  *
  * @since 0.2
  */
 @Immutable
 @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-public final class Zipped {
+public final class ZippedDirectory {
 
     /**
      * EntranceDirectory or a file to zip.
@@ -56,7 +54,7 @@ public final class Zipped {
      * Ctor.
      * @param directory EntranceDirectory or a file to zip.
      */
-    public Zipped(final Path directory) {
+    public ZippedDirectory(final Path directory) {
         this.directory = directory;
     }
 
@@ -68,31 +66,40 @@ public final class Zipped {
     public InputStream zip() throws Exception {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (ZipOutputStream zos = new ZipOutputStream(out)) {
-            final List<Path> paths = Files.walk(
+            Files.walk(
                 this.directory
             ).filter(
-                dirr -> !Files.isDirectory(dirr)
-            ).collect(
-                Collectors.toList()
+                dir -> !Files.isDirectory(dir)
+            ).forEach(
+                path -> {
+                    try {
+                        zos.putNextEntry(
+                            new ZipEntry(
+                                this.directory.relativize(
+                                    path
+                                ).toString()
+                            )
+                        );
+                        zos.write(
+                            new IoCheckedScalar<>(
+                                () -> new BytesOf(
+                                    new InputOf(
+                                        path
+                                    )
+                                ).asBytes()
+                            ).value()
+                        );
+                        zos.closeEntry();
+                        zos.flush();
+                        zos.close();
+                    } catch (final IOException ex) {
+                        throw new IllegalStateException(
+                            "Zipping failed with an exception: ",
+                            ex
+                        );
+                    }
+                }
             );
-            for (final Path path : paths) {
-                final ZipEntry entry = new ZipEntry(
-                    this.directory.relativize(
-                        path
-                    ).toString()
-                );
-                zos.putNextEntry(entry);
-                zos.write(
-                    new BytesOf(
-                        new InputOf(
-                            path
-                        )
-                    ).asBytes()
-                );
-                zos.closeEntry();
-            }
-            zos.flush();
-            zos.close();
             return new ByteArrayInputStream(
                 out.toByteArray()
             );

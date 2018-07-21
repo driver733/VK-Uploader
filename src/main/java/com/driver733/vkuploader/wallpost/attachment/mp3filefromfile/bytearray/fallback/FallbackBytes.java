@@ -25,9 +25,11 @@ package com.driver733.vkuploader.wallpost.attachment.mp3filefromfile.bytearray.f
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.log.Logger;
+import java.io.IOException;
 import java.util.List;
 import org.cactoos.Bytes;
 import org.cactoos.list.ListOf;
+import org.cactoos.scalar.IoCheckedScalar;
 
 /**
  * Finds the first valid byte array.
@@ -55,15 +57,14 @@ public final class FallbackBytes implements Bytes {
     }
 
     @Override
-    @SuppressWarnings({
-        "PMD.AvoidThrowingRawExceptionTypes",
-        "PMD.AvoidCatchingGenericException"
-        })
+    @SuppressWarnings("PMD.AvoidThrowingRawExceptionTypes")
     public byte[] asBytes() throws Exception {
         for (final Bytes array : this.arrays) {
             try {
-                return array.asBytes();
-            } catch (final Exception ex) {
+                return new IoCheckedScalar<>(
+                    array::asBytes
+                ).value();
+            } catch (final IOException ex) {
                 Logger.debug(
                     this,
                     "Unable to read bytes from the provided Bytes object: %s",

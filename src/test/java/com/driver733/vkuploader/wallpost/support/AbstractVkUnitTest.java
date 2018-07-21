@@ -26,10 +26,9 @@ package com.driver733.vkuploader.wallpost.support;
 /**
  * VK API endpoints.
  *
- *
- *
  * @since 0.1
- * @checkstyle FinalClassCheck (5 lines)
+ * @checkstyle AvoidConstantsInterface (5 lines)
+ * @checkstyle InterfaceIsTypeCheck (5 lines)
  */
 public abstract class AbstractVkUnitTest {
 

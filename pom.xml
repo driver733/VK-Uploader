@@ -166,8 +166,8 @@
                         <exclude>cobertura:.*</exclude>
                         <exclude>dependencies:.*</exclude>
 
-                        <exclude>checkstyle:/src/main/java/com.driver733.vkmusicuploader/Main.java</exclude>
-                        <exclude>pmd:/src/main/java/com.driver733.vkmusicuploader/Main.java</exclude>
+                        <exclude>checkstyle:/src/main/java/com.driver733.vkuploader/Main.java</exclude>
+                        <exclude>pmd:/src/main/java/com.driver733.vkuploader/Main.java</exclude>
                         <exclude>findbugs:com.driver733.vkuploader.Main</exclude>
                     </excludes>
                 </configuration>
@@ -218,13 +218,24 @@
                 <version>1.0.0</version>
                 <executions>
                     <execution>
+                        <id>1</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>write-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${project.build.outputDirectory}/credentials.properties</outputFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>2</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>read-project-properties</goal>
                         </goals>
                         <configuration>
                             <files>
-                                <file>${credentials}</file>
+                                <file>${project.build.outputDirectory}/credentials.properties</file>
                             </files>
                         </configuration>
                     </execution>

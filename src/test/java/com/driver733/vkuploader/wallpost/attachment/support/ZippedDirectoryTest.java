@@ -39,7 +39,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test for {@link Zipped}.
+ * Test for {@link ZippedDirectory}.
  *
  *
  *
@@ -47,7 +47,7 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class ZippedTest {
+public final class ZippedDirectoryTest {
 
     @Test
     @SuppressWarnings({
@@ -66,7 +66,7 @@ public final class ZippedTest {
         new LengthOf(
             new TeeInput(
                 new InputOf(
-                    new Zipped(
+                    new ZippedDirectory(
                         Paths.get("src/test/resources/zip/test/")
                     ).zip()
                 ),

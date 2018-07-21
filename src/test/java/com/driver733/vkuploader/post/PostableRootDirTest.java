@@ -54,7 +54,7 @@ import org.junit.Test;
  * @checkstyle MethodLength (2000 lines)
  */
 @Immutable
-public final class PostableRootDirTest implements AbstractVkUnitTest {
+public final class PostableRootDirTest extends AbstractVkUnitTest {
 
     @Test
     @SuppressWarnings({

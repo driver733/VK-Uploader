@@ -26,7 +26,7 @@ package com.driver733.vkuploader.post;
 import com.driver733.vkuploader.post.posts.PostsBasic;
 import com.driver733.vkuploader.wallpost.ImmutableProperties;
 import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
-import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
+import com.driver733.vkuploader.wallpost.support.VkTest;
 import com.driver733.vkuploader.wallpost.wallposts.WallPosts;
 import com.driver733.vkuploader.wallpost.wallposts.WallPostsPhotoAlbum;
 import com.vk.api.sdk.client.TransportClient;
@@ -56,7 +56,7 @@ import org.junit.Test;
  * @checkstyle MethodLength (500 lines)
  * @checkstyle IllegalCatchCheck (500 lines)
  */
-public final class EntranceDirectoryTest implements AbstractVkUnitTest {
+public final class EntranceDirectoryTest implements VkTest {
 
     @Test
     @SuppressWarnings({
@@ -96,7 +96,7 @@ public final class EntranceDirectoryTest implements AbstractVkUnitTest {
                                 )
                             );
                             put(
-                                AbstractVkUnitTest.PHOTO_SAVE_URL,
+                                VkTest.PHOTO_SAVE_URL,
                                 new TransportClientCached(
                                     String.join(
                                         "",
@@ -130,7 +130,7 @@ public final class EntranceDirectoryTest implements AbstractVkUnitTest {
                                 )
                             );
                             put(
-                                AbstractVkUnitTest.EXECUTE_URL,
+                                VkTest.EXECUTE_URL,
                                 new TransportClientCached(
                                     String.join(
                                         "",
@@ -155,7 +155,7 @@ public final class EntranceDirectoryTest implements AbstractVkUnitTest {
                         new HashMap<String, TransportClient>() {
                             {
                                 put(
-                                    AbstractVkUnitTest.PHOTO_WALL_URL,
+                                    VkTest.PHOTO_WALL_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -171,7 +171,7 @@ public final class EntranceDirectoryTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.AUDIO_UPLOAD_URL,
+                                    VkTest.AUDIO_UPLOAD_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -192,10 +192,10 @@ public final class EntranceDirectoryTest implements AbstractVkUnitTest {
                     1,
                     "1"
                 ),
-                AbstractVkUnitTest.GROUP_ID
+                VkTest.GROUP_ID
             ),
             actual,
-            AbstractVkUnitTest.GROUP_ID
+            VkTest.GROUP_ID
         );
         final File temp = root.resolve("testPhotoAlbum")
             .resolve(".temp")
@@ -203,7 +203,7 @@ public final class EntranceDirectoryTest implements AbstractVkUnitTest {
         temp.deleteOnExit();
         new Thread(
             () -> {
-                try {z
+                try {
                     new EntranceDirectory(
                         new PostsBasic(
                             posts

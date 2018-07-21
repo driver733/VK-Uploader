@@ -25,7 +25,7 @@ package com.driver733.vkuploader.post;
 
 import com.driver733.vkuploader.wallpost.ImmutableProperties;
 import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
-import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
+import com.driver733.vkuploader.wallpost.support.VkTest;
 import com.driver733.vkuploader.wallpost.wallposts.WallPostsMusicAlbum;
 import com.driver733.vkuploader.wallpost.wallposts.WallPostsPhotoAlbum;
 import com.driver733.vkuploader.wallpost.wallposts.WallPostsRandom;
@@ -54,7 +54,7 @@ import org.junit.Test;
  * @checkstyle MethodLength (2000 lines)
  */
 @Immutable
-public final class PostableRootDirTest implements AbstractVkUnitTest {
+public final class PostableRootDirTest implements VkTest {
 
     @Test
     @SuppressWarnings({
@@ -93,7 +93,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.PHOTO_SAVE_URL,
+                                    VkTest.PHOTO_SAVE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -127,7 +127,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.EXECUTE_URL,
+                                    VkTest.EXECUTE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -151,7 +151,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                             new HashMap<String, TransportClient>() {
                                 {
                                     put(
-                                        AbstractVkUnitTest.PHOTO_WALL_URL,
+                                        VkTest.PHOTO_WALL_URL,
                                         new TransportClientCached(
                                             String.join(
                                                 "",
@@ -167,7 +167,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                                         )
                                     );
                                     put(
-                                        AbstractVkUnitTest.AUDIO_UPLOAD_URL,
+                                        VkTest.AUDIO_UPLOAD_URL,
                                         new TransportClientCached(
                                             String.join(
                                                 "",
@@ -187,14 +187,14 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                     new UserActor(
                         1, "1"
                     ),
-                    AbstractVkUnitTest.GROUP_ID
+                    VkTest.GROUP_ID
                 ),
                 new ImmutableProperties(
                     root.resolve("testPhotoAlbum")
                         .resolve("vkmu.properties")
                         .toFile()
                 ),
-                AbstractVkUnitTest.GROUP_ID
+                VkTest.GROUP_ID
             )
         ).post();
         TimeUnit.SECONDS.sleep(1);
@@ -301,7 +301,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.AUDIO_SAVE_URL,
+                                    VkTest.AUDIO_SAVE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -316,7 +316,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.PHOTO_SAVE_URL,
+                                    VkTest.PHOTO_SAVE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -350,13 +350,13 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.AUDIO_ADD_URL,
+                                    VkTest.AUDIO_ADD_URL,
                                     new TransportClientCached(
                                         "{ \"response\" : 123456789 }"
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.EXECUTE_URL,
+                                    VkTest.EXECUTE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -380,7 +380,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                             new HashMap<String, TransportClient>() {
                                 {
                                     put(
-                                        AbstractVkUnitTest.PHOTO_WALL_URL,
+                                        VkTest.PHOTO_WALL_URL,
                                         new TransportClientCached(
                                             String.join(
                                                 "",
@@ -396,7 +396,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                                         )
                                     );
                                     put(
-                                        AbstractVkUnitTest.AUDIO_UPLOAD_URL,
+                                        VkTest.AUDIO_UPLOAD_URL,
                                         new TransportClientCached(
                                             String.join(
                                                 "",
@@ -416,14 +416,14 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                     new UserActor(
                         1, "1"
                     ),
-                    AbstractVkUnitTest.GROUP_ID
+                    VkTest.GROUP_ID
                 ),
                 new ImmutableProperties(
                     root.resolve("album")
                         .resolve("vkmu.properties")
                         .toFile()
                 ),
-                AbstractVkUnitTest.GROUP_ID
+                VkTest.GROUP_ID
             )
         ).post();
         TimeUnit.SECONDS.sleep(1);
@@ -483,7 +483,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.PHOTO_SAVE_URL,
+                                    VkTest.PHOTO_SAVE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -517,7 +517,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.EXECUTE_URL,
+                                    VkTest.EXECUTE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -541,7 +541,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                             new HashMap<String, TransportClient>() {
                                 {
                                     put(
-                                        AbstractVkUnitTest.PHOTO_WALL_URL,
+                                        VkTest.PHOTO_WALL_URL,
                                         new TransportClientCached(
                                             String.join(
                                                 "",
@@ -563,14 +563,14 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                     new UserActor(
                         1, "1"
                     ),
-                    AbstractVkUnitTest.GROUP_ID
+                    VkTest.GROUP_ID
                 ),
                 new ImmutableProperties(
                     root.resolve("testPhotoAlbum")
                         .resolve("vkmu.properties")
                         .toFile()
                 ),
-                AbstractVkUnitTest.GROUP_ID,
+                VkTest.GROUP_ID,
                 root.resolve("testPhotoAlbum")
             )
         ).post();
@@ -636,7 +636,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.AUDIO_SAVE_URL,
+                                    VkTest.AUDIO_SAVE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -651,13 +651,13 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.AUDIO_ADD_URL,
+                                    VkTest.AUDIO_ADD_URL,
                                     new TransportClientCached(
                                         "{ \"response\" : 123456789 }"
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.EXECUTE_URL,
+                                    VkTest.EXECUTE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -681,7 +681,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                             new HashMap<String, TransportClient>() {
                                 {
                                     put(
-                                        AbstractVkUnitTest.AUDIO_UPLOAD_URL,
+                                        VkTest.AUDIO_UPLOAD_URL,
                                         new TransportClientCached(
                                             String.join(
                                                 "",
@@ -701,7 +701,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                     new UserActor(
                         1, "1"
                     ),
-                    AbstractVkUnitTest.GROUP_ID
+                    VkTest.GROUP_ID
                 ),
                 new ImmutableProperties(
                     root.resolve("musicAlbum")
@@ -709,7 +709,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                         .toFile()
                 ),
                 root.resolve("musicAlbum"),
-                AbstractVkUnitTest.GROUP_ID
+                VkTest.GROUP_ID
             )
         ).post();
         MatcherAssert.assertThat(
@@ -777,7 +777,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.AUDIO_SAVE_URL,
+                                    VkTest.AUDIO_SAVE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -792,7 +792,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.PHOTO_SAVE_URL,
+                                    VkTest.PHOTO_SAVE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -826,13 +826,13 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.AUDIO_ADD_URL,
+                                    VkTest.AUDIO_ADD_URL,
                                     new TransportClientCached(
                                         "{ \"response\" : 123456789 }"
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.EXECUTE_URL,
+                                    VkTest.EXECUTE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -856,7 +856,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                             new HashMap<String, TransportClient>() {
                                 {
                                     put(
-                                        AbstractVkUnitTest.PHOTO_WALL_URL,
+                                        VkTest.PHOTO_WALL_URL,
                                         new TransportClientCached(
                                             String.join(
                                                 "",
@@ -872,7 +872,7 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                                         )
                                     );
                                     put(
-                                        AbstractVkUnitTest.AUDIO_UPLOAD_URL,
+                                        VkTest.AUDIO_UPLOAD_URL,
                                         new TransportClientCached(
                                             String.join(
                                                 "",
@@ -893,13 +893,13 @@ public final class PostableRootDirTest implements AbstractVkUnitTest {
                         1,
                         "1"
                     ),
-                    AbstractVkUnitTest.GROUP_ID
+                    VkTest.GROUP_ID
                 ),
                 new ImmutableProperties(
                     root.resolve("vkmu.properties")
                         .toFile()
                 ),
-                AbstractVkUnitTest.GROUP_ID,
+                VkTest.GROUP_ID,
                 root.resolve("testPhotoAlbum"),
                 root.resolve("musicAlbum")
             )

@@ -25,8 +25,8 @@ package com.driver733.vkuploader.wallpost.wallposts;
 
 import com.driver733.vkuploader.post.UploadServers;
 import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
-import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
 import com.driver733.vkuploader.wallpost.support.JsonPattern;
+import com.driver733.vkuploader.wallpost.support.VkTest;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.matchers.RegexMatchers;
 import com.vk.api.sdk.client.TransportClient;
@@ -56,7 +56,7 @@ import org.junit.Test;
     "PMD.NonStaticInitializer",
     "PMD.AvoidDuplicateLiterals"
     })
-public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
+public final class WallPostsRandomQuoteTest implements VkTest {
 
     /**
      * Number of Wallposts to make.
@@ -83,7 +83,7 @@ public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
                     new HashMap<String, TransportClient>() {
                         {
                             put(
-                                AbstractVkUnitTest.EXECUTE_URL,
+                                VkTest.EXECUTE_URL,
                                 new TransportClientCached(
                                     String.join(
                                         "",
@@ -101,7 +101,7 @@ public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
                 1,
                 "1"
             ),
-            AbstractVkUnitTest.GROUP_ID,
+            VkTest.GROUP_ID,
             WallPostsRandomQuoteTest.N_WALLPOSTS
         ).postsQueries()
             .get(0)
@@ -154,7 +154,7 @@ public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
                                 )
                             );
                             put(
-                                AbstractVkUnitTest.PHOTO_SAVE_URL,
+                                VkTest.PHOTO_SAVE_URL,
                                 new TransportClientCached(
                                     String.join(
                                         "",
@@ -188,7 +188,7 @@ public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
                                 )
                             );
                             put(
-                                AbstractVkUnitTest.EXECUTE_URL,
+                                VkTest.EXECUTE_URL,
                                 new TransportClientCached(
                                     String.join(
                                         "",
@@ -212,7 +212,7 @@ public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
                         new HashMap<String, TransportClient>() {
                             {
                                 put(
-                                    AbstractVkUnitTest.PHOTO_WALL_URL,
+                                    VkTest.PHOTO_WALL_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -234,9 +234,9 @@ public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
                 new UserActor(
                     1, "1"
                 ),
-                AbstractVkUnitTest.GROUP_ID
+                VkTest.GROUP_ID
             ),
-            AbstractVkUnitTest.GROUP_ID,
+            VkTest.GROUP_ID,
             WallPostsRandomQuoteTest.N_WALLPOSTS,
             WallPostsRandomQuoteTest.PHOTOS
         ).postsQueries()
@@ -292,7 +292,7 @@ public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
                                 )
                             );
                             put(
-                                AbstractVkUnitTest.AUDIO_SAVE_URL,
+                                VkTest.AUDIO_SAVE_URL,
                                 new TransportClientCached(
                                     String.join(
                                         "",
@@ -307,13 +307,13 @@ public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
                                 )
                             );
                             put(
-                                AbstractVkUnitTest.AUDIO_ADD_URL,
+                                VkTest.AUDIO_ADD_URL,
                                 new TransportClientCached(
                                     "{ \"response\" : 123456789 }"
                                 )
                             );
                             put(
-                                AbstractVkUnitTest.EXECUTE_URL,
+                                VkTest.EXECUTE_URL,
                                 new TransportClientCached(
                                     String.join(
                                         "",
@@ -337,7 +337,7 @@ public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
                         new HashMap<String, TransportClient>() {
                             {
                                 put(
-                                    AbstractVkUnitTest.AUDIO_UPLOAD_URL,
+                                    VkTest.AUDIO_UPLOAD_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -357,9 +357,9 @@ public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
                 new UserActor(
                     1, "1"
                 ),
-                AbstractVkUnitTest.GROUP_ID
+                VkTest.GROUP_ID
             ),
-            AbstractVkUnitTest.GROUP_ID,
+            VkTest.GROUP_ID,
             WallPostsRandomQuoteTest.AUDIOS,
             WallPostsRandomQuoteTest.N_WALLPOSTS
         ).postsQueries()
@@ -428,7 +428,7 @@ public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
                                 )
                             );
                             put(
-                                AbstractVkUnitTest.AUDIO_SAVE_URL,
+                                VkTest.AUDIO_SAVE_URL,
                                 new TransportClientCached(
                                     String.join(
                                         "",
@@ -443,7 +443,7 @@ public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
                                 )
                             );
                             put(
-                                AbstractVkUnitTest.PHOTO_SAVE_URL,
+                                VkTest.PHOTO_SAVE_URL,
                                 new TransportClientCached(
                                     String.join(
                                         "",
@@ -477,13 +477,13 @@ public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
                                 )
                             );
                             put(
-                                AbstractVkUnitTest.AUDIO_ADD_URL,
+                                VkTest.AUDIO_ADD_URL,
                                 new TransportClientCached(
                                     "{ \"response\" : 123456789 }"
                                 )
                             );
                             put(
-                                AbstractVkUnitTest.EXECUTE_URL,
+                                VkTest.EXECUTE_URL,
                                 new TransportClientCached(
                                     String.join(
                                         "",
@@ -507,7 +507,7 @@ public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
                         new HashMap<String, TransportClient>() {
                             {
                                 put(
-                                    AbstractVkUnitTest.PHOTO_WALL_URL,
+                                    VkTest.PHOTO_WALL_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -523,7 +523,7 @@ public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.AUDIO_UPLOAD_URL,
+                                    VkTest.AUDIO_UPLOAD_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -543,9 +543,9 @@ public final class WallPostsRandomQuoteTest implements AbstractVkUnitTest {
                 new UserActor(
                     1, "1"
                 ),
-                AbstractVkUnitTest.GROUP_ID
+                VkTest.GROUP_ID
             ),
-            AbstractVkUnitTest.GROUP_ID,
+            VkTest.GROUP_ID,
             WallPostsRandomQuoteTest.N_WALLPOSTS,
             WallPostsRandomQuoteTest.PHOTOS,
             WallPostsRandomQuoteTest.AUDIOS

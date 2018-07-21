@@ -26,8 +26,8 @@ package com.driver733.vkuploader.wallpost.attachment;
 import com.driver733.vkuploader.wallpost.ImmutableProperties;
 import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkuploader.wallpost.attachment.upload.UploadAudio;
-import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
 import com.driver733.vkuploader.wallpost.support.RecoverableFile;
+import com.driver733.vkuploader.wallpost.support.VkTest;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
@@ -54,7 +54,7 @@ import org.junit.Test;
  * @checkstyle MethodLength (50 lines)
  */
 @Immutable
-public final class AttachmentAudioTest implements AbstractVkUnitTest {
+public final class AttachmentAudioTest implements VkTest {
 
     @SuppressWarnings({
         "PMD.NonStaticInitializer",
@@ -93,7 +93,7 @@ public final class AttachmentAudioTest implements AbstractVkUnitTest {
                                     )
                                 );
                                 put(
-                                    AbstractVkUnitTest.AUDIO_SAVE_URL,
+                                    VkTest.AUDIO_SAVE_URL,
                                     new TransportClientCached(
                                         String.join(
                                             "",
@@ -118,7 +118,7 @@ public final class AttachmentAudioTest implements AbstractVkUnitTest {
                 new ImmutableProperties(
                     props
                 ),
-                AbstractVkUnitTest.GROUP_ID,
+                VkTest.GROUP_ID,
                 new UploadAudio(
                     new VkApiClient(
                         new TransportClientCached(
@@ -152,7 +152,7 @@ public final class AttachmentAudioTest implements AbstractVkUnitTest {
                     ),
                     1,
                     2
-                ).groupId(AbstractVkUnitTest.GROUP_ID)
+                ).groupId(VkTest.GROUP_ID)
                     .build()
             )
         );

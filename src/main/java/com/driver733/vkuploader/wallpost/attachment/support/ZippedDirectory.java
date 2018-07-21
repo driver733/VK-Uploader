@@ -39,6 +39,8 @@ import org.cactoos.scalar.IoCheckedScalar;
 /**
  * Creates a zip file with files in the directory.
  *
+ *
+ *
  * @since 0.2
  */
 @Immutable
@@ -99,7 +101,7 @@ public final class ZippedDirectory {
                         );
                     }
                 }
-            );
+                );
             return new ByteArrayInputStream(
                 out.toByteArray()
             );

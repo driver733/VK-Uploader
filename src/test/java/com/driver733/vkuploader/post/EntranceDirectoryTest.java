@@ -203,7 +203,7 @@ public final class EntranceDirectoryTest implements VkTest {
         temp.deleteOnExit();
         new Thread(
             () -> {
-                try {z
+                try {
                     new EntranceDirectory(
                         new PostsBasic(
                             posts

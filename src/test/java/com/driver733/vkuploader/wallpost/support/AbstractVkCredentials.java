@@ -24,17 +24,11 @@
 package com.driver733.vkuploader.wallpost.support;
 
 import com.jcabi.aspects.Immutable;
-import java.io.File;
-import java.util.Properties;
-import org.cactoos.Scalar;
-import org.cactoos.io.InputOf;
-import org.cactoos.scalar.PropertiesOf;
 
 /**
  * VK credentials for IT.
  *
- *
- *
+ * @checkstyle NonStaticMethodCheck (500 lines)
  * @since 0.2
  */
 @Immutable
@@ -45,34 +39,19 @@ import org.cactoos.scalar.PropertiesOf;
 public abstract class AbstractVkCredentials {
 
     /**
-     * Properties with credentials.
-     */
-    private final Scalar<Properties> props;
-
-    /**
      * Ctor.
      */
-    protected AbstractVkCredentials() {
-        this.props = new PropertiesOf(
-            new InputOf(
-                new File(
-                    System.getProperty("credentials")
-                )
-            )
-        );
-    }
+    @SuppressWarnings("PMD.UncommentedEmptyConstructor")
+    protected AbstractVkCredentials() { }
 
     /**
      * VK group ID.
      * @return Group ID.
      * @throws Exception If properties cannot be read.
      */
-    protected final int groupId() throws Exception {
+    protected final int groupId() {
         return Integer.parseInt(
-            String.valueOf(
-                this.props.value()
-                    .get("vk.groupId")
-            )
+            System.getProperty("vk.groupId")
         );
     }
 
@@ -81,12 +60,9 @@ public abstract class AbstractVkCredentials {
      * @return User ID.
      * @throws Exception If properties cannot be read.
      */
-    protected final int userId() throws Exception {
+    protected final int userId() {
         return Integer.parseInt(
-            String.valueOf(
-                this.props.value()
-                    .get("vk.userId")
-            )
+            System.getProperty("vk.userId")
         );
     }
 
@@ -95,10 +71,9 @@ public abstract class AbstractVkCredentials {
      * @return Token.
      * @throws Exception If properties cannot be read.
      */
-    protected final String token() throws Exception {
+    protected final String token() {
         return String.valueOf(
-            this.props.value()
-                .get("vk.token")
+            System.getProperty("vk.token")
         );
     }
 

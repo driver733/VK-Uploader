@@ -25,7 +25,7 @@ package com.driver733.vkuploader.wallpost;
 
 import com.driver733.vkuploader.post.UploadServers;
 import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
-import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
+import com.driver733.vkuploader.wallpost.support.VkTest;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -51,7 +51,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (500 lines)
  */
-public final class WallPostPhotoAlbumTest implements AbstractVkUnitTest {
+public final class WallPostPhotoAlbumTest implements VkTest {
 
     @Test
     @SuppressWarnings({

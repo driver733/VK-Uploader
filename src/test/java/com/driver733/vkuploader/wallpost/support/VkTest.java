@@ -28,10 +28,10 @@ package com.driver733.vkuploader.wallpost.support;
  *
  * @since 0.1
  * @checkstyle AvoidConstantsInterface (5 lines)
- * @checkstyle InterfaceIsTypeCheck (5 lines)
+ * @checkstyle InterfaceIsTypeCheck (20 lines)
  */
 @SuppressWarnings("PMD.AvoidConstantsInterface")
-public interface AbstractVkUnitTest {
+public interface VkTest {
 
     /**
      * Group ID.

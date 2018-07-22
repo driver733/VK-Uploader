@@ -29,6 +29,9 @@ import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.StickyScalar;
+import org.junit.rules.TestRule;
+import org.junit.runner.Description;
+import org.junit.runners.model.Statement;
 
 /**
  * Creates {@link VkApiClient} and {@link UserActor}
@@ -40,7 +43,7 @@ import org.cactoos.scalar.StickyScalar;
  */
 @Immutable
 @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-public final class VkCredentials {
+public final class VkCredentials implements TestRule {
 
     /**
      * VK group ID props key.
@@ -127,4 +130,8 @@ public final class VkCredentials {
         return this.group;
     }
 
+    @Override
+    public Statement apply(final Statement base, final Description description) {
+        throw new UnsupportedOperationException("#apply()");
+    }
 }

@@ -49,7 +49,7 @@ public final class WallPostFromGroupIT {
      * VK user, group and auth token.
      */
     @Rule
-    private final VkCredentials credentials =
+    public final VkCredentials credentials =
         new VkCredentials();
 
     @After

@@ -57,7 +57,7 @@ public final class WallPostWithMessageIT {
      * VK user, group and auth token.
      */
     @Rule
-    private final VkCredentials credentials =
+    public final VkCredentials credentials =
         new VkCredentials();
 
     @After

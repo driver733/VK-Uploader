@@ -57,7 +57,7 @@ public final class WallPostWithAttachmentsIT {
      * VK UserId, GroupId and auth token.
      */
     @Rule
-    private final VkCredentials credentials =
+    public final VkCredentials credentials =
         new VkCredentials();
 
     @After

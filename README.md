@@ -68,29 +68,18 @@ and acts upon them (creates [WallPosts](https://github.com/driver733/VKUploader/
 
 ## Maven
 
-1. Qulice  (static analysis check)
-    * `mvn clean test -Dcredentials="Path to the credentials.properties" qulice:check`
+1. Qulice (static analysis check)
+    * `mvn clean test -DskipTests=true qulice:check`
 2. Unit tests
-    * `mvn clean test -Dcredentials="Path to the credentials.properties"`
+    * `mvn clean test`
 3. Integration Tests
-    * `mvn clean verify -Dcredentials="Path to the credentials.properties"`
-4. Full Pre-push validation
-    * `mvn clean verify -Dcredentials="Path to the credentials.properties" qulice:check`
-5. Create test coverage report (located in `VKUploader/target/site`)
+    * `clean verify -Dvk.userId= -Dvk.groupId= -Dvk.token=`
+4. Full Pre-push validation (static analysis + unit tests + integration tests)
+    * `mvn clean verify qulice:check -Dvk.userId= -Dvk.groupId= -Dvk.token=`
+5. Test coverage report (located in `VKUploader/target/site`)
     * `mvn clean test jacoco:report`
 
-
-## Configuration file
-
-```
-# credentials.properties
-
-vk.userId="VK USER ID"   # VK.com Group Admin User ID
-vk.groupId="VK GROUP ID" # VK.com Group ID
-vk.token="VK AUTH TOKEN" # VK.com auththorization token received using "Authorization Code Flow")
-```
 For more info see [Authorization Code Flow for User Access Token](https://vk.com/dev/authcode_flow_user)
-
 
 ## How to contribute
 
@@ -100,7 +89,7 @@ they don't violate our quality standards. To avoid frustration, before
 sending us your pull request please run full Maven build:
 
 ```
-$ mvn `clean verify -Dcredentials="Path to the credentials file" qulice:check`
+$ mvn clean install qulice:check`
 ```
 
 To avoid build errors use maven 3.2+.

@@ -89,7 +89,7 @@ they don't violate our quality standards. To avoid frustration, before
 sending us your pull request please run full Maven build:
 
 ```
-$ mvn clean install qulice:check`
+$ mvn clean install qulice:check
 ```
 
 To avoid build errors use maven 3.2+.

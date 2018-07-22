@@ -69,15 +69,25 @@ and acts upon them (creates [WallPosts](https://github.com/driver733/VKUploader/
 ## Maven
 
 1. Qulice (static analysis check)
-    * `mvn clean test -DskipTests=true qulice:check`
+    ```
+    $ mvn clean test -DskipTests=true qulice:check
+    ```
 2. Unit tests
-    * `mvn clean test`
+    ```
+    $ mvn clean test
+    ```
 3. Integration Tests
-    * `clean verify -Dvk.userId= -Dvk.groupId= -Dvk.token=`
+    ```
+    $ clean verify -Dvk.userId= -Dvk.groupId= -Dvk.token=
+    ```
 4. Full Pre-push validation (static analysis + unit tests + integration tests)
-    * `mvn clean verify qulice:check -Dvk.userId= -Dvk.groupId= -Dvk.token=`
+    ```
+    $ mvn clean verify qulice:check -Dvk.userId= -Dvk.groupId= -Dvk.token=
+    ```
 5. Test coverage report (located in `VKUploader/target/site`)
-    * `mvn clean test jacoco:report`
+    ```
+    $ mvn clean test jacoco:report
+    ```
 
 For more info see [Authorization Code Flow for User Access Token](https://vk.com/dev/authcode_flow_user)
 

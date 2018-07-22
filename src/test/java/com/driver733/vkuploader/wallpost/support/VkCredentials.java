@@ -27,7 +27,6 @@ import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
-import java.util.concurrent.TimeUnit;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.StickyScalar;
 
@@ -41,15 +40,25 @@ import org.cactoos.scalar.StickyScalar;
  */
 @Immutable
 @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-public abstract class AbstractEntrance extends AbstractVkCredentials {
+public final class VkCredentials {
 
     /**
-     * Exit delay before next IT.
+     * VK group ID props key.
      */
-    private final int delay;
+    private static final String GROUP_PROPS_KEY = "vk.groupId";
 
     /**
-     * {@link VkApiClient}.
+     * VK user ID props key.
+     */
+    private static final String USER_PROPS_KEY = "vk.userId";
+
+    /**
+     * VK auth token props key.
+     */
+    private static final String TOKEN_PROPS_KEY = "vk.token";
+
+    /**
+     * VK {@link VkApiClient}.
      */
     private final Scalar<VkApiClient> client;
 
@@ -59,10 +68,20 @@ public abstract class AbstractEntrance extends AbstractVkCredentials {
     private final Scalar<UserActor> actor;
 
     /**
+     * VK Group ID.
+     */
+    private final int group;
+
+    /**
      * Ctor.
      */
-    protected AbstractEntrance() {
+    public VkCredentials() {
         super();
+        this.group = Integer.parseInt(
+            System.getProperty(
+                VkCredentials.GROUP_PROPS_KEY
+            )
+        );
         this.client = new StickyScalar<>(
             () -> new VkApiClient(
                 new TransportClientHttp()
@@ -70,11 +89,16 @@ public abstract class AbstractEntrance extends AbstractVkCredentials {
         );
         this.actor = new StickyScalar<>(
             () -> new UserActor(
-                userId(),
-                token()
+                Integer.parseInt(
+                    System.getProperty(
+                        VkCredentials.USER_PROPS_KEY
+                    )
+                ),
+                System.getProperty(
+                    VkCredentials.TOKEN_PROPS_KEY
+                )
             )
         );
-        this.delay = 1;
     }
 
     /**
@@ -82,7 +106,7 @@ public abstract class AbstractEntrance extends AbstractVkCredentials {
      * @return The {@link UserActor}.
      * @throws Exception If {@link UserActor} cannot be created.
      */
-    protected final UserActor actor() throws Exception {
+    public UserActor actor() throws Exception {
         return this.actor.value();
     }
 
@@ -91,19 +115,16 @@ public abstract class AbstractEntrance extends AbstractVkCredentials {
      * @return The {@link VkApiClient}.
      * @throws Exception If {@link UserActor} cannot be created.
      */
-    protected final VkApiClient client() throws Exception {
+    public VkApiClient client() throws Exception {
         return this.client.value();
     }
 
     /**
-     * Delay before next IT.
-     * @throws InterruptedException If thread sleep fails.
-     * @checkstyle MagicNumberCheck (5 lines)
+     * VK group ID.
+     * @return VK group ID.
      */
-    protected final void exit() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(
-            this.delay
-        );
+    public int group() {
+        return this.group;
     }
 
 }

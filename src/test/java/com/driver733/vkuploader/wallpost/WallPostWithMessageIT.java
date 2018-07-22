@@ -23,13 +23,16 @@
  */
 package com.driver733.vkuploader.wallpost;
 
-import com.driver733.vkuploader.wallpost.support.AbstractEntrance;
+import com.driver733.vkuploader.wallpost.support.VkCredentials;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.objects.wall.WallpostFull;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import net.jcip.annotations.NotThreadSafe;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.After;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -43,31 +46,43 @@ import org.junit.Test;
  */
 @Immutable
 @NotThreadSafe
-public final class WallPostWithMessageIT extends AbstractEntrance {
+public final class WallPostWithMessageIT {
 
     /**
      * Test message.
      */
     private static final String MESSAGE = "Test message.";
 
+    /**
+     * VK user, group and auth token.
+     */
+    @Rule
+    private final VkCredentials credentials =
+        new VkCredentials();
+
+    @After
+    public void delay() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(1);
+    }
+
     @Test
     public void test() throws Exception {
         final int post = new WallPostWithOwnerId(
             new WallPostWithMessage(
                 new WallPostBase(
-                    client(),
-                    actor()
+                    this.credentials.client(),
+                    this.credentials.actor()
                 ),
                 WallPostWithMessageIT.MESSAGE
             ),
-            -groupId()
+            -this.credentials.group()
         ).construct()
             .execute()
             .getPostId();
-        final List<WallpostFull> result = client()
+        final List<WallpostFull> result = this.credentials.client()
             .wall().getById(
-                actor(),
-                String.format("%d_%d", -groupId(), post)
+                this.credentials.actor(),
+                String.format("%d_%d", -this.credentials.group(), post)
         ).execute();
         MatcherAssert.assertThat(
             result.get(0).getText(),
@@ -75,16 +90,15 @@ public final class WallPostWithMessageIT extends AbstractEntrance {
                 WallPostWithMessageIT.MESSAGE
             )
         );
-        client().wall()
+        this.credentials.client().wall()
             .delete(
-                actor()
+                this.credentials.actor()
             )
             .ownerId(
-                -groupId()
+                -this.credentials.group()
             )
             .postId(post)
             .execute();
-        exit();
     }
 
 }

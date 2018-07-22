@@ -131,7 +131,10 @@ public final class VkCredentials implements TestRule {
     }
 
     @Override
-    public Statement apply(final Statement base, final Description description) {
+    public Statement apply(
+        final Statement base,
+        final Description description
+    ) {
         throw new UnsupportedOperationException("#apply()");
     }
 }

@@ -36,7 +36,7 @@ import com.vk.api.sdk.queries.audio.AudioAddQuery;
 import com.vk.api.sdk.queries.upload.UploadAudioQuery;
 import java.util.ArrayList;
 import java.util.List;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 
 /**
  * Upload the audios and returns
@@ -88,7 +88,9 @@ public final class AttachmentAudio implements Attachment {
         this.client = client;
         this.actor = actor;
         this.group = group;
-        this.audios = new ListOf<>(audios);
+        this.audios = new StickyList<>(
+            audios
+        );
     }
 
     @Override
@@ -126,7 +128,7 @@ public final class AttachmentAudio implements Attachment {
                 response.getAudio(),
                 response.getHash()
             ).execute();
-        return new ListOf<>(
+        return new StickyList<>(
             new AudioAddQuery(
                 this.client,
                 this.actor,

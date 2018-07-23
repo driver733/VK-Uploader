@@ -27,7 +27,7 @@ import com.jcabi.aspects.Immutable;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 
 /**
  * Verifies that the {@link List}
@@ -55,7 +55,7 @@ public final class MediaVerified implements Media {
 
     @Override
     public List<Path> files() throws IOException {
-        final List<Path> audios = new ListOf<>(
+        final List<Path> audios = new StickyList<>(
             this.origin.files()
         );
         if (audios.isEmpty()) {

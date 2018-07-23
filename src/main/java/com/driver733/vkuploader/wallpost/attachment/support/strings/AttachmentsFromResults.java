@@ -30,7 +30,7 @@ import com.jcabi.aspects.Immutable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 
 /**
  * Maps queries queriesResults to Attachment attachmentStrings.
@@ -78,7 +78,9 @@ public final class AttachmentsFromResults implements AttachmentStrings {
                     .attachmentStrings()
             );
         }
-        return new ListOf<>(list);
+        return new StickyList<>(
+            list
+        );
     }
 
 }

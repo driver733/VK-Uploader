@@ -27,7 +27,7 @@ import com.driver733.vkuploader.wallpost.WallPost;
 import com.jcabi.aspects.Immutable;
 import java.util.List;
 import org.cactoos.Scalar;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 
 /**
  * Constructs a {@link WallPost}
@@ -50,7 +50,9 @@ public final class MessageBasic implements Scalar<String> {
      * @param parts Parts of the message.
      */
     public MessageBasic(final String... parts) {
-        this.parts = new ListOf<>(parts);
+        this.parts = new StickyList<>(
+            parts
+        );
     }
 
     @Override

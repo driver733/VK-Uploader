@@ -25,13 +25,14 @@ package com.driver733.vkuploader.wallpost.attachment.support;
 
 import com.driver733.vkuploader.wallpost.attachment.AttachmentAddAudio;
 import com.jcabi.aspects.Immutable;
+import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -41,8 +42,10 @@ import org.junit.Test;
  *
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle AnonInnerLengthCheck (500 lines)
  */
 @Immutable
+@SuppressWarnings("PMD.NonStaticInitializer")
 public final class IdsMapTest {
 
     /**
@@ -67,34 +70,40 @@ public final class IdsMapTest {
 
     public IdsMapTest() {
         this.queries = new IdsMap(
-            new ListOf<>(
-                new AttachmentAddAudio(
-                    new VkApiClient(
-                        new TransportClientHttp()
-                    ),
-                    new UserActor(
+            new ArrayList<AbstractQueryBuilder>(2) {
+                {
+                    addAll(
+                        new AttachmentAddAudio(
+                        new VkApiClient(
+                            new TransportClientHttp()
+                        ),
+                        new UserActor(
+                            0,
+                            IdsMapTest.TOKEN1
+                        ),
                         0,
-                        IdsMapTest.TOKEN1
-                    ),
-                    0,
-                    1,
-                    1
-                ),
-                new AttachmentAddAudio(
-                    new VkApiClient(
-                        new TransportClientCached(
-                            IdsMapTest.CACHE
-                        )
-                    ),
-                    new UserActor(
-                        0,
-                        IdsMapTest.TOKEN2
-                    ),
-                    0,
-                    2,
-                    1
-                )
-            )
+                        1,
+                        1
+                        ).upload()
+                    );
+                    addAll(
+                        new AttachmentAddAudio(
+                            new VkApiClient(
+                            new TransportClientCached(
+                                IdsMapTest.CACHE
+                            )
+                            ),
+                            new UserActor(
+                                0,
+                                IdsMapTest.TOKEN2
+                            ),
+                            0,
+                            2,
+                            1
+                        ).upload()
+                    );
+                }
+            }
         );
     }
 

@@ -33,7 +33,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.cactoos.scalar.StickyScalar;
 import org.cactoos.scalar.UncheckedScalar;
 
 /**
@@ -62,40 +61,36 @@ public final class ImmutableProps implements Props {
         final File file
     ) {
         this.origin = new UncheckedScalar<>(
-            new StickyScalar<>(
-                () -> {
-                    final Properties props = new Properties();
-                    if (file.exists()) {
-                        try (
-                            FileInputStream fis = new FileInputStream(
-                                file
-                            )
-                        ) {
-                            props.load(
-                                fis
-                            );
-                        }
-                    } else {
-                        try (
-                            FileOutputStream fos = new FileOutputStream(
-                                file
-                            )
-                        ) {
-                            props.store(
-                                fos,
-                                ""
-                            );
-                        }
+            () -> {
+                final Properties props = new Properties();
+                if (file.exists()) {
+                    try (
+                        FileInputStream fis = new FileInputStream(
+                            file
+                        )
+                    ) {
+                        props.load(
+                            fis
+                        );
                     }
-                    return props;
+                } else {
+                    try (
+                        FileOutputStream fos = new FileOutputStream(
+                            file
+                        )
+                    ) {
+                        props.store(
+                            fos,
+                            null
+                        );
+                    }
                 }
-            )
+                return props;
+            }
         );
         this.output = new UncheckedScalar<>(
-            new StickyScalar<>(
-                () -> new FileOutputStream(
-                    file
-                )
+            () -> new FileOutputStream(
+                file
             )
         );
     }
@@ -114,7 +109,9 @@ public final class ImmutableProps implements Props {
 
     @Override
     public boolean containsKey(final String key) {
-        return this.origin.value().containsKey(key);
+        return this.origin
+            .value()
+            .containsKey(key);
     }
 
     @Override
@@ -153,7 +150,7 @@ public final class ImmutableProps implements Props {
         );
         props.store(
             this.output.value(),
-            ""
+            null
         );
         return this;
     }

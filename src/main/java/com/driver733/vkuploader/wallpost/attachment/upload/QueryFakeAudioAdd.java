@@ -27,7 +27,7 @@ import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import java.util.Collection;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 
 /**
  * A fake {@link com.vk.api.sdk.queries.audio.AudioAddQuery}.
@@ -56,7 +56,7 @@ public final class QueryFakeAudioAdd
 
     @Override
     protected Collection<String> essentialKeys() {
-        return new ListOf<>();
+        return new StickyList<>();
     }
 
 }

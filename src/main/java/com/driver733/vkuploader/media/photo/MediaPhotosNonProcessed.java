@@ -33,7 +33,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 
 /**
  * Returns a {@link List} of files
@@ -77,7 +77,7 @@ public final class MediaPhotosNonProcessed implements Media {
 
     @Override
     public List<Path> files() throws IOException {
-        final List<Path> photos = new ListOf<>(
+        final List<Path> photos = new StickyList<>(
             this.origin.files()
         );
         final List<Path> result = new ArrayList<>(

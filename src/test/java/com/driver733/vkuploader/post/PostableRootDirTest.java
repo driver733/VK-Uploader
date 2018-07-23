@@ -73,7 +73,6 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
             .toFile()
             .deleteOnExit();
         new PostableRootDir(
-            root,
             new WallPostsPhotoAlbum(
                 new VkApiClient(
                     new TransportClientFake(
@@ -266,7 +265,6 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
             .toFile()
             .deleteOnExit();
         new PostableRootDir(
-            root,
             new WallPostsMusicAlbum(
                 new VkApiClient(
                     new TransportClientFake(
@@ -461,7 +459,6 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
             .toFile()
             .deleteOnExit();
         new PostableRootDir(
-            root,
             new WallPostsRandom(
                 new VkApiClient(
                     new TransportClientFake(
@@ -609,7 +606,6 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
             .toFile()
             .deleteOnExit();
         new PostableRootDir(
-            root,
             new WallPostsRandom(
                 new VkApiClient(
                     new TransportClientFake(
@@ -700,7 +696,6 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 new ImmutableProps(
                     root.resolve("musicAlbum")
                         .resolve("vkmu.properties")
-                        .toFile()
                 ),
                 root.resolve("musicAlbum"),
                 AbstractVkUnitTest.GROUP_ID
@@ -739,7 +734,6 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
             .toFile()
             .deleteOnExit();
         new PostableRootDir(
-            root,
             new WallPostsRandom(
                 new VkApiClient(
                     new TransportClientFake(

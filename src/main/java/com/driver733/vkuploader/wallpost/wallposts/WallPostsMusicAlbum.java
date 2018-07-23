@@ -44,7 +44,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 
 /**
  * Creates {@link WallPost}s
@@ -279,7 +279,7 @@ public final class WallPostsMusicAlbum implements WallPosts {
                 query = new WallPostMusicAlbum(
                     this.client,
                     this.actor,
-                    new ListOf<>(
+                    new StickyList<>(
                         audios.subList(
                             from,
                             to

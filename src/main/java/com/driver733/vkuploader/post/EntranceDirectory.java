@@ -42,7 +42,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 
 /**
  * Tracks the specified folder for changes
@@ -86,7 +86,7 @@ public final class EntranceDirectory implements Entrance {
         final Path... dirs
     ) throws IOException {
         this.posts = posts;
-        this.dirs = new ListOf<>(
+        this.dirs = new StickyList<>(
             dirs
         );
         this.keys = new HashMap<>();

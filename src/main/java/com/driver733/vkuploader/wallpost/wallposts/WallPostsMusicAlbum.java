@@ -27,7 +27,7 @@ import com.driver733.vkuploader.media.AudiosNonProcessed;
 import com.driver733.vkuploader.media.MediaAudiosBasic;
 import com.driver733.vkuploader.post.SuppressFBWarnings;
 import com.driver733.vkuploader.post.UploadServers;
-import com.driver733.vkuploader.wallpost.ImmutableProperties;
+import com.driver733.vkuploader.wallpost.ImmutableProps;
 import com.driver733.vkuploader.wallpost.WallPost;
 import com.driver733.vkuploader.wallpost.WallPostMusicAlbum;
 import com.driver733.vkuploader.wallpost.attachment.support.AudioStatus;
@@ -130,7 +130,7 @@ public final class WallPostsMusicAlbum implements WallPosts {
     /**
      * Properties that contain the {@link AudioStatus}es of audios files.
      */
-    private final ImmutableProperties properties;
+    private final ImmutableProps properties;
 
     /**
      * Ctor.
@@ -149,7 +149,7 @@ public final class WallPostsMusicAlbum implements WallPosts {
         final UserActor actor,
         final Path dir,
         final UploadServers servers,
-        final ImmutableProperties properties,
+        final ImmutableProps properties,
         final int group
     ) {
         this.client = client;
@@ -210,10 +210,10 @@ public final class WallPostsMusicAlbum implements WallPosts {
     public void updateProperties() throws IOException {
         final List<Path> audios = this.audios();
         for (final Path audio : audios) {
-            this.properties.setPropertyAndStore(
+            this.properties.with(
                 audio.getFileName().toString(),
                 new StringBuilder(
-                    this.properties.getProperty(
+                    this.properties.property(
                         audio
                             .getFileName().toString()
                     )

@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.wallpost.attachment.support;
 
-import com.driver733.vkuploader.wallpost.ImmutableProperties;
+import com.driver733.vkuploader.wallpost.ImmutableProps;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.jcabi.aspects.Immutable;
@@ -47,7 +47,7 @@ public final class PropertiesUpdate {
     /**
      * Properties that contain the {@link AudioStatus} of audios files.
      */
-    private final ImmutableProperties properties;
+    private final ImmutableProps properties;
 
     /**
      * A map of with index-audio_id pairs from the audios queries.
@@ -71,7 +71,7 @@ public final class PropertiesUpdate {
     *  of the queries.
     */
     public PropertiesUpdate(
-        final ImmutableProperties properties,
+        final ImmutableProps properties,
         final Map<Integer, String> ids,
         final JsonArray root
     ) {
@@ -87,7 +87,7 @@ public final class PropertiesUpdate {
     public void save() throws IOException {
         final Map<Integer, String> results = this.resStrings();
         for (final int index : this.ids.keySet()) {
-            this.properties.setPropertyAndStore(
+            this.properties.with(
                 this.key(index).toString(),
                 String.format(
                     "%s_%s",
@@ -106,9 +106,9 @@ public final class PropertiesUpdate {
      * @checkstyle StringLiteralsConcatenationCheck (50 lines)
      */
     private Object key(final int index) throws IOException {
-        for (final Map.Entry<Object, Object> entry
+        for (final Map.Entry<String, String> entry
             : this.properties.entrySet()) {
-            final String value = entry.getValue().toString();
+            final String value = entry.getValue();
             if (
                 Objects.equals(
                     this.ids.get(index),

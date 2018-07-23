@@ -30,7 +30,7 @@ import com.driver733.vkuploader.media.MediaRandom;
 import com.driver733.vkuploader.media.photo.MediaPhotosBasic;
 import com.driver733.vkuploader.post.SuppressFBWarnings;
 import com.driver733.vkuploader.post.UploadServers;
-import com.driver733.vkuploader.wallpost.ImmutableProperties;
+import com.driver733.vkuploader.wallpost.ImmutableProps;
 import com.driver733.vkuploader.wallpost.WallPost;
 import com.driver733.vkuploader.wallpost.WallPostRandom;
 import com.driver733.vkuploader.wallpost.attachment.support.AudioStatus;
@@ -109,7 +109,7 @@ public final class WallPostsRandom implements WallPosts {
     /**
      * Properties for caching results.
      */
-    private final ImmutableProperties properties;
+    private final ImmutableProps properties;
 
     /**
      * Ctor.
@@ -125,7 +125,7 @@ public final class WallPostsRandom implements WallPosts {
         final VkApiClient client,
         final UserActor actor,
         final UploadServers servers,
-        final ImmutableProperties properties,
+        final ImmutableProps properties,
         final int group,
         final Path photos
     ) {
@@ -157,7 +157,7 @@ public final class WallPostsRandom implements WallPosts {
         final VkApiClient client,
         final UserActor actor,
         final UploadServers servers,
-        final ImmutableProperties properties,
+        final ImmutableProps properties,
         final Path audios,
         final int group
     ) {
@@ -190,7 +190,7 @@ public final class WallPostsRandom implements WallPosts {
         final VkApiClient client,
         final UserActor actor,
         final UploadServers servers,
-        final ImmutableProperties properties,
+        final ImmutableProps properties,
         final int group,
         final Path photos,
         final Path audios
@@ -311,7 +311,7 @@ public final class WallPostsRandom implements WallPosts {
             images.size()
         );
         for (int iter = 0; iter < nphotos; iter += 1) {
-            this.properties.setPropertyAndStore(
+            this.properties.with(
                 images.get(iter).getFileName().toString(),
                 WallPhotoStatus.POSTED.toString()
             );
@@ -323,10 +323,10 @@ public final class WallPostsRandom implements WallPosts {
         );
         for (int iter = 0; iter < naudios; iter += 1) {
             final Path audio = audioss.get(iter);
-            this.properties.setPropertyAndStore(
+            this.properties.with(
                 audio.getFileName().toString(),
                 new StringBuilder(
-                    this.properties.getProperty(
+                    this.properties.property(
                         audio.getFileName()
                             .toString()
                     )

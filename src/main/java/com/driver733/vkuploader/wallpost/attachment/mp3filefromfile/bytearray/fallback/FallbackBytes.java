@@ -27,7 +27,7 @@ import com.jcabi.aspects.Immutable;
 import com.jcabi.log.Logger;
 import java.util.List;
 import org.cactoos.Bytes;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 
 /**
  * Finds the first valid byte array.
@@ -51,7 +51,7 @@ public final class FallbackBytes implements Bytes {
      * @param arrays Byte array providers.
      */
     public FallbackBytes(final Bytes... arrays) {
-        this.arrays = new ListOf<>(arrays);
+        this.arrays = new StickyList<>(arrays);
     }
 
     @Override

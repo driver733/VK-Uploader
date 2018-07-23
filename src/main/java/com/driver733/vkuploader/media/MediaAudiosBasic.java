@@ -29,7 +29,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 
 /**
  * Constructs a list of audios files
@@ -58,7 +58,7 @@ public final class MediaAudiosBasic implements Media {
     // @checkstyle ParameterNameCheck (10 lines)
     @Override
     public List<Path> files() throws IOException {
-        return new ListOf<>(
+        return new StickyList<>(
             Files.list(
                 this.dir
             ).filter(

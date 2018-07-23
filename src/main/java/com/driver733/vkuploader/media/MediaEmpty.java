@@ -25,7 +25,7 @@ package com.driver733.vkuploader.media;
 
 import java.nio.file.Path;
 import java.util.List;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 
 /**
  * Media Empty.
@@ -38,7 +38,7 @@ public final class MediaEmpty implements Media {
 
     @Override
     public List<Path> files() {
-        return new ListOf<>();
+        return new StickyList<>();
     }
 
 }

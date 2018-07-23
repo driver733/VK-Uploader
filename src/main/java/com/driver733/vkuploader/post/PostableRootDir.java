@@ -25,14 +25,8 @@
 package com.driver733.vkuploader.post;
 
 import com.driver733.vkuploader.post.execution.UploadExecVerification;
-import com.driver733.vkuploader.wallpost.ImmutableProps;
 import com.driver733.vkuploader.wallpost.wallposts.WallPosts;
 import com.jcabi.aspects.Immutable;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.stream.Stream;
 
 /**
  * Constructs {@link com.driver733.vkuploader.post.posts.Posts}
@@ -45,60 +39,23 @@ import java.util.stream.Stream;
 public final class PostableRootDir implements Postable {
 
     /**
-     * Root directory that contains directories with albums.
-     */
-    private final Path directory;
-
-    /**
      * WallPosts.
      */
     private final WallPosts wallposts;
 
     /**
      * Ctor.
-     * @param dir Root directory that contains directories with albums.
      * @param wallposts WallPosts.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
     public PostableRootDir(
-        final Path dir,
         final WallPosts wallposts
     ) {
-        this.directory = dir;
         this.wallposts = wallposts;
     }
 
     @Override
-    // @checkstyle RequireThisCheck (50 lines)
-    @SuppressWarnings({"PMD.AvoidInstantiatingObjectsInLoops",
-        "PMD.ExceptionAsFlowControl",
-        "PMD.PreserveStackTrace"})
     public void post() throws Exception {
-        Stream.concat(
-            Files.list(
-                this.directory
-            ),
-            new ArrayList<Path>(1) {
-                {
-                    add(directory);
-                }
-            }.stream()
-        ).filter(
-            file -> Files.isDirectory(file)
-        ).forEach(
-            path -> {
-                final File file = new File(
-                    String.format(
-                        "%s/vkmu.properties",
-                        path.toAbsolutePath()
-                    )
-                );
-                final ImmutableProps props = new ImmutableProps(
-                    file
-                );
-                props.containsKey("");
-            }
-            );
         new UploadExecVerification(
             this.wallposts
         ).execute();

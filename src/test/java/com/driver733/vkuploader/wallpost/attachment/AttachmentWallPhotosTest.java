@@ -39,7 +39,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -66,7 +66,7 @@ public final class AttachmentWallPhotosTest extends AbstractVkUnitTest {
             "src/test/resources/photos/testPhotoAlbum/vkmu.properties"
         ).deleteOnExit();
         final String dir = "src/test/resources/photos/testPhotoAlbum";
-        final List<Path> photos = new ListOf<>(
+        final List<Path> photos = new StickyList<>(
             Paths.get(String.format("%s/1.jpg", dir)),
             Paths.get(String.format("%s/2.jpg", dir)),
             Paths.get(String.format("%s/3.jpg", dir)),

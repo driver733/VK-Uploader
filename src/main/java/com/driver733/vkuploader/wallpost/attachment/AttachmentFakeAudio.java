@@ -30,7 +30,7 @@ import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.util.ArrayList;
 import java.util.List;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 
 /**
  * An {@link Attachment} with a fake audios query.
@@ -52,7 +52,9 @@ public final class AttachmentFakeAudio implements Attachment {
      * @param results Query results (audios IDs).
      */
     public AttachmentFakeAudio(final Integer... results) {
-        this.results = new ListOf<>(results);
+        this.results = new StickyList<>(
+            results
+        );
     }
 
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
@@ -77,7 +79,9 @@ public final class AttachmentFakeAudio implements Attachment {
                 )
             );
         }
-        return new ListOf<>(out);
+        return new StickyList<>(
+            out
+        );
     }
 
 }

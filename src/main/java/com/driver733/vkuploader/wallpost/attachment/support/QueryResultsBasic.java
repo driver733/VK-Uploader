@@ -35,7 +35,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 
 /**
  * Combines the responses of cached
@@ -84,7 +84,9 @@ public final class QueryResultsBasic implements QueryResults {
                 );
             }
         }
-        return new ListOf<>(results);
+        return new StickyList<>(
+            results
+        );
     }
 
     @Override

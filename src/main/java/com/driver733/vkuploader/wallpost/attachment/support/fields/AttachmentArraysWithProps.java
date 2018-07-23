@@ -41,7 +41,7 @@ import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientExecuteBatchCached;
 import java.io.IOException;
 import java.util.List;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 
 /**
  * Returns attachment strings from
@@ -96,7 +96,7 @@ public final class AttachmentArraysWithProps implements AttachmentsFields {
         this.actor = actor;
         this.properties = properties;
         this.group = group;
-        this.attachments = new ListOf<>(
+        this.attachments = new StickyList<>(
             attachments
         );
     }
@@ -109,7 +109,7 @@ public final class AttachmentArraysWithProps implements AttachmentsFields {
         ).queries();
         final IdsMap ids =
             new IdsMap(
-                this.attachments
+                queries
             );
         final JsonElement root =
             new VkApiClient(

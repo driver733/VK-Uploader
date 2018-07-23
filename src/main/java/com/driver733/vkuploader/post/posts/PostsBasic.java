@@ -59,7 +59,6 @@ public final class PostsBasic implements Posts {
     @Override
     public Postable postFromDir(final Path dir) {
         return new PostableRootDir(
-            dir,
             this.wallposts
         );
     }

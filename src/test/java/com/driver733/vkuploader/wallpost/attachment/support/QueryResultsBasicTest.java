@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.Collection;
 import java.util.Collections;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -56,7 +56,7 @@ public final class QueryResultsBasicTest {
         MatcherAssert.assertThat(
             new QueryResultsBasic(
                 new QueriesSafeCached(
-                    new ListOf<>(
+                    new StickyList<>(
                         new AbstractQueryBuilder(
                             new VkApiClient(
                                 new TransportClientCached(

@@ -24,14 +24,11 @@
 package com.driver733.vkuploader.wallpost.attachment.support;
 
 import com.driver733.vkuploader.wallpost.attachment.Attachment;
-import com.driver733.vkuploader.wallpost.attachment.support.queries.QueriesFromAttachments;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.cactoos.list.ListOf;
 
 /**
  * Forms a map of with  index (queries) - audio_id pairs
@@ -48,14 +45,14 @@ public final class IdsMap {
      * {@link Attachment} array.
      */
     @Immutable.Array
-    private final List<Attachment> attachments;
+    private final List<AbstractQueryBuilder> attachments;
 
     /**
      * Ctor.
      * @param attachments An {@link Attachment} array.
      */
-    public IdsMap(final List<Attachment> attachments) {
-        this.attachments = new ListOf<>(attachments);
+    public IdsMap(final List<AbstractQueryBuilder> attachments) {
+        this.attachments = attachments;
     }
 
     /**
@@ -64,22 +61,16 @@ public final class IdsMap {
      * @throws Exception If queries` results cannot to be obtained.
      */
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-    public Map<Integer, String> idsMap() throws Exception {
-        final List<AbstractQueryBuilder> queries;
-        try {
-            queries = new QueriesFromAttachments(
-                this.attachments
-            ).queries();
-        } catch (final IOException ex) {
-            throw new IOException("Failed to obtain queries` results", ex);
-        }
+    public Map<Integer, String> idsMap() {
         int index = 0;
         final Map<Integer, String> ids = new HashMap<>();
-        for (final AbstractQueryBuilder query : queries) {
+        for (final AbstractQueryBuilder query : this.attachments) {
             if (query.getMethod().contains("audio.add")) {
                 ids.put(
                     index,
-                    query.build().get("audio_id").toString()
+                    query.build()
+                        .get("audio_id")
+                        .toString()
                 );
             }
             index += 1;

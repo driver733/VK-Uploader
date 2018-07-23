@@ -34,7 +34,7 @@ import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.queries.execute.ExecuteBatchQuery;
 import java.io.IOException;
 import java.util.List;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 import org.junit.Test;
 
 /**
@@ -164,7 +164,7 @@ public final class UploadExecTest {
 
         @Override
         public List<ExecuteBatchQuery> postsQueries() {
-            return new ListOf<>(
+            return new StickyList<>(
                 new ExecuteBatchQueryFakeApiEx()
             );
         }
@@ -181,7 +181,7 @@ public final class UploadExecTest {
 
         @Override
         public List<ExecuteBatchQuery> postsQueries() {
-            return new ListOf<>(
+            return new StickyList<>(
                 new ExecuteBatchQueryFakeClientEx()
             );
         }
@@ -198,7 +198,7 @@ public final class UploadExecTest {
 
         @Override
         public List<ExecuteBatchQuery> postsQueries() {
-            return new ListOf<>(
+            return new StickyList<>(
                 new ExecuteBatchQueryFake()
             );
         }
@@ -214,7 +214,7 @@ public final class UploadExecTest {
 
         @Override
         public List<ExecuteBatchQuery> postsQueries() {
-            return new ListOf<>(
+            return new StickyList<>(
                 new ExecuteBatchQueryFake()
             );
         }

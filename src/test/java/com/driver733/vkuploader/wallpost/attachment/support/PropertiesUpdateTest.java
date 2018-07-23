@@ -28,12 +28,13 @@ import com.driver733.vkuploader.wallpost.attachment.AttachmentAddAudio;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.jcabi.aspects.Immutable;
+import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.io.File;
 import java.io.StringReader;
-import org.cactoos.list.ListOf;
+import java.util.ArrayList;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -49,6 +50,7 @@ import org.junit.Test;
  * @checkstyle LocalFinalVariableNameCheck (200 lines)
  */
 @Immutable
+@SuppressWarnings("PMD.NonStaticInitializer")
 public final class PropertiesUpdateTest {
 
     /**
@@ -76,17 +78,21 @@ public final class PropertiesUpdateTest {
         new PropertiesUpdate(
             props,
             new IdsMap(
-                new ListOf<>(
-                    new AttachmentAddAudio(
-                        new VkApiClient(
-                            new TransportClientCached("")
-                        ),
-                        new UserActor(0, ""),
-                        ownerId,
-                        uploadedMediaId,
-                        1
-                    )
-                )
+                new ArrayList<AbstractQueryBuilder>(1) {
+                    {
+                        addAll(
+                            new AttachmentAddAudio(
+                                new VkApiClient(
+                                    new TransportClientCached("")
+                                ),
+                                new UserActor(0, ""),
+                                ownerId,
+                                uploadedMediaId,
+                                1
+                            ).upload()
+                        );
+                    }
+                }
             ).idsMap(),
             new JsonParser().parse(
                 new JsonReader(

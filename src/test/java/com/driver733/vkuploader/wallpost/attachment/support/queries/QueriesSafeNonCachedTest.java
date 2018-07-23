@@ -30,7 +30,7 @@ import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -65,7 +65,7 @@ public final class QueriesSafeNonCachedTest {
         MatcherAssert.assertThat(
             new QueriesSafeNonCached(
                 new QueriesFromAttachments(
-                    new ListOf<>(
+                    new StickyList<>(
                         new AttachmentAddAudio(
                             new VkApiClient(
                                 new TransportClientHttp()

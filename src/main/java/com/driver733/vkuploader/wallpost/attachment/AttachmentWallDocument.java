@@ -32,7 +32,7 @@ import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.objects.docs.responses.DocUploadResponse;
 import com.vk.api.sdk.queries.upload.UploadDocQuery;
 import java.util.List;
-import org.cactoos.list.ListOf;
+import org.cactoos.list.StickyList;
 
 /**
  * Attachment of a document that had been uploaded
@@ -82,9 +82,10 @@ public final class AttachmentWallDocument implements Attachment {
         final DocUploadResponse response =
             this.doc.query()
                 .execute();
-        return new ListOf<>(
-            this.client.docs().save(
-                this.actor,
+        return new StickyList<>(
+            this.client.docs()
+                .save(
+                    this.actor,
                 response.getFile()
             )
         );

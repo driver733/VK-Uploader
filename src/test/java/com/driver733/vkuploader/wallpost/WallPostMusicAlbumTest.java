@@ -229,12 +229,13 @@ public final class WallPostMusicAlbumTest extends AbstractVkUnitTest {
                         )
                     ),
                     new UserActor(
-                        1, "1"
+                        1,
+                        "1"
                     ),
                     GROUP_ID
                 ),
-                new ImmutableProperties(
-                    this.properties.toFile()
+                new ImmutableProps(
+                    this.properties
                 ),
                 GROUP_ID
             ).construct()

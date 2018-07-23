@@ -69,7 +69,7 @@ public final class WallPostRandom implements WallPost {
         final UserActor actor,
         final UploadServers servers,
         final Path photo,
-        final ImmutableProperties properties,
+        final ImmutableProps properties,
         final int group
     ) {
         this.query =
@@ -118,7 +118,7 @@ public final class WallPostRandom implements WallPost {
         final UserActor actor,
         final UploadServers servers,
         final int group,
-        final ImmutableProperties properties,
+        final ImmutableProps properties,
         final Path audio
     ) {
         this.query =
@@ -169,7 +169,7 @@ public final class WallPostRandom implements WallPost {
         final UserActor actor,
         final UploadServers servers,
         final int group,
-        final ImmutableProperties properties,
+        final ImmutableProps properties,
         final Path photo,
         final Path audio
     ) {

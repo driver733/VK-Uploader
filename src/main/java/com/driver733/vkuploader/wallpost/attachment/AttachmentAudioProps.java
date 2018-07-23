@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.wallpost.attachment;
 
-import com.driver733.vkuploader.wallpost.ImmutableProperties;
+import com.driver733.vkuploader.wallpost.ImmutableProps;
 import com.driver733.vkuploader.wallpost.attachment.support.AudioStatus;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.objects.audio.Audio;
@@ -44,7 +44,7 @@ public final class AttachmentAudioProps {
     /**
      * Properties that contain the {@link AudioStatus} of audios files.
      */
-    private final ImmutableProperties properties;
+    private final ImmutableProps properties;
 
     /**
      * The name of the file.
@@ -67,7 +67,7 @@ public final class AttachmentAudioProps {
     public AttachmentAudioProps(
         final Audio audio,
         final String fileName,
-        final ImmutableProperties properties
+        final ImmutableProps properties
     ) {
         this.properties = properties;
         this.audio = audio;
@@ -81,7 +81,7 @@ public final class AttachmentAudioProps {
      */
     public void saveProps()
         throws IOException {
-        this.properties.setPropertyAndStore(
+        this.properties.with(
             this.fileName,
             String.format(
                 "%s_%d_%d",

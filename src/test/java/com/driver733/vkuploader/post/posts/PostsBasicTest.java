@@ -24,7 +24,7 @@
 package com.driver733.vkuploader.post.posts;
 
 import com.driver733.vkuploader.post.UploadServers;
-import com.driver733.vkuploader.wallpost.ImmutableProperties;
+import com.driver733.vkuploader.wallpost.ImmutableProps;
 import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
 import com.driver733.vkuploader.wallpost.wallposts.WallPostsMusicAlbum;
@@ -186,7 +186,7 @@ public final class PostsBasicTest extends AbstractVkUnitTest {
                     ),
                     AbstractVkUnitTest.GROUP_ID
                 ),
-                new ImmutableProperties(
+                new ImmutableProps(
                     root.resolve("testPhotoAlbum")
                         .resolve("vkmu.properties")
                         .toFile()
@@ -199,12 +199,11 @@ public final class PostsBasicTest extends AbstractVkUnitTest {
         TimeUnit.SECONDS.sleep(1);
         MatcherAssert.assertThat(
             "The properties files differ",
-            new ImmutableProperties(
+            new ImmutableProps(
                 root.resolve("testPhotoAlbum")
                     .resolve("vkmu.properties")
                     .toFile()
-            ).loaded()
-                .entrySet()
+            ).entrySet()
             .stream()
             .collect(
                 Collectors.toMap(
@@ -417,7 +416,7 @@ public final class PostsBasicTest extends AbstractVkUnitTest {
                     ),
                     AbstractVkUnitTest.GROUP_ID
                 ),
-                new ImmutableProperties(
+                new ImmutableProps(
                     root.resolve("album")
                         .resolve("vkmu.properties")
                         .toFile()
@@ -430,12 +429,11 @@ public final class PostsBasicTest extends AbstractVkUnitTest {
         TimeUnit.SECONDS.sleep(1);
         MatcherAssert.assertThat(
             "The properties files differ",
-            new ImmutableProperties(
+            new ImmutableProps(
                 root.resolve("album")
                     .resolve("vkmu.properties")
                     .toFile()
-            ).loaded()
-                .entrySet()
+            ).entrySet()
                 .stream()
                 .collect(
                     Collectors.toMap(

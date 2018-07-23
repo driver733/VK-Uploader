@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.wallpost.attachment;
 
-import com.driver733.vkuploader.wallpost.ImmutableProperties;
+import com.driver733.vkuploader.wallpost.ImmutableProps;
 import com.driver733.vkuploader.wallpost.attachment.support.AudioStatus;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.objects.audio.Audio;
@@ -66,14 +66,13 @@ public final class AttachmentAudioPropsTest {
         new AttachmentAudioProps(
             test,
             fileName,
-            new ImmutableProperties(
+            new ImmutableProps(
                 file
             )
         ).saveProps();
-        final ImmutableProperties props = new ImmutableProperties(file);
-        props.load();
+        final ImmutableProps props = new ImmutableProps(file);
         MatcherAssert.assertThat(
-            props.getProperty(fileName),
+            props.property(fileName),
             Matchers.equalTo(
                 String.format(
                     "%s_%d_%d",

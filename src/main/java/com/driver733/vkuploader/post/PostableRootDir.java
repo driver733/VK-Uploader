@@ -25,11 +25,10 @@
 package com.driver733.vkuploader.post;
 
 import com.driver733.vkuploader.post.execution.UploadExecVerification;
-import com.driver733.vkuploader.wallpost.ImmutableProperties;
+import com.driver733.vkuploader.wallpost.ImmutableProps;
 import com.driver733.vkuploader.wallpost.wallposts.WallPosts;
 import com.jcabi.aspects.Immutable;
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -94,20 +93,10 @@ public final class PostableRootDir implements Postable {
                         path.toAbsolutePath()
                     )
                 );
-                final ImmutableProperties props = new ImmutableProperties(
+                final ImmutableProps props = new ImmutableProps(
                     file
                 );
-                try {
-                    if (file.exists()) {
-                        props.load();
-                    } else {
-                        props.store();
-                    }
-                } catch (final IOException ex) {
-                    throw new IllegalStateException(
-                        "Failed to init properties"
-                    );
-                }
+                props.containsKey("");
             }
             );
         new UploadExecVerification(

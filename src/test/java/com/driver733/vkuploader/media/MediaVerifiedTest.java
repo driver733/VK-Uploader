@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.media;
 
-import com.driver733.vkuploader.wallpost.ImmutableProperties;
+import com.driver733.vkuploader.wallpost.ImmutableProps;
 import com.jcabi.aspects.Immutable;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -58,9 +58,9 @@ public final class MediaVerifiedTest {
                     new MediaAudiosBasic(
                         Paths.get("src/test/resources/album")
                     ),
-                    new ImmutableProperties(
-                        MediaVerifiedTest.PROPS.toFile()
-                    ).loaded()
+                    new ImmutableProps(
+                        MediaVerifiedTest.PROPS
+                    )
                 )
             ).files(),
             Matchers.containsInAnyOrder(
@@ -78,8 +78,8 @@ public final class MediaVerifiedTest {
                     new MediaAudiosBasic(
                         Paths.get("src/test/")
                     ),
-                    new ImmutableProperties(
-                        MediaVerifiedTest.PROPS.toFile()
+                    new ImmutableProps(
+                        MediaVerifiedTest.PROPS
                     )
                 )
             ).files(),

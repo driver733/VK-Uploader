@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.post;
 
-import com.driver733.vkuploader.wallpost.ImmutableProperties;
+import com.driver733.vkuploader.wallpost.ImmutableProps;
 import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
 import com.driver733.vkuploader.wallpost.wallposts.WallPostsMusicAlbum;
@@ -189,7 +189,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                     ),
                     AbstractVkUnitTest.GROUP_ID
                 ),
-                new ImmutableProperties(
+                new ImmutableProps(
                     root.resolve("testPhotoAlbum")
                         .resolve("vkmu.properties")
                         .toFile()
@@ -200,12 +200,11 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         TimeUnit.SECONDS.sleep(1);
         MatcherAssert.assertThat(
             "The properties files differ",
-            new ImmutableProperties(
+            new ImmutableProps(
                 root.resolve("testPhotoAlbum")
                     .resolve("vkmu.properties")
                     .toFile()
-            ).loaded()
-                .entrySet()
+            ).entrySet()
                 .stream()
                 .collect(
                     Collectors.toMap(
@@ -418,7 +417,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                     ),
                     AbstractVkUnitTest.GROUP_ID
                 ),
-                new ImmutableProperties(
+                new ImmutableProps(
                     root.resolve("album")
                         .resolve("vkmu.properties")
                         .toFile()
@@ -429,12 +428,11 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         TimeUnit.SECONDS.sleep(1);
         MatcherAssert.assertThat(
             "The properties files differ",
-            new ImmutableProperties(
+            new ImmutableProps(
                 root.resolve("album")
                     .resolve("vkmu.properties")
                     .toFile()
-            ).loaded()
-                .entrySet()
+            ).entrySet()
                 .stream()
                 .collect(
                     Collectors.toMap(
@@ -565,7 +563,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                     ),
                     AbstractVkUnitTest.GROUP_ID
                 ),
-                new ImmutableProperties(
+                new ImmutableProps(
                     root.resolve("testPhotoAlbum")
                         .resolve("vkmu.properties")
                         .toFile()
@@ -576,27 +574,23 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         ).post();
         MatcherAssert.assertThat(
             "The properties files differ",
-            new ImmutableProperties(
+            new ImmutableProps(
                 root.resolve("testPhotoAlbum")
                     .resolve("vkmu.properties")
-                    .toFile()
-            ).loaded(),
-            Matchers.anyOf(
-                Matchers.hasEntry(
-                    "1.jpg", "1"
+            ).entrySet()
+                .stream()
+                .collect(
+                    Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue
+                    )
                 ),
-                Matchers.hasEntry(
-                    "2.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "3.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "4.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "5.jpg", "1"
-                )
+            Matchers.allOf(
+                Matchers.hasEntry("1.jpg", "1"),
+                Matchers.hasEntry("2.jpg", "1"),
+                Matchers.hasEntry("3.jpg", "1"),
+                Matchers.hasEntry("4.jpg", "1"),
+                Matchers.hasEntry("5.jpg", "1")
             )
         );
     }
@@ -703,7 +697,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                     ),
                     AbstractVkUnitTest.GROUP_ID
                 ),
-                new ImmutableProperties(
+                new ImmutableProps(
                     root.resolve("musicAlbum")
                         .resolve("vkmu.properties")
                         .toFile()
@@ -714,18 +708,20 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         ).post();
         MatcherAssert.assertThat(
             "The properties files differ",
-            new ImmutableProperties(
+            new ImmutableProps(
                 root.resolve("musicAlbum")
                     .resolve("vkmu.properties")
-                    .toFile()
-            ).loaded(),
-            Matchers.anyOf(
-                Matchers.hasEntry(
-                    "test.mp3", "2_123456789"
+            ).entrySet()
+                .stream()
+                .collect(
+                    Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue
+                    )
                 ),
-                Matchers.hasEntry(
-                    "testMissingTags.mp3", "2_123456789"
-                )
+            Matchers.allOf(
+                Matchers.hasEntry("test.mp3", "2_123456789"),
+                Matchers.hasEntry("testMissingTags.mp3", "2_123456789")
             )
         );
     }
@@ -895,7 +891,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                     ),
                     AbstractVkUnitTest.GROUP_ID
                 ),
-                new ImmutableProperties(
+                new ImmutableProps(
                     root.resolve("vkmu.properties")
                         .toFile()
                 ),
@@ -906,31 +902,27 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         ).post();
         MatcherAssert.assertThat(
             "The properties files differ",
-            new ImmutableProperties(
+            new ImmutableProps(
                 root.resolve("vkmu.properties")
-                    .toFile()
-            ).loaded(),
-            Matchers.anyOf(
-                Matchers.hasEntry(
-                    "1.jpg", "1"
+            ).entrySet()
+                .stream()
+                .collect(
+                Collectors.toMap(
+                    Map.Entry::getKey,
+                    Map.Entry::getValue
+                )
+            ),
+            Matchers.allOf(
+                Matchers.anyOf(
+                    Matchers.hasEntry("1.jpg", "1"),
+                    Matchers.hasEntry("2.jpg", "1"),
+                    Matchers.hasEntry("3.jpg", "1"),
+                    Matchers.hasEntry("4.jpg", "1"),
+                    Matchers.hasEntry("5.jpg", "1")
                 ),
-                Matchers.hasEntry(
-                    "2.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "3.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "4.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "5.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "test.mp3", "2_123456789"
-                ),
-                Matchers.hasEntry(
-                    "testMissingTags.mp3", "2_123456789"
+                Matchers.anyOf(
+                    Matchers.hasEntry("test.mp3", "2_123456789"),
+                    Matchers.hasEntry("testMissingTags.mp3", "2_123456789")
                 )
             )
         );

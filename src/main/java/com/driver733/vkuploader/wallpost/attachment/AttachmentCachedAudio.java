@@ -24,7 +24,7 @@
 package com.driver733.vkuploader.wallpost.attachment;
 
 import com.driver733.vkuploader.post.SuppressFBWarnings;
-import com.driver733.vkuploader.wallpost.ImmutableProperties;
+import com.driver733.vkuploader.wallpost.ImmutableProps;
 import com.driver733.vkuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkuploader.wallpost.attachment.upload.UploadAudio;
 import com.jcabi.aspects.Immutable;
@@ -86,7 +86,7 @@ public final class AttachmentCachedAudio implements Attachment {
     /**
      * Properties that contain the {@link AudioStatus} of audios files.
      */
-    private final ImmutableProperties properties;
+    private final ImmutableProps properties;
 
     /**
      * Ctor.
@@ -103,7 +103,7 @@ public final class AttachmentCachedAudio implements Attachment {
         final VkApiClient client,
         final UserActor actor,
         final String url,
-        final ImmutableProperties properties,
+        final ImmutableProps properties,
         final List<Path> audios,
         final int group
     ) {
@@ -145,7 +145,7 @@ public final class AttachmentCachedAudio implements Attachment {
         throws Exception {
         final List<AbstractQueryBuilder> result;
         if (
-            this.properties.getProperty(
+            this.properties.property(
             audio.getFileName().toString()
         ) == null
             ) {
@@ -161,7 +161,7 @@ public final class AttachmentCachedAudio implements Attachment {
                 )
                 ).upload();
         } else {
-            final String value = this.properties.getProperty(
+            final String value = this.properties.property(
                 audio.getFileName().toString()
             );
             final int status = Integer.parseInt(

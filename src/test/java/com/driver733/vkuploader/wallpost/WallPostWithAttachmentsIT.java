@@ -27,15 +27,18 @@ import com.driver733.vkuploader.post.UploadServers;
 import com.driver733.vkuploader.wallpost.attachment.AttachmentWallDocument;
 import com.driver733.vkuploader.wallpost.attachment.support.fields.AttachmentArraysWithProps;
 import com.driver733.vkuploader.wallpost.attachment.upload.UploadWallDocument;
-import com.driver733.vkuploader.wallpost.support.AbstractEntrance;
+import com.driver733.vkuploader.wallpost.support.VkCredentials;
 import com.vk.api.sdk.objects.wall.WallpostFull;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 import net.jcip.annotations.NotThreadSafe;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.After;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -48,7 +51,19 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  */
 @NotThreadSafe
-public final class WallPostWithAttachmentsIT extends AbstractEntrance {
+public final class WallPostWithAttachmentsIT {
+
+    /**
+     * VK UserId, GroupId and auth token.
+     */
+    @Rule
+    public final VkCredentials credentials =
+        new VkCredentials();
+
+    @After
+    public void delay() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(1);
+    }
 
     @Test
     public void test() throws Exception {
@@ -59,33 +74,33 @@ public final class WallPostWithAttachmentsIT extends AbstractEntrance {
             ""
         );
         final UploadServers servers = new UploadServers(
-            client(),
-            actor(),
-            groupId()
+            this.credentials.client(),
+            this.credentials.actor(),
+            this.credentials.group()
         );
         final int post =
             new WallPostWithAttachments(
                 new WallPostWithOwnerId(
                     new WallPostWithMessage(
                         new WallPostBase(
-                            client(),
-                            actor()
+                            this.credentials.client(),
+                            this.credentials.actor()
                         ),
                         "The message."
                     ),
-                    -groupId()
+                    -this.credentials.group()
                 ),
                 new AttachmentArraysWithProps(
-                    actor(),
+                    this.credentials.actor(),
                     new ImmutableProps(
                         props
                     ),
-                    groupId(),
+                    this.credentials.group(),
                     new AttachmentWallDocument(
-                        client(),
-                        actor(),
+                        this.credentials.client(),
+                        this.credentials.actor(),
                         new UploadWallDocument(
-                            client(),
+                            this.credentials.client(),
                             servers.docs(),
                             new File(
                                 "src/test/resources/attachment.txt"
@@ -96,12 +111,12 @@ public final class WallPostWithAttachmentsIT extends AbstractEntrance {
             ).construct()
                 .execute()
                 .getPostId();
-        final List<WallpostFull> result = client()
+        final List<WallpostFull> result = this.credentials.client()
             .wall().getById(
-                actor(),
+                this.credentials.actor(),
                 String.format(
                     "%d_%d",
-                    -groupId(),
+                    -this.credentials.group(),
                     post
                 )
             ).execute();
@@ -115,16 +130,15 @@ public final class WallPostWithAttachmentsIT extends AbstractEntrance {
                 "attachment.txt"
             )
         );
-        client().wall()
+        this.credentials.client().wall()
             .delete(
-                actor()
+                this.credentials.actor()
             )
             .ownerId(
-                -groupId()
+                -this.credentials.group()
             )
             .postId(post)
             .execute();
-        exit();
     }
 
 }

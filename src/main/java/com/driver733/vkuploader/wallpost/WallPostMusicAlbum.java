@@ -90,7 +90,7 @@ public final class WallPostMusicAlbum implements WallPost {
     /**
      * Properties that contain the {@link AudioStatus} of audios files.
      */
-    private final ImmutableProperties properties;
+    private final ImmutableProps properties;
 
     /**
      * Ctor.
@@ -109,7 +109,7 @@ public final class WallPostMusicAlbum implements WallPost {
         final UserActor actor,
         final List<Path> audios,
         final UploadServers servers,
-        final ImmutableProperties properties,
+        final ImmutableProps properties,
         final int group
     ) {
         this.client = client;

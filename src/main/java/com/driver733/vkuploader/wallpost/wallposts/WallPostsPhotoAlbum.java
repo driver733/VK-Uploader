@@ -27,7 +27,7 @@ import com.driver733.vkuploader.media.photo.MediaPhotosBasic;
 import com.driver733.vkuploader.media.photo.MediaPhotosNonProcessed;
 import com.driver733.vkuploader.post.SuppressFBWarnings;
 import com.driver733.vkuploader.post.UploadServers;
-import com.driver733.vkuploader.wallpost.ImmutableProperties;
+import com.driver733.vkuploader.wallpost.ImmutableProps;
 import com.driver733.vkuploader.wallpost.WallPost;
 import com.driver733.vkuploader.wallpost.WallPostPhotoAlbum;
 import com.driver733.vkuploader.wallpost.attachment.support.WallPhotoStatus;
@@ -114,7 +114,7 @@ public final class WallPostsPhotoAlbum implements WallPosts {
     /**
      * Properties that contain the {@link WallPhotoStatus}es of photos.
      */
-    private final ImmutableProperties properties;
+    private final ImmutableProps properties;
 
     /**
      * Ctor.
@@ -133,7 +133,7 @@ public final class WallPostsPhotoAlbum implements WallPosts {
         final UserActor actor,
         final Path dir,
         final UploadServers servers,
-        final ImmutableProperties properties,
+        final ImmutableProps properties,
         final int group
     ) {
         this.client = client;
@@ -188,7 +188,7 @@ public final class WallPostsPhotoAlbum implements WallPosts {
     public void updateProperties() throws IOException {
         final List<Path> photos = this.photos();
         for (final Path photo : photos) {
-            this.properties.setPropertyAndStore(
+            this.properties.with(
                 photo.getFileName()
                     .toString(),
                 WallPhotoStatus.POSTED.toString()

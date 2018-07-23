@@ -24,7 +24,7 @@
 package com.driver733.vkuploader.media;
 
 import com.driver733.vkuploader.post.SuppressFBWarnings;
-import com.driver733.vkuploader.wallpost.ImmutableProperties;
+import com.driver733.vkuploader.wallpost.ImmutableProps;
 import com.driver733.vkuploader.wallpost.attachment.support.AudioStatus;
 import com.jcabi.aspects.Immutable;
 import java.io.IOException;
@@ -56,7 +56,7 @@ public final class AudiosNonProcessed implements Media {
     /**
      * Properties that contain the {@link AudioStatus}es of audios files.
      */
-    private final ImmutableProperties props;
+    private final ImmutableProps props;
 
     /**
      * Ctor.
@@ -66,7 +66,7 @@ public final class AudiosNonProcessed implements Media {
      */
     public AudiosNonProcessed(
         final Media origin,
-        final ImmutableProperties properties
+        final ImmutableProps properties
     ) {
         this.origin = origin;
         this.props = properties;
@@ -83,14 +83,12 @@ public final class AudiosNonProcessed implements Media {
                 !this.props.containsKey(
                     file.getFileName().toString()
                 )
-                    || !this.props
-                        .get(
-                            file.getFileName().toString()
-                        ).toString()
-                        .substring(0, 1)
-                        .equals(
-                            AudioStatus.POSTED.toString()
-                        )
+                    || !this.props.property(
+                        file.getFileName().toString()
+                ).substring(0, 1)
+                    .equals(
+                        AudioStatus.POSTED.toString()
+                    )
                 ) {
                 result.add(file);
             }

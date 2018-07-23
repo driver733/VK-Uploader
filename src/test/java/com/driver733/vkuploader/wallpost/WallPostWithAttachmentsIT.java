@@ -77,7 +77,7 @@ public final class WallPostWithAttachmentsIT extends AbstractEntrance {
                 ),
                 new AttachmentArraysWithProps(
                     actor(),
-                    new ImmutableProperties(
+                    new ImmutableProps(
                         props
                     ),
                     groupId(),

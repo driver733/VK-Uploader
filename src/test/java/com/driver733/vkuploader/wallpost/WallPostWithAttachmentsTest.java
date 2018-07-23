@@ -79,9 +79,9 @@ public final class WallPostWithAttachmentsTest extends AbstractVkUnitTest {
                         0,
                         "1"
                     ),
-                    new ImmutableProperties(
-                        this.properties.toFile()
-                    ).loaded(),
+                    new ImmutableProps(
+                        this.properties
+                    ),
                     GROUP_ID,
                     new AttachmentFakeAudio(
                         1, 2

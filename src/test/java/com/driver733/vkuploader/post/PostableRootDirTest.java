@@ -698,6 +698,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 AbstractVkUnitTest.GROUP_ID
             )
         ).post();
+        TimeUnit.SECONDS.sleep(2);
         MatcherAssert.assertThat(
             "The properties files differ",
             new ImmutableProps(

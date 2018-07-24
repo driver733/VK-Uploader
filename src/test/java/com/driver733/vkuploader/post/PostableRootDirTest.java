@@ -65,9 +65,6 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         })
     public void testPhotoAlbum() throws Exception {
         final Path root = Paths.get("src/test/resources/photos/");
-        root.resolve("vkmu.properties")
-            .toFile()
-            .deleteOnExit();
         root.resolve("testPhotoAlbum")
             .resolve("vkmu.properties")
             .toFile()
@@ -196,7 +193,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 AbstractVkUnitTest.GROUP_ID
             )
         ).post();
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(2);
         MatcherAssert.assertThat(
             "The properties files differ",
             new ImmutableProps(
@@ -423,7 +420,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 AbstractVkUnitTest.GROUP_ID
             )
         ).post();
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(2);
         MatcherAssert.assertThat(
             "The properties files differ",
             new ImmutableProps(
@@ -730,9 +727,6 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         })
     public void testRandomAudioAndPhoto() throws Exception {
         final Path root = Paths.get("src/test/resources/random/");
-        root.resolve("vkmu.properties")
-            .toFile()
-            .deleteOnExit();
         new PostableRootDir(
             new WallPostsRandom(
                 new VkApiClient(

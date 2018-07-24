@@ -69,10 +69,9 @@ public final class EntranceDirectoryTest extends AbstractVkUnitTest {
     public void test() throws Exception {
         final int delay = 5;
         final Path root = Paths.get("src/test/resources/photos");
-        final File props = root.resolve("testPhotoAlbum")
-            .resolve("vkmu.properties")
-            .toFile();
-        props.deleteOnExit();
+        final Path props = root.resolve("testPhotoAlbum")
+            .resolve("vkmu.properties");
+        props.toFile().deleteOnExit();
         final ImmutableProps actual = new ImmutableProps(
             props
         );

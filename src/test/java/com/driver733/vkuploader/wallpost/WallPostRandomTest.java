@@ -172,7 +172,6 @@ public final class WallPostRandomTest extends AbstractVkUnitTest {
                     WallPostRandomTest.ROOT
                         .resolve("testPhotoAlbum")
                         .resolve("vkmu.properties")
-                        .toFile()
                 ),
                 GROUP_ID
             ).construct()
@@ -291,7 +290,6 @@ public final class WallPostRandomTest extends AbstractVkUnitTest {
                     WallPostRandomTest.ROOT
                         .resolve("musicAlbum")
                         .resolve("vkmu.properties")
-                        .toFile()
                 ),
                 WallPostRandomTest.ROOT
                     .resolve("musicAlbum")
@@ -474,7 +472,6 @@ public final class WallPostRandomTest extends AbstractVkUnitTest {
                 GROUP_ID,
                 new ImmutableProps(
                     WallPostRandomTest.ROOT.resolve("vkmu.properties")
-                        .toFile()
                 ),
                 WallPostRandomTest.ROOT
                     .resolve("testPhotoAlbum")

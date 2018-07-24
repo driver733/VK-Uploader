@@ -188,7 +188,6 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 new ImmutableProps(
                     root.resolve("testPhotoAlbum")
                         .resolve("vkmu.properties")
-                        .toFile()
                 ),
                 AbstractVkUnitTest.GROUP_ID
             )
@@ -199,7 +198,6 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
             new ImmutableProps(
                 root.resolve("testPhotoAlbum")
                     .resolve("vkmu.properties")
-                    .toFile()
             ).entrySet()
                 .stream()
                 .collect(
@@ -415,7 +413,6 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 new ImmutableProps(
                     root.resolve("album")
                         .resolve("vkmu.properties")
-                        .toFile()
                 ),
                 AbstractVkUnitTest.GROUP_ID
             )
@@ -426,7 +423,6 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
             new ImmutableProps(
                 root.resolve("album")
                     .resolve("vkmu.properties")
-                    .toFile()
             ).entrySet()
                 .stream()
                 .collect(
@@ -560,7 +556,6 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 new ImmutableProps(
                     root.resolve("testPhotoAlbum")
                         .resolve("vkmu.properties")
-                        .toFile()
                 ),
                 AbstractVkUnitTest.GROUP_ID,
                 root.resolve("testPhotoAlbum")
@@ -882,7 +877,6 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 ),
                 new ImmutableProps(
                     root.resolve("vkmu.properties")
-                        .toFile()
                 ),
                 AbstractVkUnitTest.GROUP_ID,
                 root.resolve("testPhotoAlbum"),

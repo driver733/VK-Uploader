@@ -40,6 +40,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import net.jcip.annotations.NotThreadSafe;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -54,6 +55,7 @@ import org.junit.Test;
  * @checkstyle MethodLength (2000 lines)
  */
 @Immutable
+@NotThreadSafe
 public final class PostableRootDirTest extends AbstractVkUnitTest {
 
     @Test

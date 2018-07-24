@@ -29,6 +29,7 @@ import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
 import com.driver733.vkuploader.wallpost.wallposts.WallPostsMusicAlbum;
 import com.driver733.vkuploader.wallpost.wallposts.WallPostsPhotoAlbum;
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -39,6 +40,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import net.jcip.annotations.NotThreadSafe;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -52,6 +54,8 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (500 lines)
  */
+@Immutable
+@NotThreadSafe
 public final class PostsBasicTest extends AbstractVkUnitTest {
 
     @Test

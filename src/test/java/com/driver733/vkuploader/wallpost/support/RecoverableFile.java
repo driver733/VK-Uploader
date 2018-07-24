@@ -70,7 +70,6 @@ public final class RecoverableFile implements Recoverable<File> {
         ) {
             fop.write(this.contents);
             fop.flush();
-            fop.close();
         } catch (final IOException ex) {
             throw new IOException(
                 "Failed to complete the recovery.",

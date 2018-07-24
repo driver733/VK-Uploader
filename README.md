@@ -1,6 +1,6 @@
 # VKUploader
 [![EO principles respected here](http://www.elegantobjects.org/badge.svg)](http://www.elegantobjects.org)
-[![DevOps By Rultor.com](http://www.rultor.com/p/driver733/VKUploader)](http://www.rultor.com/p/yegor256/cactoos)
+[![DevOps By Rultor.com](http://www.rultor.com/p/driver733/VKUploader)](http://www.rultor.com/p/driver733/VKUploader)
 [![We recommend IntelliJ IDEA](http://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
 [![Build Status](https://travis-ci.org/driver733/VKUploader.svg?branch=master)](https://travis-ci.org/driver733/VKUploader)

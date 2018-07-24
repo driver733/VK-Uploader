@@ -28,6 +28,7 @@ import com.driver733.vkuploader.wallpost.attachment.AttachmentWallDocument;
 import com.driver733.vkuploader.wallpost.attachment.support.fields.AttachmentArraysWithProps;
 import com.driver733.vkuploader.wallpost.attachment.upload.UploadWallDocument;
 import com.driver733.vkuploader.wallpost.support.VkCredentials;
+import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.objects.wall.WallpostFull;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -50,6 +51,7 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  */
+@Immutable
 @NotThreadSafe
 public final class WallPostWithAttachmentsIT {
 

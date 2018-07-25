@@ -30,7 +30,7 @@ import com.driver733.vkuploader.media.MediaRandom;
 import com.driver733.vkuploader.media.photo.MediaPhotosBasic;
 import com.driver733.vkuploader.post.SuppressFBWarnings;
 import com.driver733.vkuploader.post.UploadServers;
-import com.driver733.vkuploader.wallpost.ImmutableProps;
+import com.driver733.vkuploader.wallpost.PropsFile;
 import com.driver733.vkuploader.wallpost.WallPost;
 import com.driver733.vkuploader.wallpost.WallPostRandom;
 import com.driver733.vkuploader.wallpost.attachment.support.AudioStatus;
@@ -109,7 +109,7 @@ public final class WallPostsRandom implements WallPosts {
     /**
      * Properties for caching results.
      */
-    private final ImmutableProps properties;
+    private final PropsFile properties;
 
     /**
      * Ctor.
@@ -125,7 +125,7 @@ public final class WallPostsRandom implements WallPosts {
         final VkApiClient client,
         final UserActor actor,
         final UploadServers servers,
-        final ImmutableProps properties,
+        final PropsFile properties,
         final int group,
         final Path photos
     ) {
@@ -157,7 +157,7 @@ public final class WallPostsRandom implements WallPosts {
         final VkApiClient client,
         final UserActor actor,
         final UploadServers servers,
-        final ImmutableProps properties,
+        final PropsFile properties,
         final Path audios,
         final int group
     ) {
@@ -190,7 +190,7 @@ public final class WallPostsRandom implements WallPosts {
         final VkApiClient client,
         final UserActor actor,
         final UploadServers servers,
-        final ImmutableProps properties,
+        final PropsFile properties,
         final int group,
         final Path photos,
         final Path audios

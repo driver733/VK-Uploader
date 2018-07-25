@@ -33,6 +33,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.Constant;
 import org.cactoos.scalar.UncheckedScalar;
 
 /**
@@ -41,7 +43,7 @@ import org.cactoos.scalar.UncheckedScalar;
  * @since 0.1
  */
 @Immutable
-public final class ImmutableProps implements Props {
+public final class PropsFile implements Props {
 
     /**
      * Properties.
@@ -57,13 +59,44 @@ public final class ImmutableProps implements Props {
      * Ctor.
      * @param file Properties.
      */
-    public ImmutableProps(
+    public PropsFile(
         final File file
+    ) {
+        this(
+            new Constant<>(
+                () -> file
+            )
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param path Path to the properties.
+     */
+    public PropsFile(
+        final Path path
+    ) {
+        this(
+            new Constant<>(
+                path::toFile
+            )
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param scalar Scalar with {@link File}.
+     */
+    private PropsFile(
+        final Scalar<Scalar<File>> scalar
     ) {
         this.origin = new UncheckedScalar<>(
             () -> {
+                final File file = scalar.value().value();
                 final Properties props = new Properties();
-                if (file.exists()) {
+                if (
+                    file.exists()
+                    ) {
                     try (
                         FileInputStream fis = new FileInputStream(
                             file
@@ -90,20 +123,8 @@ public final class ImmutableProps implements Props {
         );
         this.output = new UncheckedScalar<>(
             () -> new FileOutputStream(
-                file
+                scalar.value().value()
             )
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param path Path to the properties.
-     */
-    public ImmutableProps(
-        final Path path
-    ) {
-        this(
-            path.toFile()
         );
     }
 
@@ -139,7 +160,7 @@ public final class ImmutableProps implements Props {
     }
 
     @Override
-    public ImmutableProps with(
+    public PropsFile with(
         final String key,
         final String value
     ) throws IOException {

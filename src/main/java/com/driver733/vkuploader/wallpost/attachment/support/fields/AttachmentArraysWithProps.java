@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.wallpost.attachment.support.fields;
 
-import com.driver733.vkuploader.wallpost.ImmutableProps;
+import com.driver733.vkuploader.wallpost.PropsFile;
 import com.driver733.vkuploader.wallpost.attachment.Attachment;
 import com.driver733.vkuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkuploader.wallpost.attachment.support.IdsMap;
@@ -76,7 +76,7 @@ public final class AttachmentArraysWithProps implements AttachmentsFields {
     /**
      * Properties that contain the {@link AudioStatus} of audios files.
      */
-    private final ImmutableProps properties;
+    private final PropsFile properties;
 
     /**
      * Ctor.
@@ -89,7 +89,7 @@ public final class AttachmentArraysWithProps implements AttachmentsFields {
      */
     public AttachmentArraysWithProps(
         final UserActor actor,
-        final ImmutableProps properties,
+        final PropsFile properties,
         final int group,
         final Attachment... attachments
     ) {

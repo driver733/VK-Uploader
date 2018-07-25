@@ -24,7 +24,7 @@
 package com.driver733.vkuploader.post;
 
 import com.driver733.vkuploader.post.posts.PostsBasic;
-import com.driver733.vkuploader.wallpost.ImmutableProps;
+import com.driver733.vkuploader.wallpost.PropsFile;
 import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
 import com.driver733.vkuploader.wallpost.wallposts.WallPosts;
@@ -72,7 +72,7 @@ public final class EntranceDirectoryTest extends AbstractVkUnitTest {
         final Path props = root.resolve("testPhotoAlbum")
             .resolve("vkmu.properties");
         props.toFile().deleteOnExit();
-        final ImmutableProps actual = new ImmutableProps(
+        final PropsFile actual = new PropsFile(
             props
         );
         final WallPosts posts = new WallPostsPhotoAlbum(

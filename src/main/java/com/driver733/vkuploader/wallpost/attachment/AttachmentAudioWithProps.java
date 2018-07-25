@@ -24,7 +24,7 @@
 
 package com.driver733.vkuploader.wallpost.attachment;
 
-import com.driver733.vkuploader.wallpost.ImmutableProps;
+import com.driver733.vkuploader.wallpost.PropsFile;
 import com.driver733.vkuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkuploader.wallpost.attachment.upload.Upload;
 import com.driver733.vkuploader.wallpost.attachment.upload.UploadAudio;
@@ -76,7 +76,7 @@ public final class AttachmentAudioWithProps implements Attachment {
     /**
      * Properties that contain the {@link AudioStatus} of audios files.
      */
-    private final ImmutableProps properties;
+    private final PropsFile properties;
 
     /**
      * Ctor.
@@ -92,7 +92,7 @@ public final class AttachmentAudioWithProps implements Attachment {
     public AttachmentAudioWithProps(
         final VkApiClient client,
         final UserActor actor,
-        final ImmutableProps properties,
+        final PropsFile properties,
         final int group,
         final UploadAudio... audios
     ) {

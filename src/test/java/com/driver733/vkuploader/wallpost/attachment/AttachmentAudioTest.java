@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.wallpost.attachment;
 
-import com.driver733.vkuploader.wallpost.ImmutableProps;
+import com.driver733.vkuploader.wallpost.PropsFile;
 import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkuploader.wallpost.attachment.upload.UploadAudio;
 import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
@@ -115,7 +115,7 @@ public final class AttachmentAudioTest extends AbstractVkUnitTest {
                     0,
                     "1"
                 ),
-                new ImmutableProps(
+                new PropsFile(
                     props
                 ),
                 AbstractVkUnitTest.GROUP_ID,

@@ -234,7 +234,7 @@ public final class WallPostMusicAlbumTest extends AbstractVkUnitTest {
                     ),
                     GROUP_ID
                 ),
-                new ImmutableProps(
+                new PropsFile(
                     this.properties
                 ),
                 GROUP_ID

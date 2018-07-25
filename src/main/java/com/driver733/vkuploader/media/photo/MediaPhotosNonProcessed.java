@@ -25,7 +25,7 @@ package com.driver733.vkuploader.media.photo;
 
 import com.driver733.vkuploader.media.Media;
 import com.driver733.vkuploader.post.SuppressFBWarnings;
-import com.driver733.vkuploader.wallpost.ImmutableProps;
+import com.driver733.vkuploader.wallpost.PropsFile;
 import com.driver733.vkuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkuploader.wallpost.attachment.support.WallPhotoStatus;
 import com.jcabi.aspects.Immutable;
@@ -59,7 +59,7 @@ public final class MediaPhotosNonProcessed implements Media {
     /**
      * Properties that contain the {@link AudioStatus}es of audios files.
      */
-    private final ImmutableProps props;
+    private final PropsFile props;
 
     /**
      * Ctor.
@@ -69,7 +69,7 @@ public final class MediaPhotosNonProcessed implements Media {
      */
     public MediaPhotosNonProcessed(
         final Media origin,
-        final ImmutableProps properties
+        final PropsFile properties
     ) {
         this.origin = origin;
         this.props = properties;

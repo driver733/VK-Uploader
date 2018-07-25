@@ -94,7 +94,7 @@ public final class WallPostWithAttachmentsIT {
                 ),
                 new AttachmentArraysWithProps(
                     this.credentials.actor(),
-                    new ImmutableProps(
+                    new PropsFile(
                         props
                     ),
                     this.credentials.group(),

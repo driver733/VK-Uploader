@@ -79,7 +79,7 @@ public final class WallPostWithAttachmentsTest extends AbstractVkUnitTest {
                         0,
                         "1"
                     ),
-                    new ImmutableProps(
+                    new PropsFile(
                         this.properties
                     ),
                     GROUP_ID,

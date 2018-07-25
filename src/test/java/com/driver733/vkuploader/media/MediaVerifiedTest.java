@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.media;
 
-import com.driver733.vkuploader.wallpost.ImmutableProps;
+import com.driver733.vkuploader.wallpost.PropsFile;
 import com.jcabi.aspects.Immutable;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -58,7 +58,7 @@ public final class MediaVerifiedTest {
                     new MediaAudiosBasic(
                         Paths.get("src/test/resources/album")
                     ),
-                    new ImmutableProps(
+                    new PropsFile(
                         MediaVerifiedTest.PROPS
                     )
                 )
@@ -78,7 +78,7 @@ public final class MediaVerifiedTest {
                     new MediaAudiosBasic(
                         Paths.get("src/test/")
                     ),
-                    new ImmutableProps(
+                    new PropsFile(
                         MediaVerifiedTest.PROPS
                     )
                 )

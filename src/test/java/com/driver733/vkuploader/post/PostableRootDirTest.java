@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.post;
 
-import com.driver733.vkuploader.wallpost.ImmutableProps;
+import com.driver733.vkuploader.wallpost.PropsFile;
 import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
 import com.driver733.vkuploader.wallpost.wallposts.WallPostsMusicAlbum;
@@ -187,7 +187,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                     ),
                     AbstractVkUnitTest.GROUP_ID
                 ),
-                new ImmutableProps(
+                new PropsFile(
                     root.resolve("testPhotoAlbum")
                         .resolve("vkmu.properties")
                 ),
@@ -197,7 +197,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         TimeUnit.SECONDS.sleep(2);
         MatcherAssert.assertThat(
             "The properties files differ",
-            new ImmutableProps(
+            new PropsFile(
                 root.resolve("testPhotoAlbum")
                     .resolve("vkmu.properties")
             ).entrySet()
@@ -412,7 +412,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                     ),
                     AbstractVkUnitTest.GROUP_ID
                 ),
-                new ImmutableProps(
+                new PropsFile(
                     root.resolve("album")
                         .resolve("vkmu.properties")
                 ),
@@ -422,7 +422,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         TimeUnit.SECONDS.sleep(2);
         MatcherAssert.assertThat(
             "The properties files differ",
-            new ImmutableProps(
+            new PropsFile(
                 root.resolve("album")
                     .resolve("vkmu.properties")
             ).entrySet()
@@ -555,7 +555,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                     ),
                     AbstractVkUnitTest.GROUP_ID
                 ),
-                new ImmutableProps(
+                new PropsFile(
                     root.resolve("testPhotoAlbum")
                         .resolve("vkmu.properties")
                 ),
@@ -565,7 +565,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         ).post();
         MatcherAssert.assertThat(
             "The properties files differ",
-            new ImmutableProps(
+            new PropsFile(
                 root.resolve("testPhotoAlbum")
                     .resolve("vkmu.properties")
             ).entrySet()
@@ -687,7 +687,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                     ),
                     AbstractVkUnitTest.GROUP_ID
                 ),
-                new ImmutableProps(
+                new PropsFile(
                     root.resolve("musicAlbum")
                         .resolve("vkmu.properties")
                 ),
@@ -698,7 +698,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         TimeUnit.SECONDS.sleep(2);
         MatcherAssert.assertThat(
             "The properties files differ",
-            new ImmutableProps(
+            new PropsFile(
                 root.resolve("musicAlbum")
                     .resolve("vkmu.properties")
             ).entrySet()
@@ -877,7 +877,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                     ),
                     AbstractVkUnitTest.GROUP_ID
                 ),
-                new ImmutableProps(
+                new PropsFile(
                     root.resolve("vkmu.properties")
                 ),
                 AbstractVkUnitTest.GROUP_ID,
@@ -887,7 +887,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         ).post();
         MatcherAssert.assertThat(
             "The properties files differ",
-            new ImmutableProps(
+            new PropsFile(
                 root.resolve("vkmu.properties")
             ).entrySet()
                 .stream()

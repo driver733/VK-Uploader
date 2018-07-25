@@ -27,7 +27,7 @@ import com.driver733.vkuploader.media.AudiosNonProcessed;
 import com.driver733.vkuploader.media.MediaAudiosBasic;
 import com.driver733.vkuploader.post.SuppressFBWarnings;
 import com.driver733.vkuploader.post.UploadServers;
-import com.driver733.vkuploader.wallpost.ImmutableProps;
+import com.driver733.vkuploader.wallpost.PropsFile;
 import com.driver733.vkuploader.wallpost.WallPost;
 import com.driver733.vkuploader.wallpost.WallPostMusicAlbum;
 import com.driver733.vkuploader.wallpost.attachment.support.AudioStatus;
@@ -130,7 +130,7 @@ public final class WallPostsMusicAlbum implements WallPosts {
     /**
      * Properties that contain the {@link AudioStatus}es of audios files.
      */
-    private final ImmutableProps properties;
+    private final PropsFile properties;
 
     /**
      * Ctor.
@@ -149,7 +149,7 @@ public final class WallPostsMusicAlbum implements WallPosts {
         final UserActor actor,
         final Path dir,
         final UploadServers servers,
-        final ImmutableProps properties,
+        final PropsFile properties,
         final int group
     ) {
         this.client = client;

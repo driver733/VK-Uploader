@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.wallpost.attachment.support;
 
-import com.driver733.vkuploader.wallpost.ImmutableProps;
+import com.driver733.vkuploader.wallpost.PropsFile;
 import com.driver733.vkuploader.wallpost.attachment.AttachmentAddAudio;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
@@ -62,7 +62,7 @@ public final class PropertiesUpdateTest {
         final String fileName = "test.mp3";
         final File file = new File("src/test/resources/temp.properties");
         file.deleteOnExit();
-        final ImmutableProps props = new ImmutableProps(file);
+        final PropsFile props = new PropsFile(file);
         final int ownerId = 111;
         final int uploadedMediaId = 222;
         final int addedMediaId = 333;
@@ -104,7 +104,7 @@ public final class PropertiesUpdateTest {
                 )
             ).getAsJsonArray()
         ).save();
-        final ImmutableProps result = new ImmutableProps(file);
+        final PropsFile result = new PropsFile(file);
         MatcherAssert.assertThat(
             "Saved property does not match the expected value",
             result.property(fileName),

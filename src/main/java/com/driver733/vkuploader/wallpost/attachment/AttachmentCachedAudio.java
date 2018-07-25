@@ -24,7 +24,7 @@
 package com.driver733.vkuploader.wallpost.attachment;
 
 import com.driver733.vkuploader.post.SuppressFBWarnings;
-import com.driver733.vkuploader.wallpost.ImmutableProps;
+import com.driver733.vkuploader.wallpost.PropsFile;
 import com.driver733.vkuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkuploader.wallpost.attachment.upload.UploadAudio;
 import com.jcabi.aspects.Immutable;
@@ -86,7 +86,7 @@ public final class AttachmentCachedAudio implements Attachment {
     /**
      * Properties that contain the {@link AudioStatus} of audios files.
      */
-    private final ImmutableProps properties;
+    private final PropsFile properties;
 
     /**
      * Ctor.
@@ -103,7 +103,7 @@ public final class AttachmentCachedAudio implements Attachment {
         final VkApiClient client,
         final UserActor actor,
         final String url,
-        final ImmutableProps properties,
+        final PropsFile properties,
         final List<Path> audios,
         final int group
     ) {

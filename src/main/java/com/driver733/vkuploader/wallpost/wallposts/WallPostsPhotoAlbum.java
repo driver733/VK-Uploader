@@ -27,7 +27,7 @@ import com.driver733.vkuploader.media.photo.MediaPhotosBasic;
 import com.driver733.vkuploader.media.photo.MediaPhotosNonProcessed;
 import com.driver733.vkuploader.post.SuppressFBWarnings;
 import com.driver733.vkuploader.post.UploadServers;
-import com.driver733.vkuploader.wallpost.ImmutableProps;
+import com.driver733.vkuploader.wallpost.PropsFile;
 import com.driver733.vkuploader.wallpost.WallPost;
 import com.driver733.vkuploader.wallpost.WallPostPhotoAlbum;
 import com.driver733.vkuploader.wallpost.attachment.support.WallPhotoStatus;
@@ -114,7 +114,7 @@ public final class WallPostsPhotoAlbum implements WallPosts {
     /**
      * Properties that contain the {@link WallPhotoStatus}es of photos.
      */
-    private final ImmutableProps properties;
+    private final PropsFile properties;
 
     /**
      * Ctor.
@@ -133,7 +133,7 @@ public final class WallPostsPhotoAlbum implements WallPosts {
         final UserActor actor,
         final Path dir,
         final UploadServers servers,
-        final ImmutableProps properties,
+        final PropsFile properties,
         final int group
     ) {
         this.client = client;

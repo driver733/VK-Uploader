@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.wallpost.attachment.support;
 
-import com.driver733.vkuploader.wallpost.ImmutableProps;
+import com.driver733.vkuploader.wallpost.PropsFile;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.jcabi.aspects.Immutable;
@@ -47,7 +47,7 @@ public final class PropertiesUpdate {
     /**
      * Properties that contain the {@link AudioStatus} of audios files.
      */
-    private final ImmutableProps properties;
+    private final PropsFile properties;
 
     /**
      * A map of with index-audio_id pairs from the audios queries.
@@ -71,7 +71,7 @@ public final class PropertiesUpdate {
     *  of the queries.
     */
     public PropertiesUpdate(
-        final ImmutableProps properties,
+        final PropsFile properties,
         final Map<Integer, String> ids,
         final JsonArray root
     ) {

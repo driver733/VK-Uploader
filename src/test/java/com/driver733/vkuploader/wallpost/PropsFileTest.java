@@ -35,7 +35,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Test for {@link ImmutableProps}.
+ * Test for {@link PropsFile}.
  *
  *
  *
@@ -52,16 +52,16 @@ import org.junit.Test;
         "PMD.NonStaticInitializer"
     }
     )
-public final class ImmutablePropsTest {
+public final class PropsFileTest {
 
     @Test
     public void storeAndRead() throws IOException {
         final File file = new File("src/test/resources/testTemp.properties");
         file.deleteOnExit();
-        final ImmutableProps props = new ImmutableProps(file);
+        final PropsFile props = new PropsFile(file);
         props.with("key1", "value1");
         props.with("key2", "value2");
-        final ImmutableProps loadedProps = new ImmutableProps(file);
+        final PropsFile loadedProps = new PropsFile(file);
         final Map<String, String> result = new HashMap<>();
         result.put("key1", "value1");
         result.put("key2", "value2");
@@ -83,7 +83,7 @@ public final class ImmutablePropsTest {
             "anyFile1"
         );
         file.deleteOnExit();
-        final ImmutableProps props = new ImmutableProps(
+        final PropsFile props = new PropsFile(
             file
         ).with(
             key,
@@ -112,7 +112,7 @@ public final class ImmutablePropsTest {
             "anyFile2"
         );
         file.deleteOnExit();
-        final ImmutableProps props = new ImmutableProps(
+        final PropsFile props = new PropsFile(
             file.toPath()
         ).with(
             key,
@@ -141,7 +141,7 @@ public final class ImmutablePropsTest {
             "anyFile3"
         );
         file.deleteOnExit();
-        final ImmutableProps props = new ImmutableProps(
+        final PropsFile props = new PropsFile(
             file
         ).with(
             key,
@@ -171,7 +171,7 @@ public final class ImmutablePropsTest {
             "anyFile4"
         );
         file.deleteOnExit();
-        final ImmutableProps actual = new ImmutableProps(
+        final PropsFile actual = new PropsFile(
             file
         ).with(
             fkey,
@@ -204,7 +204,7 @@ public final class ImmutablePropsTest {
             "anyFile5"
         );
         file.deleteOnExit();
-        final ImmutableProps actual = new ImmutableProps(
+        final PropsFile actual = new PropsFile(
             file
         );
         final Properties result = new Properties();

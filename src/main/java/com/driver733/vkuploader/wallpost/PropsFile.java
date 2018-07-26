@@ -35,6 +35,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.Constant;
+import org.cactoos.scalar.StickyScalar;
 import org.cactoos.scalar.UncheckedScalar;
 
 /**
@@ -91,39 +92,43 @@ public final class PropsFile implements Props {
         final Scalar<Scalar<File>> scalar
     ) {
         this.origin = new UncheckedScalar<>(
-            () -> {
-                final File file = scalar.value().value();
-                final Properties props = new Properties();
-                if (
-                    file.exists()
-                    ) {
-                    try (
-                        FileInputStream fis = new FileInputStream(
-                            file
-                        )
-                    ) {
-                        props.load(
-                            fis
-                        );
+            new StickyScalar<>(
+                () -> {
+                    final File file = scalar.value().value();
+                    final Properties props = new Properties();
+                    if (
+                        file.exists()
+                        ) {
+                        try (
+                            FileInputStream fis = new FileInputStream(
+                                file
+                            )
+                        ) {
+                            props.load(
+                                fis
+                            );
+                        }
+                    } else {
+                        try (
+                            FileOutputStream fos = new FileOutputStream(
+                                file
+                            )
+                        ) {
+                            props.store(
+                                fos,
+                                null
+                            );
+                        }
                     }
-                } else {
-                    try (
-                        FileOutputStream fos = new FileOutputStream(
-                            file
-                        )
-                    ) {
-                        props.store(
-                            fos,
-                            null
-                        );
-                    }
+                    return props;
                 }
-                return props;
-            }
+            )
         );
         this.output = new UncheckedScalar<>(
-            () -> new FileOutputStream(
-                scalar.value().value()
+            new StickyScalar<>(
+                () -> new FileOutputStream(
+                    scalar.value().value()
+                )
             )
         );
     }

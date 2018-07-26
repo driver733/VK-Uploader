@@ -725,6 +725,9 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         })
     public void testRandomAudioAndPhoto() throws Exception {
         final Path root = Paths.get("src/test/resources/random/");
+        root.resolve("vkmu.properties")
+            .toFile()
+            .deleteOnExit();
         new PostableRootDir(
             new WallPostsRandom(
                 new VkApiClient(

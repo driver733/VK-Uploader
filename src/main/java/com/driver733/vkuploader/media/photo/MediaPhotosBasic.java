@@ -35,9 +35,6 @@ import org.cactoos.list.StickyList;
 /**
  * Constructs a list of audios files
  *  in the specified folder.
- *
- *
- *
  * @since 0.2
  */
 @Immutable

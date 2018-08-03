@@ -14,9 +14,53 @@
             <url>https://jitpack.io</url>
         </repository>
     </repositories>
-    <groupId>groupId</groupId>
-    <artifactId>VKMusicUploader</artifactId>
+    <groupId>com.driver733</groupId>
+    <artifactId>vkuploader</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>VK Uploader</name>
+    <description>VK.com group posts generator</description>
+    <url>https://github.com/driver733/VK-Uploader</url>
+    <inceptionYear>2017</inceptionYear>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+            <developer>
+                <id>1</id>
+                <name>Mikhail Yakushin</name>
+                <email>yakushin@terpmail.umd.edu</email>
+                <organization>driver733.com</organization>
+                <organizationUrl>http://www.driver733.com</organizationUrl>
+                <roles>
+                    <role>Architect</role>
+                    <role>Developer</role>
+                </roles>
+        </developer>
+    </developers>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/driver733/VK-Uploader/issues</url>
+    </issueManagement>
+    <scm>
+        <connection>scm:git:git@github.com:driver733/VK-Uploader.git</connection>
+        <developerConnection>scm:git:git@github.com:driver733/VK-Uploader.git</developerConnection>
+        <url>https://github.com/driver733/VK-Uploader</url>
+    </scm>
+    <ciManagement>
+        <system>rultor</system>
+        <url>http://www.rultor.com/s/VK-Uploader</url>
+    </ciManagement>
+    <distributionManagement>
+        <site>
+            <id>github-pages</id>
+            <url>https://github.com/driver733/VK-Uploader</url>
+        </site>
+    </distributionManagement>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

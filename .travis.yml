@@ -10,7 +10,7 @@ script:
   - set -e
   - mvn clean
   - pdd --source=$(pwd) --file=/dev/null
-  - mvn clean test -DskipITs -Pqulice --errors --batch-mode
+  - mvn clean test qulice:check -DskipITs --errors --batch-mode
 before_install:
   - rvm install 2.2.2
   - rvm use 2.2.2

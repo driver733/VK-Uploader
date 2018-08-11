@@ -113,7 +113,7 @@ public final class IdsMapTest {
         expected.put(0, "1");
         expected.put(1, "2");
         MatcherAssert.assertThat(
-            this.queries.idsMap(),
+            this.queries.value(),
             Matchers.equalTo(expected)
         );
     }

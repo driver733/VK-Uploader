@@ -68,7 +68,7 @@ public final class ZippedTest {
                 new InputOf(
                     new Zipped(
                         Paths.get("src/test/resources/zip/test/")
-                    ).zip()
+                    ).stream()
                 ),
                 new OutputTo(
                     new FileOutputStream(

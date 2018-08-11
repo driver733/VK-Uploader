@@ -42,7 +42,7 @@ import org.apache.commons.lang3.StringUtils;
  * @since 0.1
  */
 @Immutable
-public final class PropertiesUpdate {
+public final class PropertiesUpdate implements Runnable {
 
     /**
      * Properties that contain the {@link AudioStatus} of audios files.
@@ -84,17 +84,28 @@ public final class PropertiesUpdate {
      * Saves the properties.
      * @throws IOException If properties cannot be saved.
      */
-    public void save() throws IOException {
+    public void run() {
         final Map<Integer, String> results = this.resStrings();
         for (final int index : this.ids.keySet()) {
-            this.properties.with(
-                this.key(index).toString(),
-                String.format(
-                    "%s_%s",
-                    AudioStatus.ADDED.toString(),
-                    results.get(index)
-                )
-            );
+            try {
+                this.properties.with(
+                    this.key(
+                        index
+                    ).toString(),
+                    String.format(
+                        "%s_%s",
+                        AudioStatus.ADDED.toString(),
+                        results.get(
+                            index
+                        )
+                    )
+                );
+            } catch (final IOException ex) {
+                throw new IllegalStateException(
+                    "PropertiesUpdate key not found",
+                    ex
+                );
+            }
         }
     }
 
@@ -105,9 +116,12 @@ public final class PropertiesUpdate {
      * @throws IOException If key is not found.
      * @checkstyle StringLiteralsConcatenationCheck (50 lines)
      */
-    private Object key(final int index) throws IOException {
-        for (final Map.Entry<String, String> entry
-            : this.properties.entrySet()) {
+    private Object key(
+        final int index
+    ) throws IOException {
+        for (
+            final Map.Entry<String, String> entry : this.properties.entrySet()
+        ) {
             final String value = entry.getValue();
             if (
                 Objects.equals(

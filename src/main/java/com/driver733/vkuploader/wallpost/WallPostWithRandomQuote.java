@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.wallpost;
 
-import com.driver733.vkuploader.post.UploadServers;
+import com.driver733.vkuploader.post.UploadServersBasic;
 import com.driver733.vkuploader.wallpost.attachment.AttachmentAudio;
 import com.driver733.vkuploader.wallpost.attachment.AttachmentWallPhoto;
 import com.driver733.vkuploader.wallpost.attachment.message.MessageWithRandomQuote;
@@ -99,7 +99,7 @@ public final class WallPostWithRandomQuote implements WallPost {
     public WallPostWithRandomQuote(
         final VkApiClient client,
         final UserActor actor,
-        final UploadServers servers,
+        final UploadServersBasic servers,
         final Path photo,
         final int group
     ) {
@@ -151,7 +151,7 @@ public final class WallPostWithRandomQuote implements WallPost {
     public WallPostWithRandomQuote(
         final VkApiClient client,
         final UserActor actor,
-        final UploadServers servers,
+        final UploadServersBasic servers,
         final int group,
         final Path audio
     ) {
@@ -204,7 +204,7 @@ public final class WallPostWithRandomQuote implements WallPost {
     public WallPostWithRandomQuote(
         final VkApiClient client,
         final UserActor actor,
-        final UploadServers servers,
+        final UploadServersBasic servers,
         final int group,
         final Path photo,
         final Path audio

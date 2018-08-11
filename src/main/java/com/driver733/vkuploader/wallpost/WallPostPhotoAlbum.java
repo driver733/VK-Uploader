@@ -24,7 +24,7 @@
 package com.driver733.vkuploader.wallpost;
 
 import com.driver733.vkuploader.post.SuppressFBWarnings;
-import com.driver733.vkuploader.post.UploadServers;
+import com.driver733.vkuploader.post.UploadServersBasic;
 import com.driver733.vkuploader.wallpost.attachment.AttachmentWallPhotos;
 import com.driver733.vkuploader.wallpost.attachment.support.AudioStatus;
 import com.driver733.vkuploader.wallpost.attachment.support.fields.AttachmentArrays;
@@ -74,7 +74,7 @@ public final class WallPostPhotoAlbum implements WallPost {
     /**
      * Upload servers that provide upload URLs for attachmentsFields.
      */
-    private final UploadServers servers;
+    private final UploadServersBasic servers;
 
     /**
      * Ctor.
@@ -91,7 +91,7 @@ public final class WallPostPhotoAlbum implements WallPost {
         final VkApiClient client,
         final UserActor actor,
         final List<Path> photos,
-        final UploadServers servers,
+        final UploadServersBasic servers,
         final int group
     ) {
         this.client = client;

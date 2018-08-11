@@ -147,7 +147,7 @@ public final class EntranceDirectoryTest extends AbstractVkUnitTest {
                 ""
             ),
             root.resolve("testPhotoAlbum"),
-            new UploadServers(
+            new UploadServersBasic(
                 new VkApiClient(
                     new TransportClientFake(
                         new HashMap<String, TransportClient>() {

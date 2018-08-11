@@ -28,7 +28,7 @@ import com.driver733.vkuploader.media.MediaAudiosBasic;
 import com.driver733.vkuploader.media.MediaEmpty;
 import com.driver733.vkuploader.media.MediaRandom;
 import com.driver733.vkuploader.media.photo.MediaPhotosBasic;
-import com.driver733.vkuploader.post.UploadServers;
+import com.driver733.vkuploader.post.UploadServersBasic;
 import com.driver733.vkuploader.wallpost.WallPost;
 import com.driver733.vkuploader.wallpost.WallPostWithRandomQuote;
 import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
@@ -93,7 +93,7 @@ public final class WallPostsRandomQuote implements WallPosts {
     /**
      * Upload servers that provide upload URLs for attachmentsFields.
      */
-    private final UploadServers servers;
+    private final UploadServersBasic servers;
 
     /**
      * Number of posts to create.
@@ -116,7 +116,7 @@ public final class WallPostsRandomQuote implements WallPosts {
     ) {
         this.client = client;
         this.actor = actor;
-        this.servers = new UploadServers(
+        this.servers = new UploadServersBasic(
             new VkApiClient(
                 new TransportClientFake()
             ),
@@ -145,7 +145,7 @@ public final class WallPostsRandomQuote implements WallPosts {
     public WallPostsRandomQuote(
         final VkApiClient client,
         final UserActor actor,
-        final UploadServers servers,
+        final UploadServersBasic servers,
         final int group,
         final int count,
         final Path photos
@@ -174,7 +174,7 @@ public final class WallPostsRandomQuote implements WallPosts {
     public WallPostsRandomQuote(
         final VkApiClient client,
         final UserActor actor,
-        final UploadServers servers,
+        final UploadServersBasic servers,
         final int group,
         final Path audios,
         final int count
@@ -204,7 +204,7 @@ public final class WallPostsRandomQuote implements WallPosts {
     public WallPostsRandomQuote(
         final VkApiClient client,
         final UserActor actor,
-        final UploadServers servers,
+        final UploadServersBasic servers,
         final int group,
         final int count,
         final Path photos,

@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.wallpost;
 
-import com.driver733.vkuploader.post.UploadServers;
+import com.driver733.vkuploader.post.UploadServersBasic;
 import com.driver733.vkuploader.wallpost.attachment.AttachmentAudioWithProps;
 import com.driver733.vkuploader.wallpost.attachment.AttachmentWallPhoto;
 import com.driver733.vkuploader.wallpost.attachment.mp3filefromfile.bytearray.ByteArrayFromFile;
@@ -67,7 +67,7 @@ public final class WallPostRandom implements WallPost {
     public WallPostRandom(
         final VkApiClient client,
         final UserActor actor,
-        final UploadServers servers,
+        final UploadServersBasic servers,
         final Path photo,
         final PropsFile properties,
         final int group
@@ -116,7 +116,7 @@ public final class WallPostRandom implements WallPost {
     public WallPostRandom(
         final VkApiClient client,
         final UserActor actor,
-        final UploadServers servers,
+        final UploadServersBasic servers,
         final int group,
         final PropsFile properties,
         final Path audio
@@ -167,7 +167,7 @@ public final class WallPostRandom implements WallPost {
     public WallPostRandom(
         final VkApiClient client,
         final UserActor actor,
-        final UploadServers servers,
+        final UploadServersBasic servers,
         final int group,
         final PropsFile properties,
         final Path photo,

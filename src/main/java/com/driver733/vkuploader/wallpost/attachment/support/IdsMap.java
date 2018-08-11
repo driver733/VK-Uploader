@@ -29,6 +29,7 @@ import com.vk.api.sdk.client.AbstractQueryBuilder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.cactoos.Scalar;
 
 /**
  * Forms a map of with index (queries) - audio_id pairs
@@ -37,7 +38,7 @@ import java.util.Map;
  * @since 0.1
  */
 @Immutable
-public final class IdsMap {
+public final class IdsMap implements Scalar<Map<Integer, String>> {
 
     /**
      * {@link Attachment} array.
@@ -49,17 +50,16 @@ public final class IdsMap {
      * Ctor.
      * @param attachments An {@link Attachment} array.
      */
-    public IdsMap(final List<AbstractQueryBuilder> attachments) {
+    public IdsMap(
+        final List<AbstractQueryBuilder> attachments
+    ) {
+        super();
         this.attachments = attachments;
     }
 
-    /**
-     * Forms a map of with index-audio_id pairs from the audios queries.
-     * @return Map.
-     * @throws Exception If queries` results cannot to be obtained.
-     */
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-    public Map<Integer, String> idsMap() {
+    @Override
+    public Map<Integer, String> value() {
         int index = 0;
         final Map<Integer, String> ids = new HashMap<>();
         for (final AbstractQueryBuilder query : this.attachments) {
@@ -75,5 +75,4 @@ public final class IdsMap {
         }
         return ids;
     }
-
 }

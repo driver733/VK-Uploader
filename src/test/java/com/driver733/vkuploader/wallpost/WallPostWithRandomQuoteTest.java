@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.wallpost;
 
-import com.driver733.vkuploader.post.UploadServers;
+import com.driver733.vkuploader.post.UploadServersBasic;
 import com.driver733.vkuploader.wallpost.attachment.support.BytesFromRequest;
 import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
@@ -180,7 +180,7 @@ public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
                     1,
                     "1"
                 ),
-                new UploadServers(
+                new UploadServersBasic(
                     new VkApiClient(
                         new TransportClientFake(
                             new HashMap<String, TransportClient>() {
@@ -309,7 +309,7 @@ public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
                     1,
                     "1"
                 ),
-                new UploadServers(
+                new UploadServersBasic(
                     new VkApiClient(
                         new TransportClientFake(
                             new HashMap<String, TransportClient>() {
@@ -497,7 +497,7 @@ public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
                     1,
                     "1"
                 ),
-                new UploadServers(
+                new UploadServersBasic(
                     new VkApiClient(
                         new TransportClientFake(
                             new HashMap<String, TransportClient>() {

@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.wallpost;
 
-import com.driver733.vkuploader.post.UploadServers;
+import com.driver733.vkuploader.post.UploadServersBasic;
 import com.driver733.vkuploader.wallpost.attachment.AttachmentWallDocument;
 import com.driver733.vkuploader.wallpost.attachment.support.fields.AttachmentArraysWithProps;
 import com.driver733.vkuploader.wallpost.attachment.upload.UploadWallDocument;
@@ -75,7 +75,7 @@ public final class WallPostWithAttachmentsIT {
             new FileOutputStream(props),
             ""
         );
-        final UploadServers servers = new UploadServers(
+        final UploadServersBasic servers = new UploadServersBasic(
             this.credentials.client(),
             this.credentials.actor(),
             this.credentials.group()

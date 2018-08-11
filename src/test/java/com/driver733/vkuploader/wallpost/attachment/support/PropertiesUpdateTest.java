@@ -93,7 +93,7 @@ public final class PropertiesUpdateTest {
                         );
                     }
                 }
-            ).idsMap(),
+            ).value(),
             new JsonParser().parse(
                 new JsonReader(
                     new StringReader(
@@ -103,7 +103,7 @@ public final class PropertiesUpdateTest {
                     )
                 )
             ).getAsJsonArray()
-        ).save();
+        ).run();
         final PropsFile result = new PropsFile(file);
         MatcherAssert.assertThat(
             "Saved property does not match the expected value",

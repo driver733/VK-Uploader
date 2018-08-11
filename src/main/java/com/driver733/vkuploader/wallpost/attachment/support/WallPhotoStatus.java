@@ -55,12 +55,16 @@ public enum WallPhotoStatus {
      * Ctor.
      * @param value Int value.
      */
-    WallPhotoStatus(final Integer value) {
+    WallPhotoStatus(
+        final Integer value
+    ) {
         this.value = value;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(this.value);
+        return String.valueOf(
+            this.value
+        );
     }
 }

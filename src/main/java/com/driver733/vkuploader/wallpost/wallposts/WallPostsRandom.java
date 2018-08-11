@@ -29,7 +29,7 @@ import com.driver733.vkuploader.media.MediaEmpty;
 import com.driver733.vkuploader.media.MediaRandom;
 import com.driver733.vkuploader.media.photo.MediaPhotosBasic;
 import com.driver733.vkuploader.post.SuppressFBWarnings;
-import com.driver733.vkuploader.post.UploadServers;
+import com.driver733.vkuploader.post.UploadServersBasic;
 import com.driver733.vkuploader.wallpost.PropsFile;
 import com.driver733.vkuploader.wallpost.WallPost;
 import com.driver733.vkuploader.wallpost.WallPostRandom;
@@ -104,7 +104,7 @@ public final class WallPostsRandom implements WallPosts {
     /**
      * Upload servers that provide upload URLs for attachmentsFields.
      */
-    private final UploadServers servers;
+    private final UploadServersBasic servers;
 
     /**
      * Properties for caching results.
@@ -124,7 +124,7 @@ public final class WallPostsRandom implements WallPosts {
     public WallPostsRandom(
         final VkApiClient client,
         final UserActor actor,
-        final UploadServers servers,
+        final UploadServersBasic servers,
         final PropsFile properties,
         final int group,
         final Path photos
@@ -156,7 +156,7 @@ public final class WallPostsRandom implements WallPosts {
     public WallPostsRandom(
         final VkApiClient client,
         final UserActor actor,
-        final UploadServers servers,
+        final UploadServersBasic servers,
         final PropsFile properties,
         final Path audios,
         final int group
@@ -189,7 +189,7 @@ public final class WallPostsRandom implements WallPosts {
     public WallPostsRandom(
         final VkApiClient client,
         final UserActor actor,
-        final UploadServers servers,
+        final UploadServersBasic servers,
         final PropsFile properties,
         final int group,
         final Path photos,

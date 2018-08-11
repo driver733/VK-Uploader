@@ -59,12 +59,16 @@ public enum AudioStatus {
      * Ctor.
      * @param value Int value.
      */
-    AudioStatus(final Integer value) {
+    AudioStatus(
+        final Integer value
+    ) {
         this.value = value;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(this.value);
+        return String.valueOf(
+            this.value
+        );
     }
 }

@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.wallpost;
 
-import com.driver733.vkuploader.post.UploadServers;
+import com.driver733.vkuploader.post.UploadServersBasic;
 import com.driver733.vkuploader.wallpost.attachment.AttachmentCachedAudio;
 import com.driver733.vkuploader.wallpost.attachment.AttachmentWallPhoto;
 import com.driver733.vkuploader.wallpost.attachment.message.ID3v1AnnotatedSafe;
@@ -85,7 +85,7 @@ public final class WallPostMusicAlbum implements WallPost {
     /**
      * Upload servers that provide upload URLs for attachmentsFields.
      */
-    private final UploadServers servers;
+    private final UploadServersBasic servers;
 
     /**
      * Properties that contain the {@link AudioStatus} of audios files.
@@ -108,7 +108,7 @@ public final class WallPostMusicAlbum implements WallPost {
         final VkApiClient client,
         final UserActor actor,
         final List<Path> audios,
-        final UploadServers servers,
+        final UploadServersBasic servers,
         final PropsFile properties,
         final int group
     ) {

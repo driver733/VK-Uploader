@@ -23,7 +23,7 @@
  */
 package com.driver733.vkuploader.wallpost;
 
-import com.driver733.vkuploader.post.UploadServers;
+import com.driver733.vkuploader.post.UploadServersBasic;
 import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
 import com.vk.api.sdk.client.TransportClient;
@@ -141,7 +141,7 @@ public final class WallPostPhotoAlbumTest extends AbstractVkUnitTest {
                     "1"
                 ),
                 photos,
-                new UploadServers(
+                new UploadServersBasic(
                     new VkApiClient(
                         new TransportClientFake(
                             new HashMap<String, TransportClient>() {

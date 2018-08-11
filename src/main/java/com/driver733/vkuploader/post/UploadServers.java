@@ -21,56 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.driver733.vkuploader.post;
 
-import com.jcabi.aspects.Cacheable;
-import com.jcabi.aspects.Immutable;
-import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Acquires upload servers for various files.
  *
- *
- *
- * @since 0.1
+ * @since 0.4
  */
-@Immutable
-public final class UploadServers {
-
-    /**
-     * Group ID.
-     */
-    private final int group;
-
-    /**
-     * VKAPIClient that is used for all VK API requests.
-     */
-    private final VkApiClient client;
-
-    /**
-     * UserActor on behalf of which all requests will be sent.
-     */
-    private final UserActor actor;
-
-    /**
-     * Ctor.
-     * @param client VKAPIClient that is used for all VK API requests.
-     * @param actor UserActor on behalf of which all requests will be sent.
-     * @param group Group ID.
-     */
-    public UploadServers(
-        final VkApiClient client,
-        final UserActor actor,
-        final int group
-    ) {
-        this.client = client;
-        this.actor = actor;
-        this.group = group;
-    }
+public interface UploadServers {
 
     /**
      * Acquires an upload URL for audios files
@@ -79,16 +41,7 @@ public final class UploadServers {
      * @throws ClientException VK client error.
      * @throws ApiException VK API error.
      */
-    @Cacheable(
-        lifetime = 1,
-        unit = TimeUnit.MINUTES
-    )
-    public String audios() throws ClientException, ApiException {
-        return this.client.audio()
-            .getUploadServer(this.actor)
-            .execute()
-            .getUploadUrl();
-    }
+    String audios() throws ClientException, ApiException;
 
     /**
      * Acquires an upload URL for wall docs
@@ -97,14 +50,7 @@ public final class UploadServers {
      * @throws ClientException VK client error.
      * @throws ApiException VK API error.
      */
-    @Cacheable(lifetime = 1, unit = TimeUnit.MINUTES)
-    public String docs() throws ClientException, ApiException {
-        return this.client.docs()
-            .getWallUploadServer(this.actor)
-            .groupId(this.group)
-            .execute()
-            .getUploadUrl();
-    }
+    String docs() throws ClientException, ApiException;
 
     /**
      * Acquires an upload URL for wall files
@@ -113,16 +59,6 @@ public final class UploadServers {
      * @throws ClientException VK client error.
      * @throws ApiException VK API error.
      */
-    @Cacheable(
-        lifetime = 1,
-        unit = TimeUnit.MINUTES
-    )
-    public String wallPhoto() throws ClientException, ApiException {
-        return this.client.photos()
-            .getWallUploadServer(this.actor)
-            .groupId(this.group)
-            .execute()
-            .getUploadUrl();
-    }
+    String wallPhoto() throws ClientException, ApiException;
 
 }

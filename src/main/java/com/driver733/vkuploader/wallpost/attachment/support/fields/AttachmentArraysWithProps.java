@@ -129,9 +129,9 @@ public final class AttachmentArraysWithProps implements AttachmentsFields {
                 ).execute();
         new PropertiesUpdate(
             this.properties,
-            ids.idsMap(),
+            ids.value(),
             root.getAsJsonArray()
-        ).save();
+        ).run();
         try {
             return new AttachmentsFromResults(
                 root.getAsJsonArray(),

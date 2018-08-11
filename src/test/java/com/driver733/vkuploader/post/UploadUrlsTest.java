@@ -34,7 +34,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test for {@link UploadServers}.
+ * Test for {@link UploadServersBasic}.
  *
  *
  *
@@ -47,7 +47,7 @@ public final class UploadUrlsTest {
     @Test
     public void audio() throws ClientException, ApiException {
         MatcherAssert.assertThat(
-            new UploadServers(
+            new UploadServersBasic(
                 new VkApiClient(
                     new TransportClientCached(
                         "{ \"upload_url\" : \"http://test.com/audios\" }"
@@ -63,7 +63,7 @@ public final class UploadUrlsTest {
     @Test
     public void docs() throws ClientException, ApiException {
         MatcherAssert.assertThat(
-            new UploadServers(
+            new UploadServersBasic(
                 new VkApiClient(
                     new TransportClientCached(
                         "{ \"upload_url\" : \"http://test.com/docs\" }"
@@ -79,7 +79,7 @@ public final class UploadUrlsTest {
     @Test
     public void wallPhoto() throws ClientException, ApiException {
         MatcherAssert.assertThat(
-            new UploadServers(
+            new UploadServersBasic(
                 new VkApiClient(
                     new TransportClientCached(
                         "{ \"upload_url\" : \"http://test.com/wallPhoto\" }"

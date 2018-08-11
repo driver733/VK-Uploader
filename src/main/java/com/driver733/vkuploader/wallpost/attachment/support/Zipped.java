@@ -33,19 +33,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+import org.cactoos.Input;
 import org.cactoos.io.BytesOf;
 import org.cactoos.io.InputOf;
 
 /**
  * Creates a zip file with files in the directory.
  *
- *
- *
  * @since 0.2
  */
 @Immutable
 @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-public final class Zipped {
+public final class Zipped implements Input {
 
     /**
      * EntranceDirectory or a file to zip.
@@ -56,32 +55,35 @@ public final class Zipped {
      * Ctor.
      * @param directory EntranceDirectory or a file to zip.
      */
-    public Zipped(final Path directory) {
+    public Zipped(
+        final Path directory
+    ) {
         this.directory = directory;
     }
 
-    /**
-     * Creates a zip file with files in the directory.
-     * @return Created zip file.
-     * @throws Exception If zip file cannot be created.
-     */
-    public InputStream zip() throws Exception {
+    @Override
+    public InputStream stream() throws Exception {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (ZipOutputStream zos = new ZipOutputStream(out)) {
             final List<Path> paths = Files.walk(
                 this.directory
             ).filter(
-                dirr -> !Files.isDirectory(dirr)
+                dirr -> !Files.isDirectory(
+                    dirr
+                )
             ).collect(
                 Collectors.toList()
             );
             for (final Path path : paths) {
                 final ZipEntry entry = new ZipEntry(
-                    this.directory.relativize(
-                        path
-                    ).toString()
+                    this.directory
+                        .relativize(
+                            path
+                        ).toString()
                 );
-                zos.putNextEntry(entry);
+                zos.putNextEntry(
+                    entry
+                );
                 zos.write(
                     new BytesOf(
                         new InputOf(

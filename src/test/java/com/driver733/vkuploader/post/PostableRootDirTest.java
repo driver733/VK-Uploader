@@ -143,7 +143,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                     1, ""
                 ),
                 root.resolve("testPhotoAlbum"),
-                new UploadServers(
+                new UploadServersBasic(
                     new VkApiClient(
                         new TransportClientFake(
                             new HashMap<String, TransportClient>() {
@@ -368,7 +368,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                     1, ""
                 ),
                 root.resolve("album"),
-                new UploadServers(
+                new UploadServersBasic(
                     new VkApiClient(
                         new TransportClientFake(
                             new HashMap<String, TransportClient>() {
@@ -525,7 +525,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                     1,
                     ""
                 ),
-                new UploadServers(
+                new UploadServersBasic(
                     new VkApiClient(
                         new TransportClientFake(
                             new HashMap<String, TransportClient>() {
@@ -659,7 +659,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                     1,
                     ""
                 ),
-                new UploadServers(
+                new UploadServersBasic(
                     new VkApiClient(
                         new TransportClientFake(
                             new HashMap<String, TransportClient>() {
@@ -835,7 +835,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                     1,
                     ""
                 ),
-                new UploadServers(
+                new UploadServersBasic(
                     new VkApiClient(
                         new TransportClientFake(
                             new HashMap<String, TransportClient>() {

@@ -1,8 +1,11 @@
 assets:
   dropboxAPIKey.txt: "driver733/VK-Uploader-Config#dropboxAPIKey.txt"
   credentials.properties: "driver733/VK-Uploader-Config#credentials.properties"
+  secring.gpg: "driver733/VK-Uploader-Config#secring.gpg"
+  pubring.gpg: "driver733/VK-Uploader-Config#pubring.gpg"
+  settings.xml: "driver733/VK-Uploader-Config#settings.xml"
 architect:
-  - driver733
+- driver733
 docker:
   as_root: true
   image: "maven:3.5-jdk-8"
@@ -12,24 +15,23 @@ merge:
   fast-forward: default
   rebase: true
   script:
-      - apt-get update
-      - apt-get -y upgrade
-      - apt-get -y install md5deep
-      - # .m2 archive cache download
-      - curl "https://raw.githubusercontent.com/driver733/Dropbox-Uploader/master/dropbox_uploader.sh" -o dropbox_uploader.sh
-      - chmod +x dropbox_uploader.sh
-      - ./dropbox_uploader.sh < /home/r/dropboxAPIKey.txt
-      - ./dropbox_uploader.sh download m2.tar.gz m2.tar.gz
-      - tar -xzvf m2.tar.gz -C / > /dev/null
-      - md5deep -r -s /root/.m2 > m2sumOld
-      # Build
-      - PROPS="/home/r/credentials.properties"
-      - mvn clean verify jacoco:report coveralls:report clean verify qulice:check -Dvk.userId=`cat $PROPS | grep "vk.user"  | cut -d'=' -f2` -Dvk.groupId=`cat $PROPS | grep "vk.group" | cut -d'=' -f2` -Dvk.token=`cat $PROPS | grep "vk.token" | cut -d'=' -f2` -Dcoveralls.repo.token=`cat $PROPS | grep "coveralls.repo.token" | cut -d'=' -f2`
-      # Upload (if necessary) the updated .m2 archive to Dropbox
-      - if [ "$(md5deep -r -x m2sumOld /root/.m2 | grep -v --ignore-case -e "driver733" -e "VK-Uploader")" != "" ]; then tar -czvf m2.tar.gz /root/.m2 > /dev/null; ./dropbox_uploader.sh upload m2.tar.gz /m2.tar.gz; fi
+  - apt-get update
+  - apt-get -y upgrade
+  - apt-get -y install md5deep
+  - # .m2 archive cache download
+  - curl "https://raw.githubusercontent.com/driver733/Dropbox-Uploader/master/dropbox_uploader.sh" -o dropbox_uploader.sh
+  - chmod +x dropbox_uploader.sh
+  - ./dropbox_uploader.sh < /home/r/dropboxAPIKey.txt
+  - ./dropbox_uploader.sh download m2.tar.gz m2.tar.gz
+  - tar -xzvf m2.tar.gz -C / > /dev/null
+  - md5deep -r -s /root/.m2 > m2sumOld
+  # Build
+  - PROPS="/home/r/credentials.properties"
+  - mvn clean verify jacoco:report coveralls:report clean verify qulice:check -Dvk.userId=`cat $PROPS | grep "vk.user"  | cut -d'=' -f2` -Dvk.groupId=`cat $PROPS | grep "vk.group" | cut -d'=' -f2` -Dvk.token=`cat $PROPS | grep "vk.token" | cut -d'=' -f2` -Dcoveralls.repo.token=`cat $PROPS | grep "coveralls.repo.token" | cut -d'=' -f2`
+  # Upload (if necessary) the updated .m2 archive to Dropbox
+  - if [ "$(md5deep -r -x m2sumOld /root/.m2 | grep -v --ignore-case -e "driver733" -e "VK-Uploader")" != "" ]; then tar -czvf m2.tar.gz /root/.m2 > /dev/null; ./dropbox_uploader.sh upload m2.tar.gz /m2.tar.gz; fi
 release:
   script: |-
-    [[ "${tag}" =~ ^[0-9]+(\.[0-9]+)*$ ]] || exit -1
-    mvn versions:set "-DnewVersion=${tag}"
+    mvn versions:set "-DnewVersion=${tag}" -e
     git commit -am "${tag}"
-    mvn clean deploy qulice:check
+    mvn clean deploy --settings /home/r/settings.xml qulice:check

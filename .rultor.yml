@@ -11,7 +11,7 @@ docker:
   image: "maven:3.5-jdk-8"
 merge:
   commanders:
-  - driver733
+    - driver733
   fast-forward: default
   rebase: true
   script: |-

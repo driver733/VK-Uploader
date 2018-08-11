@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Forms a map of with  index (queries) - audio_id pairs
+ * Forms a map of with index (queries) - audio_id pairs
  *  from the audios queries.
  *
  * @since 0.1

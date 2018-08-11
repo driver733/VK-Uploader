@@ -5,7 +5,9 @@
 
 [![Build Status](https://travis-ci.org/driver733/VK-Uploader.svg?branch=master)](https://travis-ci.org/driver733/VK-Uploader)
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.driver733/vk-uploader/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.driver733/vk-uploader)
+[![Maven Central](https://img.shields.io/maven-central/v/com.driver733/vk-uploader.svg)](https://maven-badges.herokuapp.com/maven-central/com.driver733/vk-uploader)
+
+[![jPeek Report](http://i.jpeek.org/com.driver733/vk-uploader/badge.svg)](http://i.jpeek.org/com.driver733/vk-uploader/)
 
 [![Coverage Status](https://coveralls.io/repos/github/driver733/VK-Uploader/badge.svg?branch=master)](https://coveralls.io/github/driver733/VK-Uploader?branch=master)
 [![](https://tokei.rs/b1/github/driver733/VK-Uploader)](https://github.com/driver733/VK-Uploader)

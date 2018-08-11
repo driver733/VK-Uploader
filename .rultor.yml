@@ -5,7 +5,7 @@ assets:
   pubring.gpg: "driver733/VK-Uploader-Config#pubring.gpg"
   settings.xml: "driver733/VK-Uploader-Config#settings.xml"
 architect:
-- driver733
+  - driver733
 docker:
   as_root: true
   image: "maven:3.5-jdk-8"

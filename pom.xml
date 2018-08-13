@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.github.driver733</groupId>
         <artifactId>jcabi-parent</artifactId>
-        <version>8864b83e8e</version>
+        <version>c4d152c3b2</version>
     </parent>
     <repositories>
         <repository>
@@ -18,7 +18,7 @@
     <artifactId>vk-uploader</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>VK Uploader</name>
+    <name>vk-uploader</name>
     <description>VK.com group posts generator</description>
     <url>https://github.com/driver733/VK-Uploader</url>
     <inceptionYear>2017</inceptionYear>

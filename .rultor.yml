@@ -4,6 +4,8 @@ assets:
   secring.gpg: "driver733/VK-Uploader-Config#secring.gpg"
   pubring.gpg: "driver733/VK-Uploader-Config#pubring.gpg"
   settings.xml: "driver733/VK-Uploader-Config#settings.xml"
+env:
+  GPG_TTY: $(tty)
 architect:
   - driver733
 docker:

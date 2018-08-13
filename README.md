@@ -20,6 +20,8 @@
 
 [![PDD status](http://www.0pdd.com/svg?name=driver733/VK-Uploader)](http://www.0pdd.com/p?name=driver733/VK-Uploader)
 
+[![Javadoc](http://www.javadoc.io/badge/com.driver733/vk-uploader.svg)](http://www.javadoc.io/doc/com.driver733/vk-uploader)
+
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/driver733/VK-Uploader/blob/master/LICENSE.txt)
 
 **VK-Uploader** is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)

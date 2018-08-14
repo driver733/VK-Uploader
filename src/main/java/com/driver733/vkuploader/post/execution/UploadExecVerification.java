@@ -35,8 +35,6 @@ import java.util.List;
  * Executes the queries and
  *  notifies {@link WallPosts} to cache the changes.
  *
- *
- *
  * @since 0.1
  */
 @Immutable

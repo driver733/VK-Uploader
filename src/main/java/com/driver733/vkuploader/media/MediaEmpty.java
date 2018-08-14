@@ -30,8 +30,6 @@ import org.cactoos.list.StickyList;
 /**
  * Media Empty.
  *
- *
- *
  * @since 0.2
  */
 public final class MediaEmpty implements Media {

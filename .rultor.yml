@@ -34,7 +34,7 @@ release:
     PROPS="/home/r/credentials.properties"
     mvn versions:set "-DnewVersion=${tag}" -e
     git commit -am "${tag}"
-    mvn clean deploy -Psonatype jacoco:report coveralls:report qulice:check --settings /home/r/settings.xml -Dvk.userId=`cat $PROPS | grep "vk.user"  | cut -d'=' -f2` -Dvk.groupId=`cat $PROPS | grep "vk.group" | cut -d'=' -f2` -Dvk.token=`cat $PROPS | grep "vk.token" | cut -d'=' -f2` -Dcoveralls.repo.token=`cat $PROPS | grep "coveralls.repo.token" | cut -d'=' -f2`
+    mvn clean deploy -Psonatype jacoco:report coveralls:report qulice:check sonar:sonar --settings /home/r/settings.xml -Dvk.userId=`cat $PROPS | grep "vk.user"  | cut -d'=' -f2` -Dvk.groupId=`cat $PROPS | grep "vk.group" | cut -d'=' -f2` -Dvk.token=`cat $PROPS | grep "vk.token" | cut -d'=' -f2` -Dcoveralls.repo.token=`cat $PROPS | grep "coveralls.repo.token" | cut -d'=' -f2`
 uninstall: |-
   md5deep -r -s /root/.m2 > m2sumOld
   if [ "$(md5deep -r -x m2sumOld /root/.m2 | grep -v --ignore-case -e "driver733" -e "VK-Uploader")" != "" ]; then tar -czvf m2.tar.gz /root/.m2 > /dev/null; ./dropbox_uploader.sh upload m2.tar.gz /m2.tar.gz; fi

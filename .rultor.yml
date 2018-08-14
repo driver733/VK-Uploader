@@ -27,7 +27,7 @@ merge:
   rebase: true
   script: |-
     PROPS="/home/r/credentials.properties"
-    mvn clean verify jacoco:report coveralls:report qulice:check -Dvk.userId=`cat $PROPS | grep "vk.user"  | cut -d'=' -f2` -Dvk.groupId=`cat $PROPS | grep "vk.group" | cut -d'=' -f2` -Dvk.token=`cat $PROPS | grep "vk.token" | cut -d'=' -f2` -Dcoveralls.repo.token=`cat $PROPS | grep "coveralls.repo.token" | cut -d'=' -f2`
+    mvn clean verify jacoco:report coveralls:report qulice:check -Dsonar.organization=driver733-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=`cat $PROPS | grep "sonar.login"  | cut -d'=' -f2` -Dvk.userId=`cat $PROPS | grep "vk.user"  | cut -d'=' -f2` -Dvk.groupId=`cat $PROPS | grep "vk.group" | cut -d'=' -f2` -Dvk.token=`cat $PROPS | grep "vk.token" | cut -d'=' -f2` -Dcoveralls.repo.token=`cat $PROPS | grep "coveralls.repo.token" | cut -d'=' -f2`
     if [ "$(md5deep -r -x m2sumOld /root/.m2 | grep -v --ignore-case -e "driver733" -e "VK-Uploader")" != "" ]; then tar -czvf m2.tar.gz /root/.m2 > /dev/null; ./dropbox_uploader.sh upload m2.tar.gz /m2.tar.gz; fi
 release:
   script: |-

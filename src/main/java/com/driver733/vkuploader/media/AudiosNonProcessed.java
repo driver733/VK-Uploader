@@ -37,8 +37,6 @@ import java.util.List;
  * files that have not been processed
  * yet.
  *
- *
- *
  * @since 0.1
  */
 @Immutable

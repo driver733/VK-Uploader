@@ -9,6 +9,7 @@
 [![Javadoc](http://www.javadoc.io/badge/com.driver733/vk-uploader.svg)](http://www.javadoc.io/doc/com.driver733/vk-uploader)
 
 [![jPeek Report](http://i.jpeek.org/com.driver733/vk-uploader/badge.svg)](http://i.jpeek.org/com.driver733/vk-uploader/)
+[![SonarQube](https://img.shields.io/badge/sonar-ok-green.svg)](https://sonarcloud.io/dashboard?id=com.driver733%3Avk-uploader)
 
 [![Coverage Status](https://coveralls.io/repos/github/driver733/VK-Uploader/badge.svg?branch=master)](https://coveralls.io/github/driver733/VK-Uploader?branch=master)
 [![](https://tokei.rs/b1/github/driver733/VK-Uploader)](https://github.com/driver733/VK-Uploader)

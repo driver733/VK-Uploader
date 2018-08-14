@@ -6,6 +6,7 @@
 [![Build Status](https://travis-ci.org/driver733/VK-Uploader.svg?branch=master)](https://travis-ci.org/driver733/VK-Uploader)
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.driver733/vk-uploader.svg)](https://maven-badges.herokuapp.com/maven-central/com.driver733/vk-uploader)
+[![Javadoc](http://www.javadoc.io/badge/com.driver733/vk-uploader.svg)](http://www.javadoc.io/doc/com.driver733/vk-uploader)
 
 [![jPeek Report](http://i.jpeek.org/com.driver733/vk-uploader/badge.svg)](http://i.jpeek.org/com.driver733/vk-uploader/)
 
@@ -19,8 +20,6 @@
 [![Codacy (badge)](https://api.codacy.com/project/badge/Grade/65288c94deac4a36bf03a80604cf1c04)](https://www.codacy.com/app/driver733/VK-Uploader?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=driver733/VK-Uploader&amp;utm_campaign=Badge_Grade)
 
 [![PDD status](http://www.0pdd.com/svg?name=driver733/VK-Uploader)](http://www.0pdd.com/p?name=driver733/VK-Uploader)
-
-[![Javadoc](http://www.javadoc.io/badge/com.driver733/vk-uploader.svg)](http://www.javadoc.io/doc/com.driver733/vk-uploader)
 
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/driver733/VK-Uploader/blob/master/LICENSE.txt)
 

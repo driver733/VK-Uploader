@@ -16,9 +16,9 @@
 
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&identifier=91912426)](https://dependabot.com)
 
-[![Code Climate (badge)](https://api.codeclimate.com/v1/badges/4bb9b9966d40e4b10c8d/maintainability)](https://codeclimate.com/github/driver733/VK-Uploader/maintainability)
-[![codebeat (badge)](https://codebeat.co/badges/483007e8-a73d-4bfd-80a1-52586ba3a615)](https://codebeat.co/projects/github-com-driver733-VK-Uploader-master)
-[![Codacy (badge)](https://api.codacy.com/project/badge/Grade/65288c94deac4a36bf03a80604cf1c04)](https://www.codacy.com/app/driver733/VK-Uploader?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=driver733/VK-Uploader&amp;utm_campaign=Badge_Grade)
+[![Code climate](https://api.codeclimate.com/v1/badges/b2373387471b6c3ecf36/maintainability)](https://codeclimate.com/github/driver733/VK-Uploader/maintainability)
+[![codebeat badge](https://codebeat.co/badges/5abe85eb-0359-41c8-baec-5cf168210bcf)](https://codebeat.co/projects/github-com-driver733-vk-uploader-master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/65288c94deac4a36bf03a80604cf1c04)](https://www.codacy.com/app/driver733/VK-Uploader?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=driver733/VK-Uploader&amp;utm_campaign=Badge_Grade)
 
 [![PDD status](http://www.0pdd.com/svg?name=driver733/VK-Uploader)](http://www.0pdd.com/p?name=driver733/VK-Uploader)
 

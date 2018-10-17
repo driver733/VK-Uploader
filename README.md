@@ -1,8 +1,13 @@
 # VK-Uploader
+
+<a href="https://www.yegor256.com/2017/10/24/award-2018.html">
+<img src="https://www.yegor256.com/images/award/2018/winner-driver733.png" height=50px alt='Winner Badge'/>
+</a>
+
 [![EO principles respected here](http://www.elegantobjects.org/badge.svg)](http://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/driver733/VK-Uploader)](http://www.rultor.com/p/driver733/VK-Uploader)
 [![We recommend IntelliJ IDEA](http://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
-
+  
 [![Build Status](https://travis-ci.org/driver733/VK-Uploader.svg?branch=master)](https://travis-ci.org/driver733/VK-Uploader)
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.driver733/vk-uploader.svg)](https://search.maven.org/artifact/com.driver733/vk-uploader/0.4/jar)
@@ -107,7 +112,7 @@ they don't violate our quality standards. To avoid frustration, before
 sending us your pull request please run full Maven build:
 
 ```
-$ mvn clean install qulice:check
+$ mvn clean test -DskipTests=true qulice:check
 ```
 
 To avoid build errors use maven 3.2+.

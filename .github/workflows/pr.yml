@@ -1,0 +1,22 @@
+name: Pull Request
+
+on: [pull_request]
+
+jobs:
+  build-merge-result:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 8
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+          fetch-depth: 0
+      - name: Merge with base branch
+        run: |
+          git fetch origin +refs/heads/${{ github.head_ref }}:refs/remotes/origin/${{ github.head_ref }} --no-tags
+          git checkout ${{ github.head_ref }}
+          git checkout ${{ github.base_ref }}
+          git merge ${{ github.head_ref }}
+      - run: mvn install qulice:check -DskipITs --errors --batch-mode

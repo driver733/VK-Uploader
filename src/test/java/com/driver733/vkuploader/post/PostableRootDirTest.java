@@ -38,21 +38,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import net.jcip.annotations.NotThreadSafe;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
  * Test for {@link PostableRootDir}.
  *
- * @since 0.2
  * @checkstyle AnonInnerLengthCheck (2000 lines)
  * @checkstyle JavadocMethodCheck (2000 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (2000 lines)
  * @checkstyle MethodLength (2000 lines)
+ * @checkstyle IndentationCheck (1000 lines)
+ * @since 0.2
  */
 @Immutable
 @NotThreadSafe
@@ -64,7 +63,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         "PMD.NonStaticInitializer",
         "PMD.AvoidDuplicateLiterals",
         "PMD.ProhibitPlainJunitAssertionsRule"
-        })
+    })
     public void testPhotoAlbum() throws Exception {
         final Path root = Paths.get("src/test/resources/photos/");
         root.resolve("testPhotoAlbum")
@@ -194,9 +193,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 AbstractVkUnitTest.GROUP_ID
             )
         ).post();
-        TimeUnit.SECONDS.sleep(2);
-        MatcherAssert.assertThat(
-            "The properties files differ",
+        Assertions.assertThat(
             new PropsFile(
                 root.resolve("testPhotoAlbum")
                     .resolve("vkmu.properties")
@@ -207,45 +204,20 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                         Map.Entry::getKey,
                         Map.Entry::getValue
                     )
-                ),
-            Matchers.allOf(
-                Matchers.hasEntry(
-                    "1.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "2.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "3.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "4.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "5.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "6.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "7.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "8.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "9.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "10.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "11.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "12.jpg", "1"
                 )
-            )
+        ).containsOnly(
+            Assertions.entry("1.jpg", "1"),
+            Assertions.entry("2.jpg", "1"),
+            Assertions.entry("3.jpg", "1"),
+            Assertions.entry("4.jpg", "1"),
+            Assertions.entry("5.jpg", "1"),
+            Assertions.entry("6.jpg", "1"),
+            Assertions.entry("7.jpg", "1"),
+            Assertions.entry("8.jpg", "1"),
+            Assertions.entry("9.jpg", "1"),
+            Assertions.entry("10.jpg", "1"),
+            Assertions.entry("11.jpg", "1"),
+            Assertions.entry("12.jpg", "1")
         );
     }
 
@@ -255,7 +227,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         "PMD.NonStaticInitializer",
         "PMD.AvoidDuplicateLiterals",
         "PMD.ProhibitPlainJunitAssertionsRule"
-        })
+    })
     public void testMusicAlbum() throws Exception {
         final Path root = Paths.get("src/test/resources/music/");
         root.resolve("vkmu.properties")
@@ -321,9 +293,9 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                                             "\"user_id\"     : 4356,",
                                             "\"sizes\"       : [",
                                             "{",
-                                                "\"src\": \"src\",",
-                                                "\"width\": 100,",
-                                                "\"height\": 100",
+                                            "\"src\": \"src\",",
+                                            "\"width\": 100,",
+                                            "\"height\": 100",
                                             "}",
                                             "],",
                                             "\"photo_75\"    : \"url1.com\",",
@@ -419,9 +391,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 AbstractVkUnitTest.GROUP_ID
             )
         ).post();
-        TimeUnit.SECONDS.sleep(2);
-        MatcherAssert.assertThat(
-            "The properties files differ",
+        Assertions.assertThat(
             new PropsFile(
                 root.resolve("album")
                     .resolve("vkmu.properties")
@@ -432,11 +402,10 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                         Map.Entry::getKey,
                         Map.Entry::getValue
                     )
-                ),
-            Matchers.allOf(
-                Matchers.hasEntry("test.mp3", "2_123456789"),
-                Matchers.hasEntry("testMissingTags.mp3", "2_123456789")
-            )
+                )
+        ).containsOnly(
+            Assertions.entry("test.mp3", "2_123456789"),
+            Assertions.entry("testMissingTags.mp3", "2_123456789")
         );
     }
 
@@ -446,7 +415,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         "PMD.NonStaticInitializer",
         "PMD.AvoidDuplicateLiterals",
         "PMD.ProhibitPlainJunitAssertionsRule"
-        })
+    })
     public void testRandomPhoto() throws Exception {
         final Path root = Paths.get("src/test/resources/random/");
         root.resolve("testPhotoAlbum")
@@ -563,8 +532,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 root.resolve("testPhotoAlbum")
             )
         ).post();
-        MatcherAssert.assertThat(
-            "The properties files differ",
+        Assertions.assertThat(
             new PropsFile(
                 root.resolve("testPhotoAlbum")
                     .resolve("vkmu.properties")
@@ -575,14 +543,13 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                         Map.Entry::getKey,
                         Map.Entry::getValue
                     )
-                ),
-            Matchers.allOf(
-                Matchers.hasEntry("1.jpg", "1"),
-                Matchers.hasEntry("2.jpg", "1"),
-                Matchers.hasEntry("3.jpg", "1"),
-                Matchers.hasEntry("4.jpg", "1"),
-                Matchers.hasEntry("5.jpg", "1")
-            )
+                )
+        ).containsOnly(
+            Assertions.entry("1.jpg", "1"),
+            Assertions.entry("2.jpg", "1"),
+            Assertions.entry("3.jpg", "1"),
+            Assertions.entry("4.jpg", "1"),
+            Assertions.entry("5.jpg", "1")
         );
     }
 
@@ -592,7 +559,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         "PMD.NonStaticInitializer",
         "PMD.AvoidDuplicateLiterals",
         "PMD.ProhibitPlainJunitAssertionsRule"
-        })
+    })
     public void testRandomAudio() throws Exception {
         final Path root = Paths.get("src/test/resources/random/");
         root.resolve("musicAlbum")
@@ -695,9 +662,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 AbstractVkUnitTest.GROUP_ID
             )
         ).post();
-        TimeUnit.SECONDS.sleep(2);
-        MatcherAssert.assertThat(
-            "The properties files differ",
+        Assertions.assertThat(
             new PropsFile(
                 root.resolve("musicAlbum")
                     .resolve("vkmu.properties")
@@ -708,11 +673,10 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                         Map.Entry::getKey,
                         Map.Entry::getValue
                     )
-                ),
-            Matchers.allOf(
-                Matchers.hasEntry("test.mp3", "2_123456789"),
-                Matchers.hasEntry("testMissingTags.mp3", "2_123456789")
-            )
+                )
+        ).containsOnly(
+            Assertions.entry("test.mp3", "2_123456789"),
+            Assertions.entry("testMissingTags.mp3", "2_123456789")
         );
     }
 
@@ -722,7 +686,7 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
         "PMD.NonStaticInitializer",
         "PMD.AvoidDuplicateLiterals",
         "PMD.ProhibitPlainJunitAssertionsRule"
-        })
+    })
     public void testRandomAudioAndPhoto() throws Exception {
         final Path root = Paths.get("src/test/resources/random/");
         root.resolve("vkmu.properties")
@@ -888,31 +852,26 @@ public final class PostableRootDirTest extends AbstractVkUnitTest {
                 root.resolve("musicAlbum")
             )
         ).post();
-        MatcherAssert.assertThat(
-            "The properties files differ",
+        Assertions.assertThat(
             new PropsFile(
                 root.resolve("vkmu.properties")
             ).entrySet()
                 .stream()
                 .collect(
-                Collectors.toMap(
-                    Map.Entry::getKey,
-                    Map.Entry::getValue
+                    Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue
+                    )
                 )
-            ),
-            Matchers.allOf(
-                Matchers.anyOf(
-                    Matchers.hasEntry("1.jpg", "1"),
-                    Matchers.hasEntry("2.jpg", "1"),
-                    Matchers.hasEntry("3.jpg", "1"),
-                    Matchers.hasEntry("4.jpg", "1"),
-                    Matchers.hasEntry("5.jpg", "1")
-                ),
-                Matchers.anyOf(
-                    Matchers.hasEntry("test.mp3", "2_123456789"),
-                    Matchers.hasEntry("testMissingTags.mp3", "2_123456789")
-                )
-            )
+        ).containsAnyOf(
+            Assertions.entry("1.jpg", "1"),
+            Assertions.entry("2.jpg", "1"),
+            Assertions.entry("3.jpg", "1"),
+            Assertions.entry("4.jpg", "1"),
+            Assertions.entry("5.jpg", "1")
+        ).containsAnyOf(
+            Assertions.entry("test.mp3", "2_123456789"),
+            Assertions.entry("testMissingTags.mp3", "2_123456789")
         );
     }
 

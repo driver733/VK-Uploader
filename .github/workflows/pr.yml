@@ -18,5 +18,7 @@ jobs:
           git fetch origin +refs/heads/${{ github.head_ref }}:refs/remotes/origin/${{ github.head_ref }} --no-tags
           git checkout ${{ github.head_ref }}
           git checkout ${{ github.base_ref }}
+          git config --global user.name 'Mikhail Yakushin'
+          git config --global user.email 'driver733@gmail.com'
           git merge ${{ github.head_ref }}
       - run: mvn install qulice:check -DskipITs --errors --batch-mode

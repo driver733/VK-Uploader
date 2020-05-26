@@ -8,7 +8,7 @@
 [![DevOps By Rultor.com](http://www.rultor.com/b/driver733/VK-Uploader)](http://www.rultor.com/p/driver733/VK-Uploader)
 [![We recommend IntelliJ IDEA](http://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
   
-[![Build Status](https://travis-ci.org/driver733/VK-Uploader.svg?branch=master)](https://travis-ci.org/driver733/VK-Uploader)
+![Build](https://github.com/driver733/VK-Uploader/workflows/Build/badge.svg?branch=master)
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.driver733/vk-uploader.svg)](https://search.maven.org/artifact/com.driver733/vk-uploader/0.4/jar)
 [![Javadoc](http://www.javadoc.io/badge/com.driver733/vk-uploader.svg)](http://www.javadoc.io/doc/com.driver733/vk-uploader)

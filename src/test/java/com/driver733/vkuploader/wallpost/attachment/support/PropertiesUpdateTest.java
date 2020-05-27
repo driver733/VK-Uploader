@@ -35,8 +35,7 @@ import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.io.File;
 import java.io.StringReader;
 import java.util.ArrayList;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -105,13 +104,11 @@ public final class PropertiesUpdateTest {
             ).getAsJsonArray()
         ).run();
         final PropsFile result = new PropsFile(file);
-        MatcherAssert.assertThat(
-            "Saved property does not match the expected value",
-            result.property(fileName),
-            Matchers.equalTo(
-                String.format(
-                    "%s_%d", AudioStatus.ADDED, addedMediaId
-                )
+        Assertions.assertThat(
+            result.property(fileName)
+        ).isEqualTo(
+            String.format(
+                "%s_%d", AudioStatus.ADDED, addedMediaId
             )
         );
     }

@@ -29,8 +29,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jcabi.aspects.Immutable;
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -38,14 +37,14 @@ import org.junit.Test;
  *
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle IndentationCheck (500 lines)
  */
 @Immutable
 public final class AttachmentStringsFromJsonTest {
 
     @Test
     public void testObject() throws IOException {
-        MatcherAssert.assertThat(
-            "Failed to form an attachment attachmentString from JsonObject",
+        Assertions.assertThat(
             new AttachmentStringsFromJson(
                 new GsonBuilder()
                     .setPrettyPrinting()
@@ -65,17 +64,13 @@ public final class AttachmentStringsFromJsonTest {
                     )
                     .getAsJsonObject(),
                 1
-            ).attachmentStrings(),
-            Matchers.containsInAnyOrder(
-                "audio1111111_1000000"
-            )
-        );
+            ).attachmentStrings()
+        ).containsOnly("audio1111111_1000000");
     }
 
     @Test
     public void testArray() throws IOException {
-        MatcherAssert.assertThat(
-            "Failed to form an attachment attachmentString from JsonArray.",
+        Assertions.assertThat(
             new AttachmentStringsFromJson(
                 new GsonBuilder()
                     .setPrettyPrinting()
@@ -104,18 +99,16 @@ public final class AttachmentStringsFromJsonTest {
                     )
                     .getAsJsonArray(),
                 1
-            ).attachmentStrings(),
-            Matchers.containsInAnyOrder(
-                "audio111111_3000000",
-                "audio2222222_2000000"
-            )
+            ).attachmentStrings()
+        ).containsOnly(
+            "audio111111_3000000",
+            "audio2222222_2000000"
         );
     }
 
     @Test(expected = IOException.class)
     public void testException() throws IOException {
-        MatcherAssert.assertThat(
-            "Failed to form an attachment attachmentString from JsonArray..",
+        Assertions.assertThat(
             new AttachmentStringsFromJson(
                 new GsonBuilder()
                     .setPrettyPrinting()
@@ -143,11 +136,10 @@ public final class AttachmentStringsFromJsonTest {
                         JsonArray.class
                     ).getAsJsonArray(),
                 1
-            ).attachmentStrings(),
-            Matchers.containsInAnyOrder(
-                "audio111111_30000001",
-                "audio2222222_20000001"
-            )
+            ).attachmentStrings()
+        ).containsOnly(
+            "audio111111_30000001",
+            "audio2222222_20000001"
         );
     }
 

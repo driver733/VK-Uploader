@@ -34,8 +34,7 @@ import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -62,8 +61,7 @@ public final class WallPostWithAttachmentsTest extends AbstractVkUnitTest {
             ),
             this.properties
         );
-        MatcherAssert.assertThat(
-            "Incorrect query map produced.",
+        Assertions.assertThat(
             new WallPostWithAttachments(
                 new WallPostBase(
                     new VkApiClient(
@@ -88,14 +86,13 @@ public final class WallPostWithAttachmentsTest extends AbstractVkUnitTest {
                     )
                 )
             ).construct()
-                .build(),
-            Matchers.allOf(
-                Matchers.hasEntry("access_token", "1"),
-                Matchers.hasEntry("v", "5.63"),
-                Matchers.hasEntry(
-                    "attachments",
-                    "audio-161929264_1,audio-161929264_2"
-                )
+                .build()
+        ).containsOnly(
+            Assertions.entry("access_token", "1"),
+            Assertions.entry("v", "5.63"),
+            Assertions.entry(
+                "attachments",
+                "audio-161929264_1,audio-161929264_2"
             )
         );
         props.recover();

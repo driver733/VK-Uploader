@@ -31,13 +31,12 @@ import com.driver733.vkuploader.wallpost.support.VkCredentials;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.objects.wall.WallpostFull;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import net.jcip.annotations.NotThreadSafe;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
@@ -72,7 +71,7 @@ public final class WallPostWithAttachmentsIT {
         final File props = new File("props.properties");
         props.deleteOnExit();
         new Properties().store(
-            new FileOutputStream(props),
+            Files.newOutputStream(props.toPath()),
             ""
         );
         final UploadServersBasic servers = new UploadServersBasic(
@@ -122,16 +121,13 @@ public final class WallPostWithAttachmentsIT {
                     post
                 )
             ).execute();
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             result.get(0)
                 .getAttachments()
                 .get(0)
                 .getDoc()
-                .getTitle(),
-            Matchers.equalTo(
-                "attachment.txt"
-            )
-        );
+                .getTitle()
+        ).isEqualTo("attachment.txt");
         this.credentials.client().wall()
             .delete(
                 this.credentials.actor()

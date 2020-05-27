@@ -41,8 +41,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import net.jcip.annotations.NotThreadSafe;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -200,8 +199,7 @@ public final class PostsBasicTest extends AbstractVkUnitTest {
             root
         ).post();
         TimeUnit.SECONDS.sleep(1);
-        MatcherAssert.assertThat(
-            "The properties files differ",
+        Assertions.assertThat(
             new PropsFile(
                 root.resolve("testPhotoAlbum")
                     .resolve("vkmu.properties")
@@ -212,45 +210,44 @@ public final class PostsBasicTest extends AbstractVkUnitTest {
                     Map.Entry::getKey,
                     Map.Entry::getValue
                 )
+            )
+        ).containsOnly(
+            Assertions.entry(
+                "1.jpg", "1"
             ),
-                Matchers.allOf(
-                    Matchers.hasEntry(
-                        "1.jpg", "1"
-                    ),
-                    Matchers.hasEntry(
-                        "2.jpg", "1"
-                    ),
-                    Matchers.hasEntry(
-                        "3.jpg", "1"
-                    ),
-                    Matchers.hasEntry(
-                        "4.jpg", "1"
-                    ),
-                    Matchers.hasEntry(
-                        "5.jpg", "1"
-                    ),
-                    Matchers.hasEntry(
-                        "6.jpg", "1"
-                    ),
-                    Matchers.hasEntry(
-                        "7.jpg", "1"
-                    ),
-                    Matchers.hasEntry(
-                        "8.jpg", "1"
-                    ),
-                    Matchers.hasEntry(
-                        "9.jpg", "1"
-                    ),
-                    Matchers.hasEntry(
-                        "10.jpg", "1"
-                    ),
-                    Matchers.hasEntry(
-                        "11.jpg", "1"
-                    ),
-                    Matchers.hasEntry(
-                        "12.jpg", "1"
-                    )
-                )
+            Assertions.entry(
+                "2.jpg", "1"
+            ),
+            Assertions.entry(
+                "3.jpg", "1"
+            ),
+            Assertions.entry(
+                "4.jpg", "1"
+            ),
+            Assertions.entry(
+                "5.jpg", "1"
+            ),
+            Assertions.entry(
+                "6.jpg", "1"
+            ),
+            Assertions.entry(
+                "7.jpg", "1"
+            ),
+            Assertions.entry(
+                "8.jpg", "1"
+            ),
+            Assertions.entry(
+                "9.jpg", "1"
+            ),
+            Assertions.entry(
+                "10.jpg", "1"
+            ),
+            Assertions.entry(
+                "11.jpg", "1"
+            ),
+            Assertions.entry(
+                "12.jpg", "1"
+            )
         );
     }
 
@@ -428,8 +425,7 @@ public final class PostsBasicTest extends AbstractVkUnitTest {
                 root
         ).post();
         TimeUnit.SECONDS.sleep(1);
-        MatcherAssert.assertThat(
-            "The properties files differ",
+        Assertions.assertThat(
             new PropsFile(
                 root.resolve("album")
                     .resolve("vkmu.properties")
@@ -440,11 +436,10 @@ public final class PostsBasicTest extends AbstractVkUnitTest {
                         Map.Entry::getKey,
                         Map.Entry::getValue
                     )
-                ),
-            Matchers.allOf(
-                Matchers.hasEntry("test.mp3", "2_123456789"),
-                Matchers.hasEntry("testMissingTags.mp3", "2_123456789")
-            )
+                )
+        ).containsOnly(
+            Assertions.entry("test.mp3", "2_123456789"),
+            Assertions.entry("testMissingTags.mp3", "2_123456789")
         );
     }
 

@@ -29,8 +29,7 @@ import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientCached;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -40,13 +39,14 @@ import org.junit.Test;
  *
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle IndentationCheck (500 lines)
  */
 @Immutable
 public final class UploadUrlsTest {
 
     @Test
     public void audio() throws ClientException, ApiException {
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new UploadServersBasic(
                 new VkApiClient(
                     new TransportClientCached(
@@ -55,14 +55,15 @@ public final class UploadUrlsTest {
                 ),
                 new UserActor(1, ""),
                 1
-            ).audios(),
-            Matchers.equalTo("http://test.com/audios")
+            ).audios()
+        ).isEqualTo(
+            "http://test.com/audios"
         );
     }
 
     @Test
     public void docs() throws ClientException, ApiException {
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new UploadServersBasic(
                 new VkApiClient(
                     new TransportClientCached(
@@ -71,14 +72,15 @@ public final class UploadUrlsTest {
                 ),
                 new UserActor(1, ""),
                 1
-            ).docs(),
-            Matchers.equalTo("http://test.com/docs")
+            ).docs()
+        ).isEqualTo(
+            "http://test.com/docs"
         );
     }
 
     @Test
     public void wallPhoto() throws ClientException, ApiException {
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new UploadServersBasic(
                 new VkApiClient(
                     new TransportClientCached(
@@ -87,8 +89,9 @@ public final class UploadUrlsTest {
                 ),
                 new UserActor(1, ""),
                 1
-            ).wallPhoto(),
-            Matchers.equalTo("http://test.com/wallPhoto")
+            ).wallPhoto()
+        ).isEqualTo(
+            "http://test.com/wallPhoto"
         );
     }
 

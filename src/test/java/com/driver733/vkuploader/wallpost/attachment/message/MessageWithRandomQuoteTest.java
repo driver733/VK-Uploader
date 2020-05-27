@@ -25,8 +25,7 @@ package com.driver733.vkuploader.wallpost.attachment.message;
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.http.request.FakeRequest;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -41,8 +40,7 @@ public final class MessageWithRandomQuoteTest {
 
     @Test
     public void testQuote() throws Exception {
-        MatcherAssert.assertThat(
-            "Quote text is does not match the answer",
+        Assertions.assertThat(
             new MessageWithRandomQuote(
                 new FakeRequest()
                     .withBody(
@@ -57,13 +55,12 @@ public final class MessageWithRandomQuoteTest {
                             "}"
                         )
                     )
-            ).value(),
-            Matchers.equalTo(
-                String.format(
-                    "%s%n© %s",
-                    "Общественной жизни.",
-                    "Лев Толстой"
-                )
+            ).value()
+        ).isEqualTo(
+            String.format(
+                "%s%n© %s",
+                "Общественной жизни.",
+                "Лев Толстой"
             )
         );
     }

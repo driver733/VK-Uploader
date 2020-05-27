@@ -93,8 +93,8 @@ public final class WallPostWithRandomQuote implements WallPost {
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param servers Upload servers that provide upload URLs
      *  for attachmentsFields.
-     * @param group Group ID.
      * @param photo WallPost photo.
+     * @param group Group ID.
      */
     public WallPostWithRandomQuote(
         final VkApiClient client,

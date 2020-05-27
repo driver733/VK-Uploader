@@ -28,8 +28,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.jcabi.aspects.Immutable;
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -38,13 +37,14 @@ import org.junit.Test;
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle CascadeIndentationCheck (50 lines)
+ * @checkstyle IndentationCheck (50 lines)
  */
 @Immutable
 public final class AttachmentsFromResultsTest {
 
     @Test
     public void statusUploadedAudio() throws IOException {
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new AttachmentsFromResults(
                 new GsonBuilder()
                     .setPrettyPrinting()
@@ -73,16 +73,15 @@ public final class AttachmentsFromResultsTest {
                     )
                     .getAsJsonArray(),
                 1
-            ).attachmentStrings(),
-            Matchers.containsInAnyOrder(
-                "audio1111111_1000000", "audio2222222_2000000"
-            )
+            ).attachmentStrings()
+        ).containsOnly(
+            "audio1111111_1000000", "audio2222222_2000000"
         );
     }
 
     @Test
     public void statusUploadedPhoto() throws IOException {
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new AttachmentsFromResults(
                 new GsonBuilder()
                     .setPrettyPrinting()
@@ -129,16 +128,15 @@ public final class AttachmentsFromResultsTest {
                     )
                     .getAsJsonArray(),
                 1
-            ).attachmentStrings(),
-            Matchers.containsInAnyOrder(
-                "photo111111_333333", "photo222222_444444"
-            )
+            ).attachmentStrings()
+        ).containsOnly(
+            "photo111111_333333", "photo222222_444444"
         );
     }
 
     @Test
     public void statusAdded() throws IOException {
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new AttachmentsFromResults(
                 new GsonBuilder()
                     .setPrettyPrinting()
@@ -146,10 +144,9 @@ public final class AttachmentsFromResultsTest {
                     .fromJson("[123456789, 987654321]", JsonArray.class)
                     .getAsJsonArray(),
                 1
-            ).attachmentStrings(),
-            Matchers.containsInAnyOrder(
-                "audio-1_123456789", "audio-1_987654321"
-            )
+            ).attachmentStrings()
+        ).containsOnly(
+            "audio-1_123456789", "audio-1_987654321"
         );
     }
 

@@ -16,5 +16,11 @@ jobs:
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: '2.7.1'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       - run: gem install pdd
       - run: pdd --source=$(pwd) --file=/dev/null

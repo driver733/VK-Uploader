@@ -28,11 +28,10 @@ import com.driver733.vkuploader.wallpost.attachment.support.AudioStatus;
 import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.objects.audio.Audio;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Properties;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -60,7 +59,7 @@ public final class AttachmentAudioPropsTest {
         final File file = new File("temp.properties");
         file.deleteOnExit();
         temp.store(
-            new FileOutputStream(file),
+            Files.newOutputStream(file.toPath()),
             ""
         );
         new AttachmentAudioProps(
@@ -71,15 +70,14 @@ public final class AttachmentAudioPropsTest {
             )
         ).saveProps();
         final PropsFile props = new PropsFile(file);
-        MatcherAssert.assertThat(
-            props.property(fileName),
-            Matchers.equalTo(
-                String.format(
-                    "%s_%d_%d",
-                    AudioStatus.UPLOADED,
-                    ownerId,
-                    mediaId
-                )
+        Assertions.assertThat(
+            props.property(fileName)
+        ).isEqualTo(
+            String.format(
+                "%s_%d_%d",
+                AudioStatus.UPLOADED,
+                ownerId,
+                mediaId
             )
         );
     }

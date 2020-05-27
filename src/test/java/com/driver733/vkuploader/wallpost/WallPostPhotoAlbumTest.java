@@ -38,8 +38,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -63,12 +62,11 @@ public final class WallPostPhotoAlbumTest extends AbstractVkUnitTest {
         final List<Path> photos = Files.walk(
             Paths.get("src/test/resources/photos/testPhotoAlbum")
         ).filter(
-            path -> path.toString().toLowerCase().endsWith(".jpg")
+            path -> path.toString().endsWith(".jpg")
         ).collect(
             Collectors.toList()
         );
-        MatcherAssert.assertThat(
-            "Incorrect query map produced.",
+        Assertions.assertThat(
             new WallPostPhotoAlbum(
                 new VkApiClient(
                     new TransportClientFake(
@@ -173,23 +171,22 @@ public final class WallPostPhotoAlbumTest extends AbstractVkUnitTest {
                 ),
                 GROUP_ID
             ).construct()
-                .build(),
-            Matchers.allOf(
-                Matchers.hasEntry("access_token", "1"),
-                Matchers.hasEntry("v", "5.63"),
-                Matchers.hasEntry(
-                    "attachments",
-                    StringUtils.join(
-                        Collections.nCopies(
-                            photos.size(),
-                            "photo6785_123456"
-                        ),
-                        ","
-                    )
-                ),
-                Matchers.hasEntry("owner_id", "-161929264"),
-                Matchers.hasEntry("from_group", "1")
-            )
+                .build()
+        ).containsOnly(
+            Assertions.entry("access_token", "1"),
+            Assertions.entry("v", "5.63"),
+            Assertions.entry(
+                "attachments",
+                StringUtils.join(
+                    Collections.nCopies(
+                        photos.size(),
+                        "photo6785_123456"
+                    ),
+                    ","
+                )
+            ),
+            Assertions.entry("owner_id", "-161929264"),
+            Assertions.entry("from_group", "1")
         );
     }
 

@@ -25,8 +25,7 @@ package com.driver733.vkuploader.wallpost.attachment.support;
 
 import com.jcabi.aspects.Immutable;
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -40,15 +39,13 @@ public final class RandomImageIT {
 
     @Test
     public void randomImageTest() throws IOException {
-        MatcherAssert.assertThat(
-            "Byte array received is empty.",
+        Assertions.assertThat(
             new BytesFromRequest(
                 new RequestRandomImage()
                 .value()
             ).asBytes()
-                .length,
-            Matchers.greaterThan(0)
-        );
+                .length
+        ).isGreaterThan(0);
     }
 
 }

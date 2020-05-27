@@ -23,6 +23,9 @@
  */
 package com.driver733.vkuploader.wallpost.support;
 
+import com.jcabi.matchers.RegexMatchers;
+import org.assertj.core.api.Condition;
+
 /**
  * VK API endpoints.
  *
@@ -37,7 +40,7 @@ public abstract class AbstractVkUnitTest {
     /**
      * Group ID.
      */
-    protected static final int GROUP_ID = 161929264;
+    protected static final int GROUP_ID = 161_929_264;
 
     /**
      * VK API endpoint - photos.saveWallPhoto.
@@ -50,6 +53,7 @@ public abstract class AbstractVkUnitTest {
      */
     protected static final String AUDIO_SAVE_URL =
         "https://api.vk.com/method/audio.save";
+
     /**
      * VK API endpoint - photos.getWallUploadServer.
      */
@@ -73,5 +77,18 @@ public abstract class AbstractVkUnitTest {
      */
     protected static final String EXECUTE_URL =
         "https://api.vk.com/method/execute";
+
+    protected static Condition<String> containsPattern(final String pattern) {
+        return new Condition<String>() {
+            @Override
+            public boolean matches(final String value) {
+                return RegexMatchers.containsPattern(pattern).matches(value);
+            }
+        };
+    }
+
+    protected static Condition<String> containsPatternCyrillic() {
+        return containsPattern("[а-яА-Я]");
+    }
 
 }

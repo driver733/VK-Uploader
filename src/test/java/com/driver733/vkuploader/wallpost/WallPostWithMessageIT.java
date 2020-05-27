@@ -29,8 +29,7 @@ import com.vk.api.sdk.objects.wall.WallpostFull;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import net.jcip.annotations.NotThreadSafe;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
@@ -84,12 +83,9 @@ public final class WallPostWithMessageIT {
                 this.credentials.actor(),
                 String.format("%d_%d", -this.credentials.group(), post)
         ).execute();
-        MatcherAssert.assertThat(
-            result.get(0).getText(),
-            Matchers.equalTo(
-                WallPostWithMessageIT.MESSAGE
-            )
-        );
+        Assertions.assertThat(
+            result.get(0).getText()
+        ).isEqualTo(WallPostWithMessageIT.MESSAGE);
         this.credentials.client().wall()
             .delete(
                 this.credentials.actor()

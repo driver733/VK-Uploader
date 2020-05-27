@@ -24,8 +24,9 @@
 package com.driver733.vkuploader.wallpost.support;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 
@@ -64,8 +65,8 @@ public final class RecoverableFile implements Recoverable<File> {
     @Override
     public File recover() throws IOException {
         try (
-            FileOutputStream fop = new FileOutputStream(
-                this.path.toFile()
+            OutputStream fop = Files.newOutputStream(
+                this.path
             )
         ) {
             fop.write(this.contents);

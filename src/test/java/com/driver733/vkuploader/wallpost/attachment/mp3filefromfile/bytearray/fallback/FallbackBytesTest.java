@@ -31,8 +31,7 @@ import com.mpatric.mp3agic.Mp3File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -62,7 +61,7 @@ public final class FallbackBytesTest {
     @Test
     public void testAdvancedTag()
         throws Exception {
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new FallbackBytes(
                 new ByteArrayImageFromAdvancedTag(
                     new AdvancedTagFromMp3File(
@@ -74,18 +73,17 @@ public final class FallbackBytesTest {
                 new ByteArrayFromFile(
                     this.audio
                 )
-            ).asBytes(),
-            Matchers.equalTo(
-                Files.readAllBytes(
-                    this.path
-                )
+            ).asBytes()
+        ).isEqualTo(
+            Files.readAllBytes(
+                this.path
             )
         );
     }
 
     @Test
     public void testFile() throws Exception {
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new FallbackBytes(
                 new ByteArrayFromFile(
                     this.path
@@ -93,35 +91,33 @@ public final class FallbackBytesTest {
             new ByteArrayFromFile(
                 this.audio
             )
-        ).asBytes(),
-            Matchers.equalTo(
-                Files.readAllBytes(
-                    this.path
-                )
+        ).asBytes()
+        ).isEqualTo(
+            Files.readAllBytes(
+                this.path
             )
         );
     }
 
     @Test(expected = Exception.class)
     public void testException() throws Exception {
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new FallbackBytes(
                 new ByteArrayFromFile(
                     this.path
                         .resolve("invalid")
                 )
-            ).asBytes(),
-            Matchers.equalTo(
-                Files.readAllBytes(
-                    this.path
-                )
+            ).asBytes()
+        ).isEqualTo(
+            Files.readAllBytes(
+                this.path
             )
         );
     }
 
     @Test
     public void testValidAndException() throws Exception {
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new FallbackBytes(
                 new ByteArrayFromFile(
                     this.path
@@ -130,11 +126,10 @@ public final class FallbackBytesTest {
                 new ByteArrayFromFile(
                     this.path
                 )
-            ).asBytes(),
-            Matchers.equalTo(
-                Files.readAllBytes(
-                    this.path
-                )
+            ).asBytes()
+        ).isEqualTo(
+            Files.readAllBytes(
+                this.path
             )
         );
     }

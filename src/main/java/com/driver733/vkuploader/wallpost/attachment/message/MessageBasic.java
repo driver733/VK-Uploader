@@ -23,6 +23,7 @@
  */
 package com.driver733.vkuploader.wallpost.attachment.message;
 
+import com.driver733.vkuploader.post.SuppressFBWarnings;
 import com.driver733.vkuploader.wallpost.WallPost;
 import com.jcabi.aspects.Immutable;
 import java.util.List;
@@ -56,6 +57,7 @@ public final class MessageBasic implements Scalar<String> {
     }
 
     @Override
+    @SuppressFBWarnings("VA_FORMAT_STRING_USES_NEWLINE")
     public String value() {
         final StringBuilder builder = new StringBuilder();
         for (int index = 0; index < this.parts.size(); index += 1) {
@@ -65,7 +67,7 @@ public final class MessageBasic implements Scalar<String> {
                 if (index == this.parts.size() - 1) {
                     res = String.format("%s", result);
                 } else {
-                    res = String.format("%s%n", result);
+                    res = String.format("%s\n", result);
                 }
                 builder.append(res);
             }

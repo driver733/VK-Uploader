@@ -29,7 +29,9 @@ import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
+import com.vk.api.sdk.objects.docs.Doc;
 import com.vk.api.sdk.objects.docs.responses.DocUploadResponse;
+import com.vk.api.sdk.queries.docs.DocsSaveQuery;
 import com.vk.api.sdk.queries.upload.UploadDocQuery;
 import java.util.List;
 import org.cactoos.list.StickyList;
@@ -43,7 +45,7 @@ import org.cactoos.list.StickyList;
  * @since 0.1
  */
 @Immutable
-public final class AttachmentWallDocument implements Attachment {
+public final class AttachmentWallDocument implements Attachment<DocsSaveQuery, List<Doc>> {
 
     /**
      * VKAPIClient that is used for all VK API requests.
@@ -77,7 +79,7 @@ public final class AttachmentWallDocument implements Attachment {
     }
 
     @Override
-    public List<AbstractQueryBuilder> upload()
+    public List<AbstractQueryBuilder<DocsSaveQuery, List<Doc>>> upload()
         throws Exception {
         final DocUploadResponse response =
             this.doc.query()

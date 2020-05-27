@@ -33,8 +33,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.apache.commons.io.FileUtils;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -64,14 +63,12 @@ public final class AdvancedTagFromMp3FileTest {
         );
         final File actual = path.toFile();
         actual.deleteOnExit();
-        MatcherAssert.assertThat(
-            "Album cover image from tag did not match the original one",
+        Assertions.assertThat(
             FileUtils.contentEquals(
                 actual,
                 new File("src/test/resources/album/albumCover.jpg")
-            ),
-            Matchers.equalTo(true)
-        );
+            )
+        ).isTrue();
     }
 
 }

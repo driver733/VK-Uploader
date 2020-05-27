@@ -34,7 +34,6 @@ import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -42,8 +41,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -217,15 +215,14 @@ public final class EntranceDirectoryTest extends AbstractVkUnitTest {
         Files.copy(
             root.resolve("testPhotoAlbum")
                 .resolve("1.jpg"),
-            new FileOutputStream(
-                temp
+            Files.newOutputStream(
+                temp.toPath()
             )
         );
         TimeUnit.SECONDS.sleep(delay);
         posts.updateProperties();
         TimeUnit.SECONDS.sleep(delay);
-        MatcherAssert.assertThat(
-            "The properties files differ",
+        Assertions.assertThat(
             actual.entrySet()
             .stream()
             .collect(
@@ -233,44 +230,43 @@ public final class EntranceDirectoryTest extends AbstractVkUnitTest {
                     Map.Entry::getKey,
                     Map.Entry::getValue
                 )
+            )
+        ).containsOnly(
+            Assertions.entry(
+                "1.jpg", "1"
             ),
-            Matchers.allOf(
-                Matchers.hasEntry(
-                    "1.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "2.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "3.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "4.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "5.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "6.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "7.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "8.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "9.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "10.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "11.jpg", "1"
-                ),
-                Matchers.hasEntry(
-                    "12.jpg", "1"
-                )
+            Assertions.entry(
+                "2.jpg", "1"
+            ),
+            Assertions.entry(
+                "3.jpg", "1"
+            ),
+            Assertions.entry(
+                "4.jpg", "1"
+            ),
+            Assertions.entry(
+                "5.jpg", "1"
+            ),
+            Assertions.entry(
+                "6.jpg", "1"
+            ),
+            Assertions.entry(
+                "7.jpg", "1"
+            ),
+            Assertions.entry(
+                "8.jpg", "1"
+            ),
+            Assertions.entry(
+                "9.jpg", "1"
+            ),
+            Assertions.entry(
+                "10.jpg", "1"
+            ),
+            Assertions.entry(
+                "11.jpg", "1"
+            ),
+            Assertions.entry(
+                "12.jpg", "1"
             )
         );
     }

@@ -36,9 +36,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.assertj.core.api.Assertions;
 import org.cactoos.io.BytesOf;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
@@ -74,8 +73,7 @@ public final class WallPostMusicAlbumTest extends AbstractVkUnitTest {
             ).asBytes(),
             this.properties
         );
-        MatcherAssert.assertThat(
-            "Incorrect query map produced.",
+        Assertions.assertThat(
             new WallPostMusicAlbum(
                 new VkApiClient(
                     new TransportClientFake(
@@ -239,20 +237,19 @@ public final class WallPostMusicAlbumTest extends AbstractVkUnitTest {
                 ),
                 GROUP_ID
             ).construct()
-                .build(),
-            Matchers.allOf(
-                Matchers.hasEntry("access_token", "1"),
-                Matchers.hasEntry("v", "5.63"),
-                Matchers.hasEntry(
-                    "attachments",
-                    "photo6785_123456,audio-161929264_123456789"
-                ),
-                Matchers.hasEntry("owner_id", "-161929264"),
-                Matchers.hasEntry("from_group", "1"),
-                Matchers.hasEntry(
-                    "message",
-                    "Album: Elegant Testing\nArtist: Test Man"
-                )
+                .build()
+        ).containsOnly(
+            Assertions.entry("access_token", "1"),
+            Assertions.entry("v", "5.63"),
+            Assertions.entry(
+                "attachments",
+                "photo6785_123456,audio-161929264_123456789"
+            ),
+            Assertions.entry("owner_id", "-161929264"),
+            Assertions.entry("from_group", "1"),
+            Assertions.entry(
+                "message",
+                "Album: Elegant Testing\nArtist: Test Man"
             )
         );
         file.recover();

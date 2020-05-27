@@ -40,7 +40,7 @@ import org.cactoos.list.StickyList;
  * @since 0.1
  */
 @Immutable
-public final class AttachmentFakeAudio implements Attachment {
+public final class AttachmentFakeAudio implements Attachment<QueryFakeAudioAdd, Integer> {
 
     /**
      * Query results (audios IDs).
@@ -59,8 +59,8 @@ public final class AttachmentFakeAudio implements Attachment {
 
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     @Override
-    public List<AbstractQueryBuilder> upload() {
-        final List<AbstractQueryBuilder> out = new ArrayList<>(
+    public List<AbstractQueryBuilder<QueryFakeAudioAdd, Integer>> upload() {
+        final List<AbstractQueryBuilder<QueryFakeAudioAdd, Integer>> out = new ArrayList<>(
             this.results.size()
         );
         for (final Integer res : this.results) {

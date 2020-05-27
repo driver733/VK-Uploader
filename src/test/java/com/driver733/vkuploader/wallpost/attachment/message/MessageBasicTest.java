@@ -31,8 +31,7 @@ import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import java.io.File;
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -58,23 +57,18 @@ public final class MessageBasicTest {
                 )
             ).construct()
         );
-        MatcherAssert.assertThat(
-            "Cannot construct a message with tags",
+        Assertions.assertThat(
             new MessageBasic(
                 tag.getAlbum(),
                 tag.getArtist()
-            ).value(),
-            Matchers.equalTo(
-                String.format("Album: Elegant Testing%nArtist: Test Man")
-            )
-        );
+            ).value()
+        ).isEqualTo("Album: Elegant Testing\nArtist: Test Man");
     }
 
     @Test
     public void missingTags()
         throws InvalidDataException, IOException, UnsupportedTagException {
-        MatcherAssert.assertThat(
-            "Failed to process missing tags",
+        Assertions.assertThat(
             new MessageBasic(
                 new ID3v1AnnotatedSafe(
                     new BasicTagFromMp3File(
@@ -94,9 +88,8 @@ public final class MessageBasicTest {
                         )
                     ).construct()
                 ).getArtist()
-            ).value(),
-            Matchers.equalTo("")
-        );
+            ).value()
+        ).isEqualTo("");
     }
 
 }

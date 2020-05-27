@@ -30,6 +30,7 @@ import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
+import com.vk.api.sdk.objects.photos.Photo;
 import com.vk.api.sdk.queries.photos.PhotosSaveWallPhotoQuery;
 import java.io.File;
 import java.nio.file.Path;
@@ -39,9 +40,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.assertj.core.api.Assertions;
 import org.cactoos.list.StickyList;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
@@ -60,7 +60,7 @@ public final class AttachmentWallPhotosTest extends AbstractVkUnitTest {
         "PMD.ExcessiveMethodLength",
         "PMD.NonStaticInitializer",
         "PMD.AvoidDuplicateLiterals"
-        })
+    })
     public void test() throws Exception {
         new File(
             "src/test/resources/photos/testPhotoAlbum/vkmu.properties"
@@ -80,43 +80,41 @@ public final class AttachmentWallPhotosTest extends AbstractVkUnitTest {
             Paths.get(String.format("%s/11.jpg", dir)),
             Paths.get(String.format("%s/12.jpg", dir))
         );
-        final List<AbstractQueryBuilder> queries = new AttachmentWallPhotos(
-            new VkApiClient(
-                new TransportClientFake(
-                    new HashMap<String, TransportClient>() {
-                        {
-                            put(
-                                AbstractVkUnitTest.PHOTO_SAVE_URL,
-                                new TransportClientCached(
-                                    String.join(
-                                        "",
-                                        "{",
-                                        " \"photo\"  : \"testPhoto\",",
-                                        " \"server\" : 1,",
-                                        " \"hash\"   : \"testHash\"",
-                                        " }"
+        final List<AbstractQueryBuilder<PhotosSaveWallPhotoQuery, List<Photo>>> queries =
+            new AttachmentWallPhotos(
+                new VkApiClient(
+                    new TransportClientFake(
+                        new HashMap<String, TransportClient>() {
+                            {
+                                put(
+                                    AbstractVkUnitTest.PHOTO_SAVE_URL,
+                                    new TransportClientCached(
+                                        String.join(
+                                            "",
+                                            "{",
+                                            " \"photo\"  : \"testPhoto\",",
+                                            " \"server\" : 1,",
+                                            " \"hash\"   : \"testHash\"",
+                                            " }"
+                                        )
                                     )
-                                )
-                            );
+                                );
+                            }
                         }
-                    }
-                )
-            ),
-            new UserActor(0, "1"),
-            AbstractVkUnitTest.PHOTO_SAVE_URL,
-            photos,
-            AbstractVkUnitTest.GROUP_ID
-           ).upload();
+                    )
+                ),
+                new UserActor(0, "1"),
+                AbstractVkUnitTest.PHOTO_SAVE_URL,
+                photos,
+                AbstractVkUnitTest.GROUP_ID
+            ).upload();
         final ArrayList<Map<String, String>> list = new ArrayList<>(12);
         for (final AbstractQueryBuilder query : queries) {
             list.add(
                 query.build()
             );
         }
-        MatcherAssert.assertThat(
-            "",
-            list,
-            Matchers.equalTo(
+        Assertions.assertThat(list).isEqualTo(
             Collections.nCopies(
                 photos.size(),
                 new PhotosSaveWallPhotoQuery(
@@ -131,15 +129,14 @@ public final class AttachmentWallPhotosTest extends AbstractVkUnitTest {
                                 " }"
                             )
                         )
-                   ),
-                   new UserActor(0, "1"),
-                   "testPhoto"
-               ).hash("testHash")
-                   .groupId(AbstractVkUnitTest.GROUP_ID)
-                   .server(1)
-                   .build()
-                )
-           )
+                    ),
+                    new UserActor(0, "1"),
+                    "testPhoto"
+                ).hash("testHash")
+                    .groupId(AbstractVkUnitTest.GROUP_ID)
+                    .server(1)
+                    .build()
+            )
         );
     }
 

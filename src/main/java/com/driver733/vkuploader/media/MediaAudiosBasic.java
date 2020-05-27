@@ -63,7 +63,6 @@ public final class MediaAudiosBasic implements Media {
                 file -> Files.isRegularFile(file)
                     && file
                     .toString()
-                    .toLowerCase()
                     .endsWith(".mp3")
             ).collect(
                 Collectors.toList()

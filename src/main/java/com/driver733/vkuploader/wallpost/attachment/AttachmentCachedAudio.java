@@ -56,7 +56,7 @@ import org.apache.commons.lang3.StringUtils;
     value = "NP_NULL_ON_SOME_PATH",
     justification = "If path exists then NP will not occur."
 )
-public final class AttachmentCachedAudio implements Attachment {
+public final class AttachmentCachedAudio implements Attachment<AudioAddQuery, Integer> {
 
     /**
      * Group ID.
@@ -116,9 +116,9 @@ public final class AttachmentCachedAudio implements Attachment {
     }
 
     @Override
-    public List<AbstractQueryBuilder> upload()
+    public List<AbstractQueryBuilder<AudioAddQuery, Integer>> upload()
         throws Exception {
-        final List<AbstractQueryBuilder> list = new ArrayList<>(
+        final List<AbstractQueryBuilder<AudioAddQuery, Integer>> list = new ArrayList<>(
             this.audios.size()
         );
         for (final Path audio : this.audios) {
@@ -141,9 +141,9 @@ public final class AttachmentCachedAudio implements Attachment {
      * @checkstyle StringLiteralsConcatenationCheck (100 lines)
      * @checkstyle LocalFinalVariableNameCheck (100 lines)
      */
-    private List<AbstractQueryBuilder> upload(final Path audio)
+    private List<AbstractQueryBuilder<AudioAddQuery, Integer>> upload(final Path audio)
         throws Exception {
-        final List<AbstractQueryBuilder> result;
+        final List<AbstractQueryBuilder<AudioAddQuery, Integer>> result;
         if (
             this.properties.property(
             audio.getFileName().toString()

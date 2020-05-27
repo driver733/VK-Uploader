@@ -34,9 +34,8 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.Collection;
 import java.util.Collections;
+import org.assertj.core.api.Assertions;
 import org.cactoos.list.StickyList;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
@@ -53,7 +52,7 @@ public final class QueryResultsBasicTest {
 
     @Test
     public void test() throws IOException {
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new QueryResultsBasic(
                 new QueriesSafeCached(
                     new StickyList<>(
@@ -78,13 +77,12 @@ public final class QueryResultsBasicTest {
                         }
                     )
                 )
-            ).results(),
-            Matchers.containsInAnyOrder(
-                new JsonParser().parse(
-                    new JsonReader(
-                        new StringReader(
-                            "{\"response\" : 123}"
-                        )
+            ).results()
+        ).containsOnly(
+            new JsonParser().parse(
+                new JsonReader(
+                    new StringReader(
+                        "{\"response\" : 123}"
                     )
                 )
             )

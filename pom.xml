@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.github.driver733</groupId>
         <artifactId>jcabi-parent</artifactId>
-        <version>c4d152c3b2</version>
+        <version>0.49.3</version>
     </parent>
     <repositories>
         <repository>

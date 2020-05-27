@@ -29,19 +29,19 @@ import java.util.List;
 /**
  * Constructs {@link AbstractQueryBuilder}(s)
  *  for the wall attachments.
- *
- *
+ * @param <T> Query.
+ * @param <R> Query return type.
  *
  * @since 0.1
  */
-public interface Attachment {
+public interface Attachment<T, R> {
 
     /**
      * Uploads the Attachment(s).
      * @return The resulting queries of uploaded Attachment(s).
      * @throws Exception If query fails to be constructed.
      */
-    List<AbstractQueryBuilder> upload()
+    List<AbstractQueryBuilder<T, R>> upload()
         throws Exception;
 
 }

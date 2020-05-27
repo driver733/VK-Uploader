@@ -59,9 +59,9 @@ public final class AttachmentAudioProps {
     /**
      * Ctor.
      * @param audio The {@link Audio} with audios ID and owner ID.
+     * @param fileName The name of the file.
      * @param properties Properties that contain the
      *  {@link AudioStatus} of audios files.
-     * @param fileName The name of the file.
      * @checkstyle ParameterNameCheck (10 lines)
      */
     public AttachmentAudioProps(

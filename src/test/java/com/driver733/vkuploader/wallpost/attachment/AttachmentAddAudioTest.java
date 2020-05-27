@@ -31,8 +31,7 @@ import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
 import com.vk.api.sdk.queries.audio.AudioAddQuery;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -50,7 +49,7 @@ public final class AttachmentAddAudioTest {
 
     @Test
     public void testBasic() {
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new AttachmentAddAudio(
                 new VkApiClient(
                     new TransportClientHttp()
@@ -62,25 +61,24 @@ public final class AttachmentAddAudioTest {
                 1,
                 2,
                 1
-            ).upload().get(0).build(),
-            Matchers.equalTo(
-                new AudioAddQuery(
-                    new VkApiClient(
-                        new TransportClientHttp()
-                    ),
-                    new UserActor(0, ""),
-                    2,
-                    1
-                ).groupId(
-                    1
-                ).build()
-            )
+            ).upload().get(0).build()
+        ).isEqualTo(
+            new AudioAddQuery(
+                new VkApiClient(
+                    new TransportClientHttp()
+                ),
+                new UserActor(0, ""),
+                2,
+                1
+            ).groupId(
+                1
+            ).build()
         );
     }
 
     @Test
     public void cached() throws ClientException, ApiException {
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new AttachmentAddAudio(
                 new VkApiClient(
                     new TransportClientCached("{ \"response\" : 1 }")
@@ -92,11 +90,8 @@ public final class AttachmentAddAudioTest {
                 0,
                 0,
                 1
-            ).upload().get(0).execute(),
-            Matchers.equalTo(
-            1
-            )
-        );
+            ).upload().get(0).execute()
+        ).isEqualTo(1);
     }
 
 }

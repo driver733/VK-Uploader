@@ -29,8 +29,7 @@ import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import java.io.File;
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -40,6 +39,7 @@ import org.junit.Test;
  *
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle IndentationCheck (500 lines)
  */
 @Immutable
 public final class BasicTagTest {
@@ -47,28 +47,28 @@ public final class BasicTagTest {
     @Test
     public void testValid()
         throws InvalidDataException, IOException, UnsupportedTagException {
-        MatcherAssert.assertThat(
-            "Failed to get the tag from Mp3 file",
+        Assertions.assertThat(
             new BasicTagFromMp3File(
                 new Mp3File(
                     new File("src/test/resources/album/test.mp3")
                 )
-            ).construct().getAlbum(),
-            Matchers.equalTo("Elegant Testing")
+            ).construct().getAlbum()
+        ).isEqualTo(
+            "Elegant Testing"
         );
     }
 
     @Test(expected = IOException.class)
     public void testException()
         throws InvalidDataException, IOException, UnsupportedTagException {
-        MatcherAssert.assertThat(
-            "Failed to get the tag from Mp3 file.",
+        Assertions.assertThat(
             new BasicTagFromMp3File(
                 new Mp3File(
                     new File("src/test/resources/album/testMissingTest.mp3")
                 )
-            ).construct().getAlbum(),
-            Matchers.equalTo("Elegant Testing.")
+            ).construct().getAlbum()
+        ).isEqualTo(
+            "Elegant Testing."
         );
     }
 

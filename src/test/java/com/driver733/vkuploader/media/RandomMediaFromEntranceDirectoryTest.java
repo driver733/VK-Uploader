@@ -26,18 +26,17 @@ package com.driver733.vkuploader.media;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
  * Test for {@link RandomMediaFromDirectory}.
  *
- * @since 0.1
  * @checkstyle AnonInnerLengthCheck (500 lines
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  * @checkstyle MethodLength (500 lines)
+ * @since 0.1
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class RandomMediaFromEntranceDirectoryTest {
@@ -51,33 +50,33 @@ public final class RandomMediaFromEntranceDirectoryTest {
 
     @Test
     public void testSingle() throws IOException {
-        MatcherAssert.assertThat(
-            "Returned paths do not match the expected ones.",
+        Assertions.assertThat(
             new RandomMediaFromDirectory(
                 RandomMediaFromEntranceDirectoryTest.ROOT
-            ).file(),
-            Matchers.anyOf(
-                Matchers.equalTo(
-                    RandomMediaFromEntranceDirectoryTest.ROOT
-                        .resolve("1.properties")
-                ),
-                Matchers.equalTo(
-                    RandomMediaFromEntranceDirectoryTest.ROOT
-                        .resolve("2.properties")
-                ),
-                Matchers.equalTo(
-                    RandomMediaFromEntranceDirectoryTest.ROOT
-                        .resolve("3.properties")
-                ),
-                Matchers.equalTo(
+            ).file()
+        ).satisfiesAnyOf(
+            p -> Assertions.assertThat(p).isEqualTo(
+                RandomMediaFromEntranceDirectoryTest.ROOT
+                    .resolve("1.properties")
+            ),
+            p -> Assertions.assertThat(p).isEqualTo(
+                RandomMediaFromEntranceDirectoryTest.ROOT
+                    .resolve("2.properties")
+            ),
+            p -> Assertions.assertThat(p).isEqualTo(
+                RandomMediaFromEntranceDirectoryTest.ROOT
+                    .resolve("3.properties")
+            ),
+            p -> Assertions.assertThat(p).satisfiesAnyOf(
+                pp -> Assertions.assertThat(pp).isEqualTo(
                     RandomMediaFromEntranceDirectoryTest.ROOT
                         .resolve("4.properties")
                 ),
-                Matchers.equalTo(
+                pp -> Assertions.assertThat(pp).isEqualTo(
                     RandomMediaFromEntranceDirectoryTest.ROOT
                         .resolve("5.properties")
                 ),
-                Matchers.equalTo(
+                pp -> Assertions.assertThat(pp).isEqualTo(
                     RandomMediaFromEntranceDirectoryTest.ROOT
                         .resolve("6.properties")
                 )
@@ -87,25 +86,23 @@ public final class RandomMediaFromEntranceDirectoryTest {
 
     @Test
     public void testShuffledList() throws IOException {
-        MatcherAssert.assertThat(
-            "Returned path does not match the expected one.",
+        Assertions.assertThat(
             new RandomMediaFromDirectory(
                 RandomMediaFromEntranceDirectoryTest.ROOT
-            ).files(),
-                Matchers.containsInAnyOrder(
-                    RandomMediaFromEntranceDirectoryTest.ROOT
-                        .resolve("1.properties"),
-                    RandomMediaFromEntranceDirectoryTest.ROOT
-                        .resolve("2.properties"),
-                    RandomMediaFromEntranceDirectoryTest.ROOT
-                        .resolve("3.properties"),
-                    RandomMediaFromEntranceDirectoryTest.ROOT
-                        .resolve("4.properties"),
-                    RandomMediaFromEntranceDirectoryTest.ROOT
-                        .resolve("5.properties"),
-                    RandomMediaFromEntranceDirectoryTest.ROOT
-                        .resolve("6.properties")
-                )
+            ).files()
+        ).containsOnly(
+            RandomMediaFromEntranceDirectoryTest.ROOT
+                .resolve("1.properties"),
+            RandomMediaFromEntranceDirectoryTest.ROOT
+                .resolve("2.properties"),
+            RandomMediaFromEntranceDirectoryTest.ROOT
+                .resolve("3.properties"),
+            RandomMediaFromEntranceDirectoryTest.ROOT
+                .resolve("4.properties"),
+            RandomMediaFromEntranceDirectoryTest.ROOT
+                .resolve("5.properties"),
+            RandomMediaFromEntranceDirectoryTest.ROOT
+                .resolve("6.properties")
         );
     }
 

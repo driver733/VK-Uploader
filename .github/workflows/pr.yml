@@ -4,21 +4,43 @@ on: [pull_request]
 
 jobs:
   build-merge-result:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            shell: bash
+            git: git
+          - os: macos-latest
+            shell: bash
+            git: git
+          - os: windows-latest
+            shell: cmd
+            git: >-
+              "C:\Program Files\Git\bin\git.exe"
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
     steps:
       - uses: actions/setup-java@v1
         with:
           java-version: 8
+      - uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       - uses: actions/checkout@v2
         with:
           ref: master
           fetch-depth: 0
       - name: Merge with base branch
         run: |
-          git fetch origin +refs/heads/${{ github.head_ref }}:refs/remotes/origin/${{ github.head_ref }} --no-tags
-          git checkout ${{ github.head_ref }}
-          git checkout ${{ github.base_ref }}
-          git config --global user.name 'Mikhail Yakushin'
-          git config --global user.email 'driver733@gmail.com'
-          git merge ${{ github.head_ref }}
+          ${{ matrix.git }} config --global user.name 'Mikhail Yakushin'
+          ${{ matrix.git }} config --global user.email 'driver733@gmail.com'
+          ${{ matrix.git }} fetch origin +refs/heads/${{ github.head_ref }}:refs/remotes/origin/${{ github.head_ref }} --no-tags
+          ${{ matrix.git }} checkout ${{ github.head_ref }}
+          ${{ matrix.git }} checkout ${{ github.base_ref }}
+          ${{ matrix.git }} merge ${{ github.head_ref }}
       - run: mvn install qulice:check -DskipITs --errors --batch-mode

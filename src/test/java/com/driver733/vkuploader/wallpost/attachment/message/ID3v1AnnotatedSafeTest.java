@@ -30,17 +30,14 @@ import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
  * Test for {@link ID3v1AnnotatedSafe}.
  *
- *
- *
- * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @since 0.1
  */
 @Immutable
 public final class ID3v1AnnotatedSafeTest {
@@ -96,52 +93,14 @@ public final class ID3v1AnnotatedSafeTest {
 
     @Test
     public void valid() {
-        MatcherAssert.assertThat(
-            this.tag.getAlbum(),
-            Matchers.equalTo(
-                "Album: Elegant Testing"
-            )
-        );
-        MatcherAssert.assertThat(
-            this.tag.getArtist(),
-            Matchers.equalTo(
-                "Artist: Test Man"
-            )
-        );
-        MatcherAssert.assertThat(
-            this.tag.getVersion(),
-            Matchers.equalTo("4.0")
-        );
-        MatcherAssert.assertThat(
-            this.tag.getTrack(),
-            Matchers.equalTo(
-                "Track: 01/1"
-            )
-        );
-        MatcherAssert.assertThat(
-            this.tag.getTitle(),
-            Matchers.equalTo(
-                "Title: Test of MP3 File"
-            )
-        );
-        MatcherAssert.assertThat(
-            this.tag.getComment(),
-            Matchers.equalTo(
-                "Comment: Test comment"
-            )
-        );
-        MatcherAssert.assertThat(
-            this.tag.getGenre(),
-            Matchers.equalTo(
-                0
-            )
-        );
-        MatcherAssert.assertThat(
-            this.tag.getGenreDescription(),
-            Matchers.equalTo(
-                "Genre Description: Blues"
-            )
-        );
+        Assertions.assertThat(this.tag.getAlbum()).isEqualTo("Album: Elegant Testing");
+        Assertions.assertThat(this.tag.getArtist()).isEqualTo("Artist: Test Man");
+        Assertions.assertThat(this.tag.getVersion()).isEqualTo("4.0");
+        Assertions.assertThat(this.tag.getTrack()).isEqualTo("Track: 01/1");
+        Assertions.assertThat(this.tag.getTitle()).isEqualTo("Title: Test of MP3 File");
+        Assertions.assertThat(this.tag.getComment()).isEqualTo("Comment: Test comment");
+        Assertions.assertThat(this.tag.getGenre()).isEqualTo(0);
+        Assertions.assertThat(this.tag.getGenreDescription()).isEqualTo("Genre Description: Blues");
     }
 
     @Test
@@ -152,42 +111,15 @@ public final class ID3v1AnnotatedSafeTest {
                 new Mp3File("src/test/resources/album/testMissingTags.mp3")
             ).construct()
         );
-        MatcherAssert.assertThat(
-            missing.getAlbum(),
-            Matchers.equalTo("")
-        );
-        MatcherAssert.assertThat(
-            missing.getArtist(),
-            Matchers.equalTo("")
-        );
-        MatcherAssert.assertThat(
-            missing.getVersion(),
-            Matchers.equalTo("1")
-        );
-        MatcherAssert.assertThat(
-            missing.getTrack(),
-            Matchers.equalTo("")
-        );
-        MatcherAssert.assertThat(
-            missing.getTitle(),
-            Matchers.equalTo("")
-        );
-        MatcherAssert.assertThat(
-            missing.getYear(),
-            Matchers.equalTo("")
-        );
-        MatcherAssert.assertThat(
-            missing.getComment(),
-            Matchers.equalTo("")
-        );
-        MatcherAssert.assertThat(
-            missing.getGenre(),
-            Matchers.equalTo(-1)
-        );
-        MatcherAssert.assertThat(
-            missing.getGenreDescription(),
-            Matchers.equalTo("")
-        );
+        Assertions.assertThat(missing.getAlbum()).isEqualTo("");
+        Assertions.assertThat(missing.getArtist()).isEqualTo("");
+        Assertions.assertThat(missing.getVersion()).isEqualTo("1");
+        Assertions.assertThat(missing.getTrack()).isEqualTo("");
+        Assertions.assertThat(missing.getTitle()).isEqualTo("");
+        Assertions.assertThat(missing.getYear()).isEqualTo("");
+        Assertions.assertThat(missing.getComment()).isEqualTo("");
+        Assertions.assertThat(missing.getGenre()).isEqualTo(-1);
+        Assertions.assertThat(missing.getGenreDescription()).isEqualTo("");
     }
 
     /**
@@ -196,12 +128,9 @@ public final class ID3v1AnnotatedSafeTest {
     @Test
     public void fix() {
         if (this.tag.getYear() != null && !"".equals(this.tag.getYear())) {
-            MatcherAssert.assertThat(
-                this.tag.getYear(),
-                Matchers.equalTo(
-                    "Year: 2018"
-                )
-            );
+            Assertions.assertThat(
+                this.tag.getYear()
+            ).isEqualTo("Year: 2018");
         }
     }
 

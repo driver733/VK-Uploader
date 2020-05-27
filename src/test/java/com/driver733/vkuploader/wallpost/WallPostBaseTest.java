@@ -27,8 +27,7 @@ import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -44,8 +43,7 @@ public final class WallPostBaseTest {
 
     @Test
     public void test() {
-        MatcherAssert.assertThat(
-            "Incorrect query map produced.",
+        Assertions.assertThat(
             new WallPostBase(
                 new VkApiClient(
                     new TransportClientCached(
@@ -56,11 +54,10 @@ public final class WallPostBaseTest {
                     0,
                     "1"
                 )
-            ).construct().build(),
-            Matchers.allOf(
-                Matchers.hasEntry("access_token", "1"),
-                Matchers.hasEntry("v", "5.63")
-            )
+            ).construct().build()
+        ).containsOnly(
+            Assertions.entry("access_token", "1"),
+            Assertions.entry("v", "5.63")
         );
     }
 

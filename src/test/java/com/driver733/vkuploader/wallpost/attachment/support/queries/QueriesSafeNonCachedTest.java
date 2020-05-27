@@ -30,9 +30,8 @@ import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.httpclient.TransportClientHttp;
+import org.assertj.core.api.Assertions;
 import org.cactoos.list.StickyList;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
@@ -62,7 +61,7 @@ public final class QueriesSafeNonCachedTest {
 
     @Test
     public void test() throws Exception {
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new QueriesSafeNonCached(
                 new QueriesFromAttachments(
                     new StickyList<>(
@@ -94,21 +93,20 @@ public final class QueriesSafeNonCachedTest {
                         )
                     )
                 ).queries()
-            ).queries().get(0).build(),
-                Matchers.equalTo(
-                    new AttachmentAddAudio(
-                        new VkApiClient(
-                            new TransportClientHttp()
-                        ),
-                        new UserActor(
-                            0,
-                            QueriesSafeNonCachedTest.TOKEN1
-                        ),
-                        0,
-                        1,
-                        1
-                    ).upload().get(0).build()
-                )
+            ).queries().get(0).build()
+        ).isEqualTo(
+            new AttachmentAddAudio(
+                new VkApiClient(
+                    new TransportClientHttp()
+                ),
+                new UserActor(
+                    0,
+                    QueriesSafeNonCachedTest.TOKEN1
+                ),
+                0,
+                1,
+                1
+            ).upload().get(0).build()
         );
     }
 }

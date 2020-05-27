@@ -31,17 +31,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
  * Test for {@link AdvancedTagVerifiedAlbumImage}.
  *
- *
- *
- * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle IndentationCheck (500 lines)
+ * @since 0.1
  */
 @Immutable
 public final class AdvancedTagVerifiedAlbumImageTest {
@@ -56,34 +54,32 @@ public final class AdvancedTagVerifiedAlbumImageTest {
     public void valid()
         throws InvalidDataException, IOException, UnsupportedTagException {
         final Path path = Paths.get("src/test/resources/album/test.mp3");
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new AdvancedTagVerifiedAlbumImage(
                 new AdvancedTagFromMp3File(
                     new Mp3File(
                         path.toFile()
                     )
                 )
-            ).construct().getAlbumImage(),
-            Matchers.equalTo(
-                Files.readAllBytes(this.image)
-            )
+            ).construct().getAlbumImage()
+        ).isEqualTo(
+            Files.readAllBytes(this.image)
         );
     }
 
     @Test(expected = IOException.class)
     public void invalid()
         throws IOException, InvalidDataException, UnsupportedTagException {
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new AdvancedTagVerifiedAlbumImage(
                 new AdvancedTagFromMp3File(
                     new Mp3File(
                         "src/test/resources/album/testMissingTags.mp3"
                     )
                 )
-            ).construct().getAlbumImage(),
-            Matchers.equalTo(
-                Files.readAllBytes(this.image)
-            )
+            ).construct().getAlbumImage()
+        ).isEqualTo(
+            Files.readAllBytes(this.image)
         );
     }
 

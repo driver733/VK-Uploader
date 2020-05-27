@@ -48,7 +48,7 @@ import org.cactoos.list.StickyList;
  * @since 0.2
  */
 @Immutable
-public final class AttachmentAudio implements Attachment {
+public final class AttachmentAudio implements Attachment<AudioAddQuery, Integer> {
 
     /**
      * Group ID.
@@ -72,11 +72,10 @@ public final class AttachmentAudio implements Attachment {
 
     /**
      * Ctor.
-     * @param client The {@link VkApiClient}
-     *  that is used for all VK API requests.
+     * @param client The {@link VkApiClient} that is used for all VK API requests.
      * @param actor UserActor on behalf of which all requests will be sent.
-     * @param audios Audios files.
      * @param group Group ID.
+     * @param audios Audios files.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
     public AttachmentAudio(
@@ -94,9 +93,9 @@ public final class AttachmentAudio implements Attachment {
     }
 
     @Override
-    public List<AbstractQueryBuilder> upload()
+    public List<AbstractQueryBuilder<AudioAddQuery, Integer>> upload()
         throws Exception {
-        final List<AbstractQueryBuilder> list = new ArrayList<>(
+        final List<AbstractQueryBuilder<AudioAddQuery, Integer>> list = new ArrayList<>(
             this.audios.size()
         );
         for (final Upload<UploadAudioQuery, AudioUploadResponse> audio
@@ -115,7 +114,7 @@ public final class AttachmentAudio implements Attachment {
      *  to the group page.
      * @throws Exception If a query cannot be created.
      */
-    private List<AbstractQueryBuilder> upload(
+    private List<AbstractQueryBuilder<AudioAddQuery, Integer>> upload(
         final Upload<UploadAudioQuery, AudioUploadResponse> upload
     ) throws Exception {
         final AudioUploadResponse response = upload.query()

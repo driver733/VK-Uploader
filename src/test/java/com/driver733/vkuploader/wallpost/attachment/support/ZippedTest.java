@@ -24,18 +24,16 @@
 package com.driver733.vkuploader.wallpost.attachment.support;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.zip.ZipInputStream;
+import org.assertj.core.api.Assertions;
 import org.cactoos.io.InputOf;
 import org.cactoos.io.LengthOf;
 import org.cactoos.io.OutputTo;
 import org.cactoos.io.TeeInput;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
@@ -56,10 +54,10 @@ public final class ZippedTest {
         "PMD.AvoidInstantiatingObjectsInLoops"
         })
     public void testDirectory() throws Exception {
-        final File actual = new File(
+        final Path actual = Paths.get(
             "src/test/resources/zip/actual.zip"
         );
-        actual.deleteOnExit();
+        actual.toFile().deleteOnExit();
         final File expected = new File(
             "src/test/resources/zip/expected.zip"
         );
@@ -71,18 +69,17 @@ public final class ZippedTest {
                     ).stream()
                 ),
                 new OutputTo(
-                    new FileOutputStream(
+                    Files.newOutputStream(
                         actual
                     )
                 )
             )
         ).intValue();
-        MatcherAssert.assertThat(
-            "Created ZIP file is invalid.",
+        Assertions.assertThat(
             new ArrayList<String>(2) {
                 {
                     final ZipInputStream zis = new ZipInputStream(
-                        new FileInputStream(expected)
+                        Files.newInputStream(expected.toPath())
                     );
                     add(
                         zis.getNextEntry().getName()
@@ -91,13 +88,8 @@ public final class ZippedTest {
                         zis.getNextEntry().getName()
                     );
                 }
-            },
-            Matchers.<Collection<String>>allOf(
-                Matchers.hasSize(2),
-                Matchers.hasItem("inside/audiosTest.properties"),
-                Matchers.hasItem("attachment.txt")
-            )
-        );
+            }
+        ).containsOnly("inside/audiosTest.properties", "attachment.txt");
     }
 
 }

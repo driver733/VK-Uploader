@@ -82,8 +82,8 @@ public final class MediaRandom implements Media, MediaSingle {
 
     /**
      * Origin.
-     * @param files Files.
      * @param seed Random seed.
+     * @param files Files.
      */
     public MediaRandom(
         final long seed,

@@ -30,9 +30,8 @@ import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import com.vk.api.sdk.queries.photos.PhotosSaveWallPhotoQuery;
 import java.io.File;
+import org.assertj.core.api.Assertions;
 import org.cactoos.io.BytesOf;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
@@ -48,7 +47,7 @@ public final class AttachmentWallPhotoTest {
     @Test
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     public void test() throws Exception {
-        MatcherAssert.assertThat(
+        Assertions.assertThat(
             new AttachmentWallPhoto(
                 new VkApiClient(
                     new TransportClientCached("1")
@@ -77,28 +76,27 @@ public final class AttachmentWallPhotoTest {
                 )
             ).upload()
             .get(0)
-            .build(),
-            Matchers.equalTo(
-                new PhotosSaveWallPhotoQuery(
-                    new VkApiClient(
-                        new TransportClientCached(
-                            String.join(
-                                "",
-                                "{",
-                                    "\"photo\" : \"testPhoto\",",
-                                    "\"server\" : 1,",
-                                    "\"hash\" : \"testHash\"",
-                                    "}"
-                            )
+            .build()
+        ).isEqualTo(
+            new PhotosSaveWallPhotoQuery(
+                new VkApiClient(
+                    new TransportClientCached(
+                        String.join(
+                            "",
+                            "{",
+                            "\"photo\" : \"testPhoto\",",
+                            "\"server\" : 1,",
+                            "\"hash\" : \"testHash\"",
+                            "}"
                         )
-                    ),
-                    new UserActor(0, ""),
-                    "testPhoto"
-                ).hash("testHash")
-                    .groupId(1)
-                    .server(1)
-                    .build()
-            )
+                    )
+                ),
+                new UserActor(0, ""),
+                "testPhoto"
+            ).hash("testHash")
+                .groupId(1)
+                .server(1)
+                .build()
         );
     }
 

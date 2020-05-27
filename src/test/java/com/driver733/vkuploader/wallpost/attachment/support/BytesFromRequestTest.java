@@ -25,8 +25,8 @@ package com.driver733.vkuploader.wallpost.attachment.support;
 
 import com.jcabi.http.request.FakeRequest;
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import java.nio.charset.StandardCharsets;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -46,8 +46,7 @@ public final class BytesFromRequestTest {
 
     @Test
     public void testString() throws IOException {
-        MatcherAssert.assertThat(
-            "Bytes received are invalid.",
+        Assertions.assertThat(
             new String(
                 new BytesFromRequest(
                     new FakeRequest()
@@ -55,12 +54,9 @@ public final class BytesFromRequestTest {
                             BytesFromRequestTest.REQ_BODY.getBytes()
                         )
                 ).asBytes(),
-                "UTF-8"
-            ),
-            Matchers.equalTo(
-                BytesFromRequestTest.REQ_BODY
+                StandardCharsets.UTF_8
             )
-        );
+        ).isEqualTo(BytesFromRequestTest.REQ_BODY);
     }
 
 }

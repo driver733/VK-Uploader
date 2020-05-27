@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import org.hamcrest.MatcherAssert;
+import org.assertj.core.api.Assertions;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -89,19 +89,11 @@ public final class PropsFileTest {
             key,
             value
         );
-        MatcherAssert.assertThat(
-            String.format(
-                "Properties file must contain the property \"%s:%s\"",
-                key,
-                value
-            ),
+        Assertions.assertThat(
             props.property(
                 key
-            ),
-            Matchers.equalTo(
-                value
             )
-        );
+        ).isEqualTo(value);
     }
 
     @Test
@@ -118,18 +110,11 @@ public final class PropsFileTest {
             key,
             value
         );
-        MatcherAssert.assertThat(
-            String.format(
-                "Properties must contain the property with key \"%s\"",
-                key
-            ),
+        Assertions.assertThat(
             props.containsKey(
                 key
-            ),
-            Matchers.equalTo(
-                true
             )
-        );
+        ).isTrue();
     }
 
     @Test
@@ -147,18 +132,11 @@ public final class PropsFileTest {
             key,
             value
         );
-        MatcherAssert.assertThat(
-            String.format(
-                "Properties must not contain the property with key \"%s\"",
-                invalid
-            ),
+        Assertions.assertThat(
             props.containsKey(
                 invalid
-            ),
-            Matchers.equalTo(
-                false
             )
-        );
+        ).isFalse();
     }
 
     @Test
@@ -189,13 +167,9 @@ public final class PropsFileTest {
             skey,
             svalue
         );
-        MatcherAssert.assertThat(
-            "Entry sets are not equal",
-            actual.entrySet(),
-            Matchers.equalTo(
-                result.entrySet()
-            )
-        );
+        Assertions.assertThat(
+            actual.entrySet()
+        ).isEqualTo(result.entrySet());
     }
 
     @Test
@@ -208,12 +182,10 @@ public final class PropsFileTest {
             file
         );
         final Properties result = new Properties();
-        MatcherAssert.assertThat(
-            "Entry sets are not equal",
-            actual.entrySet(),
-            Matchers.equalTo(
-                result.entrySet()
-            )
+        Assertions.assertThat(
+            actual.entrySet()
+        ).isEqualTo(
+            result.entrySet()
         );
     }
 

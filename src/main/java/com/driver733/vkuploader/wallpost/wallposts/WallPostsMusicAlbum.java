@@ -66,7 +66,6 @@ public final class WallPostsMusicAlbum implements WallPosts {
 
     /**
      * Maximum number of requests in each batch request.
-     * @see
      */
     private static final int BATCH_MAX_REQ = 25;
 

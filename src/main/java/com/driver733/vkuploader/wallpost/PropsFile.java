@@ -25,9 +25,10 @@ package com.driver733.vkuploader.wallpost;
 
 import com.jcabi.aspects.Immutable;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Properties;
@@ -54,7 +55,7 @@ public final class PropsFile implements Props {
     /**
      * Output stream.
      */
-    private final UncheckedScalar<FileOutputStream> output;
+    private final UncheckedScalar<OutputStream> output;
 
     /**
      * Ctor.
@@ -100,8 +101,8 @@ public final class PropsFile implements Props {
                         file.exists()
                         ) {
                         try (
-                            FileInputStream fis = new FileInputStream(
-                                file
+                            InputStream fis = Files.newInputStream(
+                                file.toPath()
                             )
                         ) {
                             props.load(
@@ -110,8 +111,8 @@ public final class PropsFile implements Props {
                         }
                     } else {
                         try (
-                            FileOutputStream fos = new FileOutputStream(
-                                file
+                            OutputStream fos = Files.newOutputStream(
+                                file.toPath()
                             )
                         ) {
                             props.store(
@@ -126,8 +127,8 @@ public final class PropsFile implements Props {
         );
         this.output = new UncheckedScalar<>(
             new StickyScalar<>(
-                () -> new FileOutputStream(
-                    scalar.value().value()
+                () -> Files.newOutputStream(
+                    scalar.value().value().toPath()
                 )
             )
         );

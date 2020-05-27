@@ -86,6 +86,7 @@ public final class UploadExecTest {
 
     /**
      * A fake {@link WallPosts} that fails to return the posts` queries.
+     * @since 0.2
      */
     final class WallPostsQueriesEx implements WallPosts {
 
@@ -101,6 +102,7 @@ public final class UploadExecTest {
 
     /**
      * An {@link ExecuteBatchQuery} that throws an {@link ApiException}.
+     * @since 0.2
      */
     final class ExecuteBatchQueryFakeApiEx extends ExecuteBatchQuery {
 
@@ -122,6 +124,7 @@ public final class UploadExecTest {
 
     /**
      * An {@link ExecuteBatchQuery} that throws a {@link ClientException}.
+     * @since 0.2
      */
     final class ExecuteBatchQueryFakeClientEx extends ExecuteBatchQuery {
 
@@ -143,6 +146,7 @@ public final class UploadExecTest {
 
     /**
      * Fake {@link ExecuteBatchQuery}.
+     * @since 0.2
      */
     final class ExecuteBatchQueryFake extends ExecuteBatchQuery {
 
@@ -159,6 +163,7 @@ public final class UploadExecTest {
 
     /**
      * A {@link WallPosts} that faces an {@link ApiException}.
+     * @since 0.2
      */
     final class WallPostsFakeApiEx implements WallPosts {
 
@@ -176,6 +181,7 @@ public final class UploadExecTest {
 
     /**
      * A {@link WallPosts} that faces a {@link ClientException}.
+     * @since 0.2
      */
     final class WallPostsFakeClientEx implements WallPosts {
 
@@ -193,6 +199,7 @@ public final class UploadExecTest {
 
     /**
      * A fake {@link WallPosts}.
+     * @since 0.2
      */
     final class WallPostsFake implements WallPosts {
 
@@ -208,7 +215,8 @@ public final class UploadExecTest {
     }
 
     /**
-     * A {@link WallPosts} that fails to update the properties..
+     * A {@link WallPosts} that fails to update the properties.
+     * @since 0.2
      */
     final class WallPostsPropsEx implements WallPosts {
 

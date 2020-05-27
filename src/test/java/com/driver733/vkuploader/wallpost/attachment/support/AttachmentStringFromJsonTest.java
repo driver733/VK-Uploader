@@ -28,8 +28,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.jcabi.aspects.Immutable;
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -43,8 +42,7 @@ public final class AttachmentStringFromJsonTest {
 
     @Test
     public void test() throws IOException {
-        MatcherAssert.assertThat(
-            "Failed to form an attachment attachmentString from JsonObject",
+        Assertions.assertThat(
             new AttachmentStringFromJson(
                 new GsonBuilder()
                     .setPrettyPrinting()
@@ -63,10 +61,9 @@ public final class AttachmentStringFromJsonTest {
                         JsonObject.class
                     ).getAsJsonObject(),
                 1
-            ).attachmentString(),
-            Matchers.equalTo(
-                "audio1111111_1000000"
-            )
+            ).attachmentString()
+        ).isEqualTo(
+            "audio1111111_1000000"
         );
     }
 

@@ -27,8 +27,7 @@ import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -44,8 +43,7 @@ public final class WallPostWithOwnerIdTest {
 
     @Test
     public void test() throws Exception {
-        MatcherAssert.assertThat(
-            "Incorrect query map produced.",
+        Assertions.assertThat(
             new WallPostWithOwnerId(
                 new WallPostBase(
                     new VkApiClient(
@@ -60,12 +58,11 @@ public final class WallPostWithOwnerIdTest {
                 ),
                 2
             ).construct()
-                .build(),
-            Matchers.allOf(
-                Matchers.hasEntry("access_token", "1"),
-                Matchers.hasEntry("v", "5.63"),
-                Matchers.hasEntry("owner_id", "2")
-            )
+                .build()
+        ).containsOnly(
+            Assertions.entry("access_token", "1"),
+            Assertions.entry("v", "5.63"),
+            Assertions.entry("owner_id", "2")
         );
     }
 

@@ -29,15 +29,13 @@ import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.http.request.FakeRequest;
-import com.jcabi.matchers.RegexMatchers;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.nio.file.Files;
 import java.util.HashMap;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -59,8 +57,7 @@ public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
         "PMD.AvoidDuplicateLiterals"
         })
     public void testTextOnly() throws Exception {
-        MatcherAssert.assertThat(
-            "Incorrect query map produced.",
+        Assertions.assertThat(
             new WallPostWithRandomQuote(
                 new VkApiClient(
                     new TransportClientFake(
@@ -87,16 +84,14 @@ public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
                 ),
                 GROUP_ID
             ).construct()
-                .build(),
-            Matchers.allOf(
-                Matchers.hasEntry("access_token", "1"),
-                Matchers.hasEntry("v", "5.63"),
-                Matchers.hasEntry("owner_id", "-161929264"),
-                Matchers.hasEntry("from_group", "1"),
-                Matchers.hasValue(
-                    RegexMatchers.containsPattern("[а-яА-Я]")
-                )
-            )
+                .build()
+        ).contains(
+            Assertions.entry("access_token", "1"),
+            Assertions.entry("v", "5.63"),
+            Assertions.entry("owner_id", "-161929264"),
+            Assertions.entry("from_group", "1")
+        ).hasValueSatisfying(
+            containsPatternCyrillic()
         );
     }
 
@@ -107,8 +102,7 @@ public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
         "PMD.AvoidDuplicateLiterals"
         })
     public void testWithPhoto() throws Exception {
-        MatcherAssert.assertThat(
-            "Incorrect query map produced.",
+        Assertions.assertThat(
             new WallPostWithRandomQuote(
                 new VkApiClient(
                     new TransportClientFake(
@@ -224,20 +218,18 @@ public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
                 ),
                 GROUP_ID
             ).construct()
-                .build(),
-            Matchers.allOf(
-                Matchers.hasEntry("access_token", "1"),
-                Matchers.hasEntry("v", "5.63"),
-                Matchers.hasEntry("owner_id", "-161929264"),
-                Matchers.hasEntry("from_group", "1"),
-                Matchers.hasEntry(
-                    "attachments",
-                    "photo6785_123456"
-                ),
-                Matchers.hasValue(
-                    RegexMatchers.containsPattern("[а-яА-Я]")
-                )
+                .build()
+        ).contains(
+            Assertions.entry("access_token", "1"),
+            Assertions.entry("v", "5.63"),
+            Assertions.entry("owner_id", "-161929264"),
+            Assertions.entry("from_group", "1"),
+            Assertions.entry(
+                "attachments",
+                "photo6785_123456"
             )
+        ).hasValueSatisfying(
+            containsPatternCyrillic()
         );
     }
 
@@ -248,8 +240,7 @@ public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
         "PMD.AvoidDuplicateLiterals"
         })
     public void testWithAudio() throws Exception {
-        MatcherAssert.assertThat(
-            "Incorrect query map produced.",
+        Assertions.assertThat(
             new WallPostWithRandomQuote(
                 new VkApiClient(
                     new TransportClientFake(
@@ -365,20 +356,18 @@ public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
                     ).asBytes()
                 )
             ).construct()
-                .build(),
-            Matchers.allOf(
-                Matchers.hasEntry("access_token", "1"),
-                Matchers.hasEntry("v", "5.63"),
-                Matchers.hasEntry("owner_id", "-161929264"),
-                Matchers.hasEntry("from_group", "1"),
-                Matchers.hasEntry(
-                    "attachments",
-                    "audio-161929264_123456789"
-                ),
-                Matchers.hasValue(
-                    RegexMatchers.containsPattern("[а-яА-Я]")
-                )
+                .build()
+        ).contains(
+            Assertions.entry("access_token", "1"),
+            Assertions.entry("v", "5.63"),
+            Assertions.entry("owner_id", "-161929264"),
+            Assertions.entry("from_group", "1"),
+            Assertions.entry(
+                "attachments",
+                "audio-161929264_123456789"
             )
+        ).hasValueSatisfying(
+            containsPatternCyrillic()
         );
     }
 
@@ -389,8 +378,7 @@ public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
         "PMD.AvoidDuplicateLiterals"
         })
     public void testWithPhotoAndAudio() throws Exception {
-        MatcherAssert.assertThat(
-            "Incorrect query map produced.",
+        Assertions.assertThat(
             new WallPostWithRandomQuote(
                 new VkApiClient(
                     new TransportClientFake(
@@ -567,20 +555,18 @@ public final class WallPostWithRandomQuoteTest extends AbstractVkUnitTest {
                     ).asBytes()
                 )
             ).construct()
-                .build(),
-            Matchers.allOf(
-                Matchers.hasEntry("access_token", "1"),
-                Matchers.hasEntry("v", "5.63"),
-                Matchers.hasEntry("owner_id", "-161929264"),
-                Matchers.hasEntry("from_group", "1"),
-                Matchers.hasEntry(
-                    "attachments",
-                    "photo6785_123456,audio-161929264_123456789"
-                ),
-                Matchers.hasValue(
-                    RegexMatchers.containsPattern("[а-яА-Я]")
-                )
+                .build()
+        ).contains(
+            Assertions.entry("access_token", "1"),
+            Assertions.entry("v", "5.63"),
+            Assertions.entry("owner_id", "-161929264"),
+            Assertions.entry("from_group", "1"),
+            Assertions.entry(
+                "attachments",
+                "photo6785_123456,audio-161929264_123456789"
             )
+        ).hasValueSatisfying(
+            containsPatternCyrillic()
         );
     }
 

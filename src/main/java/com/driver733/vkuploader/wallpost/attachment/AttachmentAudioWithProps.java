@@ -42,16 +42,14 @@ import org.cactoos.list.StickyList;
 
 /**
  * Upload the audios, caches the upload result
- *  in {@link java.util.Properties} and returns
- *  {@link AudioAddQuery} for the uploaded
- *  audios.
- *
- *
+ * in {@link java.util.Properties} and returns
+ * {@link AudioAddQuery} for the uploaded
+ * audios.
  *
  * @since 0.1
  */
 @Immutable
-public final class AttachmentAudioWithProps implements Attachment {
+public final class AttachmentAudioWithProps implements Attachment<AudioAddQuery, Integer> {
 
     /**
      * Group ID.
@@ -80,12 +78,13 @@ public final class AttachmentAudioWithProps implements Attachment {
 
     /**
      * Ctor.
+     *
      * @param client The {@link VkApiClient}
      *  that is used for all VK API requests.
      * @param actor UserActor on behalf of which all requests will be sent.
-     * @param audios Audios files.
-     * @param group Group ID.
      * @param properties Properties that contain the
+     * @param group Group ID.
+     * @param audios Audios files.
      *  {@link AudioStatus} of audios files.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
@@ -106,11 +105,12 @@ public final class AttachmentAudioWithProps implements Attachment {
     }
 
     @Override
-    public List<AbstractQueryBuilder> upload()
+    public List<AbstractQueryBuilder<AudioAddQuery, Integer>> upload()
         throws Exception {
-        final List<AbstractQueryBuilder> list = new ArrayList<>(
-            this.audios.size()
-        );
+        final List<AbstractQueryBuilder<AudioAddQuery, Integer>> list =
+            new ArrayList<>(
+                this.audios.size()
+            );
         for (final Upload<UploadAudioQuery, AudioUploadResponse> audio
             : this.audios) {
             list.addAll(
@@ -122,12 +122,13 @@ public final class AttachmentAudioWithProps implements Attachment {
 
     /**
      * Uploads the audios files.
+     *
      * @param upload Audio construct to upload.
-     * @return AudioAddQuery that will add the uploaded audios
+     * @return AudioAddQuery AudioAddQuery that will add the uploaded audios
      *  to the group page.
      * @throws Exception If a query cannot be created.
      */
-    private List<AbstractQueryBuilder> upload(
+    private List<AbstractQueryBuilder<AudioAddQuery, Integer>> upload(
         final Upload<UploadAudioQuery, AudioUploadResponse> upload
     ) throws Exception {
         final String filename = upload.query()

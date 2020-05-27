@@ -33,8 +33,7 @@ import com.vk.api.sdk.httpclient.TransportClientHttp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -112,10 +111,9 @@ public final class IdsMapTest {
         final Map<Integer, String> expected = new HashMap<>();
         expected.put(0, "1");
         expected.put(1, "2");
-        MatcherAssert.assertThat(
-            this.queries.value(),
-            Matchers.equalTo(expected)
-        );
+        Assertions.assertThat(
+            this.queries.value()
+        ).isEqualTo(expected);
     }
 
 }

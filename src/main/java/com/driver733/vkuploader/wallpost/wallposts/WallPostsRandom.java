@@ -74,7 +74,7 @@ public final class WallPostsRandom implements WallPosts {
     /**
      * Random seed.
      */
-    private static final int SEED = 123456;
+    private static final int SEED = 123_456;
 
     /**
      * Group ID.
@@ -117,8 +117,8 @@ public final class WallPostsRandom implements WallPosts {
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param servers Upload servers that provide upload URLs
      *  for attachmentsFields.
-     * @param group Group ID.
      * @param properties For caching results.
+     * @param group Group ID.
      * @param photos EntranceDirectory with photos.
      */
     public WallPostsRandom(
@@ -149,9 +149,9 @@ public final class WallPostsRandom implements WallPosts {
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param servers Upload servers that provide upload URLs
      *  for attachmentsFields.
-     * @param group Group ID.
      * @param properties For caching results.
      * @param audios EntranceDirectory with nonProcessedAudios.
+     * @param group Group ID.
      */
     public WallPostsRandom(
         final VkApiClient client,
@@ -181,8 +181,8 @@ public final class WallPostsRandom implements WallPosts {
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param servers Upload servers that provide upload URLs
      *  for attachmentsFields.
-     * @param group Group ID.
      * @param properties For caching results.
+     * @param group Group ID.
      * @param photos EntranceDirectory with photos.
      * @param audios EntranceDirectory with nonProcessedAudios.
      */

@@ -27,6 +27,7 @@ import com.jcabi.aspects.Immutable;
 import com.vk.api.sdk.client.AbstractQueryBuilder;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
+import com.vk.api.sdk.queries.audio.AudioAddQuery;
 import java.util.Collections;
 import java.util.List;
 
@@ -72,10 +73,10 @@ public final class AttachmentAddAudio implements Attachment {
 
     /**
      * Ctor.
+     * @param client VKAPIClient that is used for all VK API requests.
      * @param actor UserActor on behalf of which all requests will be sent.
      * @param ownerId Audio`s owner ID.
      * @param mediaId Audio`s media ID.
-     * @param client VKAPIClient that is used for all VK API requests.
      * @param group Group ID.
      * @checkstyle ParameterNumberCheck (10 lines)
      */
@@ -94,7 +95,7 @@ public final class AttachmentAddAudio implements Attachment {
     }
 
     @Override
-    public List<AbstractQueryBuilder> upload() {
+    public List<AbstractQueryBuilder<AudioAddQuery, Integer>> upload() {
         return Collections.singletonList(
             this.client.audio()
                 .add(

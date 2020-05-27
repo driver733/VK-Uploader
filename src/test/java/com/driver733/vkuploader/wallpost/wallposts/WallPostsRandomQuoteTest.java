@@ -28,7 +28,6 @@ import com.driver733.vkuploader.wallpost.attachment.upload.TransportClientFake;
 import com.driver733.vkuploader.wallpost.support.AbstractVkUnitTest;
 import com.driver733.vkuploader.wallpost.support.JsonPattern;
 import com.jcabi.aspects.Immutable;
-import com.jcabi.matchers.RegexMatchers;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -36,26 +35,27 @@ import com.vk.api.sdk.httpclient.TransportClientCached;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
  * Tests for {@link WallPostsRandomQuoteTest}.
  *
- * @since 0.1
  * @checkstyle AnonInnerLengthCheck (1000 lines)
  * @checkstyle JavadocMethodCheck (1000 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (1000 lines)
  * @checkstyle MethodLength (1000 lines)
+ * @checkstyle IndentationCheck (1000 lines)
+ * @since 0.1
  */
 @Immutable
 @SuppressWarnings({
     "PMD.ExcessiveMethodLength",
     "PMD.NonStaticInitializer",
     "PMD.AvoidDuplicateLiterals"
-    })
+})
 public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
 
     /**
@@ -107,8 +107,7 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
             .get(0)
             .build()
             .get("code");
-        MatcherAssert.assertThat(
-            "Constructed query does not match the expected one.",
+        Assertions.assertThat(
             new JsonPattern(
                 exec,
                 Pattern.compile("\\{.*:.*}\\),")
@@ -116,26 +115,25 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
                 .entrySet()
                 .stream()
                 .collect(
-                    HashMap::new,
+                    (Supplier<HashMap<String, String>>) HashMap::new,
                     (map, json) -> map.put(
                         json.getKey(),
                         json.getValue().getAsString()
                     ),
-                    (map, mapp) -> { }
-                ),
-            Matchers.allOf(
-                Matchers.hasEntry("owner_id", "-161929264"),
-                Matchers.hasEntry("from_group", "1"),
-                Matchers.hasValue(
-                    RegexMatchers.containsPattern("[а-яА-Я]")
+                    (map, mapp) -> {
+                    }
                 )
-            )
+        ).contains(
+            Assertions.entry("owner_id", "-161929264"),
+            Assertions.entry("from_group", "1")
+        ).hasValueSatisfying(
+            containsPatternCyrillic()
         );
     }
 
     @Test
     public void testWithPhoto() throws Exception {
-        final String exec =  new WallPostsRandomQuote(
+        final String exec = new WallPostsRandomQuote(
             new VkApiClient(
                 new TransportClientFake(
                     new HashMap<String, TransportClient>() {
@@ -243,8 +241,7 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
             .get(0)
             .build()
             .get("code");
-        MatcherAssert.assertThat(
-            "Constructed query does not match the expected one.",
+        Assertions.assertThat(
             new JsonPattern(
                 exec,
                 Pattern.compile("\\{.*:.*}\\),")
@@ -252,27 +249,26 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
                 .entrySet()
                 .stream()
                 .collect(
-                    HashMap::new,
+                    (Supplier<HashMap<String, String>>) HashMap::new,
                     (map, json) -> map.put(
                         json.getKey(),
                         json.getValue().getAsString()
                     ),
-                    (map, mapp) -> { }
-                ),
-            Matchers.allOf(
-                Matchers.hasEntry("owner_id", "-161929264"),
-                Matchers.hasEntry("from_group", "1"),
-                Matchers.hasEntry("attachments", "photo6785_123456"),
-                Matchers.hasValue(
-                    RegexMatchers.containsPattern("[а-яА-Я]")
+                    (map, mapp) -> {
+                    }
                 )
-            )
+        ).contains(
+            Assertions.entry("owner_id", "-161929264"),
+            Assertions.entry("from_group", "1"),
+            Assertions.entry("attachments", "photo6785_123456")
+        ).hasValueSatisfying(
+            containsPatternCyrillic()
         );
     }
 
     @Test
     public void testWithAudio() throws Exception {
-        final String exec =  new WallPostsRandomQuote(
+        final String exec = new WallPostsRandomQuote(
             new VkApiClient(
                 new TransportClientFake(
                     new HashMap<String, TransportClient>() {
@@ -366,8 +362,7 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
             .get(0)
             .build()
             .get("code");
-        MatcherAssert.assertThat(
-            "Constructed query does not match the expected one.",
+        Assertions.assertThat(
             new JsonPattern(
                 exec,
                 Pattern.compile("\\{.*:.*}\\),")
@@ -375,27 +370,26 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
                 .entrySet()
                 .stream()
                 .collect(
-                    HashMap::new,
+                    (Supplier<HashMap<String, String>>) HashMap::new,
                     (map, json) -> map.put(
                         json.getKey(),
                         json.getValue().getAsString()
                     ),
-                    (map, mapp) -> { }
-                ),
-            Matchers.allOf(
-                Matchers.hasEntry("owner_id", "-161929264"),
-                Matchers.hasEntry("from_group", "1"),
-                Matchers.hasEntry("attachments", "audio-161929264_123456789"),
-                Matchers.hasValue(
-                    RegexMatchers.containsPattern("[а-яА-Я]")
+                    (map, mapp) -> {
+                    }
                 )
-            )
+        ).contains(
+            Assertions.entry("owner_id", "-161929264"),
+            Assertions.entry("from_group", "1"),
+            Assertions.entry("attachments", "audio-161929264_123456789")
+        ).hasValueSatisfying(
+            containsPatternCyrillic()
         );
     }
 
     @Test
     public void testWithPhotoAndAudio() throws Exception {
-        final String exec =  new WallPostsRandomQuote(
+        final String exec = new WallPostsRandomQuote(
             new VkApiClient(
                 new TransportClientFake(
                     new HashMap<String, TransportClient>() {
@@ -553,8 +547,7 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
             .get(0)
             .build()
             .get("code");
-        MatcherAssert.assertThat(
-            "Constructed query does not match the expected one.",
+        Assertions.assertThat(
             new JsonPattern(
                 exec,
                 Pattern.compile("\\{.*:.*}\\),")
@@ -562,24 +555,23 @@ public final class WallPostsRandomQuoteTest extends AbstractVkUnitTest {
                 .entrySet()
                 .stream()
                 .collect(
-                    HashMap::new,
+                    (Supplier<HashMap<String, String>>) HashMap::new,
                     (map, json) -> map.put(
                         json.getKey(),
                         json.getValue().getAsString()
                     ),
-                    (map, mapp) -> { }
-            ),
-            Matchers.allOf(
-                Matchers.hasEntry("owner_id", "-161929264"),
-                Matchers.hasEntry("from_group", "1"),
-                Matchers.hasEntry(
-                    "attachments",
-                    "photo6785_123456,audio-161929264_123456789"
-                ),
-                Matchers.hasValue(
-                    RegexMatchers.containsPattern("[а-яА-Я]")
+                    (map, mapp) -> {
+                    }
                 )
+        ).contains(
+            Assertions.entry("owner_id", "-161929264"),
+            Assertions.entry("from_group", "1"),
+            Assertions.entry(
+                "attachments",
+                "photo6785_123456,audio-161929264_123456789"
             )
+        ).hasValueSatisfying(
+            containsPatternCyrillic()
         );
     }
 

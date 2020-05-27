@@ -168,8 +168,8 @@ public final class WallPostsRandomQuote implements WallPosts {
      * @param servers Upload servers that provide upload URLs
      *  for attachmentsFields.
      * @param group Group ID.
-     * @param count Number of posts to create.
      * @param audios EntranceDirectory with audios.
+     * @param count Number of posts to create.
      */
     public WallPostsRandomQuote(
         final VkApiClient client,
@@ -327,8 +327,8 @@ public final class WallPostsRandomQuote implements WallPosts {
 
     /**
      * Creates a Batch Query.
-     * @param wallpost Wallpost to post.
      * @param num Number of posts to create.
+     * @param wallpost Wallpost to post.
      * @return Batch queries.
      * @throws Exception If an error occurs while constructing queries.
      */
